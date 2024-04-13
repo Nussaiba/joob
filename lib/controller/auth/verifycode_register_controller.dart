@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jobs/core/class/statusrequest.dart';
@@ -15,7 +16,6 @@ late VerifyCodeRegisterData verifyCodeRegisterData =
 class VerifyCodeRegisterControllerImp extends VerifyCodeRegisterController {
   String? email;
 
-  
 
   StatusRequest statusRequest = StatusRequest.none;
   @override
@@ -43,15 +43,56 @@ class VerifyCodeRegisterControllerImp extends VerifyCodeRegisterController {
     }
     update();
   }
+
+
+  Timer? timer;
+  int remainingTime = 4;
+  String get timerText =>
+      '${(remainingTime ~/ 60).toString().padLeft(2, '0')}:${(remainingTime % 60).toString().padLeft(2, '0')}';
+
+  void startTimer() {
+    timer = Timer.periodic(Duration(seconds: 1), (_) {
+      if (remainingTime > 0) {
+        remainingTime--;
+        update();
+      } else {
+        timer?.cancel();
+      }
+    });
+  }
+
+  void resendCode() {
+    if (remainingTime == 0) {
+      remainingTime = 4;
+      startTimer();
+       verifyCodeRegisterData.reSendCodeData(email!);
+
+
+    }
+  }
+
   @override
+  void onClose() {
+    timer?.cancel();
+    super.onClose();
+  }
+
+
+
+@override
   void onInit() {
-    email = Get.arguments['email'];
     super.onInit();
+        email = Get.arguments['email'];
+
+    startTimer();
   }
 
   @override
   void dispose() {
-   // email.dispose();
+   // email?.dispose();
     super.dispose();
+
+
+
   }
 }

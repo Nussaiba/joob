@@ -33,7 +33,7 @@ class SuccessSignUp extends StatelessWidget {
               "Congratulations",
               style: Theme.of(context).textTheme.headline2,
             ),
-            SizedBox(
+             const  SizedBox(
               height: 15,
             ),
             Text(
@@ -44,7 +44,7 @@ class SuccessSignUp extends StatelessWidget {
                   .copyWith(color: AppColor.grey),
             ),
             const Spacer(),
-            Container(
+            SizedBox(
               width: double.infinity,
               child: CustomButtomAuth(
                 text: "Go To Login",

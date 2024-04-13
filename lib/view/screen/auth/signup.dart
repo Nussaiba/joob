@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jobs/controller/auth/signup_controller.dart';
 import 'package:jobs/core/class/handlingdataview.dart';
-import 'package:jobs/core/class/statusrequest.dart';
 import 'package:jobs/core/constants/color.dart';
 import 'package:jobs/core/functions/alert_exit.dart';
 import 'package:jobs/core/functions/validinput.dart';
@@ -73,10 +72,9 @@ class SignUp extends StatelessWidget {
                       iconData: Icons.email_outlined,
                     ),
                     CustomTextFormAuth(
-                      valid: (val) {
-                                            return validInput(val!, 8, 15, "password");
-
-                      },
+                      valid: (value) {
+                              return isPasswordCompliant(value!);
+                            },
                       mycontroller: controller.password,
                       hinttext: "Enter Your Password",
                       labeltext: "Password",

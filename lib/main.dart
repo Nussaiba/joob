@@ -3,20 +3,25 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:jobs/bindings/initialbindinds.dart';
 import 'package:jobs/core/constants/color.dart';
+import 'package:jobs/core/constants/routes.dart';
 import 'package:jobs/core/localization/changelocal.dart';
 import 'package:jobs/core/localization/translation.dart';
 import 'package:jobs/core/services/services.dart';
 
 import 'package:jobs/routes.dart';
 import 'package:jobs/view/screen/lod.dart';
-import 'package:jobs/view/screen/onboarding.dart';
+import 'package:jobs/view/screen/mainscreen/mainscreens.dart';
 
-void main()async  {
+import 'package:jobs/view/screen/onboarding.dart';
+import 'package:jobs/view/screen/testscreen.dart';
+
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-   await initialServices();
- //  await Get.putAsync(() => GetStorage.init());
+  await initialServices();
+  //  await Get.putAsync(() => GetStorage.init());
   runApp(const MyApp());
 }
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
@@ -45,7 +50,9 @@ class MyApp extends StatelessWidget {
         ),
       ),
       initialBinding: InitialBindings(),
-      home : Log(),
+      // home : Log(),
+      // home :Test(),
+      home: MainScreen(),
       getPages: routes,
     );
   }

@@ -22,9 +22,6 @@ class SignUpControllerImp extends SinUpController {
 
   SignUpData signUpData = SignUpData(Get.find());
 
-
-
-
   showPassWord() {
     isShowPassword = isShowPassword == true ? false : true;
 
@@ -53,12 +50,15 @@ class SignUpControllerImp extends SinUpController {
         if (response['status'] == 200) {
           Get.offNamed(AppRoute.verifyCodeRegister,
               arguments: {"email": email.text});
-        } 
-        
-        else   if (response['status'] == 422) {
-         
+        } else if (response['status'] == 422) {
           Get.defaultDialog(
-              title: "Warning", middleText: "Email Already Exists !");
+              title: "Warning",
+              middleText: "Email or UserName Already Exists .");
+          statusRequest = StatusRequest.failure;
+        } else if (response['status'] == 400) {
+          Get.defaultDialog(
+              title: "Warning",
+              middleText: "The email field must be a valid email address.");
           statusRequest = StatusRequest.failure;
         }
       }

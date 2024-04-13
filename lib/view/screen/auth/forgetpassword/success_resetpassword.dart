@@ -7,7 +7,7 @@ import 'package:jobs/view/widget/auth/custombuttomauth.dart';
 import 'package:lottie/lottie.dart';
 
 class SuccessResetPassword extends StatelessWidget {
-  const SuccessResetPassword({Key? key}) : super(key: key);
+  const SuccessResetPassword({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +36,7 @@ class SuccessResetPassword extends StatelessWidget {
               "Congratulations",
               style: Theme.of(context).textTheme.headline2,
             ),
-            SizedBox(
+             const   SizedBox(
               height: 15,
             ),
             Text(
@@ -47,7 +47,7 @@ class SuccessResetPassword extends StatelessWidget {
                   .copyWith(color: AppColor.grey),
             ),
             const Spacer(),
-            Container(
+             SizedBox(
               width: double.infinity,
               child: CustomButtomAuth(
                 text: "Go To Login",

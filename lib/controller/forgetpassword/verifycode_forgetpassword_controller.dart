@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:get/get.dart';
 import 'package:jobs/core/class/statusrequest.dart';
 import 'package:jobs/core/constants/routes.dart';
+import 'package:jobs/data/datasource/remote/forgetpassword/checkemail.dart';
 import 'package:jobs/data/datasource/remote/forgetpassword/verifycode.dart';
 import 'package:jobs/core/functions/handlingdata.dart';
 import 'package:jobs/core/functions/handlingdata.dart';
@@ -13,8 +14,11 @@ abstract class VerifyCodeController extends GetxController {
 }
 
 class VerifyCodeControllerImp extends VerifyCodeController {
+    String? email;
+
   VerifyCodeForgetPasswordData verifyCodeForgetPasswordData =
       VerifyCodeForgetPasswordData(Get.find());
+   CheckEmailData checkEmailData = CheckEmailData(Get.find());
   StatusRequest statusRequest = StatusRequest.none;
   @override
   goToResetPassword(verfiyCodePassWordreset) async {
@@ -40,14 +44,17 @@ class VerifyCodeControllerImp extends VerifyCodeController {
     }
     update();
   }
- Timer? timer;
-  int remainingTime =  5; // 10 دقائق بالثواني
+
+  Timer? timer;
+  int remainingTime = 4;
   String get timerText =>
       '${(remainingTime ~/ 60).toString().padLeft(2, '0')}:${(remainingTime % 60).toString().padLeft(2, '0')}';
 
   @override
   void onInit() {
     super.onInit();
+        email = Get.arguments['email'];
+
     startTimer();
   }
 
@@ -64,9 +71,9 @@ class VerifyCodeControllerImp extends VerifyCodeController {
 
   void resendCode() {
     if (remainingTime == 0) {
-      remainingTime = 10 ;
+      remainingTime = 4;
       startTimer();
-      // إضافة منطق إعادة إرسال الكود هنا
+    checkEmailData.postdata(email!);
     }
   }
 

@@ -4,6 +4,7 @@ import 'package:jobs/core/class/statusrequest.dart';
 import 'package:jobs/core/constants/routes.dart';
 import 'package:jobs/core/functions/handlingdata.dart';
 import 'package:jobs/data/datasource/remote/auth/login.dart';
+import 'package:jobs/core/services/services.dart';
 
 abstract class LoginController extends GetxController {
   login();
@@ -18,6 +19,7 @@ class LoginControllerImp extends LoginController {
   bool isShowPassword = true;
   StatusRequest statusRequest = StatusRequest.none;
   LoginData loginData = LoginData(Get.find());
+  MyServices myServices = Get.find();
 
   showPassWord() {
     isShowPassword = isShowPassword == true ? false : true;
@@ -31,7 +33,6 @@ class LoginControllerImp extends LoginController {
       statusRequest = StatusRequest.loading;
       update();
       print("=111111111111111111  Controller");
-
       var response = await loginData.postdata(email.text, password.text);
       print("================$response  Controller");
       statusRequest = handlingData(response);
@@ -39,6 +40,8 @@ class LoginControllerImp extends LoginController {
 
       if (StatusRequest.success == statusRequest) {
         if (response["status"] == 200) {
+          myServices.box.write("token", "${response["data"]["token"]}");
+          print("token ${response["data"]["token"]}");
           Get.offNamed(AppRoute.log);
         } else if (response['status'] == 401) {
           Get.defaultDialog(

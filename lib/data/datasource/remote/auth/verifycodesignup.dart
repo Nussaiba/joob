@@ -12,4 +12,13 @@ class VerifyCodeRegisterData {
     print("daataaaaaaaaaaaaaaa $response");
     return response.fold((l) => 1, (r) => r);
   }
+
+  
+  reSendCodeData (String email) async {
+    var response = await crud.postData(AppLink.reSendCode, {
+    "email" :  email ,
+    });
+    print("daataaaaaaaaaaaaaaa $response");
+    return response.fold((l) => 1, (r) => r);
+  }
 }

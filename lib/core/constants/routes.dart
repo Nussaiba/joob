@@ -13,4 +13,7 @@ class AppRoute {
   static const String verifyCodeRegister = "/verifycoderegister";
     static const String testscreen = "/testscreen";
 
+        static const String mainScreen = "/mainscreen";
+
+
 }

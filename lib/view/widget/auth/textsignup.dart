@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/constants/color.dart';
 
 class CustomTextSignUpOrSignIn extends StatelessWidget {
   final String textone;

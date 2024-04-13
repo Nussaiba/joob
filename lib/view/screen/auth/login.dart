@@ -15,7 +15,7 @@ import 'package:jobs/view/widget/auth/textsignup.dart';
 import '../../widget/auth/custombuttomauth.dart';
 
 class Login extends StatelessWidget {
-  const Login({Key? key}) : super(key: key);
+  const Login({Key? key}) ;
   @override
   Widget build(BuildContext context) {
     Get.put(LoginControllerImp());
@@ -65,8 +65,8 @@ class Login extends StatelessWidget {
                             iconData: Icons.email_outlined,
                           ),
                           CustomTextFormAuth(
-                            valid: (val) {
-                              return validInput(val!, 5, 15, "password");
+                            valid: (value) {
+                              return isPasswordCompliant(value!);
                             },
                             mycontroller: controller.password,
                             hinttext: "Enter Your Password",

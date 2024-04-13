@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:jobs/controller/forgetpassword/forgetpassword_controller.dart';
 import 'package:jobs/core/class/handlingdataview.dart';
 import 'package:jobs/core/constants/color.dart';
-import 'package:jobs/core/constants/routes.dart';
 import 'package:jobs/core/functions/validinput.dart';
 import 'package:jobs/view/widget/auth/custombuttomauth.dart';
 import 'package:jobs/view/widget/auth/customtextbodyauth.dart';
@@ -11,7 +10,7 @@ import 'package:jobs/view/widget/auth/customtextformauth.dart';
 import 'package:jobs/view/widget/auth/customtexttitleauth.dart';
 
 class ForgetPassword extends StatelessWidget {
-  const ForgetPassword({Key? key}) : super(key: key);
+  const ForgetPassword({super.key});
   @override
   Widget build(BuildContext context) {
     Get.put(ForgetPasswordControllerImp());
@@ -60,12 +59,10 @@ class ForgetPassword extends StatelessWidget {
                         CustomButtomAuth(
                             text: "Check",
                             onPressed: () {
-                              //      controller.checkemail();
-                              //
-                              Get.offNamed(
-                                AppRoute.verfiyCodeForgetpassword,
-                              );
-                              //     arguments: {"email": controller.email.text});
+                              controller.checkemail();
+                              //   Get.offNamed(
+                              //     AppRoute.verfiyCodeForgetpassword,
+                              //       arguments: {"email": controller.email.text});
                             }),
                         const SizedBox(
                           height: 30,

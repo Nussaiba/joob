@@ -11,7 +11,7 @@ abstract class ForgetPasswordController extends GetxController {
 
 class ForgetPasswordControllerImp extends ForgetPasswordController {
   late TextEditingController email;
-    GlobalKey<FormState> formstate = GlobalKey<FormState>();
+  GlobalKey<FormState> formstate = GlobalKey<FormState>();
 
   CheckEmailData checkEmailData = CheckEmailData(Get.find());
   StatusRequest statusRequest = StatusRequest.none;
@@ -19,30 +19,26 @@ class ForgetPasswordControllerImp extends ForgetPasswordController {
   @override
   checkemail() async {
     if (formstate.currentState!.validate()) {
+      statusRequest = StatusRequest.loading;
+      update();
+      print("=111111111111111111  Controller");
 
- statusRequest = StatusRequest.loading;
-    update();
-    print("=111111111111111111  Controller");
+      var response = await checkEmailData.postdata(email.text);
+      print("================$response  Controller");
+      statusRequest = handlingData(response);
+      print(statusRequest);
 
-    var response =
-        await checkEmailData.postdata(email.text);
-    print("================$response  Controller");
-    statusRequest = handlingData(response);
-    print(statusRequest);
-
-    if (StatusRequest.success == statusRequest) {
-      if (response['status'] == 200) {
-        Get.offNamed(AppRoute.verfiyCodeForgetpassword );
-      } else if (response['status'] == 500) {
-        Get.defaultDialog(
-            title: "Warning", middleText: "The selected email is invalid.");
+      if (StatusRequest.success == statusRequest) {
+        if (response['status'] == 200) {
+          Get.offNamed(AppRoute.verfiyCodeForgetpassword,
+              arguments: {"email": email.text});
+        } else if (response['status'] == 500) {
+          Get.defaultDialog(
+              title: "Warning", middleText: "The selected email is invalid.");
+        }
       }
-    }
-    update();
-   }
-    else{
-
-    }
+      update();
+    } else {}
   }
 
   @override

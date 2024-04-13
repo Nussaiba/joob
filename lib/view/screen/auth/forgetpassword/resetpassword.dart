@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:jobs/controller/forgetpassword/resetpassword_controller.dart';
 import 'package:jobs/core/class/handlingdataview.dart';
 import 'package:jobs/core/constants/color.dart';
-import 'package:jobs/core/constants/routes.dart';
 import 'package:jobs/core/functions/validinput.dart';
 import 'package:jobs/view/widget/auth/custombuttomauth.dart';
 import 'package:jobs/view/widget/auth/customtextbodyauth.dart';
@@ -11,7 +10,7 @@ import 'package:jobs/view/widget/auth/customtextformauth.dart';
 import 'package:jobs/view/widget/auth/customtexttitleauth.dart';
 
 class ResetPassword extends StatelessWidget {
-  const ResetPassword({Key? key}) : super(key: key);
+  const ResetPassword({super.key});
   @override
   Widget build(BuildContext context) {
         Get.put(ResetPasswordControllerImp());
@@ -45,9 +44,9 @@ class ResetPassword extends StatelessWidget {
                   height: 15,
                 ),
                 CustomTextFormAuth(
-                  valid: (val) {
-                    return validInput(val!, 8, 20, "password");
-                  },
+                 valid: (value) {
+                              return isPasswordCompliant(value!);
+                            },
                   mycontroller: controller.password,
                   hinttext: "Enter Your Password",
                   labeltext: "Password",

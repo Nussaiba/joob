@@ -9,15 +9,14 @@ class CustomTextFormAuth extends StatelessWidget {
   final void Function()? onTapIcon;
   final String? Function(String?)? valid;
   const CustomTextFormAuth(
-      {Key? key,
+      {super.key,
       this.obscureText,
       this.onTapIcon,
       required this.hinttext,
       required this.labeltext,
       required this.iconData,
       this.mycontroller,
-      required this.valid})
-      : super(key: key);
+      required this.valid});
 
   @override
   Widget build(BuildContext context) {

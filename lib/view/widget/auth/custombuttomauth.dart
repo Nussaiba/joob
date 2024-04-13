@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:jobs/core/constants/color.dart';
 
 class CustomButtomAuth extends StatelessWidget {
-  final text;
+  final String  text;
   final void Function()? onPressed;
-  const CustomButtomAuth({super.key, this.text, this.onPressed});
+  const CustomButtomAuth({super.key, required this.text, this.onPressed});
 
   @override
   Widget build(BuildContext context) {

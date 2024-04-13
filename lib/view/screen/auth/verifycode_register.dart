@@ -72,12 +72,27 @@ class VerifyCodeRegister extends StatelessWidget {
                 height: 30,
               ),
 
-
-
-
-
-
-
+  GetBuilder<VerifyCodeRegisterControllerImp>(
+                      builder: (controller) => InkWell(
+                        onTap: controller.remainingTime == 0
+                            ? controller.resendCode
+                            : null,
+                        
+                          child: Text(
+                            textAlign: TextAlign.end,
+                            controller.remainingTime > 0
+                                ? 'Resend after ${controller.timerText}'
+                                : 'Resend Now',
+                            style: TextStyle(
+                               
+                                color: controller.remainingTime > 0
+                                    ? AppColor.grey
+                                    : AppColor.praimaryColor,
+                                fontWeight: FontWeight.bold),
+                          
+                        ),
+                      ),
+                    ),
             ])
                 ),
       )
