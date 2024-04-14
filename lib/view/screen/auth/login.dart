@@ -24,7 +24,7 @@ class Login extends StatelessWidget {
           backgroundColor: AppColor.praimaryColor,
           elevation: 0.0,
           title: Text(
-            'sign in',
+          "9".tr,
             style: Theme.of(context)
                 .textTheme
                 .headline1!
@@ -43,15 +43,15 @@ class Login extends StatelessWidget {
                         key: controller.formstate,
                         child: ListView(children: [
                           const LogoAuth(),
-                          const CustomTextTitleAuth(
-                            text: "Welcome Back",
+                           CustomTextTitleAuth(
+                            text: "10".tr,
                           ),
                           const SizedBox(
                             height: 10,
                           ),
-                          const CustomTextBodyAuth(
+                           CustomTextBodyAuth(
                               text:
-                                  "Sign In With Your Email And Password OR Continue With Google"),
+                                 "11".tr),
                           const SizedBox(
                             height: 15,
                           ),
@@ -60,8 +60,8 @@ class Login extends StatelessWidget {
                               return validInput(val!, 5, 50, "email");
                             },
                             mycontroller: controller.email,
-                            hinttext: "Enter Your Email",
-                            labeltext: "Email",
+                            hinttext: "12".tr,
+                            labeltext: "13".tr,
                             iconData: Icons.email_outlined,
                           ),
                           CustomTextFormAuth(
@@ -69,8 +69,8 @@ class Login extends StatelessWidget {
                               return isPasswordCompliant(value!);
                             },
                             mycontroller: controller.password,
-                            hinttext: "Enter Your Password",
-                            labeltext: "Password",
+                            hinttext:"14".tr,
+                            labeltext: "15".tr,
                             iconData: controller.isShowPassword
                                 ? Icons.visibility
                                 : Icons.visibility_off,
@@ -83,13 +83,13 @@ class Login extends StatelessWidget {
                             onTap: () {
                               controller.goToForgetPassword();
                             },
-                            child: const Text(
-                              "Forget Password",
+                            child:  Text(
+                              "16".tr,
                               textAlign: TextAlign.end,
                             ),
                           ),
                           CustomButtomAuth(
-                              text: "Sign In",
+                              text: "9".tr,
                               onPressed: () {
                                 //  Get.offNamed(AppRoute.log);
                                 controller.login();
@@ -98,8 +98,8 @@ class Login extends StatelessWidget {
                             height: 30,
                           ),
                           CustomTextSignUpOrSignIn(
-                              textone: "Don't have an account ?",
-                              texttwo: "SignUp",
+                              textone: "17".tr ,
+                              texttwo: "18".tr,
                               onTap: () {
                                 controller.goToSignUp();
                               })

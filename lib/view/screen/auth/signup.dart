@@ -22,7 +22,7 @@ class SignUp extends StatelessWidget {
         backgroundColor: AppColor.praimaryColor,
         elevation: 0.0,
         title: Text(
-          'Sign Up',
+          "18".tr,
           style: Theme.of(context)
               .textTheme
               .headline1!
@@ -31,24 +31,22 @@ class SignUp extends StatelessWidget {
       ),
       body: GetBuilder<SignUpControllerImp>(
         builder: (controller) => HandlingDataRequest(
-            statusRequest: controller.statusRequest,
-            widget:
-            WillPopScope(onWillPop: alertExitApp,child:  
-             Container(
+          statusRequest: controller.statusRequest,
+          widget: WillPopScope(
+            onWillPop: alertExitApp,
+            child: Container(
                 padding:
                     const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
                 child: Form(
                   key: controller.formstate,
                   child: ListView(children: [
-                    const CustomTextTitleAuth(
-                      text: "Welcome Back",
+                    CustomTextTitleAuth(
+                      text: "10".tr,
                     ),
                     const SizedBox(
                       height: 10,
                     ),
-                    const CustomTextBodyAuth(
-                        text:
-                            "Sign Up With Your Email And Password OR Continue With Google"),
+                    CustomTextBodyAuth(text: "19".tr),
                     const SizedBox(
                       height: 15,
                     ),
@@ -57,37 +55,36 @@ class SignUp extends StatelessWidget {
                         return validInput(val!, 5, 20, "username");
                       },
                       mycontroller: controller.username,
-                      hinttext: "Enter Your Username",
-                      labeltext: "Username",
+                      hinttext: "20".tr,
+                      labeltext: "21".tr,
                       iconData: Icons.person_outline,
                     ),
                     CustomTextFormAuth(
                       valid: (val) {
-                                            return validInput(val!, 5, 50, "email");
-
+                        return validInput(val!, 5, 50, "email");
                       },
                       mycontroller: controller.email,
-                      hinttext: "Enter Your Email",
-                      labeltext: "Email",
+                      hinttext: "12".tr,
+                      labeltext: "13".tr,
                       iconData: Icons.email_outlined,
                     ),
                     CustomTextFormAuth(
                       valid: (value) {
-                              return isPasswordCompliant(value!);
-                            },
+                        return isPasswordCompliant(value!);
+                      },
                       mycontroller: controller.password,
-                      hinttext: "Enter Your Password",
-                      labeltext: "Password",
+                      hinttext: "14".tr,
+                      labeltext: "15".tr,
                       iconData: controller.isShowPassword
-                                ? Icons.visibility
-                                : Icons.visibility_off,
-                            obscureText: controller.isShowPassword,
-                            onTapIcon: () {
-                              controller.showPassWord();
-                            },
+                          ? Icons.visibility
+                          : Icons.visibility_off,
+                      obscureText: controller.isShowPassword,
+                      onTapIcon: () {
+                        controller.showPassWord();
+                      },
                     ),
                     CustomButtomAuth(
-                        text: "Sign Up",
+                        text: "18".tr,
                         onPressed: () {
                           controller.SignUp();
                         }),
@@ -95,17 +92,16 @@ class SignUp extends StatelessWidget {
                       height: 30,
                     ),
                     CustomTextSignUpOrSignIn(
-                      textone: "have an accunt ?  ",
-                      texttwo: "  Sign In",
+                      textone: "22".tr,
+                      texttwo: "9".tr,
                       onTap: () {
                         controller.goToSignIn();
                       },
                     )
                   ]),
-                )),),
-            
-            
-           ),
+                )),
+          ),
+        ),
       ),
     );
   }

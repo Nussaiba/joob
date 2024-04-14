@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CustomTextTitleAuth extends StatelessWidget {
-  final String text;
+  final String text ;
   const CustomTextTitleAuth({super.key, required this.text});
 
   @override

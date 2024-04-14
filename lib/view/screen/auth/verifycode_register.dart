@@ -18,7 +18,7 @@ class VerifyCodeRegister extends StatelessWidget {
           backgroundColor: AppColor.praimaryColor,
           elevation: 0.0,
           title: Text(
-            'Check Code',
+            "27".tr,
             style: Theme.of(context)
                 .textTheme
                 .headline1!
@@ -34,15 +34,15 @@ class VerifyCodeRegister extends StatelessWidget {
          Container(
             padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
             child: ListView(children: [
-              const CustomTextTitleAuth(
-                text: "Success SignUp",
+               CustomTextTitleAuth(
+                text: "28".tr,
               ),
               const SizedBox(
                 height: 10,
               ),
-              const CustomTextBodyAuth(
+               CustomTextBodyAuth(
                   text:
-                      "Please Enter Your Email Address To Recive A Verification Code"),
+                     "29".tr),
               const SizedBox(
                 height: 15,
               ),
@@ -53,17 +53,14 @@ class VerifyCodeRegister extends StatelessWidget {
                 fieldWidth: 42.0,
                 numberOfFields: 6,
                 borderColor: const Color.fromARGB(255, 129, 45, 168),
-                //set to true to show as box or false to show as dash
+                
                 showFieldAsBox: true,
-                //runs when a code is typed in
                 onCodeChanged: (String code) {
-                  //handle validation or checks here
                 },
-                //runs when every textfield is filled
                 onSubmit: (String verificationCode) {
                  // Get.toNamed(AppRoute.successSignUp);
                    controller.goToSuccessSignUp(verificationCode);
-                }, // end onSubmit
+                }, 
               ),
               const SizedBox(
                 height: 30,

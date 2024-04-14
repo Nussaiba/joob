@@ -7,11 +7,9 @@ import 'package:jobs/core/constants/routes.dart';
 import 'package:jobs/core/localization/changelocal.dart';
 import 'package:jobs/core/localization/translation.dart';
 import 'package:jobs/core/services/services.dart';
-
 import 'package:jobs/routes.dart';
 import 'package:jobs/view/screen/lod.dart';
 import 'package:jobs/view/screen/mainscreen/mainscreens.dart';
-
 import 'package:jobs/view/screen/onboarding.dart';
 import 'package:jobs/view/screen/testscreen.dart';
 
@@ -21,7 +19,6 @@ void main() async {
   //  await Get.putAsync(() => GetStorage.init());
   runApp(const MyApp());
 }
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override

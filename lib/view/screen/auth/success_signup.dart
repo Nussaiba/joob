@@ -17,7 +17,7 @@ class SuccessSignUp extends StatelessWidget {
           backgroundColor: AppColor.praimaryColor,
           elevation: 0.0,
           title: Text(
-            'Success',
+            "24".tr,
             style: Theme.of(context).textTheme.headline1!.copyWith(
                   color: Colors.white,
                 ),
@@ -30,14 +30,14 @@ class SuccessSignUp extends StatelessWidget {
                            child: Lottie.asset(AppImageAsset.success1, repeat: false),
             ),
            Text(
-              "Congratulations",
+              "23".tr,
               style: Theme.of(context).textTheme.headline2,
             ),
              const  SizedBox(
               height: 15,
             ),
             Text(
-              "SignUp successfully",
+              "25".tr ,
               style: Theme.of(context)
                   .textTheme
                   .headline1!
@@ -47,7 +47,7 @@ class SuccessSignUp extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: CustomButtomAuth(
-                text: "Go To Login",
+                text: "26".tr,
                 
                 onPressed: () {
                   Get.offAllNamed(AppRoute.login);
