@@ -16,7 +16,7 @@ class CustomButtonOnBoarding extends GetView<OnBoardingControllerImp> {
         onHighlightChanged: controller.toggle,
         highlightColor: Colors.transparent,
         child: AnimatedContainer(
-          duration: Duration(microseconds: 100),
+          duration: const Duration(microseconds: 100),
           width: 110,
           height:  110,
           decoration: BoxDecoration(
@@ -35,7 +35,7 @@ class CustomButtonOnBoarding extends GetView<OnBoardingControllerImp> {
                  .withOpacity(0.1)
                 : AppColor.praimaryColor,
                 
-            borderRadius: BorderRadius.all(Radius.circular(180)),
+            borderRadius: const BorderRadius.all(Radius.circular(180)),
 
             // topLeft: Radius.circular(100),
             // bottomLeft: Radius.circular(32),

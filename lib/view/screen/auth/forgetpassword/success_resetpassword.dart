@@ -17,7 +17,7 @@ class SuccessResetPassword extends StatelessWidget {
           backgroundColor: AppColor.white,
           elevation: 0.0,
           title: Text(
-            'Success',
+            "24".tr,
             style: Theme.of(context).textTheme.headline1!.copyWith(
                   color: AppColor.grey,
                 ),
@@ -33,14 +33,14 @@ class SuccessResetPassword extends StatelessWidget {
               child: Lottie.asset(AppImageAsset.success1, repeat: false),
             ),
             Text(
-              "Congratulations",
+              "23".tr,
               style: Theme.of(context).textTheme.headline2,
             ),
              const   SizedBox(
               height: 15,
             ),
             Text(
-              "password changed successfully",
+              "42".tr ,
               style: Theme.of(context)
                   .textTheme
                   .headline1!
@@ -50,7 +50,7 @@ class SuccessResetPassword extends StatelessWidget {
              SizedBox(
               width: double.infinity,
               child: CustomButtomAuth(
-                text: "Go To Login",
+                text: "26".tr ,
                 onPressed: () {
                   Get.offAllNamed(AppRoute.login);
                 },

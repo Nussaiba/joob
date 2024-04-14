@@ -18,7 +18,7 @@ class ResetPassword extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: AppColor.praimaryColor,
           title: Text(
-            'ResetPassword',
+            "37".tr,
             style: Theme.of(context)
                 .textTheme
                 .headline1!
@@ -33,13 +33,13 @@ class ResetPassword extends StatelessWidget {
             child: Form(
               key: controller.formstate,
               child: ListView(children: [
-                const CustomTextTitleAuth(
-                  text: "New Password",
+                CustomTextTitleAuth(
+                  text: "38".tr,
                 ),
                 const SizedBox(
                   height: 10,
                 ),
-                const CustomTextBodyAuth(text: "Please Enter new Password"),
+             CustomTextBodyAuth(text: "39".tr),
                 const SizedBox(
                   height: 15,
                 ),
@@ -48,8 +48,8 @@ class ResetPassword extends StatelessWidget {
                               return isPasswordCompliant(value!);
                             },
                   mycontroller: controller.password,
-                  hinttext: "Enter Your Password",
-                  labeltext: "Password",
+                  hinttext: "14".tr,
+                  labeltext: "15".tr,
                   iconData: controller.isShowPassword
                                 ? Icons.visibility
                                 : Icons.visibility_off,
@@ -63,8 +63,8 @@ class ResetPassword extends StatelessWidget {
                     return validInput(val!, 8, 20, "password");
                   },
                   mycontroller: controller.repassword,
-                  hinttext: "Re Enter Your Password",
-                  labeltext: "Password",
+                  hinttext: "40".tr,
+                  labeltext: "15".tr,
                   iconData: controller.isShowRePassword
                                 ? Icons.visibility
                                 : Icons.visibility_off,
@@ -74,7 +74,7 @@ class ResetPassword extends StatelessWidget {
                             },
                 ),
                 CustomButtomAuth(
-                    text: "save",
+                    text: "41".tr,
                     onPressed: () {
                     //  Get.toNamed(AppRoute.successResetpassword);
                       controller.goToSuccessResetPassword();

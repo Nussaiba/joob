@@ -18,7 +18,7 @@ class VerfiyCode extends StatelessWidget {
         backgroundColor: AppColor.praimaryColor,
         elevation: 0.0,
         title: Text(
-          'Verification Code',
+          "34".tr,
           style: Theme.of(context)
               .textTheme
               .headline1!
@@ -32,16 +32,14 @@ class VerfiyCode extends StatelessWidget {
                   padding:
                       const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
                   child: ListView(children: [
-                    const CustomTextTitleAuth(
-                      text: "Check Code",
+                    CustomTextTitleAuth(
+                      text: "35".tr,
                     ),
                     const SizedBox(
                       height: 10,
                     ),
-                     CustomTextBodyAuth(
-                        text:
-                        
-                            "Please Enter The Digit Code Sent to\n ${controller.email} "),
+                    CustomTextBodyAuth(
+                        text: " ${"36".tr} \n ${controller.email} "),
                     const SizedBox(
                       height: 30,
                     ),
@@ -52,14 +50,9 @@ class VerfiyCode extends StatelessWidget {
                       fieldWidth: 42.0,
                       numberOfFields: 6,
                       borderColor: AppColor.praimaryColor,
-                      //set to true to show as box or false to show as dash
                       showFieldAsBox: true,
-
-                      //runs when a code is typed in
                       onCodeChanged: (String code) {
-                        //handle validation or checks here
                       },
-                      //runs when every textfield is filled
                       onSubmit: (String verificationCode) {
                         print("11111  $verificationCode");
                         Get.offNamed(AppRoute.resetPassword, arguments: {
@@ -67,7 +60,7 @@ class VerfiyCode extends StatelessWidget {
                         });
 
                         //  controller.goToResetPassword(verificationCode);
-                      }, // end onSubmit
+                      }, 
                     ),
                     const SizedBox(
                       height: 30,
@@ -77,19 +70,16 @@ class VerfiyCode extends StatelessWidget {
                         onTap: controller.remainingTime == 0
                             ? controller.resendCode
                             : null,
-                        
-                          child: Text(
-                            textAlign: TextAlign.end,
-                            controller.remainingTime > 0
-                                ? 'Resend after ${controller.timerText}'
-                                : 'Resend Now',
-                            style: TextStyle(
-                               
-                                color: controller.remainingTime > 0
-                                    ? AppColor.grey
-                                    : AppColor.praimaryColor,
-                                fontWeight: FontWeight.bold),
-                          
+                        child: Text(
+                          textAlign: TextAlign.end,
+                          controller.remainingTime > 0
+                              ? ' ${"30".tr} ${controller.timerText}'
+                              : "31" ,
+                          style: TextStyle(
+                              color: controller.remainingTime > 0
+                                  ? AppColor.grey
+                                  : AppColor.praimaryColor,
+                              fontWeight: FontWeight.bold),
                         ),
                       ),
                     ),

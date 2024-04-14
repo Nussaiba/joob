@@ -40,9 +40,9 @@ class VerifyCodeRegister extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-               CustomTextBodyAuth(
-                  text:
-                     "29".tr),
+              //  CustomTextBodyAuth(
+              //     text:
+              //        "29".tr),
               const SizedBox(
                 height: 15,
               ),
@@ -78,8 +78,8 @@ class VerifyCodeRegister extends StatelessWidget {
                           child: Text(
                             textAlign: TextAlign.end,
                             controller.remainingTime > 0
-                                ? 'Resend after ${controller.timerText}'
-                                : 'Resend Now',
+                                ? " ${"30".tr} ${controller.timerText}"
+                                : "31".tr,
                             style: TextStyle(
                                
                                 color: controller.remainingTime > 0

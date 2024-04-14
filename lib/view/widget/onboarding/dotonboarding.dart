@@ -11,7 +11,7 @@ class CustomDotControllerOnBoarding extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<OnBoardingControllerImp>(
         builder: (controller) => Container(
-              margin: EdgeInsets.only(left: 40),
+              margin:const  EdgeInsets.only(left: 40),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
