@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jobs/core/constants/routes.dart';
 import 'package:jobs/core/services/services.dart';
-import 'package:jobs/data/datasource/static/static.dart';
+import 'package:jobs/data/datasource/static/onboardinglist.dart';
 
 abstract class OnBoardingController extends GetxController {
   nextPage();
@@ -26,7 +26,7 @@ class OnBoardingControllerImp extends OnBoardingController {
     currentPage++;
 
     if (currentPage > onBoardingList.length - 1) {
-      myServices.box.write("onboarding", "1");
+      myServices.box.write("step", "1");
       Get.offAllNamed(AppRoute.login);
     } else {
       pageController.animateToPage(currentPage,

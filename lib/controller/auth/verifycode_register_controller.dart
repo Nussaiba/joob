@@ -11,7 +11,7 @@ abstract class VerifyCodeRegisterController extends GetxController {
   goToSuccessSignUp(String  verifycode);
 }
 
-late VerifyCodeRegisterData verifyCodeRegisterData =
+VerifyCodeRegisterData verifyCodeRegisterData =
     VerifyCodeRegisterData(Get.find());
 class VerifyCodeRegisterControllerImp extends VerifyCodeRegisterController {
   String? email;

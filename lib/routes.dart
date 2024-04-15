@@ -15,23 +15,23 @@ import 'view/screen/auth/forgetpassword/success_resetpassword.dart';
 import 'view/screen/auth/forgetpassword/verfiycode.dart';
 
 List<GetPage<dynamic>>? routes = [
-  GetPage(name: "/", page: () => OnBoarding(), middlewares: [MyMiddleWare()]),
+  GetPage(name: "/", page: () => const OnBoarding(), middlewares: [MyMiddleWare()]),
 
-  GetPage(name: AppRoute.testscreen, page: () => Test()),
+  GetPage(name: AppRoute.testscreen, page: () => const Test()),
 
   GetPage(name: AppRoute.log, page: () => Log()),
   //OnBoarding
-  GetPage(name: AppRoute.onBoarding, page: () => OnBoarding()),
+  GetPage(name: AppRoute.onBoarding, page: () => const OnBoarding()),
   //Auth
-  GetPage(name: AppRoute.login, page: () => Login()),
-  GetPage(name: AppRoute.signUp, page: () => SignUp()),
-  GetPage(name: AppRoute.forgetPassword, page: () => ForgetPassword()),
-  GetPage(name: AppRoute.verfiyCodeForgetpassword, page: () => VerfiyCode()),
-  GetPage(name: AppRoute.resetPassword, page: () => ResetPassword()),
+  GetPage(name: AppRoute.login, page: () => const Login()),
+  GetPage(name: AppRoute.signUp, page: () => const SignUp()),
+  GetPage(name: AppRoute.forgetPassword, page: () => const ForgetPassword()),
+  GetPage(name: AppRoute.verfiyCodeForgetpassword, page: () => const VerfiyCode()),
+  GetPage(name: AppRoute.resetPassword, page: () => const ResetPassword()),
   GetPage(
-      name: AppRoute.successResetpassword, page: () => SuccessResetPassword()),
-  GetPage(name: AppRoute.successSignUp, page: () => SuccessSignUp()),
-  GetPage(name: AppRoute.verifyCodeRegister, page: () => VerifyCodeRegister()),
+      name: AppRoute.successResetpassword, page: () => const SuccessResetPassword()),
+  GetPage(name: AppRoute.successSignUp, page: () => const SuccessSignUp()),
+  GetPage(name: AppRoute.verifyCodeRegister, page: () => const VerifyCodeRegister()),
 
-  GetPage(name: AppRoute.mainScreen, page: () => MainScreen()),
+  GetPage(name: AppRoute.mainScreen, page: () => const MainScreen()),
 ];

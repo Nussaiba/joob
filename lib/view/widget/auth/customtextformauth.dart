@@ -36,8 +36,8 @@ class CustomTextFormAuth extends StatelessWidget {
                 margin: const EdgeInsets.symmetric(horizontal: 9),
                 child: Text(labeltext)),
             suffixIcon: InkWell(
-              child: Icon(iconData),
               onTap: onTapIcon,
+              child: Icon(iconData),
             ),
             border:
                 OutlineInputBorder(borderRadius: BorderRadius.circular(30))),

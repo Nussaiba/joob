@@ -34,7 +34,12 @@ class CustamTapBottomItem extends StatelessWidget {
               ),
             ),
           ),
-          Icon(icon,
+
+
+
+Column(mainAxisSize: MainAxisSize.min
+,children: [
+ Icon(icon,
               shadows: [
                 Shadow(
                   blurRadius: isSelected ? 5 : 0,
@@ -43,6 +48,12 @@ class CustamTapBottomItem extends StatelessWidget {
               ],
               size: isSelected ? 30 : 23,
               color: isSelected ? AppColor.white : AppColor.praimaryColor),
+
+ const Text("home"),
+
+],),
+         
+              
         ],
       ),
     );

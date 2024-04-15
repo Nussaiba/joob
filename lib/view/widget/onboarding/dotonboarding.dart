@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jobs/controller/onboardingcontroller.dart';
 import 'package:jobs/core/constants/color.dart';
-import 'package:jobs/data/datasource/static/static.dart';
+import 'package:jobs/data/datasource/static/onboardinglist.dart';
 
 class CustomDotControllerOnBoarding extends StatelessWidget {
   const CustomDotControllerOnBoarding({super.key});

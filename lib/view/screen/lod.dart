@@ -8,6 +8,8 @@ import 'package:jobs/core/constants/routes.dart';
 class Log extends StatelessWidget {
   final VerificationController verificationController = Get.put(VerificationController());
 
+   Log({super.key});
+
   Widget _buildNumberPadButton(String number, Function() onTap) {
     return GestureDetector(
       onTap: onTap,
@@ -19,7 +21,7 @@ class Log extends StatelessWidget {
         child: Center(
           child: Text(
             number,
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
+            style:const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
           ),
         ),
       ),
@@ -30,7 +32,7 @@ class Log extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('أدخل رمز التحقق'),
+        title:const Text('أدخل رمز التحقق'),
         backgroundColor: Colors.deepPurple,
       ),
       body: Padding(
@@ -51,7 +53,7 @@ class Log extends StatelessWidget {
                       
                       List.generate(6, (index) {
                         return Container(
-                          margin: EdgeInsets.all(8),
+                          margin:const  EdgeInsets.all(8),
                           width: 24,
                           height: 24,
                           decoration: BoxDecoration(
@@ -91,12 +93,12 @@ class Log extends StatelessWidget {
                 );
               },
             ),
-            SizedBox(height: 40),
+            const SizedBox(height: 40),
             // لوحة الأرقام
             Expanded(
               child: GridView.builder(
-                itemCount: 12, // 9 أرقام + زر الحذف + زر فارغ + زر تأكيد
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                itemCount: 12,
+                gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
                   childAspectRatio: 2,
                   crossAxisSpacing: 10,
@@ -110,7 +112,7 @@ class Log extends StatelessWidget {
                     });
                   } else if (index == 9) {
                     // زر فارغ
-                    return SizedBox.shrink();
+                    return const SizedBox.shrink();
                   } else if (index == 10) {
                     // زر الصفر
                     return _buildNumberPadButton('0', () {
@@ -122,7 +124,7 @@ class Log extends StatelessWidget {
                       verificationController.removeNumber();
                     });
                   }
-                  return SizedBox.shrink();
+                  return const SizedBox.shrink();
                 },
               ),
             ),

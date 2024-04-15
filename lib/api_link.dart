@@ -12,5 +12,7 @@ class AppLink {
   // Forget Password ****************
   static const String checkemail = "$server/forgotPassword";
   static const String verifycodeforgetpassword = "$server/checkCode";
-  static const String resetPassword = "$server/resetPassword";
+  static const String resetPassword = "$server/rePassword";
+  // Change Password ****************
+  static const String changepassword = "$server/resetPasword";
 }

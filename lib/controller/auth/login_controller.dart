@@ -41,6 +41,11 @@ class LoginControllerImp extends LoginController {
       if (StatusRequest.success == statusRequest) {
         if (response["status"] == 200) {
           myServices.box.write("token", "${response["data"]["token"]}");
+          myServices.box.write("id", "${response["data"]["user"]["id"]}");
+          myServices.box.write("email", "${response["data"]["user"]["email"]}");
+          myServices.box.write("user_name", "${response["data"]["user"]["user_name"]}");
+          myServices.box.write("step", "2");
+
           print("token ${response["data"]["token"]}");
           Get.offNamed(AppRoute.log);
         } else if (response['status'] == 401) {
