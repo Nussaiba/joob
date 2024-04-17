@@ -46,10 +46,9 @@ Column(mainAxisSize: MainAxisSize.min
                   color: isSelected ? AppColor.white : AppColor.praimaryColor,
                 )
               ],
-              size: isSelected ? 30 : 23,
+              size: isSelected ? 28 : 23,
               color: isSelected ? AppColor.white : AppColor.praimaryColor),
 
- const Text("home"),
 
 ],),
          
@@ -64,7 +63,7 @@ class HalfCircleClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
     var path = Path();
-    path.addOval(Rect.fromLTWH(30, -100, size.width / 1.5, size.height));
+    path.addOval(Rect.fromLTWH(30, -100, size.width /1.5, size.height));
     return path;
   }
 
