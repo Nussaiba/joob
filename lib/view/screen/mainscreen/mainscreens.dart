@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jobs/controller/mainscreens/mainscreen.dart';
-import 'package:jobs/view/widget/mainscreen/mainscreen/bottom_appbar.dart';
-import 'package:jobs/view/widget/mainscreen/mainscreen/customclipper_bottom_bar.dart';
+import 'package:jobs/view/widget/mainscreen/mainscreen_widgets/bottom_appbar.dart';
+import 'package:jobs/view/widget/mainscreen/mainscreen_widgets/customclipper_bottom_bar.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});

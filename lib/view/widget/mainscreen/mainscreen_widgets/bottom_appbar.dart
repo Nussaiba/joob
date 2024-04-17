@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jobs/controller/mainscreens/mainscreen.dart';
 import 'package:jobs/core/constants/color.dart';
-import 'package:jobs/view/widget/mainscreen/mainscreen/bottom_bar_item.dart';
+import 'package:jobs/view/widget/mainscreen/mainscreen_widgets/bottom_bar_item.dart';
 
 class CustomBottomAppBar extends StatelessWidget {
   const CustomBottomAppBar({super.key});
