@@ -11,7 +11,8 @@ import 'package:jobs/routes.dart';
 import 'package:jobs/view/screen/lod.dart';
 import 'package:jobs/view/screen/mainscreen/mainscreens.dart';
 import 'package:jobs/view/screen/onboarding.dart';
-import 'package:jobs/view/screen/testscreen.dart';
+import 'package:jobs/view/screen/profile/create_profile.dart';
+import 'package:jobs/view/screen/profile/edit_profile.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,6 +20,7 @@ void main() async {
   //  await Get.putAsync(() => GetStorage.init());
   runApp(const MyApp());
 }
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
@@ -33,7 +35,7 @@ class MyApp extends StatelessWidget {
         //fontFamily: "Pacifico",
         // fontFamily : "Cairo" ,
         fontFamily: "Gafata",
-        textTheme: const TextTheme(
+        textTheme: TextTheme(
           headline1: TextStyle(
               fontWeight: FontWeight.bold, fontSize: 20, color: AppColor.black),
           headline2: TextStyle(
@@ -47,9 +49,10 @@ class MyApp extends StatelessWidget {
         ),
       ),
       initialBinding: InitialBindings(),
-      // home : Log(),
+      //  home : EditProfilePage(),
+      //home: const CreateProfilePage(),
       // home :Test(),
-      home: MainScreen(),
+      // home: MainScreen(),
       getPages: routes,
     );
   }

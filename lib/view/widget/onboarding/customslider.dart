@@ -1,7 +1,7 @@
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:jobs/controller/onboardingcontroller.dart';
+import 'package:jobs/controller/onboarding/onboardingcontroller.dart';
 import 'package:jobs/core/constants/color.dart';
 import 'package:jobs/data/datasource/static/onboardinglist.dart';
 import 'package:lottie/lottie.dart';

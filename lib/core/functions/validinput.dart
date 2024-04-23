@@ -11,6 +11,11 @@ validInput(String val, int min, int max, String type) {
       return "not valid email";
     }
   }
+   if (type == "date") {
+    if (!GetUtils.isDateTime(val)) {
+      return "not valid date";
+    }
+  }
 
   if (val.isEmpty) {
     return "can't be Empty";

@@ -8,6 +8,8 @@ class MyMiddleWare extends GetMiddleware {
   int? get priority => 1;
 
   MyServices myServices = Get.find();
+
+
   @override
   RouteSettings? redirect(String? route) {
       if (myServices.box.read("step") == "2") {

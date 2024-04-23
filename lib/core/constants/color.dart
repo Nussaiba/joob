@@ -8,7 +8,9 @@ class AppColor {
         static const Color  praimaryColor  = Color(0xff5B0888);
     static const Color  praimaryColor2  = Color(0xff713ABE);
     static const Color praimaryColor3 = Color(0xff9D76C1);
-  static const Color grey = Color(0xffE0DEDE);
+  //static const Color grey = Color(0xffE0DEDE);
+    static const Color grey = Color.fromARGB(255, 114, 113, 113);
+
     static const Color white = Color(0xffE5CFF7);
 
 

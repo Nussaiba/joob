@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jobs/core/class/statusrequest.dart';
+import 'package:jobs/core/constants/color.dart';
 import 'package:jobs/core/constants/routes.dart';
+import 'package:jobs/core/functions/dialiog.dart';
 import 'package:jobs/core/functions/handlingdata.dart';
 import 'package:jobs/data/datasource/remote/auth/login.dart';
 import 'package:jobs/core/services/services.dart';
@@ -43,42 +45,45 @@ class LoginControllerImp extends LoginController {
           myServices.box.write("token", "${response["data"]["token"]}");
           myServices.box.write("id", "${response["data"]["user"]["id"]}");
           myServices.box.write("email", "${response["data"]["user"]["email"]}");
-          myServices.box.write("user_name", "${response["data"]["user"]["user_name"]}");
+          myServices.box
+              .write("user_name", "${response["data"]["user"]["user_name"]}");
           myServices.box.write("step", "2");
-
           print("token ${response["data"]["token"]}");
-          Get.offNamed(AppRoute.log);
+          Get.offNamed(AppRoute.createProfile);
+          getSnakBar(
+              "success",
+              "Welcolme ${response["data"]["user"]["user_name"]} \nBy : ${response['data']['user']['email']}",
+              3);
         } else if (response['status'] == 401) {
-          Get.defaultDialog(
-              title: "Warning",
-              middleText: "Email & password does not match with our record.");
+          getDialog(
+              "Warning", "Email & password does not match with our record.");
         }
+        update();
       }
-      update();
-    } else {}
-  }
+      }
+    }
 
-  @override
-  goToForgetPassword() {
-    Get.toNamed(AppRoute.forgetPassword);
-  }
+    @override
+    goToForgetPassword() {
+      Get.toNamed(AppRoute.forgetPassword);
+    }
 
-  @override
-  goToSignUp() {
-    Get.offNamed(AppRoute.signUp);
-  }
+    @override
+    goToSignUp() {
+      Get.offNamed(AppRoute.signUp);
+    }
 
-  @override
-  void onInit() {
-    email = TextEditingController();
-    password = TextEditingController();
-    super.onInit();
-  }
+    @override
+    void onInit() {
+      email = TextEditingController();
+      password = TextEditingController();
+      super.onInit();
+    }
 
-  @override
-  void dispose() {
-    email.dispose();
-    password.dispose();
-    super.dispose();
+    @override
+    void dispose() {
+      email.dispose();
+      password.dispose();
+      super.dispose();
+    }
   }
-}

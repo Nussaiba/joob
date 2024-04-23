@@ -11,9 +11,12 @@ class AppRoute {
   static const String successSignUp = "/successsignup";
   static const String successResetpassword = "/successresetpassword";
   static const String verifyCodeRegister = "/verifycoderegister";
-    static const String testscreen = "/testscreen";
+  static const String testscreen = "/testscreen";
 
-        static const String mainScreen = "/mainscreen";
+  static const String mainScreen = "/mainscreen";
 
+  static const String createProfile = "/createprofile";
+  static const String editProfile = "/editprofile";
+    static const String profilePage = "/profilepage";
 
 }

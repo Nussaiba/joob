@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jobs/core/constants/color.dart';
 
 class CustomTextFormAuth extends StatelessWidget {
   final String hinttext;
@@ -28,16 +29,28 @@ class CustomTextFormAuth extends StatelessWidget {
         obscureText: obscureText == null || obscureText == false ? false : true,
         decoration: InputDecoration(
             hintText: hinttext,
-            hintStyle: const TextStyle(fontSize: 14),
+            hintStyle: Theme.of(context)
+                .textTheme
+                .bodyText1!
+                .copyWith(color: AppColor.black),
             floatingLabelBehavior: FloatingLabelBehavior.always,
             contentPadding:
                 const EdgeInsets.symmetric(vertical: 5, horizontal: 30),
             label: Container(
                 margin: const EdgeInsets.symmetric(horizontal: 9),
-                child: Text(labeltext)),
+                child: Text(labeltext, style: Theme.of(context)
+                .textTheme
+                .bodyText1!
+                .copyWith(color: AppColor.black),) , ),
             suffixIcon: InkWell(
               onTap: onTapIcon,
-              child: Icon(iconData),
+              child: Icon(iconData, color: AppColor.praimaryColor),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(30),
+              borderSide: const BorderSide(
+                color: AppColor.grey,
+              ),
             ),
             border:
                 OutlineInputBorder(borderRadius: BorderRadius.circular(30))),

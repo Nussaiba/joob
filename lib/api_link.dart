@@ -1,5 +1,5 @@
 class AppLink {
-  static const String server = "http://192.168.105.152:8000/api";
+  static const String server = "http://192.168.21.152:8000/api";
   //*********************
   static const String test = "$server/ ";
 
@@ -15,4 +15,8 @@ class AppLink {
   static const String resetPassword = "$server/rePassword";
   // Change Password ****************
   static const String changepassword = "$server/resetPasword";
+
+  //Profile
+  static const String createprofile = "$server/seeker/create";
+  static const String updateprofile = "$server/seeker/update";
 }
