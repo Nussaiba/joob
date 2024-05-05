@@ -1,5 +1,6 @@
 {
     "cSpell.words": [
         "formstate"
-    ]
+    ],
+    "java.compile.nullAnalysis.mode": "automatic"
 }

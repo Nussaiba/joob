@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jobs/controller/auth/google_sign_in_controller.dart';
 import 'package:jobs/controller/auth/signup_controller.dart';
+import 'package:jobs/controller/testlog.dart';
 import 'package:jobs/core/class/handlingdataview.dart';
 import 'package:jobs/core/constants/color.dart';
 import 'package:jobs/core/functions/alert_exit.dart';
@@ -9,7 +11,6 @@ import 'package:jobs/view/widget/auth/customtextbodyauth.dart';
 import 'package:jobs/view/widget/auth/customtextformauth.dart';
 import 'package:jobs/view/widget/auth/customtexttitleauth.dart';
 import 'package:jobs/view/widget/auth/textsignup.dart';
-
 import '../../widget/auth/custombuttomauth.dart';
 
 class SignUp extends StatelessWidget {
@@ -17,6 +18,9 @@ class SignUp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.put(SignUpControllerImp());
+    Get.put(AuthWithGoogle());
+    Get.put(Auth());
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColor.praimaryColor,
@@ -97,7 +101,18 @@ class SignUp extends StatelessWidget {
                       onTap: () {
                         controller.goToSignIn();
                       },
-                    )
+                    ),
+                    GetBuilder<AuthWithGoogle>(
+                      builder: (controller) => CustomButtomAuth(
+                          text: "Google",
+                          onPressed: () async {
+                            print("llllllll");
+                            // await controller.signInWithGoogle().whenComplete(() => debugPrint('DONE'));
+                            await controller
+                                .loginWithGoogle()
+                                .whenComplete(() => debugPrint('DONE'));
+                          }),
+                    ),
                   ]),
                 )),
           ),

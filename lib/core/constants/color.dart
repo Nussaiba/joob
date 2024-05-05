@@ -12,6 +12,8 @@ class AppColor {
     static const Color grey = Color.fromARGB(255, 114, 113, 113);
 
     static const Color white = Color(0xffE5CFF7);
+        static const Color pink = Color(0xffE5CFF7);
+
 
 
  // static const Color praimaryColor = Color(0xff5db1df);
