@@ -1,67 +1,99 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jobs/controller/auth/google_sign_in_controller.dart';
+import 'package:jobs/controller/chats/chats_controller.dart';
+import 'package:jobs/core/constants/color.dart';
 import 'package:jobs/core/constants/imageassest.dart';
-import 'package:jobs/view/screen/chat/chatcreen.dart';
 
 import '../../widget/chat/app_bar_chats_page.dart';
 
-class Chats extends StatelessWidget {
-  const Chats({super.key});
+class ChatsApp extends GetView<ChatsController> {
+  final auth = Get.find<AuthWithGoogle>();
+  ChatsApp({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(ChatsController());
     return Scaffold(
-     
       body: Column(
         children: [
-           AppBarChats(),
+          AppBarChats(),
           Expanded(
-            child: ListView.builder(
-              padding: EdgeInsets.zero,
-              itemCount: 20,
-              itemBuilder: (context, index) => Container(
-                height: Get.width / 4.5,
-                decoration: const BoxDecoration(
-                    // color: Colors.amber,
-                    border: Border(
-                        bottom: BorderSide(
-                  color: Color.fromARGB(255, 236, 232, 232),
-                ))),
-                child: ListTile(
-                  onTap: () {
-                    Get.to(() => ChatScreen());
-                  },
-                  leading: ClipRRect(
-                    borderRadius: BorderRadius.circular(80),
-                    child: Image.asset(
-                      AppImageAsset.onBoardingImgFour
-                                    ,  fit: BoxFit.fill
-                    ),
-                  ),
-                  title: Text(
-                    "name person  ${index + 1}",
-                    style: 
-                     Theme.of(context).textTheme.headline1,
-                    
-                  ),
-                  subtitle: Text(
-                    "name person  ${index + 1}",
-                    style: const TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  trailing: Chip(
-                    clipBehavior: Clip.none,
-                    label: Text("$index"),
-                  ),
-                ),
-              ),
-            ),
-          ),
+              child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+            stream: controller.chatStream(auth.userModel.value.email!),
+            builder: (context, snapshot1) {
+              if (snapshot1.connectionState == ConnectionState.active) {
+                //  var allChat = (snapshot1.data!.data()
+                //               as Map<String, dynamic>)["chats"] as List;
+                var ListDocsChats = snapshot1.data!.docs;
+                return ListView.builder(
+                    padding: EdgeInsets.zero,
+                    itemCount: ListDocsChats.length,
+                    itemBuilder: (context, index) {
+                      return StreamBuilder<
+                          DocumentSnapshot<Map<String, dynamic>>>(
+                        stream: controller
+                            .friendStream(ListDocsChats[index]["connection"]),
+                        builder: (context, snapshot2) {
+                          if (snapshot2.connectionState ==
+                              ConnectionState.active) {
+                            var data = snapshot2.data!.data();
+                            print(data);
+                            return ListTile(
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 5),
+                              onTap: () {
+                                controller.goToChatRoom(
+                                    "${ListDocsChats[index].id}",
+                                    auth.userModel.value.email!,
+                                    "${ListDocsChats[index]["connection"]}");
+                              },
+                              leading: ClipRRect(
+                                borderRadius: BorderRadius.circular(80),
+                                child: Image.asset(
+                                    AppImageAsset.onBoardingImgFour,
+                                    fit: BoxFit.fill),
+                              ),
+                              title: Text(
+                                "name ${data!["name"]}",
+                                style: Theme.of(context).textTheme.headline1,
+                              ),
+                              subtitle: Text(
+                                "name${data["email"]}",
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              trailing: ListDocsChats[index]["total_unread"] ==
+                                      0
+                                  ? const SizedBox()
+                                  : Chip(
+                                      backgroundColor: AppColor.praimaryColor3,
+                                      clipBehavior: Clip.none,
+                                      label: Text(
+                                        "${ListDocsChats[index]["total_unread"]}",
+                                        style: TextStyle(color: AppColor.white),
+                                      ),
+                                    ),
+                            );
+                          }
+
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        },
+                      );
+                    });
+              }
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            },
+          )),
         ],
       ),
     );
   }
 }
-

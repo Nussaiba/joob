@@ -8,6 +8,9 @@ import 'package:jobs/core/localization/changelocal.dart';
 import 'package:jobs/core/localization/translation.dart';
 import 'package:jobs/core/services/services.dart';
 import 'package:jobs/routes.dart';
+import 'package:jobs/view/screen/cv/cv_test.dart';
+import 'package:jobs/view/screen/chat/search_chat.dart';
+import 'package:jobs/view/screen/cv/create_cv.dart';
 import 'package:jobs/view/screen/lod.dart';
 import 'package:jobs/view/screen/main2/main_screen.dart';
 import 'package:jobs/view/screen/mainscreen/mainscreens.dart';
@@ -37,13 +40,17 @@ class MyApp extends StatelessWidget {
         //fontFamily: "Pacifico",
         // fontFamily : "Cairo" ,
         fontFamily: "Gafata",
-        textTheme:const TextTheme(
+        textTheme: const TextTheme(
           headline1: TextStyle(
               fontWeight: FontWeight.bold, fontSize: 20, color: AppColor.black),
           headline2: TextStyle(
               fontWeight: FontWeight.bold, fontSize: 26, color: AppColor.black),
-              headline3: TextStyle( fontWeight: FontWeight.bold,  fontSize: 30, color: AppColor.white,),
-          bodyText1: TextStyle(    
+          headline3: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 30,
+            color: AppColor.white,
+          ),
+          bodyText1: TextStyle(
               height: 2,
               color: AppColor.grey,
               fontWeight: FontWeight.bold,
@@ -56,7 +63,11 @@ class MyApp extends StatelessWidget {
       //home: const CreateProfilePage(),
       // home :Test(),
       // home: MainScreen(),
-      home :const MainScreen2(),
+      //home: A(),
+      home: SignUp(),
+      // home: SearchChat(),
+      // home :const MainScreen2(),
+     // home:CV(),
       getPages: routes,
     );
   }

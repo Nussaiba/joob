@@ -3,8 +3,9 @@ import 'package:get/get.dart';
 import 'package:jobs/core/constants/color.dart';
 
 class TextFieldChatSend extends StatelessWidget {
-  const TextFieldChatSend({super.key});
-
+  const TextFieldChatSend({super.key, this.onTap, required this.c});
+  final void Function()? onTap;
+  final TextEditingController c;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,14 +18,12 @@ class TextFieldChatSend extends StatelessWidget {
           Expanded(
             child: Container(
                 width: 200,
-                      height: Get.width/7,
-
+                height: Get.width / 7,
                 child: TextField(
+                  controller: c,
                   decoration: InputDecoration(
-                    hintText:  "enter your message",
-                hintStyle: TextStyle(
-                      fontSize: 14
-                    ),
+                    hintText: "enter your message",
+                    hintStyle: TextStyle(fontSize: 14),
                     prefixIcon: IconButton(
                         onPressed: () {},
                         icon: Icon(Icons.emoji_emotions_outlined)),
@@ -42,12 +41,15 @@ class TextFieldChatSend extends StatelessWidget {
                 )),
           ),
           const SizedBox(width: 10),
-          const CircleAvatar(
+          CircleAvatar(
             radius: 26,
             backgroundColor: AppColor.praimaryColor,
-            child: Icon(
-              Icons.send,
-              color: AppColor.white,
+            child: InkWell(
+              onTap: onTap,
+              child: Icon(
+                Icons.send,
+                color: AppColor.white,
+              ),
             ),
           ),
         ],

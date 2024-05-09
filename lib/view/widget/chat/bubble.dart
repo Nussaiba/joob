@@ -2,9 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:jobs/core/constants/color.dart';
 
 class Bubble extends StatelessWidget {
-  const Bubble({super.key, required this.isSender, required this.text});
+  const Bubble(
+      {super.key,
+      required this.isSender,
+      required this.text,
+      required this.time});
   final bool isSender;
   final String text;
+  final String time;
 
   @override
   Widget build(BuildContext context) {
@@ -34,10 +39,10 @@ class Bubble extends StatelessWidget {
                 children: [
                   Text(
                     text,
-                    style:const  TextStyle(color: Colors.white, height: 1.5),
+                    style: const TextStyle(color: Colors.white, height: 1.5),
                   ),
-                const  Text(
-                    "12:12",
+                  Text(
+                    time,
                     style: TextStyle(
                       fontSize: 10,
                       color: AppColor.white,

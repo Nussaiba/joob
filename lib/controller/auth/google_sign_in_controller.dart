@@ -3,13 +3,18 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:jobs/core/constants/routes.dart';
+import 'package:jobs/data/model/chat_model.dart';
 import 'package:jobs/data/model/user_model.dart';
+import 'package:jobs/view/screen/chat/search_chat.dart';
+import 'package:jobs/view/screen/chat/chats.dart';
+
+import '../../view/screen/chat/chatcreen.dart';
 
 class AuthWithGoogle extends GetxController {
   var isSkipAuth = false.obs;
   var isAuth = false.obs;
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-  GoogleSignIn googleSignIn = GoogleSignIn(  );
+  GoogleSignIn googleSignIn = GoogleSignIn();
   GoogleSignInAccount? googleSignInAccount;
   UserCredential? userCredential;
   var userModel = UserModel().obs;
@@ -24,58 +29,80 @@ class AuthWithGoogle extends GetxController {
         final authgoogle = await googleSignInAccount!.authentication;
         print(authgoogle);
         final credential = await GoogleAuthProvider.credential(
-          idToken: authgoogle.idToken,
-          accessToken: authgoogle.accessToken); 
-             print(credential);
-  await FirebaseAuth.instance
+            idToken: authgoogle.idToken, accessToken: authgoogle.accessToken);
+        print(credential);
+        await FirebaseAuth.instance
             .signInWithCredential(credential)
             .then((value) => userCredential = value);
 
-        CollectionReference users =await firebaseFirestore.collection("users");
+        CollectionReference users = await firebaseFirestore.collection("users");
         print(users);
 
         final checkuser = await users.doc(googleSignInAccount!.email).get();
 
         if (checkuser.data() == null) {
-        await  users.doc(googleSignInAccount!.email).set({
+          await users.doc(googleSignInAccount!.email).set({
             "id": userCredential!.user!.uid,
             "name": googleSignInAccount!.displayName,
             "email": googleSignInAccount!.email,
+            "keyName":
+                googleSignInAccount!.displayName!.substring(0, 1).toUpperCase(),
             "status": "",
             "creationTime":
                 userCredential!.user!.metadata.creationTime!.toIso8601String(),
             "lastSignInTime": userCredential!.user!.metadata.lastSignInTime!
                 .toIso8601String(),
             "updateTime": DateTime.now().toIso8601String(),
-            // "chat": ""
+            // "chats": [],
           });
+
+          await users.doc(googleSignInAccount!.email).collection("chats");
         } else {
-         await  users.doc(googleSignInAccount!.email).update({
+          await users.doc(googleSignInAccount!.email).update({
             "lastSignInTime": userCredential!.user!.metadata.lastSignInTime!
                 .toIso8601String(),
-          //  "updateTime": DateTime.now().toIso8601String(),
           });
         }
 
-        // final curruser = await users.doc(googleSignInAccount!.email).get();
-        // final curruserdata = curruser.data() as Map<String, dynamic>;
+        final curruser = await users.doc(googleSignInAccount!.email).get();
+        final curruserdata = curruser.data() as Map<String, dynamic>;
 
-        // userModel(UserModel.fromJson(curruserdata));
-        // userModel(UserModel(
-        //     id: curruserdata["id"],
-        //     name: curruserdata["name"],
-        //     email: curruserdata["email"],
-        //     status: curruserdata["status"],
-        //     creationTime: curruserdata["creationTime"],
-        //     lastSignInTime: curruserdata["lastSignInTime"],
-        //     updatedTime: curruserdata["updatedTime"],
-        //     chats: curruserdata["chats"]));
+        userModel(UserModel.fromJson(curruserdata));
+
+        userModel.refresh();
+
+        final listChats = await users
+            .doc(googleSignInAccount!.email)
+            .collection("chats")
+            .get();
+
+        if (listChats.docs.length != 0) {
+          List<ChatUser> dataListChats = [];
+          listChats.docs.forEach((element) {
+            var dataDocChat = element.data();
+            var dataDocChatId = element.id;
+            dataListChats.add(ChatUser(
+              chatId: dataDocChatId,
+              connection: dataDocChat["connection"],
+              lastTime: dataDocChat["lastTime"],
+              totalunread: dataDocChat["total_unread"],
+            ));
+          });
+
+          userModel.update((user) {
+            user!.chats = dataListChats;
+          });
+        } else {
+          userModel.update((user) {
+            user!.chats = [];
+          });
+        }
+
+        userModel.refresh();
+
         isAuth.value = true;
-        //   print("userCredential");
-
-        //    print(userCredential);
-        //  Get.offAllNamed(AppRoute.createProfile);
-        // Get.offNamed(AppRoute.createProfile);
+        Get.to(ChatsApp());
+        //Get.off(SearchChat());
       } else {}
     } catch (error) {
       print(error);
@@ -90,68 +117,146 @@ class AuthWithGoogle extends GetxController {
   void addNewConnection(String friendEmail) async {
     bool flagNewConnection = false;
     var chat_id;
-
     CollectionReference chats = firebaseFirestore.collection("chats");
     CollectionReference users = firebaseFirestore.collection("users");
-
-    final docUser = await users.doc(googleSignInAccount!.email).get();
     final docChats =
-        await (docUser.data() as Map<String, dynamic>)["chats"] as List;
-
-    if (docChats.length != 0) {
-      docChats.forEach((singleChat) {
-        if (singleChat["connection"] == friendEmail) {
-          chat_id = singleChat["chat_id"];
-        }
-      });
-
-      if (chat_id != null) {
+        await users.doc(googleSignInAccount!.email).collection("chats").get();
+    if (docChats.docs.isNotEmpty) {
+      final checkConnection = await users
+          .doc(googleSignInAccount!.email)
+          .collection("chats")
+          .where("connection", isEqualTo: friendEmail)
+          .get();
+      if (checkConnection.docs.isNotEmpty) {
         flagNewConnection = false;
+        // chat id from chat collection
+        chat_id = checkConnection.docs[0].id;
       } else {
-//chat_id == null
         flagNewConnection = true;
       }
     } else {
       flagNewConnection = true;
     }
-
     if (flagNewConnection) {
-      final newchatDoc = await chats.add({
-        "connections": [googleSignInAccount!.email, friendEmail],
-        "total_chats": 0,
-        "total_read": 0,
-        "total_unread": 0,
-        "chat": [],
-        "lastTime": DateTime.now().toIso8601String(),
-      });
-      users.doc(googleSignInAccount!.email).update({
-        "chats": {
+      final chatsDocs = await chats.where(
+        "connections",
+        whereIn: [
+          [
+            googleSignInAccount!.email,
+            friendEmail,
+          ],
+          [
+            friendEmail,
+            googleSignInAccount!.email,
+          ],
+        ],
+      ).get();
+      if (chatsDocs.docs.isNotEmpty) {
+        final chatDataId = chatsDocs.docs[0].id;
+        final chatsData = chatsDocs.docs[0].data() as Map<String, dynamic>;
+        await users
+            .doc(googleSignInAccount!.email)
+            .collection("chats")
+            .doc(chatDataId)
+            .set({
           "connection": friendEmail,
-          "chat_id": newchatDoc.id,
-          "lastTime": DateTime.now().toIso8601String(),
+          "lastTime": chatsData["lastTime"],
+          "total_unread": 0,
+        });
+        final listChats = await users
+            .doc(googleSignInAccount!.email)
+            .collection("chats")
+            .get();
+        if (listChats.docs.length != 0) {
+          List<ChatUser> dataListChats = <ChatUser>[];
+          listChats.docs.forEach((element) {
+            var dataDocChat = element.data();
+            var dataDocChatId = element.id;
+            dataListChats.add(ChatUser(
+              chatId: dataDocChatId,
+              connection: dataDocChat["connection"],
+              lastTime: dataDocChat["lastTime"],
+              totalunread: dataDocChat["total_unread"],
+            ));
+          });
+          userModel.update((user) {
+            user!.chats = dataListChats;
+          });
+        } else {
+          userModel.update((user) {
+            user!.chats = [];
+          });
         }
-      });
+        chat_id = chatDataId;
+        userModel.refresh();
+      } else {
+        final newchatDoc = await chats.add({
+          "connections": [googleSignInAccount!.email, friendEmail],
+        });
 
-      userModel.update((userModel) {
-        userModel!.chats = [
-          ChatUser(
-            chatId: newchatDoc.id,
-            connection: friendEmail,
-            lastTime: DateTime.now().toIso8601String(),
-          ),
-        ];
-      });
-      chat_id = newchatDoc.id;
-      userModel.refresh();
+        await chats.doc(newchatDoc.id).collection("chat");
+
+        await users
+            .doc(googleSignInAccount!.email)
+            .collection("chats")
+            .doc(newchatDoc.id)
+            .set({
+          "connection": friendEmail,
+          "lastTime": DateTime.now().toIso8601String(),
+          "total_unread": 0,
+        });
+        final listChats = await users
+            .doc(googleSignInAccount!.email)
+            .collection("chats")
+            .get();
+        if (listChats.docs.length != 0) {
+          List<ChatUser> dataListChats = <ChatUser>[];
+          listChats.docs.forEach((element) {
+            var dataDocChat = element.data();
+            var dataDocChatId = element.id;
+            print(dataDocChatId);
+            dataListChats.add(ChatUser(
+              chatId: dataDocChatId,
+              connection: dataDocChat["connection"],
+              lastTime: dataDocChat["lastTime"],
+              totalunread: dataDocChat["total_unread"],
+            ));
+          });
+          userModel.update((user) {
+            user!.chats = dataListChats;
+          });
+        } else {
+          userModel.update((user) {
+            user!.chats = [];
+          });
+        }
+        chat_id = newchatDoc.id;
+        userModel.refresh();
+      }
     }
     print(chat_id);
-    //  Get.toNamed(AppRoute.chatpage, arguments: chat_id);
+    final updateStatusChat = await chats
+        .doc(chat_id)
+        .collection("chat")
+        .where("isRead", isEqualTo: false)
+        .where("penerima", isEqualTo: googleSignInAccount!.email)
+        .get();
+
+    updateStatusChat.docs.forEach((element) async {
+      await chats
+          .doc(chat_id)
+          .collection("chat")
+          .doc(element.id)
+          .update({"isRead": true});
+    });
+
+print("$chat_id nmnnnnnnnnnnnnnnn");
+    await users
+        .doc(googleSignInAccount!.email)
+        .collection("chats")
+        .doc(chat_id)
+        .update({"total_unread": 0});
+    Get.to(ChatScreen(),
+        arguments: {"chat_id": "$chat_id", "friendEmail": friendEmail});
   }
-
-////////////
-// final authcontroller = Get.find< AuthWithGoogle >();
-// authcontroller.addNewConnection(authcontroller.googleSignInAccount.value.email!);
-// authcontroller.addNewConnection(controller.tempSearch[indaex]["email"]);
-
-////////////
 }

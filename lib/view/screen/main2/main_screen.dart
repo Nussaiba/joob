@@ -55,34 +55,34 @@ class MainScreen2 extends GetView<MainScreenController> {
         body: PageView(
           physics: const NeverScrollableScrollPhysics(),
           controller: controller.pageController,
-          children: const [
+          children: [
             HomeScreen(),
-            Chats(),
-            ChatScreen2(),
-            ChatScreen2(),
+           // Chats(),
+           // ChatScreen2(),
+            //ChatScreen2(),
           ],
         ));
   }
 }
 
-class ChatScreen extends StatelessWidget {
-  const ChatScreen({super.key});
+// class ChatScreen1 extends StatelessWidget {
+//   const ChatScreen1({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text("ch777777tttt"),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return const Center(
+//       child: Text("ch777777tttt"),
+//     );
+//   }
+// }
 
-class ChatScreen2 extends StatelessWidget {
-  const ChatScreen2({super.key});
+// class ChatScreen2 extends StatelessWidget {
+//   const ChatScreen2({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text("chattttttttttttt"),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return const Center(
+//       child: Text("chattttttttttttt"),
+//     );
+//   }
+// }

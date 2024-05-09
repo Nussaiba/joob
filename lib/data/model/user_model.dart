@@ -6,6 +6,8 @@ class UserModel {
   String? id;
   String? name;
   String? email;
+  String? keyName;
+
   String? creationTime;
   String? lastSignInTime;
   String? status;
@@ -16,6 +18,7 @@ class UserModel {
       {this.id,
       this.name,
       this.email,
+      this.keyName,
       this.creationTime,
       this.lastSignInTime,
       this.status,
@@ -24,12 +27,14 @@ class UserModel {
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
         id: json['id'],
         name: json['name'],
-        email: json['email '],
+        email: json['email'],
+        keyName: json['keyName'],
         creationTime: json['ceationTime'],
         lastSignInTime: json['lastSignInTime'],
         status: json['status'],
         updatedTime: json['updatedTime'],
-        chats: List<ChatUser>.from(json["chats"]!.map((x) => ChatUser.fromJson(x))),
+        // chats: List<ChatUser>.from(
+        //     json["chats"]!.map((x) => ChatUser.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {};
@@ -39,12 +44,14 @@ class ChatUser {
   String? connection;
   String? chatId;
   String? lastTime;
+  int? totalunread;
 
-  ChatUser({this.connection, this.chatId, this.lastTime});
+  ChatUser({this.connection, this.chatId, this.lastTime, this.totalunread});
 
   factory ChatUser.fromJson(Map<String, dynamic> json) => ChatUser(
         connection: json['connection'],
         chatId: json['chat_id'],
         lastTime: json['lastTime'],
+        totalunread: json['total_unread']
       );
 }

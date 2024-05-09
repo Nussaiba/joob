@@ -12,11 +12,9 @@ import 'package:path/path.dart';
 
 class Crud {
   MyServices myServices = Get.find();
-
   Map<String, String> headers = {
     "Accept": "application/json",
   };
-
   Token() {
     String? token = myServices.box.read("token");
     print("$token qqqqqqqqqqqqqqq");
@@ -25,7 +23,7 @@ class Crud {
     }
   }
 
-  Future<Either<StatusRequest, Map>> postData(String linkurl, Map data) async {
+  Future<Either<StatusRequest, Map>> postData(String linkurl, data) async {
     try {
       //if (await checkInternet()) {
       print("sssssssssss");
@@ -59,10 +57,11 @@ class Crud {
     }
   }
 
- Future<Either<StatusRequest, Map>> postFileAndData(String linkUrl, Map data, File ?file) async {
+  Future<Either<StatusRequest, Map>> postFileAndData(
+      String linkUrl, Map data, File? file) async {
     Token();
     print("object");
-   
+
     var request = http.MultipartRequest(
       'Post',
       Uri.parse(
@@ -70,25 +69,25 @@ class Crud {
       ),
     );
     request.headers.addAll(headers);
-if (file!= null){
-   int fileLength = await file.length();
-    var streamData = http.ByteStream(file.openRead());
-    var multiFile = http.MultipartFile('image', streamData, fileLength,
-        filename: basename(file.path));
-    request.files.add(multiFile);
-}
-   
+    if (file != null) {
+      int fileLength = await file.length();
+      var streamData = http.ByteStream(file.openRead());
+      var multiFile = http.MultipartFile('image', streamData, fileLength,
+          filename: basename(file.path));
+      request.files.add(multiFile);
+    }
+
     data.forEach((key, value) {
       request.fields[key] = value;
     });
     var myRequest = await request.send();
     var response = await http.Response.fromStream(myRequest);
     if (response.statusCode == 200 ||
-          response.statusCode == 201 ||
-          response.statusCode == 401 ||
-          response.statusCode == 400 ||
-          response.statusCode == 422 ||
-          response.statusCode == 500) {
+        response.statusCode == 201 ||
+        response.statusCode == 401 ||
+        response.statusCode == 400 ||
+        response.statusCode == 422 ||
+        response.statusCode == 500) {
       Map responsebody = jsonDecode(response.body);
 
       print("postMultiData1============ $responsebody");
@@ -97,6 +96,42 @@ if (file!= null){
     } else {
       print("postMultiData1============ ${response.body}");
 
+      return const Left(StatusRequest.serverfailure);
+    }
+  }
+
+  Future<Either<StatusRequest, dynamic>> create(String linkurl, data) async {
+    try {
+      //if (await checkInternet()) {
+      print("sssssssssss");
+      Token();
+      headers['Content-Type'] = 'application/json';
+      headers['Accept'] = 'application/pdf';
+
+      var response = await http.post(
+        Uri.parse(linkurl),
+        headers: headers,
+        //  {
+        //   'Accept': 'application/pdf',
+        //   'Authorization': 'Bearer $token',
+        //   'Content-Type': 'application/json'
+        // }      ,
+        body: data,
+      );
+      print(response.statusCode);
+
+      if (response.statusCode == 200) {
+        print("CRUUUUUUUUUUUUUUUUuuuuuuD $response.....");
+
+        return Right(response);
+      } else {
+        return const Left(StatusRequest.serverfailure);
+      }
+      // } else {
+      //   print("StatusRequest.offlinefailure");
+      //   return const Left(StatusRequest.offlinefailure);
+      // }
+    } catch (_) {
       return const Left(StatusRequest.serverfailure);
     }
   }

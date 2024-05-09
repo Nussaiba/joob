@@ -7,14 +7,16 @@ class MyServices extends GetxService {
   Future<MyServices> init() async {
     await GetStorage.init();
 //box= GetStorage.init([String container = 'GetStorage']);
-    await Firebase.initializeApp( 
-  options:const FirebaseOptions(
-      apiKey: "AIzaSyC5uFk5t93WpIaecTtrbVM0FcTTlhZS748", // paste your api key here
-      appId:  "1:136062004556:android:81acac55278dcafcca73e9", //paste your app id here
-      messagingSenderId:  "136062004556", //paste your messagingSenderId here
-      projectId: "jobsapp-ea72c", //paste your project id here
-    ),
-);
+    await Firebase.initializeApp(
+      options: const FirebaseOptions(
+        apiKey:
+            "AIzaSyC5uFk5t93WpIaecTtrbVM0FcTTlhZS748", // paste your api key here
+        appId:
+            "1:136062004556:android:81acac55278dcafcca73e9", //paste your app id here
+        messagingSenderId: "136062004556", //paste your messagingSenderId here
+        projectId: "jobsapp-ea72c", //paste your project id here
+      ),
+    );
     return this;
   }
 }
