@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class ChatRoomController extends GetxController {
   late String chatid;
@@ -11,17 +12,26 @@ class ChatRoomController extends GetxController {
   late FocusNode focusNode;
   late TextEditingController chatC;
   late ScrollController scrollController;
-  FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
   Stream<QuerySnapshot<Map<String, dynamic>>> streamChats(String chat_id) {
-    CollectionReference chats = firebaseFirestore.collection("chats");
-    return  chats
+    // CollectionReference chats = firebaseFirestore.collection("chats");
+    print("$chat_id mj llllllllllllllllllll ");
+    print(FirebaseFirestore.instance
+        .collection("chats")
         .doc(chat_id)
         .collection("chat")
-        //.orderBy("time")
+        .orderBy("time"));
+    // return chats.doc("$chat_id").collection("chat").orderBy("time").snapshots();
+    return FirebaseFirestore.instance
+        .collection("chats")
+        .doc(chat_id)
+        .collection("chat")
+        .orderBy("time")
         .snapshots();
   }
 
   void newChat(String email, Map<String, dynamic> argument, String chat) async {
+    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+
     if (chat != "") {
       CollectionReference chats = firebaseFirestore.collection("chats");
       CollectionReference users = firebaseFirestore.collection("users");
@@ -36,7 +46,7 @@ class ChatRoomController extends GetxController {
         "msg": chat,
         "time": date,
         "isRead": false,
-        // "groupTime" :DateFormat.yMMMd('en_US').format(date)
+        "groupTime": DateFormat.yMMMd('en_US').format(DateTime.parse(date)),
       });
       Timer(
         Duration.zero,
@@ -61,7 +71,6 @@ class ChatRoomController extends GetxController {
       if (checkChatFriend.exists) {
         //friend ? exist in database
 //first check totat UnRead
-
         final checkTotalUnRead = await chats
             .doc(argument["chat_id"])
             .collection("chat")
@@ -79,7 +88,6 @@ class ChatRoomController extends GetxController {
       } else {
         //friend not ? exist in database
         //new for friend database
-
         await users
             .doc(argument["friendEmail"])
             .collection("chats")
@@ -95,18 +103,18 @@ class ChatRoomController extends GetxController {
     chatC = TextEditingController();
     scrollController = ScrollController();
     focusNode = FocusNode();
-    focusNode.addListener(() {
-      if (focusNode.hasFocus) {
-        isShowEmoji.value = false;
-      }
-    });
+    // focusNode.addListener(() {
+    //   if (focusNode.hasFocus) {
+    //     isShowEmoji.value = false;
+    //   }
+    // });
     super.onInit();
   }
 
   @override
   void onClose() {
     chatC.dispose();
-    scrollController.dispose();
+    //scrollController.dispose();
     focusNode.dispose();
     super.onClose();
   }

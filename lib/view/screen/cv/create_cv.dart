@@ -22,79 +22,114 @@ class CV extends StatelessWidget {
           backgroundColor: AppColor.praimaryColor),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
-        child: Column(
-          
-          children: [
-            ClipRRect(
-             // child: Image.file(File(con.imagepath!)),
+        child: Column(children: [
+          // ClipRRect(
+          //  // child: Image.file(File(con.imagepath!)),
+          // ),
+          //languages
+          titleItemCv(
+            nameitem: "languages",
+            onPressed: () {
+              con.addLanguages(con.language);
+              print("${con.language}");
+            },
+            icon: Icons.language,
+          ),
+          Fields(
+            fff: con.focuseslanguages,
+            list: con.language,
+            text: "pr",
+          ),
+          //skills
+          titleItemCv(
+            nameitem: "skills",
+            onPressed: () {
+              // con.skills.add(TextEditingController());
+              print("${con.skills}");
+              con.addSkills(con.skills);
+            },
+            icon: Icons.build,
+          ),
+          Fields(
+            list: con.skills,
+            text: "projects",
+            fff: con.focusesskills,
+          ),
+
+          //projects
+          titleItemCv(
+            nameitem: "projects",
+            onPressed: () {
+              //  con.projects.add(TextEditingController());
+              con.addprojects(con.projects);
+            },
+            icon: Icons.work,
+          ),
+          Fields(
+            list: con.projects,
+            text: "projects",
+            fff: con.focusesprojects,
+          ),
+          /////certificates
+          titleItemCv(
+            nameitem: 'certificates',
+            onPressed: () {
+              // con.certificates.add(TextEditingController());
+              con.addcertificates(con.certificates);
+              print("${con.certificates}");
+            },
+            icon: Icons.card_membership,
+          ),
+
+          Fields(
+            list: con.certificates,
+            text: "projects",
+            fff: con.focusescertificates,
+          ),
+          ///// experiences
+
+          titleItemCv(
+            nameitem: 'experiences',
+            onPressed: () {
+              //con.profile.add(TextEditingController());\
+
+              con.addexperiences(con.experiences);
+              print("${con.experiences}");
+            },
+            icon: Icons.timeline,
+          ),
+          Fields(
+              list: con.experiences,
+              text: "projects",
+              fff: con.focusesexperiences),
+
+          /////contacts
+          titleItemCv(
+            nameitem: 'contacts',
+            onPressed: () {
+              // con.profile.add(TextEditingController());
+              con.addcontacts(con.contacts);
+              print("${con.contacts}");
+            },
+            icon: Icons.contacts,
+          ),
+          Fields(
+              list: con.contacts, text: "projects", fff: con.focusescontacts),
+
+          Container(
+            color:AppColor.praimaryColor,
+            child: ElevatedButton(
+              onPressed: () {},
+              child: Text(
+                'Create CV',
+                style: TextStyle(color: AppColor.white),
+              ),
             ),
-            ////languages
-            titleItemCv(
-                nameitem: "language",
-                onPressed: () {
-                  con.language.add('');
-                            print("${con.language}");
-                },
-                icon: Icons.language,),
-
-            Fields(list: con.language, text: "projects", ),
-            // ////skills
-            // titleItemCv(
-            //     nameitem: "skills",
-            //     onPressed: () {
-            //       con.skills.add('');
-            //     },
-            //   icon: Icons.build,),
-            // Fields(list: con.skills, text: "projects",),
-            ////projects
-            // titleItemCv(
-            //     nameitem: "projects",
-            //     onPressed: () {
-            //       con.projects.add('');
-            //     },
-            //       icon: Icons.work,),
-            // Fields(list: con.projects, text: "projects",),
-            // /////certificates
-            // titleItemCv(
-            //     nameitem: 'certificates',
-            //     onPressed: () {
-            //       con.certificates.add("value");
-            //       print("${con.certificates}");
-            //     },
-            //    icon: Icons.card_membership,),
-
-            // Fields(list: con.certificates, text: "projects",),
-            // ///// experiences
-
-            // titleItemCv(
-            //     nameitem: 'experiences',
-            //     onPressed: () {
-            //       con.profile.add(" ");
-            //       print("${con.experiences}");
-            //     },
-            //     icon: Icons.timeline,),
-            // Fields(list: con.experiences, text: "projects",),
-
-            // /////contacts
-
-            // titleItemCv(
-            //     nameitem: 'contacts',
-            //     onPressed: () {
-            //       con.profile.add(" ");
-            //       print("${con.contacts}");
-            //     },
-                
-            //     icon: Icons.contacts,),
-            // Fields(list: con.contacts,  text: "projects",),
-            // ////create a pdf
-            // titleItemCv(
-            //     nameitem: 'create',
-            //     onPressed: () {
-            //       con.create();
-            //     },
-            //    icon: Icons.language,),
-       ] ),
+          ),
+        ]),
       ),
     );
   }
 }
+
+

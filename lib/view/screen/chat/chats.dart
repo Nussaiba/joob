@@ -5,7 +5,6 @@ import 'package:jobs/controller/auth/google_sign_in_controller.dart';
 import 'package:jobs/controller/chats/chats_controller.dart';
 import 'package:jobs/core/constants/color.dart';
 import 'package:jobs/core/constants/imageassest.dart';
-
 import '../../widget/chat/app_bar_chats_page.dart';
 
 class ChatsApp extends GetView<ChatsController> {
@@ -27,6 +26,7 @@ class ChatsApp extends GetView<ChatsController> {
                 //  var allChat = (snapshot1.data!.data()
                 //               as Map<String, dynamic>)["chats"] as List;
                 var ListDocsChats = snapshot1.data!.docs;
+                print(ListDocsChats);
                 return ListView.builder(
                     padding: EdgeInsets.zero,
                     itemCount: ListDocsChats.length,
@@ -56,11 +56,11 @@ class ChatsApp extends GetView<ChatsController> {
                                     fit: BoxFit.fill),
                               ),
                               title: Text(
-                                "name ${data!["name"]}",
+                                "${data!["name"]}",
                                 style: Theme.of(context).textTheme.headline1,
                               ),
                               subtitle: Text(
-                                "name${data["email"]}",
+                                "${data["email"]}",
                                 style: const TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w600,

@@ -2,7 +2,6 @@ import 'package:get/get.dart';
 import 'package:jobs/core/constants/routes.dart';
 import 'package:jobs/core/middleware/mymiddleware.dart';
 import 'package:jobs/view/screen/lod.dart';
-import 'package:jobs/view/screen/mainscreen/mainscreens.dart';
 import 'package:jobs/view/screen/profile/create_profile.dart';
 import 'package:jobs/view/screen/profile/edit_profile.dart';
 import 'package:jobs/view/screen/profile/profile.dart';
@@ -40,7 +39,6 @@ List<GetPage<dynamic>>? routes = [
       name: AppRoute.verifyCodeRegister,
       page: () => const VerifyCodeRegister()),
 
-  GetPage(name: AppRoute.mainScreen, page: () => const MainScreen()),
   GetPage(name: AppRoute.createProfile, page: () =>const CreateProfilePage()),
   GetPage(name: AppRoute.editProfile, page: () =>const EditProfilePage()),
     GetPage(name: AppRoute.profilePage, page: () =>const ProfilePage()),

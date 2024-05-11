@@ -11,6 +11,7 @@ import 'package:jobs/view/widget/auth/customtextbodyauth.dart';
 import 'package:jobs/view/widget/auth/customtextformauth.dart';
 import 'package:jobs/view/widget/auth/customtexttitleauth.dart';
 import 'package:jobs/view/widget/auth/textsignup.dart';
+import 'package:jobs/view/widget/auth/togalbutton.dart';
 import '../../widget/auth/custombuttomauth.dart';
 
 class SignUp extends StatelessWidget {
@@ -19,7 +20,6 @@ class SignUp extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.put(SignUpControllerImp());
     Get.put(AuthWithGoogle());
-    Get.put(Auth());
 
     return Scaffold(
       appBar: AppBar(
@@ -87,13 +87,59 @@ class SignUp extends StatelessWidget {
                         controller.showPassWord();
                       },
                     ),
+                  
+                    AnimatedContainer(
+                      duration: Duration(milliseconds: 300),
+                     // height: 45,
+                      decoration: BoxDecoration(
+                        color: AppColor.white,
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          ToggleButton(
+                            title: 'Seeker',
+                            isActive:
+                                controller.accountType.value == 'jobSeeker',
+                            onTap: () {
+                              controller.setAccountType('jobSeeker');
+                            },
+                          ),
+                          ToggleButton(
+                            title: 'Company',
+                            isActive: controller.accountType.value == 'company',
+                            onTap: () {
+                              controller.setAccountType('company');
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+
+                     const SizedBox(
+                      height: 30,
+                    ),
                     CustomButtomAuth(
                         text: "18".tr,
                         onPressed: () {
                           controller.SignUp();
                         }),
-                    const SizedBox(
-                      height: 30,
+                          const SizedBox(
+                      height: 10,
+                    ),
+                    GetBuilder<AuthWithGoogle>(
+                      builder: (controller) => CustomButtomAuth(
+                          text: "Google",
+                          onPressed: () async {
+                            print("llllllll");
+                            await controller
+                                .loginWithGoogle()
+                                .whenComplete(() => debugPrint('DONE'));
+                          }),
+                    ),
+                      const SizedBox(
+                      height: 5,
                     ),
                     CustomTextSignUpOrSignIn(
                       textone: "22".tr,
@@ -101,17 +147,6 @@ class SignUp extends StatelessWidget {
                       onTap: () {
                         controller.goToSignIn();
                       },
-                    ),
-                    GetBuilder<AuthWithGoogle>(
-                      builder: (controller) => CustomButtomAuth(
-                          text: "Google",
-                          onPressed: () async {
-                            print("llllllll");
-                            // await controller.signInWithGoogle().whenComplete(() => debugPrint('DONE'));
-                            await controller
-                                .loginWithGoogle()
-                                .whenComplete(() => debugPrint('DONE'));
-                          }),
                     ),
                   ]),
                 )),

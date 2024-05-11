@@ -37,18 +37,21 @@ class Bubble extends StatelessWidget {
                     ? CrossAxisAlignment.start
                     : CrossAxisAlignment.end,
                 children: [
-                  Text(
-                    text,
-                    style: const TextStyle(color: Colors.white, height: 1.5),
+                  Padding(
+                    padding: const EdgeInsets.all(2),
+                    child: Text(
+                      text,
+                      style: const TextStyle(color: Colors.white, height: 1.5),
+                    ),
                   ),
                   Text(
                     time,
                     style: TextStyle(
                       fontSize: 10,
-                      color: AppColor.white,
+                      color: Colors.white,
                     ),
                   ),
-                  // textAlign: isSender ? TextAlign.end : TextAlign.start, ),
+                 // textAlign: isSender ? TextAlign.end : TextAlign.start, ),
                 ],
               )),
         ],

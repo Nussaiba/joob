@@ -8,16 +8,17 @@ import 'package:jobs/core/localization/changelocal.dart';
 import 'package:jobs/core/localization/translation.dart';
 import 'package:jobs/core/services/services.dart';
 import 'package:jobs/routes.dart';
+import 'package:jobs/view/screen/as.dart';
 import 'package:jobs/view/screen/cv/cv_test.dart';
 import 'package:jobs/view/screen/chat/search_chat.dart';
 import 'package:jobs/view/screen/cv/create_cv.dart';
 import 'package:jobs/view/screen/lod.dart';
 import 'package:jobs/view/screen/main2/main_screen.dart';
-import 'package:jobs/view/screen/mainscreen/mainscreens.dart';
 import 'package:jobs/view/screen/onboarding.dart';
 import 'package:jobs/view/screen/profile/create_profile.dart';
 import 'package:jobs/view/screen/profile/edit_profile.dart';
 import 'package:jobs/view/screen/auth/signup.dart';
+import 'package:jobs/view/screen/z.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -64,10 +65,11 @@ class MyApp extends StatelessWidget {
       // home :Test(),
       // home: MainScreen(),
       //home: A(),
-      home: SignUp(),
+      //home: SignUp(),
       // home: SearchChat(),
       // home :const MainScreen2(),
-     // home:CV(),
+      //home:CV(),
+     home :MyAppp (),
       getPages: routes,
     );
   }

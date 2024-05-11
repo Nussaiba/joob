@@ -7,7 +7,11 @@ import 'package:jobs/controller/apply_job/create_cv_controller.dart';
 import 'package:jobs/core/constants/color.dart';
 
 class titleItemCv extends StatelessWidget {
-  titleItemCv({super.key, required this.nameitem, required this.onPressed, required this.icon});
+  titleItemCv(
+      {super.key,
+      required this.nameitem,
+      required this.onPressed,
+      required this.icon});
   final String nameitem;
   final void Function()? onPressed;
   final IconData icon;
@@ -17,32 +21,30 @@ class titleItemCv extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 15),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
         mainAxisSize: MainAxisSize.min,
         children: [
           Padding(
             padding: EdgeInsets.only(bottom: 10),
             child: Text(nameitem,
-                style: TextStyle(
-                    fontSize: 16,
+                style: const TextStyle(
+                    fontSize: 18,
                     fontWeight: FontWeight.bold,
-                    color: AppColor.grey)),
+                    color: AppColor.praimaryColor)),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-               ClipRRect(
-                borderRadius: BorderRadius.circular(25),
-                child: Container(
-                  color:AppColor.grey,
-                  height: 45,
-                  width: 45,
-                  child: Icon(icon, size: 28, color : AppColor.white))),
+              ClipRRect(
+                  borderRadius: BorderRadius.circular(25),
+                  child: Container(
+                      color: AppColor.grey,
+                      height: 45,
+                      width: 45,
+                      child: Icon(icon, size: 28, color: AppColor.white))),
               ElevatedButton(
                   onPressed: onPressed, child: Text("Add $nameitem")),
             ],
           ),
-      
         ],
       ),
     );

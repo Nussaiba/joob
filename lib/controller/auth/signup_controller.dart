@@ -28,6 +28,13 @@ class SignUpControllerImp extends SinUpController {
     update();
   }
 
+  var accountType = 'jobSeeker'.obs;
+
+  void setAccountType(String type) {
+    accountType.value = type;
+    update();
+  }
+
   @override
   goToSignIn() {
     Get.offNamed(AppRoute.login);
