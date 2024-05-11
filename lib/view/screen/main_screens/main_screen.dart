@@ -5,10 +5,9 @@ import 'package:jobs/controller/mainscreen/main_scrren_controller.dart';
 import 'package:jobs/core/constants/color.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:jobs/view/screen/chat/chats.dart';
-import 'package:jobs/view/screen/main2/home.dart';
 
-class MainScreen2 extends GetView<MainScreenController> {
-  const MainScreen2({super.key});
+class MainScreen extends GetView<MainScreenController> {
+  const MainScreen({super.key});
   @override
   Widget build(BuildContext context) {
     Get.put(MainScreenController());
@@ -56,7 +55,7 @@ class MainScreen2 extends GetView<MainScreenController> {
           physics: const NeverScrollableScrollPhysics(),
           controller: controller.pageController,
           children: [
-            HomeScreen(),
+            Homeq(),
            // Chats(),
            // ChatScreen2(),
             //ChatScreen2(),
@@ -65,24 +64,15 @@ class MainScreen2 extends GetView<MainScreenController> {
   }
 }
 
-// class ChatScreen1 extends StatelessWidget {
-//   const ChatScreen1({super.key});
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return const Center(
-//       child: Text("ch777777tttt"),
-//     );
-//   }
-// }
 
-// class ChatScreen2 extends StatelessWidget {
-//   const ChatScreen2({super.key});
+class Homeq extends StatelessWidget {
+  const Homeq({super.key});
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return const Center(
-//       child: Text("chattttttttttttt"),
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+      child: Text("chattttttttttttt"),
+    );
+  }
+}

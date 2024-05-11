@@ -13,7 +13,7 @@ import 'package:jobs/view/screen/cv/cv_test.dart';
 import 'package:jobs/view/screen/chat/search_chat.dart';
 import 'package:jobs/view/screen/cv/create_cv.dart';
 import 'package:jobs/view/screen/lod.dart';
-import 'package:jobs/view/screen/main2/main_screen.dart';
+import 'package:jobs/view/screen/main_screens/main_screen.dart';
 import 'package:jobs/view/screen/onboarding.dart';
 import 'package:jobs/view/screen/profile/create_profile.dart';
 import 'package:jobs/view/screen/profile/edit_profile.dart';
@@ -69,7 +69,7 @@ class MyApp extends StatelessWidget {
       // home: SearchChat(),
       // home :const MainScreen2(),
       //home:CV(),
-     home :MyAppp (),
+     home :MainScreen (),
       getPages: routes,
     );
   }

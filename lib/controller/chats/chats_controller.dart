@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:jobs/view/screen/chat/chatcreen.dart';
-import 'package:jobs/view/screen/main2/main_screen.dart';
 
 class ChatsController extends GetxController {
   Stream<QuerySnapshot<Map<String, dynamic>>> chatStream(String email) {
