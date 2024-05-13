@@ -16,8 +16,8 @@ class MainScreenController extends GetxController {
   void onItemClick(index) {
     if (index != page.value) {
       page(index);
-      currentindex.value = index;
-      update();
+     currentindex.value = index;
+      //update();
     }
   }
 

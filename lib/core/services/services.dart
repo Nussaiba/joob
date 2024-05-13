@@ -6,7 +6,6 @@ class MyServices extends GetxService {
   final box = GetStorage();
   Future<MyServices> init() async {
     await GetStorage.init();
-//box= GetStorage.init([String container = 'GetStorage']);
     await Firebase.initializeApp(
       options: const FirebaseOptions(
         apiKey:
@@ -20,7 +19,6 @@ class MyServices extends GetxService {
     return this;
   }
 }
-
 initialServices() async {
   await Get.putAsync(() => MyServices().init());
 }

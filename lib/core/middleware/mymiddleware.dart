@@ -13,7 +13,7 @@ class MyMiddleWare extends GetMiddleware {
   @override
   RouteSettings? redirect(String? route) {
       if (myServices.box.read("step") == "2") {
-      return const  RouteSettings(name: AppRoute.mainScreen);
+      return const  RouteSettings(name: AppRoute.mainScreens);
     }
     if (myServices.box.read("step") == "1") {
       return const  RouteSettings(name: AppRoute.login);

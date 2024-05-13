@@ -1,6 +1,5 @@
 
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:jobs/core/constants/color.dart';
 
@@ -11,7 +10,7 @@ class MyAppp extends StatelessWidget {
       home: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          title: Text('Chat UI'),
+          title:const Text('Chat UI'),
         ),
         body: Column(
           children: [

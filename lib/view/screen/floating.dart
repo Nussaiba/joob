@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
+import 'package:jobs/core/constants/routes.dart';
 
-class MyHomePage extends StatelessWidget {
-  // استخدام Get.put() لإنشاء الكونترولر وجعله متاحا في التطبيق
+class MyHomePagea extends StatelessWidget {
   final MyController controller = Get.put(MyController());
 
   @override
@@ -18,33 +18,37 @@ class MyHomePage extends StatelessWidget {
         itemBuilder: (context, index) => ListTile(title: Text('Item $index')),
       ),
       floatingActionButton: Obx(
-        () => Visibility(
-          visible: controller.isVisible.value,
-          child: FloatingActionButton(
-            onPressed: () {
-              // الإجراء الذي سيتم تنفيذه عند الضغط على الزر
-            },
-            child: Icon(Icons.add),
+        () => Padding(
+          padding: const EdgeInsets.only(bottom: 60),
+          child: Visibility(
+            visible: controller.isVisible.value,
+            child: FloatingActionButton(
+              onPressed: () {
+                Get.offNamed(AppRoute.postpage);
+              },
+              child: Icon(Icons.add),
+            ),
           ),
         ),
       ),
+      //  floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
     );
   }
 }
 
 class MyController extends GetxController {
-  // إنشاء متغيرات داخل الكونترولر
   var isVisible = true.obs;
   ScrollController scrollController = ScrollController();
 
   @override
   void onInit() {
     super.onInit();
-    // إضافة المستمع لمتحكم التمرير
     scrollController.addListener(() {
-      if (scrollController.position.userScrollDirection == ScrollDirection.reverse) {
+      if (scrollController.position.userScrollDirection ==
+          ScrollDirection.reverse) {
         isVisible.value = false;
-      } else if (scrollController.position.userScrollDirection == ScrollDirection.forward) {
+      } else if (scrollController.position.userScrollDirection ==
+          ScrollDirection.forward) {
         isVisible.value = true;
       }
     });
@@ -52,7 +56,6 @@ class MyController extends GetxController {
 
   @override
   void onClose() {
-    // تنظيف الموارد عندما لا يكون الكونترولر بحاجة إليها
     scrollController.dispose();
     super.onClose();
   }

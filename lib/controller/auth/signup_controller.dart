@@ -4,6 +4,7 @@ import 'package:jobs/core/class/statusrequest.dart';
 import 'package:jobs/core/constants/routes.dart';
 import 'package:jobs/core/functions/handlingdata.dart';
 import 'package:jobs/data/datasource/remote/auth/signupdata.dart';
+import 'package:jobs/view/widget/auth/account_type.dart';
 
 abstract class SinUpController extends GetxController {
   SignUp();
@@ -28,11 +29,31 @@ class SignUpControllerImp extends SinUpController {
     update();
   }
 
-  var accountType = 'jobSeeker'.obs;
+  var selectedAccountType = ''.obs;
 
-  void setAccountType(String type) {
-    accountType.value = type;
-    update();
+  void changeAccountType() {
+    Get.defaultDialog(
+        title: "Account Type",
+        content: Column(
+          children: [
+            InkWell(
+                onTap: () {
+                  selectAccountType('seeker');
+                },
+                child: AccountType(text: 'Seeker', icon: Icons.person_search)),
+            InkWell(
+                onTap: () {
+                  selectAccountType('Company');
+                },
+                child: AccountType(text: 'Company', icon: Icons.business)),
+          ],
+        ));
+  }
+
+  void selectAccountType(String type) {
+    selectedAccountType.value = type;
+    print(selectedAccountType.value);
+    Get.back();
   }
 
   @override

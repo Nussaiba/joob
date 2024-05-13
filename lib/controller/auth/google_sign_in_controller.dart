@@ -53,7 +53,7 @@ class AuthWithGoogle extends GetxController {
             "lastSignInTime": userCredential!.user!.metadata.lastSignInTime!
                 .toIso8601String(),
             "updateTime": DateTime.now().toIso8601String(),
-            // "chats": [],
+           
           });
 
           await users.doc(googleSignInAccount!.email).collection("chats");

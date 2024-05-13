@@ -9,6 +9,8 @@ import '../../widget/chat/app_bar_chats_page.dart';
 
 class ChatsApp extends GetView<ChatsController> {
   final auth = Get.find<AuthWithGoogle>();
+   // final auth = Get.put(AuthWithGoogle());
+
   ChatsApp({super.key});
 
   @override
@@ -23,8 +25,6 @@ class ChatsApp extends GetView<ChatsController> {
             stream: controller.chatStream(auth.userModel.value.email!),
             builder: (context, snapshot1) {
               if (snapshot1.connectionState == ConnectionState.active) {
-                //  var allChat = (snapshot1.data!.data()
-                //               as Map<String, dynamic>)["chats"] as List;
                 var ListDocsChats = snapshot1.data!.docs;
                 print(ListDocsChats);
                 return ListView.builder(

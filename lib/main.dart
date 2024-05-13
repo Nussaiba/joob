@@ -8,25 +8,25 @@ import 'package:jobs/core/localization/changelocal.dart';
 import 'package:jobs/core/localization/translation.dart';
 import 'package:jobs/core/services/services.dart';
 import 'package:jobs/routes.dart';
-import 'package:jobs/view/screen/as.dart';
+import 'package:jobs/view/screen/bubbless.dart';
 import 'package:jobs/view/screen/cv/cv_test.dart';
 import 'package:jobs/view/screen/chat/search_chat.dart';
 import 'package:jobs/view/screen/cv/create_cv.dart';
 import 'package:jobs/view/screen/lod.dart';
-import 'package:jobs/view/screen/main_screens/main_screen.dart';
-import 'package:jobs/view/screen/onboarding.dart';
+import 'package:jobs/view/screen/post.dart';
+import 'package:jobs/view/screen/seeker/main_screens/main_screen.dart';
+import 'package:jobs/view/screen/on_boarding/onboarding.dart';
 import 'package:jobs/view/screen/profile/create_profile.dart';
 import 'package:jobs/view/screen/profile/edit_profile.dart';
 import 'package:jobs/view/screen/auth/signup.dart';
-import 'package:jobs/view/screen/z.dart';
+import 'package:jobs/view/screen/floating.dart';
+import 'package:jobs/view/screen/auth/account_type.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initialServices();
-  //  await Get.putAsync(() => GetStorage.init());
   runApp(const MyApp());
 }
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
@@ -67,9 +67,11 @@ class MyApp extends StatelessWidget {
       //home: A(),
       //home: SignUp(),
       // home: SearchChat(),
-      // home :const MainScreen2(),
-      //home:CV(),
-     home :MainScreen (),
+      //home :const MainScreen2(),
+     // home:CV(),
+     home :MainScreens (),
+    //home: AccountTypePage(),
+    //home : PostPage(),
       getPages: routes,
     );
   }

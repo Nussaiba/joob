@@ -88,34 +88,34 @@ class SignUp extends StatelessWidget {
                       },
                     ),
                   
-                    AnimatedContainer(
-                      duration: Duration(milliseconds: 300),
-                     // height: 45,
-                      decoration: BoxDecoration(
-                        color: AppColor.white,
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          ToggleButton(
-                            title: 'Seeker',
-                            isActive:
-                                controller.accountType.value == 'jobSeeker',
-                            onTap: () {
-                              controller.setAccountType('jobSeeker');
-                            },
-                          ),
-                          ToggleButton(
-                            title: 'Company',
-                            isActive: controller.accountType.value == 'company',
-                            onTap: () {
-                              controller.setAccountType('company');
-                            },
-                          ),
-                        ],
-                      ),
-                    ),
+                    // AnimatedContainer(
+                    //   duration: Duration(milliseconds: 300),
+                    //  // height: 45,
+                    //   decoration: BoxDecoration(
+                    //     color: AppColor.white,
+                    //     borderRadius: BorderRadius.circular(30),
+                    //   ),
+                      // child: Row(
+                      //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      //   children: [
+                          // ToggleButton(
+                          //   title: 'Seeker',
+                          //   isActive:
+                          //     //  controller.accountType.value == 'jobSeeker',
+                          //   onTap: () {
+                          //    // controller.setAccountType('jobSeeker');
+                          //   },
+                          // ),
+                          // ToggleButton(
+                          //   title: 'Company',
+                          // //  isActive: controller.accountType.value == 'company',
+                          //   onTap: () {
+                          //   //  controller.setAccountType('company');
+                          //  },
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
 
                      const SizedBox(
                       height: 30,
@@ -123,7 +123,7 @@ class SignUp extends StatelessWidget {
                     CustomButtomAuth(
                         text: "18".tr,
                         onPressed: () {
-                          controller.SignUp();
+                          controller.changeAccountType();
                         }),
                           const SizedBox(
                       height: 10,
