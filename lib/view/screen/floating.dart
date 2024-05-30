@@ -24,14 +24,13 @@ class MyHomePagea extends StatelessWidget {
             visible: controller.isVisible.value,
             child: FloatingActionButton(
               onPressed: () {
-                Get.offNamed(AppRoute.postpage);
+                Get.toNamed(AppRoute.onBoarding);
               },
               child: Icon(Icons.add),
             ),
           ),
         ),
       ),
-      //  floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
     );
   }
 }

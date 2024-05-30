@@ -1,9 +1,4 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:get/get.dart';
-import 'package:jobs/controller/apply_job/create_cv_controller.dart';
 import 'package:jobs/core/constants/color.dart';
 
 class titleItemCv extends StatelessWidget {
@@ -24,7 +19,7 @@ class titleItemCv extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Padding(
-            padding: EdgeInsets.only(bottom: 10),
+            padding: const EdgeInsets.only(bottom: 10),
             child: Text(nameitem,
                 style: const TextStyle(
                     fontSize: 18,

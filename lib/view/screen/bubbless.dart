@@ -64,8 +64,8 @@ class ChatMessageTile extends StatelessWidget {
           isSentByMe ? MainAxisAlignment.end : MainAxisAlignment.start,
       children: [
         Container(
-          margin: EdgeInsets.all(10),
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+          margin: const EdgeInsets.all(10),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
           // constraints: BoxConstraints(
           //   maxWidth: MediaQuery.of(context).size.width * 0.6,
           // ),
@@ -85,8 +85,8 @@ class ChatMessageTile extends StatelessWidget {
               ),
             ],
             borderRadius: isSentByMe
-                ? borderRadius.subtract(BorderRadius.only(bottomRight: Radius.circular(20)))
-                : borderRadius.subtract(BorderRadius.only(bottomLeft: Radius.circular(20))),
+                ? borderRadius.subtract(const BorderRadius.only(bottomRight: Radius.circular(20)))
+                : borderRadius.subtract(const BorderRadius.only(bottomLeft: Radius.circular(20))),
           ),
           child: Column(
             crossAxisAlignment:
@@ -99,7 +99,7 @@ class ChatMessageTile extends StatelessWidget {
                   fontSize: 16,
                 ),
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               Text(
                 time,
                 style: TextStyle(
@@ -248,7 +248,7 @@ class FrostedGlassBubble extends StatelessWidget {
             ),
             child: Text(
               message,
-              style: TextStyle(color: Colors.black),
+              style: const TextStyle(color: Colors.black),
             ),
           ),
         ),

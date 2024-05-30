@@ -23,8 +23,13 @@ dependencies:
   curved_navigation_bar: ^1.0.3
   path_provider: ^2.1.0
   dio: ^4.0.0
-  open_file: ^3.3.1 
+  open_file: ^3.3.2
   intl: ^0.19.0
+  avatar_glow: ^3.0.1
+  pdf: ^3.10.8
+  sa4_migration_kit: ^1.0.0
+  simple_animations: ^5.0.2
+  #file_saver: ^0.2.9
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -8,25 +8,41 @@ import 'package:jobs/core/localization/changelocal.dart';
 import 'package:jobs/core/localization/translation.dart';
 import 'package:jobs/core/services/services.dart';
 import 'package:jobs/routes.dart';
+import 'package:jobs/view/fade_animation.dart';
+import 'package:jobs/view/screen/all_opportunity_test.dart';
 import 'package:jobs/view/screen/bubbless.dart';
-import 'package:jobs/view/screen/cv/cv_test.dart';
+import 'package:jobs/view/screen/company/main_screens/main_screen_company.dart';
+import 'package:jobs/view/screen/company/opportunity/add_opportunity.dart';
+import 'package:jobs/view/screen/company/opportunity/edit_opportunity.dart';
+import 'package:jobs/view/screen/company/profile_company/create_company.dart';
+import 'package:jobs/view/screen/countries.dart';
+import 'package:jobs/view/screen/hero.dart';
+import 'package:jobs/view/screen/opportunity.dart';
+import 'package:jobs/view/screen/pdf.dart';
+import 'package:jobs/view/screen/seeker/cv/cv_test.dart';
 import 'package:jobs/view/screen/chat/search_chat.dart';
-import 'package:jobs/view/screen/cv/create_cv.dart';
+import 'package:jobs/view/screen/seeker/cv/create_cv.dart';
 import 'package:jobs/view/screen/lod.dart';
-import 'package:jobs/view/screen/post.dart';
+import 'package:jobs/view/screen/create_post.dart';
 import 'package:jobs/view/screen/seeker/main_screens/main_screen.dart';
 import 'package:jobs/view/screen/on_boarding/onboarding.dart';
-import 'package:jobs/view/screen/profile/create_profile.dart';
-import 'package:jobs/view/screen/profile/edit_profile.dart';
+import 'package:jobs/view/screen/seeker/profile/create_profile.dart';
+import 'package:jobs/view/screen/seeker/profile/edit_profile.dart';
 import 'package:jobs/view/screen/auth/signup.dart';
 import 'package:jobs/view/screen/floating.dart';
 import 'package:jobs/view/screen/auth/account_type.dart';
+import 'package:jobs/view/screen/splash.dart';
+import 'package:jobs/view/screen/seeker/posts.dart';
+import 'package:jobs/view/screen/contryesssss.dart';
+import 'package:jobs/view/screen/tes.dart';
 
+import 'package:jobs/view/screen/auth/login.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initialServices();
   runApp(const MyApp());
 }
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
@@ -59,19 +75,28 @@ class MyApp extends StatelessWidget {
           bodyText2: TextStyle(height: 2, color: AppColor.grey, fontSize: 14),
         ),
       ),
+    initialRoute: '/splash',
       initialBinding: InitialBindings(),
+      //home:MyHomePage11Con(),
+      //home: ASDF(),
+  //  home:  FadeAnimationPage(),
+      // home:CVPage(),
+      // home:UserInputPage(),
+    //home:  CreateProfilePageCompany(),
+      //  home :JobOpportunityScreen1(),
+      //  home : const JobOpportunityScreen(),
+      // home: const OpportunityPage(),
+      //  home:FirstPage(),
+      //  home:SkillsPage(),
+      // home:AddJobOpportunityScreen(),
+      //  home:  PostWidget(),
       //  home : EditProfilePage(),
-      //home: const CreateProfilePage(),
-      // home :Test(),
-      // home: MainScreen(),
-      //home: A(),
-      //home: SignUp(),
+      // home: const CreateProfilePage(),
+      // home: SignUp(),
       // home: SearchChat(),
-      //home :const MainScreen2(),
-     // home:CV(),
-     home :MainScreens (),
-    //home: AccountTypePage(),
-    //home : PostPage(),
+      // home:CV(),
+      // home: AccountTypePage(),
+      // home : PostPage(),
       getPages: routes,
     );
   }

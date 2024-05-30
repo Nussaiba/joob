@@ -1,9 +1,12 @@
 class AppRoute {
+  //splash
+  static const String splash = "/splash";
   //onboarding
   static const String onBoarding = "/onboarding";
+  static const String accountType = "/accounttype";
+
 //auth
   static const String log = "/log";
-    static const String accountType = "/accounttype";
   static const String login = "/login";
   static const String signUp = "/signup";
   static const String forgetPassword = "/forgetpassword";
@@ -12,14 +15,31 @@ class AppRoute {
   static const String successSignUp = "/successsignup";
   static const String successResetpassword = "/successresetpassword";
   static const String verifyCodeRegister = "/verifycoderegister";
-  static const String testscreen = "/testscreen";
+  //seeker_profile
   static const String createProfile = "/createprofile";
   static const String editProfile = "/editprofile";
   static const String profilePage = "/profilepage";
+  //company_profile
+  static const String createcompanyProfile = "/companycreateprofile";
+  static const String editcompanyProfile = "/companyeditprofile";
+  static const String companyprofilePage = "/companyprofilepage";
+  //seeker_mainScreens
   static const String mainScreens = "/mainscreens";
   static const String homeSeeker = "/homeseeker";
   static const String savedJobs = "/savedjobs";
   static const String detailsJob = "/detailsjob";
-    static const String postpage = "/postpage";
+  static const String postpage = "/postpage";
+  //company_mainScreens
+  static const String mainScreensCompany = "/mainscreenscompany";
+  static const String homeCompany = "/homeseekercompany";
+  static const String addOpportunity = "/addopportunity";
 
+
+
+
+
+  //**************company & seeker*****************//
+  static const String opportunityPage = "/opportunitypage";
+
+  
 }

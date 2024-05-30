@@ -14,7 +14,7 @@ class Bubble extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 15),
+      padding: const EdgeInsets.symmetric(horizontal: 15),
       alignment: isSender ? Alignment.centerRight : Alignment.centerLeft,
       // color: isSender ? Colors.grey : Colors.white,
       child: Column(
@@ -22,16 +22,16 @@ class Bubble extends StatelessWidget {
             isSender ? CrossAxisAlignment.start : CrossAxisAlignment.end,
         children: [
           Container(
-              margin: EdgeInsets.symmetric(vertical: 2),
+              margin: const EdgeInsets.symmetric(vertical: 2),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(25),
-                    topRight: Radius.circular(25),
-                    bottomLeft: isSender ? Radius.circular(25) : Radius.zero,
-                    bottomRight: isSender ? Radius.zero : Radius.circular(25)),
+                    topLeft: const Radius.circular(25),
+                    topRight: const Radius.circular(25),
+                    bottomLeft: isSender ? const Radius.circular(25) : Radius.zero,
+                    bottomRight: isSender ? Radius.zero : const Radius.circular(25)),
                 color: isSender ? AppColor.pink : AppColor.grey,
               ),
-              padding: EdgeInsets.all(6),
+              padding: const EdgeInsets.all(6),
               child: Column(
                 crossAxisAlignment: isSender
                     ? CrossAxisAlignment.start
@@ -46,7 +46,7 @@ class Bubble extends StatelessWidget {
                   ),
                   Text(
                     time,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 10,
                       color: Colors.white,
                     ),

@@ -1,7 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:jobs/core/constants/color.dart';
 import 'package:jobs/core/constants/imageassest.dart';
 
@@ -16,13 +14,13 @@ class HomeScreen extends StatelessWidget {
             child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: RichText(
-                  text: TextSpan(children: [
+                  text: const TextSpan(children: [
                 TextSpan(text: 'Hey Ali, \n '),
                 TextSpan(
                     text: 'Looking for job?',
@@ -31,7 +29,7 @@ class HomeScreen extends StatelessWidget {
                     )),
               ])),
             ),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
             Padding(
@@ -47,14 +45,14 @@ class HomeScreen extends StatelessWidget {
                       ),
                       child: Row(
                         children: [
-                          SizedBox(
+                          const SizedBox(
                             width: 10,
                           ),
-                          Icon(
+                          const Icon(
                             Icons.search,
                             size: 35,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 10,
                           ),
                           Text(
@@ -64,8 +62,8 @@ class HomeScreen extends StatelessWidget {
                                 .bodyText1!
                                 .copyWith(color: AppColor.grey),
                           ),
-                          Spacer(),
-                          Icon(
+                          const Spacer(),
+                          const Icon(
                             Icons.filter,
                             size: 35,
                           ),
@@ -86,14 +84,14 @@ class HomeScreen extends StatelessWidget {
             Container(
               height: 25,
               width: 80,
-              margin: EdgeInsets.only(
+              margin: const EdgeInsets.only(
                 left: 10,
               ),
               decoration: BoxDecoration(
                 color: AppColor.pink,
                 borderRadius: BorderRadius.circular(25),
               ),
-              child: Row(
+              child: const Row(
                 children: [
                   SizedBox(
                     width: 12,
@@ -111,12 +109,12 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Flexible(
               child: Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: AppColor.black,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(10),

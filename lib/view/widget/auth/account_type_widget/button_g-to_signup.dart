@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:jobs/core/constants/color.dart';
 
 class ButtonGoToSignUp extends StatelessWidget {
+  final void Function()? onPressed;
   const ButtonGoToSignUp({
     super.key,
+    this.onPressed,
   });
 
   @override
@@ -12,7 +14,7 @@ class ButtonGoToSignUp extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         foregroundColor: Colors.white,
         backgroundColor: AppColor.praimaryColor,
-        padding: EdgeInsets.symmetric(horizontal: 25, vertical: 18),
+        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 18),
         textStyle: const TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.bold,
@@ -22,8 +24,8 @@ class ButtonGoToSignUp extends StatelessWidget {
         ),
         elevation: 5,
       ),
-      onPressed: () {},
-      child: Text('Go to SignUp'),
+      onPressed: onPressed,
+      child: const Text('Go to SignUp'),
     );
   }
 }

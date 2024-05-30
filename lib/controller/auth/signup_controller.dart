@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jobs/core/class/statusrequest.dart';
 import 'package:jobs/core/constants/routes.dart';
+import 'package:jobs/core/functions/dialiog.dart';
 import 'package:jobs/core/functions/handlingdata.dart';
+import 'package:jobs/core/services/services.dart';
 import 'package:jobs/data/datasource/remote/auth/signupdata.dart';
-import 'package:jobs/view/widget/auth/account_type.dart';
 
 abstract class SinUpController extends GetxController {
   SignUp();
   goToSignIn();
+  showPassWord();
 }
 
 class SignUpControllerImp extends SinUpController {
@@ -20,45 +22,21 @@ class SignUpControllerImp extends SinUpController {
   bool isShowPassword = true;
 
   StatusRequest statusRequest = StatusRequest.none;
-
   SignUpData signUpData = SignUpData(Get.find());
+  MyServices myServices = Get.find();
 
-  showPassWord() {
-    isShowPassword = isShowPassword == true ? false : true;
-
-    update();
-  }
-
-  var selectedAccountType = ''.obs;
-
-  void changeAccountType() {
-    Get.defaultDialog(
-        title: "Account Type",
-        content: Column(
-          children: [
-            InkWell(
-                onTap: () {
-                  selectAccountType('seeker');
-                },
-                child: AccountType(text: 'Seeker', icon: Icons.person_search)),
-            InkWell(
-                onTap: () {
-                  selectAccountType('Company');
-                },
-                child: AccountType(text: 'Company', icon: Icons.business)),
-          ],
-        ));
-  }
-
-  void selectAccountType(String type) {
-    selectedAccountType.value = type;
-    print(selectedAccountType.value);
-    Get.back();
-  }
+  String? selectedAccountType;
 
   @override
   goToSignIn() {
     Get.offNamed(AppRoute.login);
+  }
+
+  @override
+  showPassWord() {
+    isShowPassword = isShowPassword == true ? false : true;
+
+    update();
   }
 
   @override
@@ -68,8 +46,8 @@ class SignUpControllerImp extends SinUpController {
       update();
       print("=111111111111111111  Controller");
 
-      var response =
-          await signUpData.postdata(username.text, password.text, email.text);
+      var response = await signUpData.postdata(
+          username.text, password.text, email.text, selectedAccountType!);
       print("================$response  Controller");
       statusRequest = handlingData(response);
       print(statusRequest);
@@ -78,6 +56,9 @@ class SignUpControllerImp extends SinUpController {
         if (response['status'] == 200) {
           Get.offNamed(AppRoute.verifyCodeRegister,
               arguments: {"email": email.text});
+
+          getSnakBar(
+              "success", "Verification Code sent to\n ${email.text} ", 3);
         } else if (response['status'] == 422) {
           Get.defaultDialog(
               title: "Warning",
@@ -96,6 +77,8 @@ class SignUpControllerImp extends SinUpController {
 
   @override
   void onInit() {
+    selectedAccountType = myServices.box.read("account");
+
     username = TextEditingController();
     email = TextEditingController();
     password = TextEditingController();

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:jobs/controller/forgetpassword/forgetpassword_controller.dart';
+import 'package:jobs/controller/auth/forgetpassword/forgetpassword_controller.dart';
 import 'package:jobs/core/class/handlingdataview.dart';
 import 'package:jobs/core/constants/color.dart';
 import 'package:jobs/core/functions/validinput.dart';

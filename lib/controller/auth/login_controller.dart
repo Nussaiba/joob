@@ -22,10 +22,9 @@ class LoginControllerImp extends LoginController {
   StatusRequest statusRequest = StatusRequest.none;
   LoginData loginData = LoginData(Get.find());
   MyServices myServices = Get.find();
-
+  late String account;
   showPassWord() {
     isShowPassword = isShowPassword == true ? false : true;
-
     update();
   }
 
@@ -47,9 +46,14 @@ class LoginControllerImp extends LoginController {
           myServices.box.write("email", "${response["data"]["user"]["email"]}");
           myServices.box
               .write("user_name", "${response["data"]["user"]["user_name"]}");
-          myServices.box.write("step", "2");
+          myServices.box.write("step", "4");
           print("token ${response["data"]["token"]}");
-          Get.offNamed(AppRoute.createProfile);
+          if (account == "job_seeker") {
+            Get.offAllNamed(AppRoute.mainScreens);
+          } else {
+             if (account == "company")
+            Get.offAllNamed(AppRoute.mainScreensCompany);
+          }
           getSnakBar(
               "success",
               "Welcolme ${response["data"]["user"]["user_name"]} \nBy : ${response['data']['user']['email']}",
@@ -60,30 +64,31 @@ class LoginControllerImp extends LoginController {
         }
         update();
       }
-      }
-    }
-
-    @override
-    goToForgetPassword() {
-      Get.toNamed(AppRoute.forgetPassword);
-    }
-
-    @override
-    goToSignUp() {
-      Get.offNamed(AppRoute.signUp);
-    }
-
-    @override
-    void onInit() {
-      email = TextEditingController();
-      password = TextEditingController();
-      super.onInit();
-    }
-
-    @override
-    void dispose() {
-      email.dispose();
-      password.dispose();
-      super.dispose();
     }
   }
+
+  @override
+  goToForgetPassword() {
+    Get.toNamed(AppRoute.forgetPassword);
+  }
+
+  @override
+  goToSignUp() {
+    Get.offNamed(AppRoute.signUp);
+  }
+
+  @override
+  void onInit() {
+    account = myServices.box.read("account");
+    email = TextEditingController();
+    password = TextEditingController();
+    super.onInit();
+  }
+
+  @override
+  void dispose() {
+    email.dispose();
+    password.dispose();
+    super.dispose();
+  }
+}

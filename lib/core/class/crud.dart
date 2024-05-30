@@ -57,8 +57,28 @@ class Crud {
     }
   }
 
+  Future<Either<StatusRequest, Map>> getData(String linkurl) async {
+    Token();
+    // if (await checkInternet()) {
+    var response = await http.get(Uri.parse(linkurl), headers: headers);
+    print(response.statusCode);
+
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      Map responsebody = jsonDecode(response.body);
+
+      //print(responsebody);
+      print('=======${response}');
+      return Right(responsebody);
+    } else {
+      return const Left(StatusRequest.serverfailure);
+    }
+    // } else {
+    //   return const Left(StatusRequest.offlinefailure);
+    // }
+  }
+
   Future<Either<StatusRequest, Map>> postFileAndData(
-      String linkUrl, Map data, File? file) async {
+      String linkUrl, Map data, String filename, File? file) async {
     Token();
     print("object");
 
@@ -72,7 +92,7 @@ class Crud {
     if (file != null) {
       int fileLength = await file.length();
       var streamData = http.ByteStream(file.openRead());
-      var multiFile = http.MultipartFile('image', streamData, fileLength,
+      var multiFile = http.MultipartFile(filename, streamData, fileLength,
           filename: basename(file.path));
       request.files.add(multiFile);
     }
@@ -111,11 +131,6 @@ class Crud {
       var response = await http.post(
         Uri.parse(linkurl),
         headers: headers,
-        //  {
-        //   'Accept': 'application/pdf',
-        //   'Authorization': 'Bearer $token',
-        //   'Content-Type': 'application/json'
-        // }      ,
         body: data,
       );
       print(response.statusCode);

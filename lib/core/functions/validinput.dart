@@ -6,12 +6,13 @@ validInput(String val, int min, int max, String type) {
       return "not valid username";
     }
   }
+
   if (type == "email") {
     if (!GetUtils.isEmail(val)) {
       return "not valid email";
     }
   }
-   if (type == "date") {
+  if (type == "date") {
     if (!GetUtils.isDateTime(val)) {
       return "not valid date";
     }
@@ -48,4 +49,13 @@ isPasswordCompliant(String password, [int minLength = 8]) {
       return "must contain at least one lowercase letter";
     }
   }
+}
+
+validInputIsEmpty(String val) {
+
+
+  if (val.isEmpty) {
+    return "can't be Empty";
+  }
+
 }

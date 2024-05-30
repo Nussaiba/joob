@@ -29,4 +29,6 @@ class AppImageAsset {
 
   static const String onboarding1 = "$rootAnimations/onboarding.json";
   static const String offline = "$rootAnimations/offline.json";
+
+  
 }

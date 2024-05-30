@@ -41,7 +41,7 @@ class ChatScreen extends StatelessWidget {
                         if (index == 0) {
                           return Column(
                             children: [
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
                               Text("${alldata[index]["groupTime"]}"),
@@ -87,7 +87,7 @@ class ChatScreen extends StatelessWidget {
                         }
                       });
                 }
-                return Center(
+                return const Center(
                   child: CircularProgressIndicator(),
                 );
               },

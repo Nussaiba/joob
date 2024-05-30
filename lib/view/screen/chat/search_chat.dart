@@ -3,9 +3,7 @@ import 'package:get/get.dart';
 import 'package:jobs/controller/auth/google_sign_in_controller.dart';
 import 'package:jobs/controller/auth/search_controller.dart';
 import 'package:jobs/core/constants/imageassest.dart';
-import 'package:jobs/view/screen/chat/chatcreen.dart';
 import '../../../core/constants/color.dart';
-import '../../widget/chat/item_person_chats.dart';
 
 class SearchChatAp extends GetView<SearchControllerImp> {
   final auth = Get.find<AuthWithGoogle>();
@@ -16,16 +14,16 @@ class SearchChatAp extends GetView<SearchControllerImp> {
     Get.put(SearchControllerImp());
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(140),
+        preferredSize: const Size.fromHeight(140),
         child: AppBar(
-          title: Text('Search '),
+          title: const Text('Search '),
           centerTitle: true,
           backgroundColor: AppColor.praimaryColor,
           leading: IconButton(
               onPressed: () {
                 Get.back();
               },
-              icon: Icon(Icons.arrow_back)),
+              icon: const Icon(Icons.arrow_back)),
           flexibleSpace: Padding(
             padding: const EdgeInsets.fromLTRB(30, 50, 30, 20),
             child: Align(
@@ -42,18 +40,18 @@ class SearchChatAp extends GetView<SearchControllerImp> {
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(50),
                         borderSide:
-                            BorderSide(color: AppColor.white, width: 1)),
+                            const BorderSide(color: AppColor.white, width: 1)),
                     focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(50),
                         borderSide:
-                            BorderSide(color: AppColor.white, width: 1)),
+                            const BorderSide(color: AppColor.white, width: 1)),
                     hintText: "Search new company or seeker here..",
-                    contentPadding:
-                        EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+                    contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 30, vertical: 20),
                     suffix: InkWell(
                         onTap: () {},
                         borderRadius: BorderRadius.circular(50),
-                        child: Icon(
+                        child: const Icon(
                           Icons.search,
                           color: AppColor.praimaryColor,
                         ))),
@@ -65,18 +63,16 @@ class SearchChatAp extends GetView<SearchControllerImp> {
       body: Obx(
         () => controller.queryAwal.isEmpty
             ? Center(
-                child: Container(
+                child: SizedBox(
                   width: Get.width * 0.7,
                   height: Get.width * 0.7,
-                  child: Text(" Nooo persons "),
+                  child: const Text(" Nooo persons "),
                 ),
               )
             : ListView.builder(
-
                 padding: EdgeInsets.zero,
                 itemCount: controller.queryAwal.length,
                 itemBuilder: (context, index) => Container(
-                  
                   height: Get.width / 4.5,
                   decoration: const BoxDecoration(
                       border: Border(
@@ -85,7 +81,7 @@ class SearchChatAp extends GetView<SearchControllerImp> {
                   ))),
                   child: ListTile(
                     onTap: () {
-                    //  Get.to(() => ChatScreen());
+                      //  Get.to(() => ChatScreen());
                     },
                     leading: ClipRRect(
                       borderRadius: BorderRadius.circular(80),
@@ -105,10 +101,12 @@ class SearchChatAp extends GetView<SearchControllerImp> {
                     ),
                     trailing: InkWell(
                       onTap: () {
-                        print("${controller.queryAwal[index]["email"]}mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm");
-                        auth.addNewConnection(controller.queryAwal[index]["email"]);
+                        print(
+                            "${controller.queryAwal[index]["email"]}mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm");
+                        auth.addNewConnection(
+                            controller.queryAwal[index]["email"]);
                       },
-                      child: Chip(
+                      child: const Chip(
                         clipBehavior: Clip.none,
                         label: Text("send"),
                       ),

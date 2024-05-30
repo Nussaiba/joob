@@ -17,7 +17,8 @@ class CustomTextFormAuth extends StatelessWidget {
       required this.labeltext,
       required this.iconData,
       this.mycontroller,
-      required this.valid});
+      required this.valid
+      });
 
   @override
   Widget build(BuildContext context) {
@@ -29,19 +30,22 @@ class CustomTextFormAuth extends StatelessWidget {
         obscureText: obscureText == null || obscureText == false ? false : true,
         decoration: InputDecoration(
             hintText: hinttext,
-            hintStyle: Theme.of(context)
+            hintStyle: 
+            Theme.of(context)
                 .textTheme
                 .bodyText1!
-                .copyWith(color: AppColor.black),
+                .copyWith(color: AppColor.grey),
             floatingLabelBehavior: FloatingLabelBehavior.always,
             contentPadding:
                 const EdgeInsets.symmetric(vertical: 5, horizontal: 30),
             label: Container(
                 margin: const EdgeInsets.symmetric(horizontal: 9),
-                child: Text(labeltext, style: Theme.of(context)
+                child: Text(labeltext, 
+                style: Theme.of(context)
                 .textTheme
                 .bodyText1!
-                .copyWith(color: AppColor.black),) , ),
+                .copyWith(color: AppColor.black),
+                ) , ),
             suffixIcon: InkWell(
               onTap: onTapIcon,
               child: Icon(iconData, color: AppColor.praimaryColor),

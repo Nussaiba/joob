@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../core/constants/color.dart';
 
+// ignore: must_be_immutable
 class Fields extends StatelessWidget {
   Fields(
       {super.key, required this.list, required this.text, required this.fff});
@@ -20,7 +21,7 @@ class Fields extends StatelessWidget {
               itemBuilder: (context, i) {
                 return Column(
                   children: [
-                    Container(
+                    SizedBox(
                         height: 60,
                         child: ListTile(
                           title: TextField(

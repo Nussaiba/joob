@@ -18,7 +18,7 @@ class AppBarChats extends StatelessWidget {
       elevation: 5,
       shadowColor: AppColor.praimaryColor,
       title: Container(
-        padding: EdgeInsets.symmetric(horizontal: 12),
+        padding: const EdgeInsets.symmetric(horizontal: 12),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -30,12 +30,12 @@ class AppBarChats extends StatelessWidget {
                   .copyWith(color: AppColor.white),
             ),
             Container(
-                padding: EdgeInsets.all(8),
+                padding: const EdgeInsets.all(8),
                 child: InkWell(
                     onTap: () {
                       Get.to(SearchChatAp());
                     },
-                    child: Icon(
+                    child: const Icon(
                       Icons.search,
                       size: 35,
                       color: AppColor.white,

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jobs/controller/auth/google_sign_in_controller.dart';
 import 'package:jobs/controller/auth/signup_controller.dart';
-import 'package:jobs/controller/testlog.dart';
 import 'package:jobs/core/class/handlingdataview.dart';
 import 'package:jobs/core/constants/color.dart';
 import 'package:jobs/core/functions/alert_exit.dart';
@@ -11,11 +10,10 @@ import 'package:jobs/view/widget/auth/customtextbodyauth.dart';
 import 'package:jobs/view/widget/auth/customtextformauth.dart';
 import 'package:jobs/view/widget/auth/customtexttitleauth.dart';
 import 'package:jobs/view/widget/auth/textsignup.dart';
-import 'package:jobs/view/widget/auth/togalbutton.dart';
 import '../../widget/auth/custombuttomauth.dart';
 
 class SignUp extends StatelessWidget {
-  const SignUp({Key? key}) : super(key: key);
+  const SignUp({super.key});
   @override
   Widget build(BuildContext context) {
     Get.put(SignUpControllerImp());
@@ -123,7 +121,7 @@ class SignUp extends StatelessWidget {
                     CustomButtomAuth(
                         text: "18".tr,
                         onPressed: () {
-                          controller.changeAccountType();
+                          controller.SignUp();
                         }),
                           const SizedBox(
                       height: 10,

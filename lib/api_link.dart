@@ -1,5 +1,7 @@
 class AppLink {
-  static const String server = "http://192.168.20.152:8000/api";
+  static const String server = "http://192.168.121.152:8000/api";
+  static const String serverimage = "http://192.168.197.152:8000";
+
   //*********************
   static const String test = "$server/ ";
 
@@ -8,7 +10,6 @@ class AppLink {
   static const String verifycoderegister = "$server/verifyAccount";
   static const String login = "$server/login";
   static const String reSendCode = "$server/sendCode";
-
   // Forget Password ****************
   static const String checkemail = "$server/forgotPassword";
   static const String verifycodeforgetpassword = "$server/checkCode";
@@ -16,9 +17,26 @@ class AppLink {
   // Change Password ****************
   static const String changepassword = "$server/resetPasword";
 
-  //Profile
+  //Seeker Profile
   static const String createprofile = "$server/seeker/create";
   static const String updateprofile = "$server/seeker/update";
+  //seeker post
+  static const String createPost = "$server/post/create";
+  static const String editPost = "$server/post/edit/{id}";
+  static const String deletePost = "$server/post/delete{/id}";
+  static const String viewPost = "$server/post/view";
+
   //CV
   static const String createCV = "$server/seeker/createCV";
+
+  //Company Profile
+  static const String createcompanyprofile = "$server/company/create";
+  static const String updatecompanyprofile = "$server/company/update";
+  //post an opportunity
+  static const String addOpportunity = "$server/company/addOpportunity";
+  static const String updateOpportunity =
+      "$server/company/updateOpportunity{id}";
+
+  //*************Seeker &  Company***************//
+  static const String allOpportunities = "$server/admin/allOpportunities";
 }

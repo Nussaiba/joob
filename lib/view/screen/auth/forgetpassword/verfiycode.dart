@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:get/get.dart';
-import 'package:jobs/controller/forgetpassword/verifycode_forgetpassword_controller.dart';
+import 'package:jobs/controller/auth/forgetpassword/verifycode_forgetpassword_controller.dart';
 import 'package:jobs/core/class/handlingdataview.dart';
 import 'package:jobs/core/constants/color.dart';
 import 'package:jobs/core/constants/routes.dart';

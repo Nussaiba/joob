@@ -30,7 +30,9 @@ class AccountTypePage extends StatelessWidget {
         //   ),
         // ],
       ),
-      child: Obx(
+      child: 
+      
+      Obx(
         () => Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -55,7 +57,7 @@ class AccountTypePage extends StatelessWidget {
                       ? AppColor.praimaryColor
                       : AppColor.grey,
                   onTap: () {
-                    controller.setAccountSeeker('Job Seeker');
+                    controller.setAccountSeeker('job_seeker');
                   },
                 ),
                 AccountTypeIcon(
@@ -79,7 +81,11 @@ class AccountTypePage extends StatelessWidget {
             const SizedBox(
               height: 30,
             ),
-            const ButtonGoToSignUp(),
+            ButtonGoToSignUp(
+              onPressed: () {
+                controller.goToSignUp();
+              },
+            )
           ],
         ),
       ),

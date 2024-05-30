@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:jobs/controller/mainscreen/main_scrren_controller.dart';
+import 'package:jobs/controller/seeker/mainscreen/main_scrren_controller.dart';
 import 'package:jobs/core/constants/color.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:jobs/view/screen/bubbless.dart';
 import 'package:jobs/view/screen/auth/signup.dart';
 import 'package:jobs/view/screen/chat/chats.dart';
 import 'package:jobs/view/screen/floating.dart';
-import 'package:jobs/view/screen/list.dart';
+import 'package:jobs/view/screen/seeker/posts.dart';
 import 'package:jobs/view/screen/zz.dart';
 
-class MainScreens extends GetView<MainScreenController> {
+class MainScreens extends GetView<MainScreenControllerImp> {
   const MainScreens({super.key});
   @override
   Widget build(BuildContext context) {
-    Get.put(MainScreenController());
+    Get.put(MainScreenControllerImp());
 
     return Scaffold(
         extendBody: true,
@@ -56,9 +56,10 @@ class MainScreens extends GetView<MainScreenController> {
             MyHomePagea(),
 
             //  Homeq(),
-            SignUp(),
+            const SignUp(),
         //  HomeScreenA(),
-             MyAppp (),
+           //  MyAppp (),
+            PostWidget(),
             ImageDropdown()
           ],
         ));
@@ -70,8 +71,8 @@ class Homeq extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: const Center(
+    return const Scaffold(
+      body: Center(
         child: Text("chat"),
       ),
     );

@@ -6,19 +6,44 @@ import 'package:jobs/core/services/services.dart';
 class MyMiddleWare extends GetMiddleware {
   @override
   int? get priority => 1;
-
   MyServices myServices = Get.find();
-
-
   @override
   RouteSettings? redirect(String? route) {
-      if (myServices.box.read("step") == "2") {
-      return const  RouteSettings(name: AppRoute.mainScreens);
-    }
-    if (myServices.box.read("step") == "1") {
-      return const  RouteSettings(name: AppRoute.login);
-    }
-   
+    print(myServices.box.read("account"));
+    print(myServices.box.read("step"));
+
+    Future.delayed(const Duration(seconds: 4), () {
+      if (myServices.box.read("step") == "4") {
+        // return const RouteSettings(name: AppRoute.mainScreens);
+        if (myServices.box.read("account") == "job_seeker") {
+          Get.offAllNamed(AppRoute.mainScreens);
+        } else {
+          Get.offAllNamed(AppRoute.mainScreensCompany);
+        }
+      } else {
+        if (myServices.box.read("step") == "3") {
+          // return const RouteSettings(name: AppRoute.mainScreens);
+          if (myServices.box.read("account") == "job_seeker") {
+            Get.offAllNamed(AppRoute.createProfile);
+          } else {
+            Get.offAllNamed(AppRoute.createcompanyProfile);
+          }
+        } else {
+          if (myServices.box.read("step") == "2") {
+            // return const RouteSettings(name: AppRoute.mainScreens);
+            Get.offAllNamed(AppRoute.signUp);
+          } else {
+            if (myServices.box.read("step") == "1") {
+              // return const RouteSettings(name: AppRoute.login);
+              Get.offAllNamed(AppRoute.accountType);
+            } else {
+              Get.offAllNamed(AppRoute.onBoarding);
+            }
+          }
+        }
+      }
+    });
+
     return null;
   }
 }
