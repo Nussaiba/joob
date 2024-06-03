@@ -150,4 +150,32 @@ class Crud {
       return const Left(StatusRequest.serverfailure);
     }
   }
+
+
+  Future<Either<StatusRequest, Map>> deleteData(String linkUrl) async {
+    try {
+      Token();
+      var response = await http.delete(
+        Uri.parse(linkUrl),
+        headers: headers,
+      );
+      print(response.statusCode);
+
+      if (response.statusCode == 200||
+          response.statusCode == 201||
+          response.statusCode == 401||
+          response.statusCode == 400||
+          response.statusCode == 422 ||
+          response.statusCode == 500) {
+        Map responsebody = jsonDecode(response.body);
+        print("CRUD DELETE $responsebody .....");
+
+        return Right(responsebody);
+      } else {
+        return const Left(StatusRequest.serverfailure);
+      }
+    } catch (_) {
+      return const Left(StatusRequest.serverfailure);
+    }
+  }
 }

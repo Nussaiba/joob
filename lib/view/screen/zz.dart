@@ -70,20 +70,22 @@ import 'package:get/get.dart';
 import 'package:jobs/core/constants/imageassest.dart';
 
 class ImageDropdown extends StatelessWidget {
+  const ImageDropdown({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('الصفحة الرئيسية'),
+        title: const Text('الصفحة الرئيسية'),
       ),
        body: Center(
         child: Column(
           children: [
             GestureDetector(
               onTap: () {
-                Get.to(ProfileScreen11());
+                Get.to(const ProfileScreen11());
               },
-              child: Hero(
+              child: const Hero(
                 tag: 'profile-picture',
                 child: CircleAvatar(
                   backgroundImage: AssetImage(AppImageAsset.onBoardingImgFour),
@@ -96,8 +98,6 @@ class ImageDropdown extends StatelessWidget {
 AvatarGlow(
 
 
-
- //glowCount : 3,
    glowColor  :Colors.grey,
  //  glowShape:BoxShape.circle,
  // BorderRadius? glowBorderRadius,
@@ -117,11 +117,11 @@ AvatarGlow(
   child: Material(
     // Replace this child with your own
     elevation: 8.0,
-    shape: CircleBorder(),
+    shape: const CircleBorder(),
     child: CircleAvatar(
       backgroundColor: Colors.grey[100],
-      child: Image.asset(AppImageAsset.onBoardingImgFour, height: 60),
       radius: 40.0,
+      child: Image.asset(AppImageAsset.onBoardingImgFour, height: 60),
     ),
   ),
 )
@@ -132,13 +132,15 @@ AvatarGlow(
   }
 }
 class ProfileScreen11 extends StatelessWidget {
+  const ProfileScreen11({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('الملف الشخصي'),
+        title: const Text('الملف الشخصي'),
       ),
-      body: Center(
+      body: const Center(
         child: Hero(
           tag: 'profile-picture',
           child: CircleAvatar(

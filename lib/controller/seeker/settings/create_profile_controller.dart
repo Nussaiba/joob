@@ -27,7 +27,6 @@ class CreateProfileControllerImp extends CreateProfileController {
   late TextEditingController about;
   File? image;
   DateTime? birthday1;
-
   StatusRequest statusRequest = StatusRequest.none;
   ProfileData profileData = ProfileData(Get.find());
   MyServices myServices = Get.find();

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jobs/core/constants/color.dart';
 import 'package:jobs/data/model/opportunity_model.dart';
-
 class CardJob extends StatelessWidget {
   final OpportuntiyModel opportuntiyModel;
   final void Function()? onPressed;
@@ -10,7 +9,6 @@ class CardJob extends StatelessWidget {
     required this.opportuntiyModel,
     this.onPressed,
   });
-
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -19,7 +17,6 @@ class CardJob extends StatelessWidget {
       ),
       elevation: 4, 
       margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -51,7 +48,6 @@ class CardJob extends StatelessWidget {
                         ),
                       ),
                       const Text(
-                        //  job.company,
                         "company",
                         style: TextStyle(
                           fontSize: 16,
@@ -93,7 +89,7 @@ class CardJob extends StatelessWidget {
                   },
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.white,
-                    backgroundColor: AppColor.grey, // لون نص الزر
+                    backgroundColor: AppColor.grey, 
                   ),
                 ),
               ],

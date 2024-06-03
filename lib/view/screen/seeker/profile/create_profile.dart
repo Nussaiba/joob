@@ -10,7 +10,7 @@ import 'package:jobs/view/widget/general/Custom_choose_image.dart';
 import 'package:jobs/view/widget/profile/create_profile_widgets/custom_date.dart';
 import 'package:jobs/view/widget/profile/create_profile_widgets/custom_name.dart';
 import 'package:jobs/view/widget/profile/create_profile_widgets/text_user.dart';
-import 'package:jobs/view/widget/profile/create_profile_widgets/textemail.dart';
+import 'package:jobs/view/widget/profile/create_profile_widgets/text_email.dart';
 
 class CreateProfilePage extends StatelessWidget {
   const CreateProfilePage({super.key});

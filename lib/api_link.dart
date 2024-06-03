@@ -1,6 +1,6 @@
 class AppLink {
-  static const String server = "http://192.168.121.152:8000/api";
-  static const String serverimage = "http://192.168.197.152:8000";
+  static const String server = "http://192.168.251.152:8000/api";
+  static const String serverimage = "http://192.168.251.152:8000";
 
   //*********************
   static const String test = "$server/ ";
@@ -24,7 +24,6 @@ class AppLink {
   static const String createPost = "$server/post/create";
   static const String editPost = "$server/post/edit/{id}";
   static const String deletePost = "$server/post/delete{/id}";
-  static const String viewPost = "$server/post/view";
 
   //CV
   static const String createCV = "$server/seeker/createCV";
@@ -33,10 +32,13 @@ class AppLink {
   static const String createcompanyprofile = "$server/company/create";
   static const String updatecompanyprofile = "$server/company/update";
   //post an opportunity
-  static const String addOpportunity = "$server/company/addOpportunity";
+  static const String addOpportunity = "$server/company/Opportunity/addOpportunity";
   static const String updateOpportunity =
       "$server/company/updateOpportunity{id}";
 
   //*************Seeker &  Company***************//
-  static const String allOpportunities = "$server/admin/allOpportunities";
+  static const String allOpportunities = "$server/allOpportunities";
+  static const String viewPost = "$server/allPosts";
+  static const String logout = "$server/logout";
+  static const String deleteaccount = "$server/delete";
 }

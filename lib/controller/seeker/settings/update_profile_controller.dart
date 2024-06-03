@@ -16,7 +16,6 @@ abstract class UpdateProfileController extends GetxController {
 
 class UpdateProfileControllerImp extends UpdateProfileController {
   GlobalKey<FormState> formstate = GlobalKey<FormState>();
-
   late TextEditingController? firstname;
   late TextEditingController? lastname;
   late TextEditingController? location;
@@ -39,7 +38,6 @@ class UpdateProfileControllerImp extends UpdateProfileController {
   final picker = ImagePicker();
   Future getImage() async {
     final pickedfile = await picker.pickImage(source: ImageSource.gallery);
-
     if (pickedfile != null) {
       image = File(pickedfile.path);
       print(image);
@@ -125,7 +123,6 @@ class UpdateProfileControllerImp extends UpdateProfileController {
     DateTime initialDate = birthday1 ?? DateTime.now();
     DateTime firstDate = DateTime(1900);
     DateTime lastDate = DateTime.now();
-
     final DateTime? pickedDate = await showDatePicker(
       context: context,
       initialDate: initialDate,

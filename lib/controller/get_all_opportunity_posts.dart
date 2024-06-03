@@ -20,13 +20,21 @@ class GetPostsAndOpportunityControllerImp
     extends GetPostsAndOpportunityController {
   var isFabVisible = true.obs;
   late ScrollController scrollController;
-  MyServices myServices = Get.find();
   HomeData homeData = HomeData(Get.find());
   List dataopportuntiy = [];
   List<OpportuntiyModel> opportuntiesList = [];
   List dataposts = [];
   List<PostModel> postsList = [];
   late StatusRequest statusRequest = StatusRequest.none;
+  MyServices myServices = Get.find();
+  var has = true.obs;
+  var isExpanded = false.obs;
+  late String idUserPostOwner;
+ 
+
+  void editPost() {}
+  void deletePost() {}
+  void reportPost() {}
 
   @override
   getOpportunitesData() async {
@@ -52,6 +60,11 @@ class GetPostsAndOpportunityControllerImp
         statusRequest = StatusRequest.failure;
       }
     }
+  }
+
+  void toggleExpanded() {
+    isExpanded.value = !isExpanded.value;
+    update();
   }
 
   @override
@@ -80,6 +93,32 @@ class GetPostsAndOpportunityControllerImp
     }
   }
 
+  void showReport(context) {
+    Get.bottomSheet(
+      Container(),
+      // BottomSheetOpportunity(
+      // image: file,
+      // title: title.text,
+      // body: body.text,
+      // location: location.text,
+      // jobType: selectedJobType,
+      // workPlaceType: selectedWorkPlaceType,
+      // jobHours: jophours.text,
+      // qualifications: qualifications,
+      // skills: skills,
+      // salary: salary.text,
+      // vacant: isVacant.toString(),
+      // onPressedBack: () {
+      //   Get.back();
+      // },
+      // onPressedPublish: () {
+      //   addOpportunity();
+      // },
+      // ),
+      isScrollControlled: true,
+    );
+  }
+
   @override
   goToPageOpportunityDetails(opportuntiyModel) {
     Get.toNamed(AppRoute.opportunityPage,
@@ -104,6 +143,7 @@ class GetPostsAndOpportunityControllerImp
     super.onInit();
     getOpportunitesData();
     getPostsData();
+    idUserPostOwner = myServices.box.read("id");
     scrollController = ScrollController();
     scrollController.addListener(scrollListener);
   }

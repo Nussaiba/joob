@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jobs/view/fade_animation.dart';
+import 'package:jobs/view/widget/general/fade_animation.dart';
 
 class ASDF extends StatelessWidget {
   const ASDF({super.key});

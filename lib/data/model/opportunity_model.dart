@@ -10,8 +10,8 @@ class OpportuntiyModel {
   String? jopType;
   String? workPlaceType;
   String? jophours;
-  String? qualifications;
-  String? skills;
+  List? qualifications;
+  List? skills;
   String? salary;
   String? vacant;
   String? image;
@@ -47,9 +47,9 @@ class OpportuntiyModel {
           skills: json['skills_req']!,
           salary: json['salary']!.toString(),
           vacant: json['vacant']!.toString(),
-          image: json['file']!,
-          createdat: json['created_at']!,
-          updatedat: json['updated_at']!);
+          image: json['file'],
+          createdat: json['craeted_at'],
+          updatedat: json['updated_at']);
 
           
   Map<String, dynamic> toJson() => {};

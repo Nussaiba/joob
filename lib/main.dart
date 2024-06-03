@@ -8,14 +8,18 @@ import 'package:jobs/core/localization/changelocal.dart';
 import 'package:jobs/core/localization/translation.dart';
 import 'package:jobs/core/services/services.dart';
 import 'package:jobs/routes.dart';
-import 'package:jobs/view/fade_animation.dart';
+import 'package:jobs/view/a.dart';
+import 'package:jobs/view/report_page.dart';
+import 'package:jobs/view/rrrrrrrrr.dart';
+import 'package:jobs/view/screen/company/main_screens/home_company.dart';
+import 'package:jobs/view/screen/homescreen.dart';
+import 'package:jobs/view/widget/general/fade_animation.dart';
 import 'package:jobs/view/screen/all_opportunity_test.dart';
 import 'package:jobs/view/screen/bubbless.dart';
 import 'package:jobs/view/screen/company/main_screens/main_screen_company.dart';
 import 'package:jobs/view/screen/company/opportunity/add_opportunity.dart';
 import 'package:jobs/view/screen/company/opportunity/edit_opportunity.dart';
 import 'package:jobs/view/screen/company/profile_company/create_company.dart';
-import 'package:jobs/view/screen/countries.dart';
 import 'package:jobs/view/screen/hero.dart';
 import 'package:jobs/view/screen/opportunity.dart';
 import 'package:jobs/view/screen/pdf.dart';
@@ -32,11 +36,9 @@ import 'package:jobs/view/screen/auth/signup.dart';
 import 'package:jobs/view/screen/floating.dart';
 import 'package:jobs/view/screen/auth/account_type.dart';
 import 'package:jobs/view/screen/splash.dart';
-import 'package:jobs/view/screen/seeker/posts.dart';
-import 'package:jobs/view/screen/contryesssss.dart';
 import 'package:jobs/view/screen/tes.dart';
-
 import 'package:jobs/view/screen/auth/login.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initialServices();
@@ -53,7 +55,10 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       locale: controller.language,
       debugShowCheckedModeBanner: false,
+      darkTheme: ThemeData.dark(
+              ),
       theme: ThemeData(
+        
         //fontFamily: "Pacifico",
         // fontFamily : "Cairo" ,
         fontFamily: "Gafata",
@@ -74,9 +79,11 @@ class MyApp extends StatelessWidget {
               fontSize: 14),
           bodyText2: TextStyle(height: 2, color: AppColor.grey, fontSize: 14),
         ),
-      ),
-    initialRoute: '/splash',
+   ),
+ //  initialRoute: '/splash',
       initialBinding: InitialBindings(),
+      home:HomeScreen55(),
+      //  home:MyAppA(),
       //home:MyHomePage11Con(),
       //home: ASDF(),
   //  home:  FadeAnimationPage(),

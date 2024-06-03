@@ -10,7 +10,7 @@ class MyHomePagea extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('AAAA'),
+        title: const Text('AAAA'),
       ),
       body: ListView.builder(
         controller: controller.scrollController,
@@ -26,7 +26,7 @@ class MyHomePagea extends StatelessWidget {
               onPressed: () {
                 Get.toNamed(AppRoute.onBoarding);
               },
-              child: Icon(Icons.add),
+              child: const Icon(Icons.add),
             ),
           ),
         ),

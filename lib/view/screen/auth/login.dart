@@ -6,13 +6,13 @@ import 'package:jobs/core/constants/color.dart';
 import 'package:jobs/core/constants/routes.dart';
 import 'package:jobs/core/functions/alert_exit.dart';
 import 'package:jobs/core/functions/validinput.dart';
-import 'package:jobs/view/fade_animation.dart';
+import 'package:jobs/view/widget/general/fade_animation.dart';
 import 'package:jobs/view/widget/auth/customtextbodyauth.dart';
 import 'package:jobs/view/widget/auth/customtextformauth.dart';
 import 'package:jobs/view/widget/auth/customtexttitleauth.dart';
 import 'package:jobs/view/widget/auth/logoauth.dart';
 import 'package:jobs/view/widget/auth/textsignup.dart';
-
+import '../../../core/constants/imageassest.dart';
 import '../../widget/auth/custombuttomauth.dart';
 
 class Login extends StatelessWidget {
@@ -21,27 +21,34 @@ class Login extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.put(LoginControllerImp());
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: AppColor.praimaryColor,
-          elevation: 0.0,
-          title: Text(
-            "9".tr,
-            style: Theme.of(context)
-                .textTheme
-                .headline1!
-                .copyWith(color: AppColor.grey),
-          ),
-        ),
+        // appBar: AppBar(
+        //   backgroundColor: Colors.transparent,
+        //   elevation: 0.0,
+        //   title: Text(
+        //     "9".tr,
+        //     style: Theme.of(context)
+        //         .textTheme
+        //         .headline1!
+        //         .copyWith(color: AppColor.grey),
+        //   ),
+        // ),
         body: GetBuilder<LoginControllerImp>(
             builder: (controller) => HandlingDataRequest(
                 statusRequest: controller.statusRequest,
                 widget: WillPopScope(
                   onWillPop: alertExitApp,
                   child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 15, horizontal: 30),
-                      child: Form(
-                        key: controller.formstate,
+                    padding:
+                    const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                    child: Form(
+                      key: controller.formstate,
+                      child: Container(
+                        padding: EdgeInsets.all(8.0),
+                      //  decoration: const BoxDecoration(
+                      //       image: DecorationImage(
+                      //           image: AssetImage(
+                      //               AppImageAsset.background2),
+                      //           fit: BoxFit.cover)),
                         child: ListView(children: [
                           const LogoAuth(),
                           CustomTextTitleAuth(
@@ -113,7 +120,9 @@ class Login extends StatelessWidget {
                                   }),
                               3),
                         ]),
-                      )),
+                      ),
+                    ),
+                  ),
                 ))));
   }
 }

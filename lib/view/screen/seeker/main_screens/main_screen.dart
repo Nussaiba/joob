@@ -7,7 +7,6 @@ import 'package:jobs/view/screen/bubbless.dart';
 import 'package:jobs/view/screen/auth/signup.dart';
 import 'package:jobs/view/screen/chat/chats.dart';
 import 'package:jobs/view/screen/floating.dart';
-import 'package:jobs/view/screen/seeker/posts.dart';
 import 'package:jobs/view/screen/zz.dart';
 
 class MainScreens extends GetView<MainScreenControllerImp> {
@@ -57,9 +56,11 @@ class MainScreens extends GetView<MainScreenControllerImp> {
 
             //  Homeq(),
             const SignUp(),
+                        const SignUp(),
+
         //  HomeScreenA(),
            //  MyAppp (),
-            PostWidget(),
+            //PostWidget(),
             ImageDropdown()
           ],
         ));

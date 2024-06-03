@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:jobs/controller/company/profile_company/profile_company.dart';
+import 'package:jobs/controller/company/profile_company/create_profile_company.dart';
 import 'package:jobs/controller/seeker/settings/create_profile_controller.dart';
 import 'package:jobs/core/class/handlingdataview.dart';
 import 'package:jobs/core/constants/imageassest.dart';
 import 'package:jobs/core/functions/alert_exit.dart';
-import 'package:jobs/view/fade_animation.dart';
+import 'package:jobs/view/widget/general/fade_animation.dart';
 import 'package:jobs/view/widget/general/custom_text_field.dart';
 import 'package:jobs/view/widget/general/Custom_choose_image.dart';
 

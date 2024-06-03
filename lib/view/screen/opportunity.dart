@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:jobs/api_link.dart';
 import 'package:jobs/controller/opportunity_details_controller.dart';
 import 'package:jobs/core/constants/color.dart';
-import 'package:jobs/core/constants/imageassest.dart';
 import 'package:jobs/view/widget/general/custom_button.dart';
 
 class OpportunityPage extends StatelessWidget {
@@ -37,7 +36,6 @@ class OpportunityPage extends StatelessWidget {
                     children: [
                       Container(
                         height: 180,
-                        // width: Get.width,
                         decoration: BoxDecoration(
                           color: AppColor.praimaryColor,
                           //            gradient: LinearGradient(
@@ -98,8 +96,7 @@ class OpportunityPage extends StatelessWidget {
                             child: CircleAvatar(
                               radius: 50,
                               backgroundImage: NetworkImage(
-                                  //  AppImageAsset.onBoardingImgOne,
-                                  //controller.opportuntiyModel.image!
+                              
                                   "${AppLink.serverimage}/${controller.opportuntiyModel.image!}"),
                             )
 
@@ -126,8 +123,8 @@ class OpportunityPage extends StatelessWidget {
                     child: Column(
                       children: [
                         Hero(
-                          tag: "${controller.opportuntiyModel.id!}",
-                          child: Text('${controller.opportuntiyModel.title!}',
+                          tag: controller.opportuntiyModel.id!,
+                          child: Text(controller.opportuntiyModel.title!,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 24,
@@ -143,7 +140,7 @@ class OpportunityPage extends StatelessWidget {
                               )),
                         ),
                         Hero(
-                          tag: "${controller.opportuntiyModel.location!}",
+                          tag: controller.opportuntiyModel.location!,
                           child: Text(
                               'Location  ${controller.opportuntiyModel.location!}',
                               style: const TextStyle(
@@ -167,12 +164,12 @@ class OpportunityPage extends StatelessWidget {
                       ItemDetailColumn(
                         icon: Icons.schedule,
                         info: 'job Hours',
-                        info2: '${controller.opportuntiyModel.jophours!}',
+                        info2: controller.opportuntiyModel.jophours!,
                       ),
                       ItemDetailColumn(
                         icon: Icons.home_work,
                         info: 'Work Place Type',
-                        info2: '${controller.opportuntiyModel.workPlaceType!}',
+                        info2: controller.opportuntiyModel.workPlaceType!,
                       ),
                       ItemDetailColumn(
                         icon: Icons.work,

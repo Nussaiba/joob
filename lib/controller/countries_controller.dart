@@ -6,15 +6,12 @@ import 'package:jobs/data/datasource/remote/contries.dart';
 
 class Country {
   String? name;
-
   Country({this.name});
-
   factory Country.fromJson(Map<String, dynamic> json) =>
       Country(name: json['country']!);
 }
 
 class CountryController extends GetxController {
-  //var countries = <Country>[].obs;
   List<Country> filteredCountries = <Country>[];
   String selectedCountry = '';
 
@@ -35,7 +32,7 @@ class CountryController extends GetxController {
     print("================$response  Controller");
     statusRequest = handlingData(response);
     if (StatusRequest.success == statusRequest) {
-      if (response['error'] == false ) {
+      if (response['error'] == false) {
         print("${data.length}lllllllmmmmmmmmmmlllll");
         data.addAll(response['data']);
 

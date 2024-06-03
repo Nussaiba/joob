@@ -1,7 +1,7 @@
 class PostModel {
   String? id;
   String? seekerid;
-  DateTime? body;
+  String? body;
   String? file;
   String? createdat;
   String? updatedat;
@@ -19,7 +19,7 @@ class PostModel {
       id: json['id']!.toString(),
       seekerid: json['seeker_id']!.toString(),
       body: json['body']!,
-      file: json['file']!,
+      file: json['file'],
       createdat: json['created_at']!,
       updatedat: json['updated_at']!);
 

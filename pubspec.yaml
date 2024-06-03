@@ -29,6 +29,7 @@ dependencies:
   pdf: ^3.10.8
   sa4_migration_kit: ^1.0.0
   simple_animations: ^5.0.2
+  sidebarx: ^0.16.3
   #file_saver: ^0.2.9
 dev_dependencies:
   flutter_test:
@@ -39,7 +40,6 @@ flutter:
   assets:
     - assets/images/
     - assets/lottie/
-
   fonts:
     - family: Cairo
       fonts:

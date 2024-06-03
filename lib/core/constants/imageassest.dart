@@ -11,6 +11,16 @@ class AppImageAsset {
   static const String onBoardingImgSix = "$rootImages/3.png";
   static const String onBoardingImgSeven = "$rootImages/2.png";
 
+
+
+
+
+    static const String background1 = "$rootImages/background1.jpg";
+  static const String background2 = "$rootImages/background2.jpg";
+  static const String background3 = "$rootImages/background3.jpg";
+  static const String background4 = "$rootImages/background4.jpg";
+
+
   static const String rootAnimations = "assets/lottie";
 
   static const String loading = "$rootAnimations/loading.json";
