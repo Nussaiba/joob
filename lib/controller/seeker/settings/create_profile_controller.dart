@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,6 +9,8 @@ import 'package:jobs/core/constants/routes.dart';
 import 'package:jobs/core/functions/handlingdata.dart';
 import 'package:jobs/core/services/services.dart';
 import 'package:jobs/data/datasource/remote/seeker/profile/profile_seeker.dart';
+
+import '../../../data/model/country.dart';
 
 abstract class CreateProfileController extends GetxController {
   createProfile();
@@ -129,6 +132,41 @@ class CreateProfileControllerImp extends CreateProfileController {
     username = myServices.box.read("user_name");
   }
 
+  List<Country> countries = <Country>[].obs;
+  String? selectedCountry;
+  List<City> cities = <City>[].obs;
+  String? selectedCity;
+    void Function(String?)? setSelectedCountry(type) {
+    selectedCountry = type;
+
+    cities = countries.firstWhere((element) => element.county == type).cities;
+    selectedCity = null;
+    update();
+    return null;
+  }
+
+  void Function(String?)? setSelectedCiTy(type) {
+    selectedCity = type;
+    update();
+    return null;
+  }
+
+
+  void loadJsonData() async {
+    final String jsonString = await DefaultAssetBundle.of(Get.context!)
+        .loadString('assets/models/countries.json');
+    final jsonData = jsonDecode(jsonString) as Map<String, dynamic>;
+    final data = jsonData['data'] as List<dynamic>;
+    update();
+    countries = data.map((item) {
+      final county = item['country'] as String;
+      final cityNames = item['cities'] as List<dynamic>;
+      final citiesList = cityNames.map((city) => City(name: city)).toList();
+      return Country(county: county, cities: citiesList);
+    }).toList();
+    update();
+  }
+
   @override
   void onInit() {
     initialData();
@@ -138,6 +176,7 @@ class CreateProfileControllerImp extends CreateProfileController {
     skills = TextEditingController();
     certificates = TextEditingController();
     about = TextEditingController();
+    loadJsonData();
     super.onInit();
   }
 

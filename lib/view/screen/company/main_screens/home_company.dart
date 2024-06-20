@@ -1,96 +1,140 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:jobs/controller/get_all_opportunity_posts.dart';
-import 'package:jobs/core/class/handlingdataview.dart';
-import 'package:jobs/core/constants/color.dart';
-import 'package:jobs/core/constants/routes.dart';
-import 'package:jobs/view/widget/custom_card_opportunity.dart';
+import 'package:jobs/controller/general/side_bar_controller.dart';
+import 'package:jobs/controller/get_all_opportunity_posts_home.dart';
+import 'package:jobs/controller/saved_opportunity_controller.dart';
+import 'package:jobs/view/widget/home_widgets/app_bar_home.dart';
+import 'package:jobs/view/widget/home_widgets/job_card_home.dart';
+import 'package:jobs/view/widget/home_widgets/side_barx.dart';
 import 'package:jobs/view/widget/post_widget.dart';
-import '../../../widget/drawerOfappp.dart';
 
 class CompanyHome extends StatelessWidget {
-  const CompanyHome({super.key});
+  CompanyHome({super.key});
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     Get.put(GetPostsAndOpportunityControllerImp());
+    Get.put(SavedController());
+    final sidebarcontroller = Get.put(SideBarController());
     return GetBuilder<GetPostsAndOpportunityControllerImp>(
         builder: (controller) => Scaffold(
-           drawer: DrawerOfApp(),
-              body: HandlingDataView(
-                  statusRequest: controller.statusRequest,
-                  widget:
-                      //  Container(
-                      //   color: Colors.red,
-                      //   child: ListView.builder(
-                      //   //  scrollDirection: Axis.horizontal,
-                      //   controller: controller.scrollController,
-                      //     itemCount: controller.opportuntiesList.length,
-                      //     itemBuilder: (context, index) {
-                      //       print(
-                      //           "${controller.opportuntiesList.length}llllllllllll");
+              key: _scaffoldKey,
+              body: Obx(
+                () => GestureDetector(
+                  onTap: () {
+                    sidebarcontroller.isShow.value ? sidebarcontroller.toggleShow() : null;
+                  },
+                  child: Stack(
+                    children: [
+                      ListView(
+                        children: [
+                          AppBarHome(
+                            controller: sidebarcontroller,
+                            text: 'Public Your Opportuniies',
+                          ),
+                          TitleOpportunitiesHome(
+                            title: "Opportunities",
+                            onTapViewAll: () {
+                              controller.goToPageAllOpportunities();
+                            },
+                          ),
+                          SizedBox(
+                            height: 195,
+                            child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: controller.opportuntiesList.length,
+                              itemBuilder: (context, index) {
+                                return GetBuilder<SavedController>(
+                                    builder: (jobController) {
+                                  final isSaved = jobController.isSaved(
+                                      controller.opportuntiesList[index].id!);
 
-                      //       return CardJob(
-                      //         opportuntiyModel:
-                      //             controller.opportuntiesList[index],
-                      //         onPressed: () =>
-                      //             controller.goToPageOpportunityDetails(
-                      //                 controller.opportuntiesList[index]),
-                      //       );
-                      //       //  ListTile(
-                      //       //   title: Text(controller.opportuntiesList[index].title!),
-                      //       //   subtitle: Text(controller.opportuntiesList[index].id!),
-                      //       // );
-                      //     },
-                      //   ),
-                      //),
+                                  return JobCardHome(
+                                    opportuntiyModel:
+                                        controller.opportuntiesList[index],
+                                    onPressed: () =>
+                                        controller.goToPageOpportunityDetails(
+                                            controller.opportuntiesList[index]),
+                                    icon: isSaved
+                                        ? Icons.bookmark
+                                        : Icons.bookmark_border,
+                                    onTapIcon: () async {
+                                      await jobController
+                                          .addOrRemoveToSavedOpportunity(
+                                              controller
+                                                  .opportuntiesList[index].id!);
+                                    },
+                                  );
+                                });
+                              },
+                            ),
+                          ),
+                          TitleOpportunitiesHome(
+                            title: "Posts",
+                            onTapViewAll: () {
+                              controller.goToPageAllPosts();
+                            },
+                          ),
+                          ListView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: controller.postsList.length,
+                            itemBuilder: (context, i) {
+                              return CustomPostWidget(
+                                postmodel: controller.postsList[i],
+                                onTapExpanded: controller.toggleExpanded,
+                                isExpanded: controller.isExpanded.value,
+                                textviewmore: '',
+                                // controller.isExpanded.value
+                                //     ? 'view less'
+                                //     : 'view more',
+                                text: controller.postsList[i].body!,
+                                // controller.isExpanded.value
+                                //     ? controller.postsList[i].body!
+                                //     : controller.postsList[i].body!
+                                //         .substring(0, 3),
+                                onSelected: controller.selecedAnOption,
 
-                      Container(
-                    child: ListView.builder(
-                      controller: controller.scrollController,
-                      itemCount: controller.postsList.length,
-                      itemBuilder: (context, index) {
-                        return CustomPostWidget(
-                          postmodel: controller.postsList[index],
-                          onTapExpanded: controller.toggleExpanded,
-                          isExpanded: controller.isExpanded.value,
-                          textviewmore: controller.isExpanded.value
-                              ? 'view less'
-                              : 'view more',
-                          text: controller.isExpanded.value
-                              ? controller.postsList[index].body!
-                              : controller.postsList[index].body!
-                                  .substring(0, 3),
-                          onSelected: (value) {
-                            switch (value) {
-                              case 'edit':
-                                controller.editPost();
-                                break;
-                              case 'delete':
-                                controller.deletePost();
-                                break;
-                              case 'report':
-                                controller.reportPost();
-                                break;
-                            }
-                          },
-                          isOwner: controller.postsList[index].seekerid ==
-                              controller.idUserPostOwner,
-                        );
-                      },
-                    ),
-                  )),
-              floatingActionButton: controller.isFabVisible.value
-                  ? Padding(
-                      padding: const EdgeInsets.only(bottom: 55),
-                      child: FloatingActionButton(
-                        onPressed: () {
-                          Get.toNamed(AppRoute.addOpportunity);
-                        },
-                        child: const Icon(Icons.add),
+                                // (value) {
+                                //   switch (value) {
+                                //     case 'edit':
+                                //       controller.editPost();
+                                //       break;
+                                //     case 'delete':
+                                //       controller.deletePost();
+                                //       break;
+                                //     case 'report':
+                                //       controller.reportPost();
+                                //       break;
+                                //   }
+                                // },
+
+                                isOwner: controller.postsList[i].seekerid ==
+                                    controller.idUserPostOwner,
+                              );
+                            },
+                          ),
+                        ],
                       ),
-                    )
-                  : const SizedBox(),
+                      Positioned(
+                        top: 110,
+                        left: 10,
+                        child: Visibility(
+                          visible: sidebarcontroller.isShow.value,
+                          child: SizedBox(
+                            height: 560,
+                            child: CustomSidebarX(
+                                controller: sidebarcontroller.sidebarXController,
+                                
+                                ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ));
   }
 }

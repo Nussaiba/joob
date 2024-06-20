@@ -18,24 +18,24 @@ class MyMiddleWare extends GetMiddleware {
         if (myServices.box.read("account") == "job_seeker") {
           Get.offAllNamed(AppRoute.mainScreens);
         } else {
+          if (myServices.box.read("account") == "company")
           Get.offAllNamed(AppRoute.mainScreensCompany);
         }
       } else {
         if (myServices.box.read("step") == "3") {
           // return const RouteSettings(name: AppRoute.mainScreens);
-          if (myServices.box.read("account") == "job_seeker") {
+           Get.offAllNamed(AppRoute.login);
+        } else {
+          if (myServices.box.read("step") == "2") {
+            if (myServices.box.read("account") == "job_seeker") {
             Get.offAllNamed(AppRoute.createProfile);
           } else {
             Get.offAllNamed(AppRoute.createcompanyProfile);
           }
-        } else {
-          if (myServices.box.read("step") == "2") {
-            // return const RouteSettings(name: AppRoute.mainScreens);
-            Get.offAllNamed(AppRoute.signUp);
           } else {
             if (myServices.box.read("step") == "1") {
               // return const RouteSettings(name: AppRoute.login);
-              Get.offAllNamed(AppRoute.accountType);
+            Get.offAllNamed(AppRoute.signUp);
             } else {
               Get.offAllNamed(AppRoute.onBoarding);
             }

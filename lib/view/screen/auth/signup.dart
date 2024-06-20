@@ -103,7 +103,7 @@ class SignUp extends StatelessWidget {
                         CustomButtomAuth(
                             text: "18".tr,
                             onPressed: () {
-                              controller.SignUp();
+                              controller.ChooseAccountType();
                             }),
                         1.5),
                     const SizedBox(

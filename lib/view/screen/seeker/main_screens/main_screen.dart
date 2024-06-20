@@ -6,6 +6,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:jobs/view/screen/bubbless.dart';
 import 'package:jobs/view/screen/auth/signup.dart';
 import 'package:jobs/view/screen/chat/chats.dart';
+import 'package:jobs/view/screen/company&seeker/save_page.dart';
 import 'package:jobs/view/screen/floating.dart';
 import 'package:jobs/view/screen/zz.dart';
 
@@ -52,7 +53,10 @@ class MainScreens extends GetView<MainScreenControllerImp> {
           physics: const NeverScrollableScrollPhysics(),
           controller: controller.pageController,
           children: [
-            MyHomePagea(),
+
+
+            JobSavedScreen(),
+           // MyHomePagea(),
 
             //  Homeq(),
             const SignUp(),

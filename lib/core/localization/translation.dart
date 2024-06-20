@@ -55,6 +55,7 @@ class MyTranslation extends Translations {
           "48": " ",
           "49": " ",
           "50": " ",
+          "100" : "اختر اللغة"
         },
         "en": {
           "1": "Start to a Promising Career",
@@ -105,6 +106,7 @@ class MyTranslation extends Translations {
           "48": " ",
           "49": " ",
           "50": " ",
+          "100" : "Choose your language"
         }
       };
 }

@@ -153,7 +153,7 @@ class Crud {
 
 
   Future<Either<StatusRequest, Map>> deleteData(String linkUrl) async {
-    try {
+  //  try {
       Token();
       var response = await http.delete(
         Uri.parse(linkUrl),
@@ -174,8 +174,8 @@ class Crud {
       } else {
         return const Left(StatusRequest.serverfailure);
       }
-    } catch (_) {
-      return const Left(StatusRequest.serverfailure);
-    }
+    // } catch (_) {
+    //   return const Left(StatusRequest.serverfailure);
+    // }
   }
 }

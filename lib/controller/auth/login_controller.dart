@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:jobs/core/class/statusrequest.dart';
 import 'package:jobs/core/constants/color.dart';
 import 'package:jobs/core/constants/routes.dart';
@@ -22,7 +23,7 @@ class LoginControllerImp extends LoginController {
   StatusRequest statusRequest = StatusRequest.none;
   LoginData loginData = LoginData(Get.find());
   MyServices myServices = Get.find();
-  late String account;
+  // late String account;
   showPassWord() {
     isShowPassword = isShowPassword == true ? false : true;
     update();
@@ -38,7 +39,6 @@ class LoginControllerImp extends LoginController {
       print("================$response  Controller");
       statusRequest = handlingData(response);
       print(statusRequest);
-
       if (StatusRequest.success == statusRequest) {
         if (response["status"] == 200) {
           myServices.box.write("token", "${response["data"]["token"]}");
@@ -46,13 +46,17 @@ class LoginControllerImp extends LoginController {
           myServices.box.write("email", "${response["data"]["user"]["email"]}");
           myServices.box
               .write("user_name", "${response["data"]["user"]["user_name"]}");
+
+              myServices.box
+              .write("account", "${response["data"]["user"]["type"]}");
           myServices.box.write("step", "4");
           print("token ${response["data"]["token"]}");
-          if (account == "job_seeker") {
+          print("${response["data"]["user"]["type"]}");
+          if ("${response["data"]["user"]["type"]}" == "job_seeker") {
             Get.offAllNamed(AppRoute.mainScreens);
           } else {
-             if (account == "company")
-            Get.offAllNamed(AppRoute.mainScreensCompany);
+            if ("${response["data"]["user"]["type"]}" == "company")
+              Get.offAllNamed(AppRoute.mainScreensCompany);
           }
           getSnakBar(
               "success",
@@ -79,7 +83,7 @@ class LoginControllerImp extends LoginController {
 
   @override
   void onInit() {
-    account = myServices.box.read("account");
+    // account = myServices.box.read("account");
     email = TextEditingController();
     password = TextEditingController();
     super.onInit();

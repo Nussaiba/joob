@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jobs/core/constants/imageassest.dart';
-import 'package:jobs/view/screen/opportunity.dart';
+import 'package:jobs/view/screen/company&seeker/opportunity.dart';
 
 
 class FirstPage extends StatelessWidget {

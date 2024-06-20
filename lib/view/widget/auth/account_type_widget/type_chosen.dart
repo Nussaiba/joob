@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:jobs/core/constants/color.dart';
 
 class AccountTypeChosen extends StatelessWidget {
@@ -11,7 +12,7 @@ class AccountTypeChosen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(text,
+    return Text(text.toString().replaceAll('_', ' ').capitalizeFirst!,
         style: TextStyle(
           color: AppColor.praimaryColor,
           fontSize: 24.0,

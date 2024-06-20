@@ -4,7 +4,7 @@ import 'package:jobs/controller/company/add_oportunity_controller.dart';
 import 'package:jobs/core/class/handlingdataview.dart';
 import 'package:jobs/core/functions/validinput.dart';
 import 'package:jobs/view/widget/auth/customtextbodyauth.dart';
-import 'package:jobs/view/widget/company/add_opportunity/custom_dropdown_button.dart';
+import 'package:jobs/view/widget/general/custom_dropdown_button.dart';
 import 'package:jobs/view/widget/company/add_opportunity/custom_switch.dart';
 import 'package:jobs/view/widget/general/custom_text_field.dart';
 import 'package:jobs/view/widget/general/Custom_choose_image.dart';
@@ -22,7 +22,6 @@ class AddJobOpportunityScreen extends StatelessWidget {
         title: const Text(
           'Add new opportunity',
         ),
-        //backgroundColor: Colors.deepPurple,
       ),
       body: Container(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),

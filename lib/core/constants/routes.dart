@@ -3,7 +3,6 @@ class AppRoute {
   static const String splash = "/splash";
   //onboarding
   static const String onBoarding = "/onboarding";
-  static const String accountType = "/accounttype";
 
 //auth
   static const String log = "/log";
@@ -23,10 +22,14 @@ class AppRoute {
   static const String createcompanyProfile = "/companycreateprofile";
   static const String editcompanyProfile = "/companyeditprofile";
   static const String companyprofilePage = "/companyprofilepage";
+  //settings
+  static const String checkPassword = "/checkpassword";
+  static const String changePassword = "/changepassword";
+  static const String deleteAccount = "/deleteaccount";
+
   //seeker_mainScreens
   static const String mainScreens = "/mainscreens";
   static const String homeSeeker = "/homeseeker";
-  static const String savedJobs = "/savedjobs";
   static const String detailsJob = "/detailsjob";
   static const String postpage = "/postpage";
   //company_mainScreens
@@ -34,12 +37,10 @@ class AppRoute {
   static const String homeCompany = "/homeseekercompany";
   static const String addOpportunity = "/addopportunity";
 
-
-
-
-
   //**************company & seeker*****************//
   static const String opportunityPage = "/opportunitypage";
+  static const String allPostPage = "/allpostpage";
+  static const String allOpportunityPage = "/allopportunitypage";
 
-  
+  static const String savedJobs = "/savedjobs";
 }

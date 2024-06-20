@@ -15,7 +15,7 @@ class AccountTypeIcon extends StatelessWidget {
     return InkWell(
         onTap: onTap,
         child: Container(
-          padding: EdgeInsets.all(8),
+          padding: EdgeInsets.all(4),
           child: Icon(
             icon,
             size: 70,

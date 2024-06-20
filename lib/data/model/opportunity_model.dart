@@ -2,8 +2,10 @@ class OpportuntiyModel {
   // OpportuntiyModel opportunitFromJson(String str) =>
   //     OpportuntiyModel.fromJson(json.decode(str));
   //String opportuntiyToJson(OpportuntiyModel data) => json.encode(data.toJson());
-  String? id;
+  int? id;
   String? companyid;
+  String? companylogo;
+  String? companyname;
   String? title;
   String? body;
   String? location;
@@ -20,6 +22,8 @@ class OpportuntiyModel {
   OpportuntiyModel(
       {this.id,
       this.companyid,
+      this.companylogo,
+      this.companyname,
       this.title,
       this.body,
       this.location,
@@ -35,8 +39,10 @@ class OpportuntiyModel {
       this.updatedat});
   factory OpportuntiyModel.fromJson(Map<String, dynamic> json) =>
       OpportuntiyModel(
-          id: json['id']!.toString(),
+          id: json['id']!,
           companyid: json['company_id']!.toString(),
+          companylogo: json['company_logo'],
+          companyname: json['company_name']!,
           title: json['title']!,
           body: json['body']!,
           location: json['location']!,
@@ -48,9 +54,8 @@ class OpportuntiyModel {
           salary: json['salary']!.toString(),
           vacant: json['vacant']!.toString(),
           image: json['file'],
-          createdat: json['craeted_at'],
+          createdat: json['created_at'],
           updatedat: json['updated_at']);
 
-          
   Map<String, dynamic> toJson() => {};
 }

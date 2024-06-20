@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jobs/core/class/statusrequest.dart';
+import 'package:jobs/core/constants/color.dart';
 import 'package:jobs/core/constants/routes.dart';
 import 'package:jobs/core/functions/dialiog.dart';
 import 'package:jobs/core/functions/handlingdata.dart';
 import 'package:jobs/core/services/services.dart';
 import 'package:jobs/data/datasource/remote/auth/signupdata.dart';
+import 'package:jobs/view/widget/auth/account_type_widget/button_signup.dart';
+import 'package:jobs/view/widget/auth/account_type_widget/icon_type.dart';
+import 'package:jobs/view/widget/auth/account_type_widget/type_chosen.dart';
 
 abstract class SinUpController extends GetxController {
   SignUp();
@@ -25,7 +29,7 @@ class SignUpControllerImp extends SinUpController {
   SignUpData signUpData = SignUpData(Get.find());
   MyServices myServices = Get.find();
 
-  String? selectedAccountType;
+  //String? selectedAccountType;
 
   @override
   goToSignIn() {
@@ -47,13 +51,16 @@ class SignUpControllerImp extends SinUpController {
       print("=111111111111111111  Controller");
 
       var response = await signUpData.postdata(
-          username.text, password.text, email.text, selectedAccountType!);
+          username.text, password.text, email.text, accountType.value);
       print("================$response  Controller");
       statusRequest = handlingData(response);
       print(statusRequest);
       print(response);
       if (StatusRequest.success == statusRequest) {
         if (response['status'] == 200) {
+          myServices.box.write("account", accountType.value);
+          myServices.box.write("step", "2");
+
           Get.offNamed(AppRoute.verifyCodeRegister,
               arguments: {"email": email.text});
 
@@ -75,9 +82,87 @@ class SignUpControllerImp extends SinUpController {
     } else {}
   }
 
+  var accountType = ''.obs;
+  bool isActiveseeker = false;
+  bool isActiveCompany = false;
+
+  void setAccountSeeker(String type) {
+    isActiveseeker = true;
+    isActiveCompany = false;
+    accountType.value = type;
+  }
+
+  void setAccountCompany(String type) {
+    isActiveseeker = false;
+    isActiveCompany = true;
+    accountType.value = type;
+  }
+
+  void ChooseAccountType() {
+    if (formstate.currentState!.validate()) {
+      Get.defaultDialog(
+          title: 'Account Type',
+          titleStyle: TextStyle(
+            fontSize: 24.0,
+            fontWeight: FontWeight.bold,
+            color: AppColor.black,
+            letterSpacing: 1.2,
+            shadows: [
+              Shadow(
+                blurRadius: 4.0,
+                color: Colors.black.withOpacity(0.5),
+              ),
+            ],
+          ),
+          content: Obx(() => Column(mainAxisSize: MainAxisSize.min, children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    AccountTypeIcon(
+                      icon: Icons.person_search,
+                      color: isActiveseeker
+                          ? AppColor.praimaryColor
+                          : AppColor.grey,
+                      onTap: () {
+                        setAccountSeeker('job_seeker');
+                      },
+                    ),
+                    AccountTypeIcon(
+                      icon: Icons.business,
+                      color: isActiveCompany
+                          ? AppColor.praimaryColor
+                          : AppColor.grey,
+                      onTap: () {
+                        setAccountCompany('company');
+                      },
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                  child: AccountTypeChosen(text: '$accountType'),
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                ButtonSignUp(
+                  onPressed: () {
+                    accountType.value != ''
+                        ? SignUp()
+                        : Get.snackbar("Warn", "Please choose account type");
+                    Get.back();
+                  },
+                )
+              ])));
+    }
+  }
+
   @override
   void onInit() {
-    selectedAccountType = myServices.box.read("account");
+    // selectedAccountType = myServices.box.read("account");
 
     username = TextEditingController();
     email = TextEditingController();

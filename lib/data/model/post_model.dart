@@ -5,6 +5,8 @@ class PostModel {
   String? file;
   String? createdat;
   String? updatedat;
+  String? createdby;
+  String? profileImg;
 
   PostModel({
     this.id,
@@ -13,6 +15,8 @@ class PostModel {
     this.file,
     this.createdat,
     this.updatedat,
+    this.createdby,
+    this.profileImg
   });
 
   factory PostModel.fromJson(Map<String, dynamic> json) => PostModel(
@@ -21,7 +25,11 @@ class PostModel {
       body: json['body']!,
       file: json['file'],
       createdat: json['created_at']!,
-      updatedat: json['updated_at']!);
+      updatedat: json['updated_at']!,
+      createdby:  json['created_by']!,
+      profileImg: json['profile_img'],
+      
+      );
 
   Map<String, dynamic> toJson() => {};
 }

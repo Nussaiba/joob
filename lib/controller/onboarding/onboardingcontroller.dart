@@ -27,7 +27,7 @@ class OnBoardingControllerImp extends OnBoardingController {
 
     if (currentPage > onBoardingList.length - 1) {
       myServices.box.write("step", "1");
-      Get.offAllNamed(AppRoute.accountType);
+      Get.offAllNamed(AppRoute.signUp);
     } else {
       pageController.animateToPage(currentPage,
           duration: const Duration(microseconds: 700), curve: Curves.bounceIn);

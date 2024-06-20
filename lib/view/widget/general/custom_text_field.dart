@@ -28,7 +28,7 @@ class CustomTextFieldInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 20),
+      padding: const EdgeInsets.only(top: 15),
       child: TextField(
         onSubmitted: onSubmitted,
         controller: mycontroller,
@@ -40,7 +40,7 @@ class CustomTextFieldInfo extends StatelessWidget {
           prefixIcon: Icon(icon, color: Colors.deepPurple),
           filled: true,
           
-          fillColor: Colors.deepPurple.withOpacity(0.5),
+          fillColor: Colors.deepPurple.shade50,
           suffixIcon:
               IconButton(icon: Icon(iconsuffix), onPressed: onPressedsuffix),
           border: OutlineInputBorder(

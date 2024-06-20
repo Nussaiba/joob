@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:jobs/controller/get_all_opportunity_posts.dart';
+import 'package:jobs/controller/get_all_opportunity_posts_home.dart';
 import 'package:jobs/core/class/statusrequest.dart';
 import 'package:jobs/core/constants/routes.dart';
 import 'package:jobs/core/functions/dialiog.dart';
@@ -126,7 +126,7 @@ class AddNewOpportunityControllerImp extends AddNewOpportunityController {
       var response = await opportunityData.createOpportunityPostdata(
           title.text,
           body.text,
-          location.text,
+        //  location.text,
           file!,
           selectedJobType,
           selectedWorkPlaceType,
@@ -143,7 +143,7 @@ class AddNewOpportunityControllerImp extends AddNewOpportunityController {
           var update1 = Get.lazyPut<GetPostsAndOpportunityControllerImp>;
           update();
           getSnakBar("success", "opportunity add successfly", 3);
-          Get.offAllNamed(AppRoute.mainScreensCompany);
+          Get.offAllNamed(AppRoute.savedJobs);
         } else {
           getDialog("Warning", "...");
         }

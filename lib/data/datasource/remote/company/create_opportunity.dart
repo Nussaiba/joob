@@ -8,7 +8,7 @@ class OpportunityData {
   createOpportunityPostdata(
       String title,
       String body,
-      String location,
+     // String location,
       File file,
       String joptype,
       String workPlaceType,
@@ -22,7 +22,7 @@ class OpportunityData {
         {
           "title": title,
           "body": body,
-          "location": location,
+          //"location": location,
           "job_type": joptype,
           "work_place_type": workPlaceType,
           "job_hours": jophours,
