@@ -8,13 +8,13 @@ class OpportunityData {
   createOpportunityPostdata(
       String title,
       String body,
-     // String location,
-      File file,
+      // String location,
+      File? file,
       String joptype,
       String workPlaceType,
       String jophours,
-      String qualifications,
-      String skills,
+      List<String> qualifications,
+      List<String> skills,
       String salary,
       String vacant) async {
     var response = await crud.postFileAndData(
@@ -34,6 +34,48 @@ class OpportunityData {
         'file',
         file);
     print("daataaaaaaaaaaaaaaa $response");
-    return response.fold((l) => 1, (r) => r);
+    return response.fold((l) => l, (r) => r);
+  }
+
+
+ editOpportunityPostdata(
+  int id,
+      String? title,
+      String ?body,
+      // String location,
+      File ?file,
+      String ? joptype,
+      String ? workPlaceType,
+      String ? jophours,
+      List <String> qualifications,
+      List <String> skills,
+      String ? salary,
+      String ? vacant) async {
+    var response = await crud.postFileAndData(
+        "${AppLink.updateOpportunity}/$id}",
+        {
+          "_method": "PUT" ,
+          "title": title,
+          "body": body,
+          //"location": location,
+          "job_type": joptype,
+          "work_place_type": workPlaceType,
+          "job_hours": jophours,
+          "qualifications": qualifications,
+          "skills_req": skills,
+          "salary": salary,
+          "vacant": vacant,
+        },
+        'file',
+        file);
+    print("daataaaaaaaaaaaaaaa $response");
+    return response.fold((l) => l, (r) => r);
+  }
+
+
+  deleteOpportunity(int id) async {
+    var response = await crud.deleteData("${AppLink.deleteOpportunity}/$id");
+    print("daataaaaaaaaaaaaaaa $response");
+    return response.fold((l) => l, (r) => r);
   }
 }

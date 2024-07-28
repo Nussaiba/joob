@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jobs/core/constants/color.dart';
+import 'package:get/get.dart';
 
 class ButtonSignUp extends StatelessWidget {
   final void Function()? onPressed;
@@ -12,12 +13,13 @@ class ButtonSignUp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        foregroundColor: Colors.white,
-        backgroundColor: AppColor.pink,
+        foregroundColor: AppColor.White(),
+        backgroundColor: AppColor.Pink(),
         //padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 18),
-        textStyle: const TextStyle(
-          fontSize: 18,
+        textStyle:  TextStyle(
+          fontSize: 16,
           fontWeight: FontWeight.bold,
+          color: AppColor.TextColor()
         ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30),
@@ -25,7 +27,7 @@ class ButtonSignUp extends StatelessWidget {
         elevation: 5,
       ),
       onPressed: onPressed,
-      child: const Text('SignUp'),
+      child:  Text("178".tr),
     );
   }
 }

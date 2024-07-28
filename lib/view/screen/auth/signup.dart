@@ -6,9 +6,9 @@ import 'package:jobs/core/class/handlingdataview.dart';
 import 'package:jobs/core/constants/color.dart';
 import 'package:jobs/core/functions/alert_exit.dart';
 import 'package:jobs/core/functions/validinput.dart';
-import 'package:jobs/view/widget/auth/customtextbodyauth.dart';
+import 'package:jobs/view/widget/general/custom_text_body.dart';
 import 'package:jobs/view/widget/auth/customtextformauth.dart';
-import 'package:jobs/view/widget/auth/customtexttitleauth.dart';
+import 'package:jobs/view/widget/general/custom_text_title.dart';
 import 'package:jobs/view/widget/auth/logoauth.dart';
 import 'package:jobs/view/widget/auth/textsignup.dart';
 import 'package:jobs/view/widget/general/fade_animation.dart';
@@ -46,14 +46,14 @@ class SignUp extends StatelessWidget {
                   child: ListView(children: [
                     const LogoAuth(),
                     FadeAnimation(
-                        CustomTextTitleAuth(
+                        CustomTextTitle(
                           text: "10".tr,
                         ),
                         0.2),
                     const SizedBox(
                       height: 10,
                     ),
-                    FadeAnimation(CustomTextBodyAuth(text: "19".tr), 0.4),
+                    FadeAnimation(CustomTextBody(text: "19".tr), 0.4),
                     const SizedBox(
                       height: 15,
                     ),
@@ -101,6 +101,7 @@ class SignUp extends StatelessWidget {
                     ),
                     FadeAnimation(
                         CustomButtomAuth(
+                            color: AppColor.praimaryColor,
                             text: "18".tr,
                             onPressed: () {
                               controller.ChooseAccountType();
@@ -112,6 +113,7 @@ class SignUp extends StatelessWidget {
                     GetBuilder<AuthWithGoogle>(
                       builder: (controller) => FadeAnimation(
                           CustomButtomAuth(
+                              color: AppColor.praimaryColor,
                               text: "Google",
                               onPressed: () async {
                                 print("llllllll");

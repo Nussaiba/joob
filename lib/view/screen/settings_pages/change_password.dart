@@ -5,11 +5,9 @@ import 'package:jobs/core/class/handlingdataview.dart';
 import 'package:jobs/core/constants/color.dart';
 import 'package:jobs/core/functions/alert_exit.dart';
 import 'package:jobs/core/functions/validinput.dart';
-import 'package:jobs/view/widget/auth/customtextbodyauth.dart';
+import 'package:jobs/view/widget/general/custom_text_body.dart';
 import 'package:jobs/view/widget/auth/customtextformauth.dart';
-import 'package:jobs/view/widget/auth/customtexttitleauth.dart';
-import 'package:jobs/view/widget/auth/logoauth.dart';
-import 'package:jobs/view/widget/auth/textsignup.dart';
+import 'package:jobs/view/widget/general/custom_text_title.dart';
 import 'package:jobs/view/widget/general/fade_animation.dart';
 import '../../widget/auth/custombuttomauth.dart';
 
@@ -24,7 +22,7 @@ class ChangePassword extends StatelessWidget {
         backgroundColor: AppColor.praimaryColor,
         elevation: 0.0,
         title: Text(
-          "change Password ",
+          "161".tr,
           style: Theme.of(context)
               .textTheme
               .headline1!
@@ -42,23 +40,18 @@ class ChangePassword extends StatelessWidget {
                 child: Form(
                   key: controller.formstate,
                   child: ListView(children: [
-                    //const LogoAuth(),
                     FadeAnimation(
-                        CustomTextTitleAuth(
-                          text: "Change Password",
+                        CustomTextTitle(
+                          text: "161".tr,
                         ),
                         0.2),
                     const SizedBox(
                       height: 10,
                     ),
-                    FadeAnimation(CustomTextBodyAuth(
-                      
-                text: "you can change your password ,/n please fill these fields"), 0.4),
+                    FadeAnimation(CustomTextBody(text: "162".tr), 0.4),
                     const SizedBox(
                       height: 15,
                     ),
-                   
-                  
                     FadeAnimation(
                         CustomTextFormAuth(
                           valid: (value) {
@@ -79,26 +72,27 @@ class ChangePassword extends StatelessWidget {
                     const SizedBox(
                       height: 10,
                     ),
-                      FadeAnimation(
+                    FadeAnimation(
                         CustomTextFormAuth(
                           valid: (value) {
                             return isPasswordCompliant(value!);
                           },
                           mycontroller: controller.password_confirmation,
-                          hinttext: "re enter password",
-                          labeltext: "password_confirmation",
-                          iconData: controller.isShowPassword
+                          hinttext: "163".tr,
+                          labeltext: "164".tr,
+                          iconData: controller.isShowRePassword
                               ? Icons.visibility
                               : Icons.visibility_off,
-                          obscureText: controller.isShowPassword,
+                          obscureText: controller.isShowRePassword,
                           onTapIcon: () {
-                            controller.showPassWord();
+                            controller.showRePassWord();
                           },
                         ),
                         1.2),
                     FadeAnimation(
                         CustomButtomAuth(
-                            text: "Change Password",
+                            color: AppColor.praimaryColor,
+                            text: "161".tr,
                             onPressed: () {
                               controller.changePassword();
                             }),
@@ -106,8 +100,6 @@ class ChangePassword extends StatelessWidget {
                     const SizedBox(
                       height: 5,
                     ),
-                    
-                   
                   ]),
                 )),
           ),

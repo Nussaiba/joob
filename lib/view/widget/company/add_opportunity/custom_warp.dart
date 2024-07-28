@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jobs/core/constants/color.dart';
 
 class CustomWarp extends StatelessWidget {
   const CustomWarp({
@@ -8,7 +9,7 @@ class CustomWarp extends StatelessWidget {
     required this.onSelected,
     required this.onDelete,
   });
-  final List<String> list;
+  final List list;
   final int selectedIndex;
   final Function(int) onSelected;
   final Function(int) onDelete;
@@ -19,17 +20,19 @@ class CustomWarp extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
       child: Wrap(
         spacing: 8.0,
+        
         children: List<Widget>.generate(
           list.length,
           (index) {
             final l = list[index];
             return InputChip(
-              label: Text(l),
+            
+              label: Text(l, style: TextStyle(color:AppColor.Grey2(), fontSize: 14),),
               onSelected: (_) => onSelected(index),
               onDeleted: 
               ()=> 
               onDelete(index),
-              deleteIcon: Icon(Icons.cancel, size: 18,),
+              deleteIcon: Icon(Icons.cancel, size: 18,color: AppColor.Grey(),),
               selected: selectedIndex == index,
               selectedColor: Colors.pink.shade100,
               showCheckmark: false,

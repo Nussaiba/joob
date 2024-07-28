@@ -1,4 +1,3 @@
-
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:jobs/core/constants/color.dart';
@@ -10,7 +9,7 @@ class MyAppp extends StatelessWidget {
       home: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          title:const Text('Chat UI'),
+          title: const Text('Chat UI'),
         ),
         body: Column(
           children: [
@@ -23,7 +22,8 @@ class MyAppp extends StatelessWidget {
               message: "مرحباً، كيف حالك اليوم؟",
               time: "12:45 PM",
               isSentByMe: false,
-            ),ChatMessageTile(
+            ),
+            ChatMessageTile(
               message: "مرحباً، كيف حالك اليوم؟",
               time: "12:45 PM",
               isSentByMe: true,
@@ -32,12 +32,15 @@ class MyAppp extends StatelessWidget {
               message: "مرحباً، كيف حالك اليوم؟",
               time: "12:45 PM",
               isSentByMe: true,
-            ),ChatMessageTile(
+            ),
+            ChatMessageTile(
               message: "مرحباً، كيف حالك اليوم؟",
               time: "12:45 PM",
               isSentByMe: true,
             ),
-            FrostedGlassBubble(message: 'hhhhhhhhh',)
+            FrostedGlassBubble(
+              message: 'hhhhhhhhh',
+            )
           ],
         ),
       ),
@@ -85,8 +88,10 @@ class ChatMessageTile extends StatelessWidget {
               ),
             ],
             borderRadius: isSentByMe
-                ? borderRadius.subtract(const BorderRadius.only(bottomRight: Radius.circular(20)))
-                : borderRadius.subtract(const BorderRadius.only(bottomLeft: Radius.circular(20))),
+                ? borderRadius.subtract(
+                    const BorderRadius.only(bottomRight: Radius.circular(20)))
+                : borderRadius.subtract(
+                    const BorderRadius.only(bottomLeft: Radius.circular(20))),
           ),
           child: Column(
             crossAxisAlignment:
@@ -115,10 +120,8 @@ class ChatMessageTile extends StatelessWidget {
   }
 }
 
-
 // import 'package:flutter/material.dart';
 // import 'package:intl/intl.dart';
-
 
 // class MyAppp extends StatelessWidget {
 //   @override
@@ -221,11 +224,6 @@ class ChatMessageTile extends StatelessWidget {
 //     );
 //   }
 // }
-
-
-
-
-
 
 class FrostedGlassBubble extends StatelessWidget {
   final String message;

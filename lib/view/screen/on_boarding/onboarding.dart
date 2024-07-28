@@ -6,8 +6,7 @@ import 'package:jobs/view/widget/onboarding/customslider.dart';
 import 'package:jobs/view/widget/onboarding/dotonboarding.dart';
 import 'package:jobs/view/widget/onboarding/buttononboarding.dart';
 
-
-class OnBoarding extends StatelessWidget {
+class OnBoarding extends GetView<OnBoardingControllerImp> {
   const OnBoarding({super.key});
 
   @override
@@ -16,7 +15,7 @@ class OnBoarding extends StatelessWidget {
     return Scaffold(
       body: Stack(children: [
         Container(
-          color: AppColor.praimaryColor ,
+          color: AppColor.praimaryColor,
         ),
         Container(
           child: Padding(
@@ -42,9 +41,10 @@ class OnBoarding extends StatelessWidget {
                 )),
           ),
         ),
-         Positioned(
-          right: -30,
-          bottom: -20,
+        Positioned(
+          right: controller.lang == 'en' ? -20 : null,
+          left: controller.lang == 'ar' ? -20 : null,
+          bottom: -25,
           child: CustomButtonOnBoarding(),
         ),
       ]),

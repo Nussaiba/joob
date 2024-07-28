@@ -2,14 +2,14 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:jobs/core/class/statusrequest.dart';
 import 'package:jobs/core/constants/color.dart';
 import 'package:jobs/core/constants/routes.dart';
+import 'package:jobs/core/functions/dialiog.dart';
 import 'package:jobs/core/functions/handlingdata.dart';
 import 'package:jobs/core/services/services.dart';
 import 'package:jobs/data/datasource/remote/company/profile_company_data.dart';
-
+import 'package:jobs/data/datasource/remote/general/choose_image.dart';
 import '../../../data/model/country.dart';
 
 abstract class CreateProfileCompanyController extends GetxController {
@@ -22,27 +22,71 @@ class CreateProfileCompanyControllerImp extends CreateProfileCompanyController {
 
   File? image;
   late TextEditingController companyname;
-  late TextEditingController location;
   late TextEditingController contactInfo;
   late TextEditingController about;
   String? companyName;
   String? email;
   StatusRequest statusRequest = StatusRequest.none;
   CompanyProfileData profileData = CompanyProfileData(Get.find());
+  ImageAndFileData imageData = ImageAndFileData(Get.find());
+
   MyServices myServices = Get.find();
-  final picker = ImagePicker();
+
+  String? selectedDomain;
+
+  final List<String> domain = [
+    "Information Technology and Communications",
+    "Health and Medicine",
+    "Education and Training",
+    "Banking and Financial Services",
+    "Engineering and Construction",
+    "Tourism and Hospitality",
+    "Media and Publishing",
+    "Retail and E-commerce",
+    "Energy and Environment",
+    "Arts and Entertainment",
+    "Real Estate and Property Development",
+    "Manufacturing Industries",
+    "Consulting Services",
+    "Research and Development",
+    "Social Services and Humanitarian Aid",
+    "Legal and Law",
+    "Safety and Security",
+    "Agriculture and Sustainable Farming",
+    "Science and Technology",
+    "Social and Human Sciences",
+    "Research and Development",
+    "Real Estate and Property Management",
+    "Food and Beverage Industries",
+    "Medical Services and Healthcare",
+    "Design and Creative",
+    "Logistics and Supply Chain",
+    "Contracts and Procurement",
+    "Operations and Quality Management",
+    "Environment and Sustainability",
+    "Market Research and Marketing",
+    "Sports and Fitness",
+    "Social Work and Human Development",
+    "Social and Human Sciences",
+    "Space and Astronomy",
+    "Security and Defense",
+    "Fine Arts and Art Exhibitions",
+    "Charity Work and Relief",
+    "Politics and Government",
+    "Smart Contracts and Decentralized Technology",
+    "Gaming and Game Development"
+  ];
+
+  void Function(String?)? setSelectedDomain(type) {
+    selectedDomain = type;
+    update();
+    return null;
+  }
+
   @override
-  Future getImage() async {
-    final pickedfile = await picker.pickImage(source: ImageSource.gallery);
-    if (pickedfile != null) {
-      image = File(pickedfile.path);
-      print(image);
-      print(image!.path);
-      print(image!.path.split("/").last);
-      update();
-    } else {
-      print("no Image");
-    }
+  getImage() async {
+    image = await imageData.getImageData();
+    update();
   }
 
   @override
@@ -52,29 +96,25 @@ class CreateProfileCompanyControllerImp extends CreateProfileCompanyController {
     update();
     print("=111111111111111111  Controller");
     var response = await profileData.createPostdata(
-        companyname.text, location.text, image!, about.text, contactInfo.text);
+        companyname.text,
+        "$selectedCountry,$selectedCity",
+        image,
+        about.text,
+        contactInfo.text,
+        selectedDomain!);
     print("================$response  Controller");
     statusRequest = handlingData(response);
     print(statusRequest);
     print(response);
     if (StatusRequest.success == statusRequest) {
       if (response['status'] == 201) {
-        myServices.box.write("companyname", companyname.text);
-        myServices.box.write("companylocation", location.text);
-        myServices.box.write("imagepath", image!.path);
-        myServices.box.write("contactInfo", contactInfo.text);
-        myServices.box.write("about", about.text);
         myServices.box.write("step", "3");
 
         Get.offAllNamed(AppRoute.login);
 
-        return Get.snackbar("success", "Welcolme ",
-            colorText: Colors.white,
-            backgroundColor: AppColor.praimaryColor,
-            duration: const Duration(seconds: 3));
+        getSnakBar("24".tr, "${response["message"]}", 3);
       } else {
-        Get.defaultDialog(
-            title: "Warning", middleText: "Company already has a company job.");
+        getDialog("203".tr, "${response["message"]}");
       }
     }
     update();
@@ -92,7 +132,6 @@ class CreateProfileCompanyControllerImp extends CreateProfileCompanyController {
   List<City> cities = <City>[].obs;
   String? selectedCity;
   String? searchValue;
-  
 
   void Function(String?)? setSelectedCountry(type) {
     selectedCountry = type;
@@ -136,7 +175,6 @@ class CreateProfileCompanyControllerImp extends CreateProfileCompanyController {
     loadJsonData();
     companyname = TextEditingController();
     contactInfo = TextEditingController();
-    location = TextEditingController();
     about = TextEditingController();
     super.onInit();
   }
@@ -145,7 +183,7 @@ class CreateProfileCompanyControllerImp extends CreateProfileCompanyController {
   void dispose() {
     companyname.dispose();
     contactInfo.dispose();
-    location.dispose();
+    // location.dispose();
     about.dispose();
     super.dispose();
   }

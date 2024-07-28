@@ -33,14 +33,15 @@ class CustomTextFieldInfo extends StatelessWidget {
         onSubmitted: onSubmitted,
         controller: mycontroller,
         keyboardType: keyboardType,
+        style: TextStyle(color: AppColor.TextColor(), fontWeight: FontWeight.w600),
+
         decoration: InputDecoration(
           labelText: label,
           hintText: hint,
-          hintStyle: const TextStyle(color: AppColor.grey),
-          prefixIcon: Icon(icon, color: Colors.deepPurple),
+        hintStyle:  TextStyle(color: AppColor.Grey(), fontSize: 14, fontWeight: FontWeight.w400),
+          prefixIcon: Icon(icon, color: AppColor.IconColor()),
           filled: true,
-          
-          fillColor: Colors.deepPurple.shade50,
+          fillColor: AppColor.Pink(),
           suffixIcon:
               IconButton(icon: Icon(iconsuffix), onPressed: onPressedsuffix),
           border: OutlineInputBorder(
@@ -49,14 +50,27 @@ class CustomTextFieldInfo extends StatelessWidget {
           ),
           focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(25),
-              borderSide: const BorderSide(
+              borderSide: BorderSide(
                 width: 1,
                 color: AppColor.praimaryColor,
               )),
-          labelStyle: const TextStyle(color: AppColor.grey),
-          contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          // labelStyle: const TextStyle(color: AppColor.grey),
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         ),
+
         maxLines: maxLines,
+        // showCursor: false,
+        // autofocus: true,
+        cursorOpacityAnimates: true,
+        // onEditingComplete: () {
+        //   FocusScope.of(context).unfocus();
+        // },
+        // onChanged: (text) {
+        //   if (text.isEmpty) {
+        //     FocusScope.of(context).unfocus();
+        //   }
+        // },
       ),
     );
   }

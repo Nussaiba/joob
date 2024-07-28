@@ -1,11 +1,10 @@
 import 'dart:async';
-
 import 'package:get/get.dart';
 import 'package:jobs/core/class/statusrequest.dart';
 import 'package:jobs/core/constants/routes.dart';
+import 'package:jobs/core/functions/dialiog.dart';
 import 'package:jobs/data/datasource/remote/auth/forgetpassword/checkemail.dart';
 import 'package:jobs/data/datasource/remote/auth/forgetpassword/verifycode.dart';
-import 'package:jobs/core/functions/handlingdata.dart';
 import 'package:jobs/core/functions/handlingdata.dart';
 
 abstract class VerifyCodeController extends GetxController {
@@ -14,11 +13,11 @@ abstract class VerifyCodeController extends GetxController {
 }
 
 class VerifyCodeControllerImp extends VerifyCodeController {
-    String? email;
+  String? email;
 
   VerifyCodeForgetPasswordData verifyCodeForgetPasswordData =
       VerifyCodeForgetPasswordData(Get.find());
-   CheckEmailData checkEmailData = CheckEmailData(Get.find());
+  CheckEmailData checkEmailData = CheckEmailData(Get.find());
   StatusRequest statusRequest = StatusRequest.none;
   @override
   goToResetPassword(verfiyCodePassWordreset) async {
@@ -37,9 +36,11 @@ class VerifyCodeControllerImp extends VerifyCodeController {
         print("2222222222 $verfiyCodePassWordreset");
         Get.offNamed(AppRoute.resetPassword,
             arguments: {"verfiyCodePassWordreset": verfiyCodePassWordreset});
+                    getSnakBar("24".tr,  "${response["message"]}" , 3);
+
       } else if (response['status'] == 400) {
-        Get.defaultDialog(
-            title: "Warning", middleText: "The selected code is invalid.");
+          getDialog("203".tr, "${response["message"]}");        
+
       }
     }
     update();
@@ -53,7 +54,7 @@ class VerifyCodeControllerImp extends VerifyCodeController {
   @override
   void onInit() {
     super.onInit();
-        email = Get.arguments['email'];
+    email = Get.arguments['email'];
 
     startTimer();
   }
@@ -73,7 +74,7 @@ class VerifyCodeControllerImp extends VerifyCodeController {
     if (remainingTime == 0) {
       remainingTime = 4;
       startTimer();
-    checkEmailData.postdata(email!);
+      checkEmailData.postdata(email!);
     }
   }
 

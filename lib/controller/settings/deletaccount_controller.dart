@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jobs/core/class/statusrequest.dart';
 
@@ -7,7 +6,6 @@ import '../../core/functions/dialiog.dart';
 import '../../core/functions/handlingdata.dart';
 import '../../core/services/services.dart';
 import '../../data/datasource/remote/settings/deletaccount.dart';
-
 
 abstract class DeleteAccountController extends GetxController {
   deleteAccount();
@@ -28,17 +26,13 @@ class DeleteAccountControllerImp extends DeleteAccountController {
 
     if (StatusRequest.success == statusRequest) {
       if (response["status"] == 200) {
-        
         Get.offAllNamed(AppRoute.login);
-       // Get.off(Login());
-        getSnakBar("Success", "Account deleted successfully", 3);
+        // Get.off(Login());
+        getSnakBar("24".tr, "${response["message"]}", 3);
       } else {
-        
-        getDialog("Error", "Failed to delete account: ${response["message"]}");
+        getDialog("203".tr, "${response["message"]}");
       }
     }
     update();
   }
-
-  
 }

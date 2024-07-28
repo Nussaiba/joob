@@ -1,109 +1,57 @@
-
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
+import 'package:jobs/api_link.dart';
+import 'package:jobs/controller/apply/get_apply_company_controller.dart';
+import 'package:jobs/controller/apply/update_status_delete_controller.dart';
+import 'package:jobs/core/class/handlingdataview.dart';
+import 'package:jobs/core/constants/color.dart';
+import 'package:jobs/view/widget/apply/apply_company_company.dart';
 
-enum JobApplicationStatus { pending, accepted, rejected }
-
-extension JobApplicationStatusExtension on JobApplicationStatus {
-  String get name => toString().split('.').last;
-}
-
-class JobOpportunity {
-  String name, company, submissionDate;
-  Rx<JobApplicationStatus> status;
-
-  JobOpportunity({
-    required this.name,
-    required this.company,
-    required this.submissionDate,
-    required this.status,
-  });
-}
-
-class JobApplicationController extends GetxController {
-  var jobOpportunity = JobOpportunity(
-    name: 'Software Developer Role',
-    company: 'Tech Solutions Inc.',
-    submissionDate: '20 June 2024',
-    status: JobApplicationStatus.pending.obs,
-  );
-  
-  void changeStatus(JobApplicationStatus newStatus) {
-    jobOpportunity.status.value = newStatus;
-  }
-}
-
-class JobApplicationCard extends StatelessWidget {
-  final JobApplicationController controller = Get.put(JobApplicationController());
-
-  JobApplicationCard({Key? key}) : super(key: key);
+class AllAppliesCompany extends StatelessWidget {
+  AllAppliesCompany({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    Get.put(GetApplyCompanyControllerImp());
+    final controller = Get.put(UpdateApplyControllerImp());
     return Scaffold(
-      body: Card(
-        elevation: 5,
-        margin: EdgeInsets.all(16.0),
-        child: Padding(
-          padding: EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(
-                controller.jobOpportunity.name,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: 8),
-              Text("Company: ${controller.jobOpportunity.company}"),
-              SizedBox(height: 8),
-              Text("Submission Date: ${controller.jobOpportunity.submissionDate}"),
-              SizedBox(height: 8),
-              Obx(() => Text(
-                    "Status: ${controller.jobOpportunity.status.value.name}",
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: controller.jobOpportunity.status.value == JobApplicationStatus.pending
-                          ? Colors.orange
-                          : controller.jobOpportunity.status.value == JobApplicationStatus.accepted
-                              ? Colors.green
-                              : Colors.red,
-                    ),
-                  )),
-              SizedBox(height: 16),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  _buildStatusButton("Accept", JobApplicationStatus.accepted, Colors.green),
-                  _buildStatusButton("Reject", JobApplicationStatus.rejected, Colors.red),
-                ],
-              ),
-
-                 SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  // Assuming a dialog or another method to set the status
-                  // Here, you can call a method to open a dialog for example:
-                  // showDialog(...);
-                  // For demonstration, we are just changing it to "accepted"
-                  //controller.updateApplicationStatus("accepted");
-                },
-                child: Text('Update Status'),
-              )
-            ],
-          ),
+      backgroundColor: AppColor.Backgroundcolor(),
+      appBar: AppBar(
+        backgroundColor: AppColor.praimaryColor,
+        title: Text(
+          "196".tr,
+          style: TextStyle(color: AppColor.White()),
+        ),
+        iconTheme: IconThemeData(
+          color: AppColor.White(),
         ),
       ),
-    );
-  }
+      body: GetBuilder<GetApplyCompanyControllerImp>(
+          builder: (m) => HandlingDataView(
+              statusRequest: m.statusRequest,
+              widget: ListView.builder(
+                itemCount: m.allAppliesCompany.length,
+                itemBuilder: (context, index) {
+                  final application = m.allAppliesCompany[index];
 
-  Widget _buildStatusButton(String title, JobApplicationStatus status, Color color) {
-    return ElevatedButton(
-      onPressed: () => controller.changeStatus(status),
-      style: ElevatedButton.styleFrom(backgroundColor: color),
-      child: Text(title),
+                  return ApplyCompanyCard(
+                      application: application,
+                      isLoudingPdf: m.isLoading[
+                          '${AppLink.serverimage}/${application.cvPath}'],
+                      onPressedDownload: () async {
+                        await m.download('${application.cvPath}',
+                            'apply_cv_${application.id}.pdf');
+                      },
+                      onPressedAccept: () {
+                        controller.setSelectedStatus('accepted');
+                        controller.updateStatusApply(application.id!);
+                      },
+                      onPressedReject: () {
+                        controller.setSelectedStatus('rejected');
+                        controller.updateStatusApply(application.id!);
+                      });
+                },
+              ))),
     );
   }
 }
-////////////////////////////////////////////
-

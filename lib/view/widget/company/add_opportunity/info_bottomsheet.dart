@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jobs/core/constants/color.dart';
 
 class InfoRow extends StatelessWidget {
   final String title;
@@ -20,13 +21,14 @@ class InfoRow extends StatelessWidget {
       child: ListTile(
         leading: Icon(
           icon,
-          color: Colors.deepPurple,
+          color: AppColor.IconColor(),
           size: 20,
         ),
         title: Text(
           title,
-          style: const TextStyle(
+          style:  TextStyle(
             fontSize: 16,
+            color: AppColor.TextColor()
           ),
         ),
         // subtitle: Text(contcontent!),

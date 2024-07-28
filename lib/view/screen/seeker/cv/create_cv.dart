@@ -17,7 +17,6 @@ class CV extends StatelessWidget {
       appBar: AppBar(
           title: const Text(
             'Create Cv',
-            style: TextStyle(color: AppColor.white),
           ),
           backgroundColor: AppColor.praimaryColor),
       body: SingleChildScrollView(
@@ -117,12 +116,11 @@ class CV extends StatelessWidget {
               list: con.contacts, text: "projects", fff: con.focusescontacts),
 
           Container(
-            color:AppColor.praimaryColor,
+            color: AppColor.praimaryColor,
             child: ElevatedButton(
               onPressed: () {},
               child: const Text(
                 'Create CV',
-                style: TextStyle(color: AppColor.white),
               ),
             ),
           ),
@@ -131,5 +129,3 @@ class CV extends StatelessWidget {
     );
   }
 }
-
-

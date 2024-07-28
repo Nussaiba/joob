@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:jobs/view/widget/auth/customtexttitleauth.dart';
+import 'package:jobs/view/widget/general/custom_text_title.dart';
 import 'package:jobs/view/widget/company/add_opportunity/info_bottomsheet.dart';
 import 'package:jobs/view/widget/company/add_opportunity/simple_list.dart';
 import 'package:jobs/view/widget/general/custom_button.dart';
@@ -15,16 +15,28 @@ class BottomSheetOpportunity extends StatelessWidget {
   final String jobType;
   final String workPlaceType;
   final String jobHours;
-  final List<String> qualifications;
-  final List<String> skills;
+  final List qualifications;
+  final List skills;
   final String salary;
   final String vacant;
   final void Function()? onPressedPublish;
   final void Function()? onPressedBack;
 
   const BottomSheetOpportunity({
-    
-    super.key, this.image, required this.title, required this.body, required this.location, required this.jobType, required this.workPlaceType, required this.jobHours, required this.qualifications, required this.skills, required this.salary, required this.vacant, this.onPressedPublish, this.onPressedBack,
+    super.key,
+    this.image,
+    required this.title,
+    required this.body,
+    required this.location,
+    required this.jobType,
+    required this.workPlaceType,
+    required this.jobHours,
+    required this.qualifications,
+    required this.skills,
+    required this.salary,
+    required this.vacant,
+    this.onPressedPublish,
+    this.onPressedBack,
   });
 
   @override
@@ -47,13 +59,15 @@ class BottomSheetOpportunity extends StatelessWidget {
             scrollDirection: Axis.vertical,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              // mainAxisAlignment: MainAxisAlignment.end,
               mainAxisSize: MainAxisSize.min,
               children: [
-                   const Padding(
-                     padding: EdgeInsets.all(8.0),
-                     child: Center(child: CustomTextTitleAuth(text: 'Jop Preview',)),
-                   ),
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Center(
+                      child: CustomTextTitle(
+                    text: "183".tr,
+                  )),
+                ),
                 ListTile(
                   title: Text(
                     title,
@@ -84,7 +98,6 @@ class BottomSheetOpportunity extends StatelessWidget {
                   children: [
                     InfoRow(
                       title: location,
-                      // content: location,
                       icon: Icons.location_on,
                     ),
                     InfoRow(
@@ -120,11 +133,11 @@ class BottomSheetOpportunity extends StatelessWidget {
                     InfoRow(title: vacant, icon: Icons.event_seat),
                   ],
                 ),
-                const InfoRow(title: 'skills', icon: Icons.lightbulb_outline),
+                InfoRow(title: "133".tr, icon: Icons.lightbulb_outline),
                 CustomSimpleList(
                   list: skills,
                 ),
-                const InfoRow(title: 'qualification', icon: Icons.school),
+                InfoRow(title: "180".tr, icon: Icons.school),
                 CustomSimpleList(
                   list: qualifications,
                 ),
@@ -142,13 +155,13 @@ class BottomSheetOpportunity extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                OpportunityButton(
+                CustomButton(
                   onPressed: onPressedPublish,
-                  title: 'Publish',
+                  title: "181".tr,
                 ),
-                OpportunityButton(
+                CustomButton(
                   onPressed: onPressedBack,
-                  title: 'Back',
+                  title: "182".tr,
                 ),
               ],
             ),

@@ -22,11 +22,10 @@ class CustomChooseImage extends StatelessWidget {
           child: Container(
             height: 100,
             width: 100,
-decoration: BoxDecoration(
-  border: Border.all(width: 1, color: AppColor.praimaryColor),
-    color: Colors.deepPurple.shade50,
-  borderRadius: BorderRadius.circular(50)
-),
+            decoration: BoxDecoration(
+                border: Border.all(width: 1, color: AppColor.praimaryColor),
+                color: Colors.deepPurple.shade50,
+                borderRadius: BorderRadius.circular(50)),
             child: ClipRRect(
               //radius: 50,
               //backgroundColor: Colors.deepPurple.shade50,
@@ -39,7 +38,7 @@ decoration: BoxDecoration(
                     )
                   : Image.file(
                       image!,
-                       fit: BoxFit.cover,
+                      fit: BoxFit.cover,
                     ),
             ),
           ),

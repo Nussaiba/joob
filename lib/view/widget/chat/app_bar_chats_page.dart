@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:jobs/view/screen/chat/search_chat.dart';
 
 import '../../../core/constants/color.dart';
-import '../../../core/constants/imageassest.dart';
 
 class AppBarChats extends StatelessWidget {
   const AppBarChats({
@@ -35,10 +34,9 @@ class AppBarChats extends StatelessWidget {
                     onTap: () {
                       Get.to(SearchChatAp());
                     },
-                    child: const Icon(
+                    child:  Icon(
                       Icons.search,
                       size: 35,
-                      color: AppColor.white,
                     ))),
           ],
         ),

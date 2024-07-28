@@ -7,7 +7,7 @@ class CountriesData {
 
   getAllConData() async {
     var response = await crud.getData("https://countriesnow.space/api/v0.1/countries");
-   return response.fold ((l)=> 1 , (r)=> r);
+   return response.fold ((l)=> l , (r)=> r);
   }
  
 }

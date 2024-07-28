@@ -7,8 +7,8 @@ class LogoAuth extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Image.asset(
-      AppImageAsset.logo2,
-      height: 170,
+      AppImageAsset.logo,
+      height: 148,
     );
   }
 }

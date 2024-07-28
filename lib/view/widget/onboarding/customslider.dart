@@ -1,4 +1,3 @@
-import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jobs/controller/onboarding/onboardingcontroller.dart';
@@ -23,7 +22,6 @@ class CustomSliderOnBoarding extends GetView<OnBoardingControllerImp> {
                   const SizedBox(
                     height: 40,
                   ),
-                 
                   Lottie.asset(
                     onBoardingList[i].image!,
                     width: 280,
@@ -36,7 +34,7 @@ class CustomSliderOnBoarding extends GetView<OnBoardingControllerImp> {
                   Text(
                     onBoardingList[i].title!,
                     textAlign: TextAlign.center,
-                    style: const TextStyle(
+                    style:  TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 30,
                         color: AppColor.praimaryColor),
@@ -51,7 +49,7 @@ class CustomSliderOnBoarding extends GetView<OnBoardingControllerImp> {
                         onBoardingList[i].body!,
                         textAlign: TextAlign.center,
                         style: const TextStyle(
-                            height: 1.5, color: AppColor.grey, fontSize: 20),
+                            height: 1.5,  fontSize: 20),
                       )),
                 ],
               ),

@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jobs/controller/auth/google_sign_in_controller.dart';
-import 'package:jobs/controller/auth/search_controller.dart';
+import 'package:jobs/controller/auth/search_fire_controller.dart';
 import 'package:jobs/core/constants/imageassest.dart';
 import '../../../core/constants/color.dart';
 
-class SearchChatAp extends GetView<SearchControllerImp> {
+class SearchChatAp extends GetView<SearchFireControllerImp> {
   final auth = Get.find<AuthWithGoogle>();
   SearchChatAp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    Get.put(SearchControllerImp());
+    Get.put(SearchFireControllerImp());
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(140),
@@ -40,18 +40,18 @@ class SearchChatAp extends GetView<SearchControllerImp> {
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(50),
                         borderSide:
-                            const BorderSide(color: AppColor.white, width: 1)),
+                             BorderSide(color: AppColor.white, width: 1)),
                     focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(50),
                         borderSide:
-                            const BorderSide(color: AppColor.white, width: 1)),
+                             BorderSide(color: AppColor.white, width: 1)),
                     hintText: "Search new company or seeker here..",
                     contentPadding: const EdgeInsets.symmetric(
                         horizontal: 30, vertical: 20),
                     suffix: InkWell(
                         onTap: () {},
                         borderRadius: BorderRadius.circular(50),
-                        child: const Icon(
+                        child:  Icon(
                           Icons.search,
                           color: AppColor.praimaryColor,
                         ))),

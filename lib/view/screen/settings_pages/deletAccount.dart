@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jobs/core/constants/color.dart';
 import '../../../controller/settings/deletaccount_controller.dart';
 
 class DeleteAccountPage extends StatelessWidget {
@@ -9,8 +10,13 @@ class DeleteAccountPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColor.Backgroundcolor(),
       appBar: AppBar(
-        title: Text('حذف الحساب'),
+        title: Text("152".tr,
+         style: TextStyle(color: AppColor.White()),
+        ),
+      
+        iconTheme: IconThemeData(color: AppColor.White()),
       ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
@@ -25,40 +31,40 @@ class DeleteAccountPage extends StatelessWidget {
             ),
             SizedBox(height: 20),
             Text(
-              'هل أنت متأكد من أنك تريد حذف حسابك؟',
+          "167".tr,
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
             ),
             SizedBox(height: 10),
             Text(
-              'إذا قمت بحذف حسابك، لن تتمكن من استرجاع البيانات في المستقبل. يرجى التأكد قبل المتابعة.',
+              "168".tr ,
               style: TextStyle(color: Colors.grey[600]),
               textAlign: TextAlign.center,
             ),
             SizedBox(height: 20),
             ElevatedButton(
-              child: Text('حذف الحساب'),
+              child: Text("152".tr),
               style: ElevatedButton.styleFrom(
-                foregroundColor: Colors.white,
-                backgroundColor: Colors.purple,
+                foregroundColor:AppColor.White(),
+                backgroundColor:AppColor.PraimaryColor(),
               ),
               onPressed: () {
                 showDialog(
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
-                      title: Text('تأكيد الحذف'),
+                      title: Text("169".tr),
                       content:
-                          Text('هل أنت متأكد من أنك تريد حذف حسابك نهائيًا؟'),
+                          Text("170".tr),
                       actions: <Widget>[
                         TextButton(
-                          child: Text('إلغاء'),
+                          child: Text("171".tr),
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
                         ),
                         TextButton(
-                          child: Text('حذف'),
+                          child: Text("172".tr),
                           onPressed: () {
                             controller.deleteAccount();
                             Navigator.of(context).pop();

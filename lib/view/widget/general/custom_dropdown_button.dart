@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jobs/core/constants/color.dart';
 
 class CustomDropDownButton extends StatelessWidget {
   final String label;
@@ -10,7 +11,7 @@ class CustomDropDownButton extends StatelessWidget {
   final IconData icon;
   final void Function(String?)? onChanged;
   List<DropdownMenuItem<String>>? items2;
-   CustomDropDownButton(
+  CustomDropDownButton(
       {super.key,
       required this.label,
       required this.items,
@@ -18,9 +19,7 @@ class CustomDropDownButton extends StatelessWidget {
       required this.icon,
       required this.onChanged,
       required this.hint,
-      this.items2
-      
-      });
+      this.items2});
 
   @override
   Widget build(BuildContext context) {
@@ -36,23 +35,24 @@ class CustomDropDownButton extends StatelessWidget {
           ),
           contentPadding:
               const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          prefixIcon: Icon(icon, color: Colors.deepPurple),
+          prefixIcon: Icon(icon, color: AppColor.IconColor()),
           filled: true,
-          fillColor: Colors.deepPurple.shade50,
+          fillColor: AppColor.Pink(),
         ),
         child: DropdownButtonHideUnderline(
           child: DropdownButton<String>(
+            dropdownColor: AppColor.Backgroundcolor(),
             value: selectedItem,
             hint: Text(hint),
             isExpanded: true,
-            items: 
-            //items2,
-            
-            items.map((value) {
+            items: items.map((value) {
               return DropdownMenuItem<String>(
+                
                 value: value,
                 child: Text(
                   value.toString().replaceAll('_', ' ').capitalizeFirst!,
+                  style: TextStyle(
+                      color: AppColor.TextColor(), fontFamily: "Gafata", fontWeight: FontWeight.w600),
                 ),
               );
             }).toList(),

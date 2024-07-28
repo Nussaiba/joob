@@ -35,10 +35,8 @@ class CountryController extends GetxController {
       if (response['error'] == false) {
         print("${data.length}lllllllmmmmmmmmmmlllll");
         data.addAll(response['data']);
-
         print("lll ${data.length}");
         print("lll ${data}");
-
         for (int i = 0; i < data.length; i++) {
           countriesList.add(
             Country.fromJson(data[i]),

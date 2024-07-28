@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:dropdown_search/dropdown_search.dart';
-import 'package:jobs/controller/seeker/settings/create_profile_controller.dart';
+import 'package:jobs/controller/seeker/profile/create_profile_controller.dart';
 
 
 class CountryController extends GetxController {

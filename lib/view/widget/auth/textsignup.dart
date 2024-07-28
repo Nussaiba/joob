@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jobs/core/constants/color.dart';
 
 class CustomTextSignUpOrSignIn extends StatelessWidget {
   final String textone;
@@ -13,14 +14,15 @@ class CustomTextSignUpOrSignIn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-      Text(textone),
+      Text(textone ,style:  TextStyle(
+              color:AppColor.TextColor()),),
       const Text(' '),
       InkWell(
         onTap: onTap,
         child: Text(
           texttwo,
-          style: const TextStyle(
-              color: Colors.purple, fontWeight: FontWeight.bold),
+          style:  TextStyle(
+              color:AppColor.PraimaryColor(), fontWeight: FontWeight.bold),
         ),
       )
     ]);

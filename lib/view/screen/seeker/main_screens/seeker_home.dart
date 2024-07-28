@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:jobs/controller/general/side_bar_controller.dart';
-import 'package:jobs/controller/get_all_opportunity_posts_home.dart';
-import 'package:jobs/controller/saved_opportunity_controller.dart';
-import 'package:jobs/view/widget/home_widgets/app_bar_home.dart';
-import 'package:jobs/view/widget/home_widgets/job_card_home.dart';
-import 'package:jobs/view/widget/home_widgets/side_barx.dart';
-import 'package:jobs/view/widget/post_widget.dart';
+import 'package:jobs/controller/company_seeker/drawer_controller.dart';
+import 'package:jobs/controller/company_seeker/get_all_opportunity_posts_home.dart';
+import 'package:jobs/controller/report/report_controller.dart';
+import 'package:jobs/controller/saved_jobs/saved_opportunity_controller.dart';
+import 'package:jobs/controller/seeker/post/create_post_controller.dart';
+import 'package:jobs/core/class/handlingdataview.dart';
+import 'package:jobs/core/constants/color.dart';
+import 'package:jobs/core/constants/routes.dart';
+import 'package:jobs/view/screen/company&seeker/drawer.dart';
+import 'package:jobs/view/widget/company&seeker/home_widgets/app_bar_home.dart';
+import 'package:jobs/view/widget/company&seeker/home_widgets/job_card_home.dart';
+import 'package:jobs/view/widget/company&seeker/home_widgets/post_widget.dart';
+import 'package:jobs/controller/company_seeker/get_user_controller.dart';
 
 class SeekerHome extends StatelessWidget {
   SeekerHome({super.key});
@@ -16,122 +22,143 @@ class SeekerHome extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.put(GetPostsAndOpportunityControllerImp());
     Get.put(SavedController());
-    final sidebarcontroller = Get.put(SideBarController());
-
+    final reportController = Get.put(ReportController());
+    final controllerDrawer = Get.put(CustomDrawerController());
+    final postController = Get.put(CreatePostControllerImp());
+    final profileController = Get.put(GetUserController());
     return GetBuilder<GetPostsAndOpportunityControllerImp>(
         builder: (controller) => Scaffold(
-              key: _scaffoldKey,
-              body: Obx(
-                () => GestureDetector(
-                  onTap: () {
-                    sidebarcontroller.isShow.value ? sidebarcontroller.toggleShow() : null;
-                  },
-                  child: Stack(
-                    children: [
-                      ListView(
-                        children: [
-                          AppBarHome(controller: sidebarcontroller, text: 'Find Your Dream Job', ),
-                          TitleOpportunitiesHome(
-                            title: "Opportunities",
-                            onTapViewAll: () {
-                              controller.goToPageAllOpportunities();
-                            },
-                          ),
-                          SizedBox(
-                            height: 195,
-                            child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: controller.opportuntiesList.length,
-                              itemBuilder: (context, index) {
-                                //savedController.isSaved[controller.opportuntiesList[index].id]==[''];
-                                return GetBuilder<SavedController>(
-                                    builder: (jobController) {
-                                  final isSaved = jobController.isSaved(
-                                      controller.opportuntiesList[index].id!);
+                       backgroundColor: AppColor.Backgroundcolor(),
 
-                                  return JobCardHome(
-                                    opportuntiyModel:
-                                        controller.opportuntiesList[index],
-                                    onPressed: () =>
-                                        controller.goToPageOpportunityDetails(
-                                            controller.opportuntiesList[index]),
-                                    icon: isSaved
-                                        ? Icons.bookmark
-                                        : Icons.bookmark_border,
-                                    onTapIcon: () async {
-                                      await jobController
-                                          .addOrRemoveToSavedOpportunity(
-                                              controller
-                                                  .opportuntiesList[index].id!);
-                                    },
-                                  );
-                                });
-                              },
-                            ),
-                          ),
-                          TitleOpportunitiesHome(
-                            title: "Posts",
-                            onTapViewAll: () {
-                              controller.goToPageAllPosts();
-                            },
-                          ),
-                          ListView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemCount: controller.postsList.length,
-                            itemBuilder: (context, i) {
-                              return CustomPostWidget(
-                                postmodel: controller.postsList[i],
-                                onTapExpanded: controller.toggleExpanded,
-                                isExpanded: controller.isExpanded.value,
-                                textviewmore: '',
-                                // controller.isExpanded.value
-                                //     ? 'view less'
-                                //     : 'view more',
-                                text: controller.postsList[i].body!,
-                                // controller.isExpanded.value
-                                //     ? controller.postsList[i].body!
-                                //     : controller.postsList[i].body!
-                                //         .substring(0, 3),
-                                onSelected: controller.selecedAnOption,
-                                
-                                // (value) {
-                                //   switch (value) {
-                                //     case 'edit':
-                                //       controller.editPost();
-                                //       break;
-                                //     case 'delete':
-                                //       controller.deletePost();
-                                //       break;
-                                //     case 'report':
-                                //       controller.reportPost();
-                                //       break;
-                                //   }
-                               // },
-                              
-                                isOwner: controller.postsList[i].seekerid ==
-                                    controller.idUserPostOwner,
-                              );
-                            },
-                          ),
-                        ],
-                      ),
-                      Positioned(
-                        top: 110,
-                        left: 10,
-                        child: Visibility(
-                          visible: sidebarcontroller.isShow.value,
-                          child: SizedBox(
-                            height: 560,
-                            child: CustomSidebarX(
-                              controller: sidebarcontroller.sidebarXController,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
+              endDrawer: CustomDrawer(),
+              key: _scaffoldKey,
+              body: ListView(
+                children: [
+                  AppBarHome(
+                    onPressedDrawer: () {
+                      _scaffoldKey.currentState!.openEndDrawer();
+                      controllerDrawer.toggleDrawer();
+                    },
+                    onPressedSearch: () {
+                      Get.toNamed(AppRoute.searchPage);
+                    },
+                    text: "43".tr,
                   ),
-                ),
+                  TitleOpportunitiesHome(
+                    title: "45".tr,
+                    onTapViewAll: () {
+                      controller.goToPageAllOpportunities();
+                    },
+                                 viewall: true,
+
+                  ),
+                  SizedBox(
+                      height: 195,
+                      child:
+                           HandlingDataView(
+                              statusRequest: controller.statusRequestOpportunity,
+                              widget:
+                          ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: controller.opportuntiesList.length,
+                        itemBuilder: (context, index) {
+                          return GetBuilder<SavedController>(
+                              builder: (jobController) {
+                            final isSaved = jobController.isSaved(
+                                controller.opportuntiesList[index].id!);
+
+                            return JobCardHome(
+                              opportuntiyModel:
+                                  controller.opportuntiesList[index],
+                              onPressed: () {
+                                controller.goToPageOpportunityDetails(
+                                    controller.opportuntiesList[index]);
+                              },
+                              onTapGoToProfile: () {
+                                profileController.getUser(controller
+                                    .opportuntiesList[index].user_id!);
+                              },
+                              icon: isSaved
+                                  ? Icons.bookmark
+                                  : Icons.bookmark_border,
+                              onTapIcon: () async {
+                                await jobController
+                                    .addOrRemoveToSavedOpportunity(
+                                        controller.opportuntiesList[index].id!);
+                              },
+                            );
+                          });
+                        },
+                      )),
+                  ),
+                  TitleOpportunitiesHome(
+                    title: "46".tr,
+                    onTapViewAll: () {
+                      controller.goToPageAllPosts();
+                    },
+                                                     viewall: true,
+
+                  ),
+                      HandlingDataView(
+                        statusRequest: controller.statusRequestPosts,
+                        widget:
+
+                  ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: controller.postsList.length,
+                    itemBuilder: (context, i) {
+                      return CustomPostWidget(
+                        onTapGoToProfile: () {
+                          profileController
+                              .getUser(controller.postsList[i].user_id!);
+                        },
+                        onPressedDownload: () async {
+                          await controller.download(
+                              '${controller.postsList[i].file}',
+                              'apply_cv_${controller.postsList[i].id}.pdf');
+                        },
+                        
+                        isLoudingPdf: false,
+                        postmodel: controller.postsList[i],
+                        onTapExpanded: controller.toggleExpanded,
+                        isExpanded: controller.isExpanded.value,
+                        textviewmore: '',
+                        text: controller.postsList[i].body!,
+                        onSelected: (value) {
+                          switch (value) {
+                            case 'edit':
+                              print("jjjjjjjjjjjjjjjjjjjjjjj");
+                              postController
+                                  .goToEditPage(controller.postsList[i]);
+                              break;
+                            case 'delete':
+                              postController
+                                  .deletePost(controller.postsList[i].id!);
+                              break;
+                            case 'report':
+                              reportController
+                                  .showReportSheetPost(controller.postsList[i].id!);
+                              break;
+                          }
+                        },
+                        // onPressedReport: ()async {
+                        //   await reportController
+                        //       .showReportSheetPost(controller.postsList[i].id!);
+                        // },
+                        // onPressedDelete: () async {
+                        //   await postController
+                        //       .deletePost(controller.postsList[i].id!);
+                        // },
+                        // onPressedEdit: () async{
+                        //  await postController.goToEditPage(controller.postsList[i]);
+                        // },
+                        isOwner: controller.postsList[i].user_id ==
+                            int.parse(controller.idUserPostOwner),
+                      );
+                    },
+                      ),),
+                ],
               ),
             ));
   }

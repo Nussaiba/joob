@@ -185,14 +185,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.10.1"
-  dio:
-    dependency: "direct main"
-    description:
-      name: dio
-      sha256: "7d328c4d898a61efc3cd93655a0955858e29a0aa647f0f9e02d59b3bb275e2e8"
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.0.6"
   dropdown_search:
     dependency: "direct main"
     description:
@@ -736,14 +728,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.0"
-  sidebarx:
-    dependency: "direct main"
-    description:
-      name: sidebarx
-      sha256: "7042d64844b8e64ca5c17e70d89b49df35b54a26c015b90000da9741eab70bc0"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.16.3"
   simple_animations:
     dependency: "direct main"
     description:

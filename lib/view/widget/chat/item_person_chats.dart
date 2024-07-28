@@ -1,10 +1,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:jobs/core/constants/imageassest.dart';
 
-import '../../screen/chat/chatcreen.dart';
 
 class ItemPersonChats extends StatelessWidget {
   final int index;

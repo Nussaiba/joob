@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../core/constants/color.dart';
 
 // ignore: must_be_immutable
 class Fields extends StatelessWidget {
@@ -37,7 +36,7 @@ class Fields extends StatelessWidget {
                           ),
                           trailing: IconButton(
                               icon: const Icon(Icons.remove_circle,
-                                  color: AppColor.grey),
+                                ),
                               onPressed: () {
                                 list.removeAt(i);
                                 print(list);
@@ -54,7 +53,6 @@ class Fields extends StatelessWidget {
             thickness: 0.5,
             indent: 20,
             endIndent: 20,
-            color: AppColor.grey,
           ),
         ),
       ],

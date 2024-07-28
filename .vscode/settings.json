@@ -1,7 +1,8 @@
 {
     "cSpell.words": [
         "chatscreen",
-        "formstate"
+        "formstate",
+        "postmodel"
     ],
     "java.compile.nullAnalysis.mode": "automatic"
 }

@@ -11,10 +11,13 @@ class ProfileData {
       String lastname,
       String birthday,
       String location,
-      File image,
-      String skills,
-      String certificates,
-      String about) async {
+      File? image,
+      List<String> skills,
+      List<String> certificates,
+      String specialization,
+      String about,
+      String gender
+      ) async {
     var response = await crud.postFileAndData(
         AppLink.createprofile,
         {
@@ -24,12 +27,13 @@ class ProfileData {
           "location": location,
           "skills": skills,
           "certificates": certificates,
+          "specialization" : specialization,
           "about": about,
-          "gender" : "male"
+          "gender" : gender
         },
          'image', image);
     print("daataaaaaaaaaaaaaaa $response");
-    return response.fold((l) => 1, (r) => r);
+    return response.fold((l) => l, (r) => r);
   }
 
   updatePostdata(
@@ -37,10 +41,12 @@ class ProfileData {
       String lastname,
       String birthday,
       String location,
-      File image,
-      String skills,
-      String certificates,
-      String about) async {
+      File? image,
+      List<String> skills,
+      List<String> certificates,
+      String specialization,
+      String about,
+      String gender) async {
     var response = await crud.postFileAndData(
         AppLink.updateprofile,
         {
@@ -50,10 +56,12 @@ class ProfileData {
           "location": location,
           "skills": skills,
           "certificates": certificates,
+          "specialization" : specialization,
           "about": about,
+          "gender" : gender
         },
        'image', image);
     print("daataaaaaaaaaaaaaaa $response");
-    return response.fold((l) => 1, (r) => r);
+    return response.fold((l) => l, (r) => r);
   }
 }

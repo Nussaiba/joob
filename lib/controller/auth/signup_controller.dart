@@ -19,12 +19,10 @@ abstract class SinUpController extends GetxController {
 
 class SignUpControllerImp extends SinUpController {
   GlobalKey<FormState> formstate = GlobalKey<FormState>();
-
   late TextEditingController username;
   late TextEditingController email;
   late TextEditingController password;
   bool isShowPassword = true;
-
   StatusRequest statusRequest = StatusRequest.none;
   SignUpData signUpData = SignUpData(Get.find());
   MyServices myServices = Get.find();
@@ -49,7 +47,6 @@ class SignUpControllerImp extends SinUpController {
       statusRequest = StatusRequest.loading;
       update();
       print("=111111111111111111  Controller");
-
       var response = await signUpData.postdata(
           username.text, password.text, email.text, accountType.value);
       print("================$response  Controller");
@@ -60,21 +57,16 @@ class SignUpControllerImp extends SinUpController {
         if (response['status'] == 200) {
           myServices.box.write("account", accountType.value);
           myServices.box.write("step", "2");
-
           Get.offNamed(AppRoute.verifyCodeRegister,
               arguments: {"email": email.text});
-
-          getSnakBar(
-              "success", "Verification Code sent to\n ${email.text} ", 3);
+          getSnakBar("24".tr, "Verification Code sent to\n ${email.text} ", 3);
         } else if (response['status'] == 422) {
           Get.defaultDialog(
-              title: "Warning",
-              middleText: "Email or UserName Already Exists .");
+              title: "203".tr, middleText: "${response["message"]}");
           statusRequest = StatusRequest.failure;
         } else if (response['status'] == 400) {
           Get.defaultDialog(
-              title: "Warning",
-              middleText: "The email field must be a valid email address.");
+              title: "203".tr, middleText: "${response["message"]}");
           statusRequest = StatusRequest.failure;
         }
       }
@@ -101,7 +93,8 @@ class SignUpControllerImp extends SinUpController {
   void ChooseAccountType() {
     if (formstate.currentState!.validate()) {
       Get.defaultDialog(
-          title: 'Account Type',
+          backgroundColor: AppColor.White(),
+          title: "179".tr,
           titleStyle: TextStyle(
             fontSize: 24.0,
             fontWeight: FontWeight.bold,
@@ -130,8 +123,8 @@ class SignUpControllerImp extends SinUpController {
                     AccountTypeIcon(
                       icon: Icons.business,
                       color: isActiveCompany
-                          ? AppColor.praimaryColor
-                          : AppColor.grey,
+                          ? AppColor.PraimaryColor()
+                          : AppColor.Grey(),
                       onTap: () {
                         setAccountCompany('company');
                       },
@@ -143,16 +136,21 @@ class SignUpControllerImp extends SinUpController {
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 2.0),
-                  child: AccountTypeChosen(text: '$accountType'),
+                  child: AccountTypeChosen(
+                    text: accountType == 'company'
+                        ? "200".tr
+                        : accountType == 'job_seeker'
+                            ? "201".tr
+                            : "$accountType",
+                  ),
                 ),
                 const SizedBox(
                   height: 30,
                 ),
                 ButtonSignUp(
                   onPressed: () {
-                    accountType.value != ''
-                        ? SignUp()
-                        : Get.snackbar("Warn", "Please choose account type");
+                    print(accountType == '');
+                    accountType != '' ? SignUp() : Get.snackbar("203".tr, "202".tr);
                     Get.back();
                   },
                 )
@@ -162,8 +160,6 @@ class SignUpControllerImp extends SinUpController {
 
   @override
   void onInit() {
-    // selectedAccountType = myServices.box.read("account");
-
     username = TextEditingController();
     email = TextEditingController();
     password = TextEditingController();

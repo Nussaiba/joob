@@ -5,14 +5,33 @@ class ReportData {
   Crud crud;
   ReportData(this.crud);
 
-  postData(int reason_id, String? another_reason) async {
-    var response = await crud.postData(AppLink.report,
+  reportUser(int id ,String reason_id, String? another_reason, String? who) async {
+    var response = await crud.postData("${AppLink.reportUser}/$id",
         {
         "reason_id": reason_id,
          "another_reason": another_reason,
-         //"who" :who
+         "who" :who
          });
     print("daataaaaaaaaaaaaaaa $response");
-    return response.fold((l) => 1, (r) => r);
+    return response.fold((l) => l, (r) => r);
+  }
+
+  reportOpportunity(int id ,String reason_id, String? another_reason) async {
+    var response = await crud.postData("${AppLink.reportOpportunity}/$id",
+        {
+        "reason_id": reason_id,
+         "another_reason": another_reason,
+         });
+    print("daataaaaaaaaaaaaaaa $response");
+    return response.fold((l) => l, (r) => r);
+  }
+   reportPost(int id ,String reason_id, String? another_reason) async {
+    var response = await crud.postData("${AppLink.reportPost}/$id",
+        {
+        "reason_id": reason_id,
+         "another_reason": another_reason,
+         });
+    print("daataaaaaaaaaaaaaaa $response");
+    return response.fold((l) => l, (r) => r);
   }
 }

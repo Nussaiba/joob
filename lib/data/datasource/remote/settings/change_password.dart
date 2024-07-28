@@ -11,6 +11,6 @@ class changePasswordData {
         "password": Password,
          "password_confirmation": password_confirmation});
     print("daataaaaaaaaaaaaaaa $response");
-    return response.fold((l) => 1, (r) => r);
+    return response.fold((l) => l, (r) => r);
   }
 }

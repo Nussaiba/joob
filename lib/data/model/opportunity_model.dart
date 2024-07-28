@@ -1,8 +1,11 @@
-class OpportuntiyModel {
+import 'dart:convert';
+
+class OpportunityModel {
   // OpportuntiyModel opportunitFromJson(String str) =>
   //     OpportuntiyModel.fromJson(json.decode(str));
   //String opportuntiyToJson(OpportuntiyModel data) => json.encode(data.toJson());
   int? id;
+  int? user_id;
   String? companyid;
   String? companylogo;
   String? companyname;
@@ -19,8 +22,9 @@ class OpportuntiyModel {
   String? image;
   String? createdat;
   String? updatedat;
-  OpportuntiyModel(
+  OpportunityModel(
       {this.id,
+      this.user_id,
       this.companyid,
       this.companylogo,
       this.companyname,
@@ -37,9 +41,10 @@ class OpportuntiyModel {
       this.image,
       this.createdat,
       this.updatedat});
-  factory OpportuntiyModel.fromJson(Map<String, dynamic> json) =>
-      OpportuntiyModel(
+  factory OpportunityModel.fromJson(Map<String, dynamic> json) =>
+      OpportunityModel(
           id: json['id']!,
+          user_id: json['user_id']!,
           companyid: json['company_id']!.toString(),
           companylogo: json['company_logo'],
           companyname: json['company_name']!,
@@ -49,8 +54,12 @@ class OpportuntiyModel {
           jopType: json['job_type']!,
           workPlaceType: json['work_place_type']!,
           jophours: json['job_hours']!.toString(),
-          qualifications: json['qualifications']!,
-          skills: json['skills_req']!,
+          qualifications: (json['qualifications']! is String)
+              ? jsonDecode(json['qualifications']!)
+              : json['qualifications']!,
+          skills: (json['skills_req']! is String)
+              ? jsonDecode(json['skills_req']!)
+              : json['skills_req']!,
           salary: json['salary']!.toString(),
           vacant: json['vacant']!.toString(),
           image: json['file'],

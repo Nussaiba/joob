@@ -8,6 +8,8 @@ class CustomDropDownSearch extends StatelessWidget {
   final IconData icon;
   final void Function(dynamic)? onChanged;
   final List<dynamic> items;
+  final String? selectedItem;
+
   const CustomDropDownSearch({
     super.key,
     required this.label,
@@ -15,32 +17,36 @@ class CustomDropDownSearch extends StatelessWidget {
     required this.icon,
     this.onChanged,
     required this.items,
+    this.selectedItem,
   });
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 15),
       child: DropdownSearch(
+        
           dropdownDecoratorProps: DropDownDecoratorProps(
+            
             dropdownSearchDecoration: InputDecoration(
+              
               labelText: label,
               hintText: hint,
               hintStyle: const TextStyle(color: Colors.grey),
-              labelStyle: const TextStyle(color: AppColor.grey),
+              //labelStyle: const TextStyle(color: AppColor.Grey()),
               contentPadding:
                   const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              prefixIcon: Icon(icon, color: Colors.deepPurple),
+              prefixIcon: Icon(icon, color:AppColor.IconColor()),
               filled: true,
-              fillColor: Colors.deepPurple.shade50,
+              fillColor:AppColor.Pink(),
               border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(25),
                   borderSide: BorderSide.none),
             ),
-            baseStyle: const TextStyle(fontWeight: FontWeight.bold),
+            baseStyle:  TextStyle(fontWeight: FontWeight.bold, color: AppColor.black),
           ),
           popupProps: PopupProps.menu(
             showSearchBox: true,
-
+            // title: Text(selectedItem),
             // fit: FlexFit.tight,
             isFilterOnline: true,
             searchFieldProps: TextFieldProps(
@@ -53,12 +59,13 @@ class CustomDropDownSearch extends StatelessWidget {
               prefixIcon: Icon(icon, color: Colors.deepPurple),
               filled: true,
               fillColor: Colors.deepPurple.shade50,
-              hintText: ' Search country',
+              hintText: hint,
             )),
             // searchDelay: Duration(seconds: 1)
             constraints: BoxConstraints.loose(const Size.fromHeight(400)),
           ),
           items: items,
+          selectedItem: selectedItem,
           onChanged: onChanged),
     );
   }

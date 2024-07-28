@@ -34,7 +34,7 @@ class ForgetPasswordControllerImp extends ForgetPasswordController {
               arguments: {"email": email.text});
         } else if (response['status'] == 500) {
           Get.defaultDialog(
-              title: "Warning", middleText: "The selected email is invalid.");
+              title: "203".tr, middleText: "The selected email is invalid.");
         }
       }
       update();

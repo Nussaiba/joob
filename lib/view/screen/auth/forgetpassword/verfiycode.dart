@@ -5,8 +5,8 @@ import 'package:jobs/controller/auth/forgetpassword/verifycode_forgetpassword_co
 import 'package:jobs/core/class/handlingdataview.dart';
 import 'package:jobs/core/constants/color.dart';
 import 'package:jobs/core/constants/routes.dart';
-import 'package:jobs/view/widget/auth/customtextbodyauth.dart';
-import 'package:jobs/view/widget/auth/customtexttitleauth.dart';
+import 'package:jobs/view/widget/general/custom_text_body.dart';
+import 'package:jobs/view/widget/general/custom_text_title.dart';
 
 class VerfiyCode extends StatelessWidget {
   const VerfiyCode({Key? key});
@@ -32,14 +32,13 @@ class VerfiyCode extends StatelessWidget {
                   padding:
                       const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
                   child: ListView(children: [
-                    CustomTextTitleAuth(
+                    CustomTextTitle(
                       text: "35".tr,
                     ),
                     const SizedBox(
                       height: 10,
                     ),
-                    CustomTextBodyAuth(
-                        text: " ${"36".tr} \n ${controller.email} "),
+                    CustomTextBody(text: " ${"36".tr} \n ${controller.email} "),
                     const SizedBox(
                       height: 30,
                     ),
@@ -51,8 +50,7 @@ class VerfiyCode extends StatelessWidget {
                       numberOfFields: 6,
                       borderColor: AppColor.praimaryColor,
                       showFieldAsBox: true,
-                      onCodeChanged: (String code) {
-                      },
+                      onCodeChanged: (String code) {},
                       onSubmit: (String verificationCode) {
                         print("11111  $verificationCode");
                         Get.offNamed(AppRoute.resetPassword, arguments: {
@@ -60,7 +58,7 @@ class VerfiyCode extends StatelessWidget {
                         });
 
                         //  controller.goToResetPassword(verificationCode);
-                      }, 
+                      },
                     ),
                     const SizedBox(
                       height: 30,
@@ -74,7 +72,7 @@ class VerfiyCode extends StatelessWidget {
                           textAlign: TextAlign.end,
                           controller.remainingTime > 0
                               ? ' ${"30".tr} ${controller.timerText}'
-                              : "31" ,
+                              : "31",
                           style: TextStyle(
                               color: controller.remainingTime > 0
                                   ? AppColor.grey

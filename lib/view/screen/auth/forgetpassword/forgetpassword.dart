@@ -5,9 +5,9 @@ import 'package:jobs/core/class/handlingdataview.dart';
 import 'package:jobs/core/constants/color.dart';
 import 'package:jobs/core/functions/validinput.dart';
 import 'package:jobs/view/widget/auth/custombuttomauth.dart';
-import 'package:jobs/view/widget/auth/customtextbodyauth.dart';
+import 'package:jobs/view/widget/general/custom_text_body.dart';
 import 'package:jobs/view/widget/auth/customtextformauth.dart';
-import 'package:jobs/view/widget/auth/customtexttitleauth.dart';
+import 'package:jobs/view/widget/general/custom_text_title.dart';
 
 class ForgetPassword extends StatelessWidget {
   const ForgetPassword({super.key});
@@ -35,15 +35,13 @@ class ForgetPassword extends StatelessWidget {
                     child: Form(
                       key: controller.formstate,
                       child: ListView(children: [
-                         CustomTextTitleAuth(
+                        CustomTextTitle(
                           text: "32".tr,
                         ),
                         const SizedBox(
                           height: 10,
                         ),
-                         CustomTextBodyAuth(
-                            text:
-                                "29".tr),
+                        CustomTextBody(text: "29".tr),
                         const SizedBox(
                           height: 15,
                         ),
@@ -57,6 +55,7 @@ class ForgetPassword extends StatelessWidget {
                           iconData: Icons.email_outlined,
                         ),
                         CustomButtomAuth(
+                            color: AppColor.praimaryColor,
                             text: "33".tr,
                             onPressed: () {
                               controller.checkemail();

@@ -54,7 +54,7 @@ Future<void> createCV() async {
   print(responsecv.statusCode);
   if (responsecv.statusCode == 200) {
     print(responsecv.statusCode);
-    final bytes= responsecv.bodyBytes;
+    final bytes = responsecv.bodyBytes;
     print(bytes);
     final buffer = bytes.buffer;
     print(buffer);
@@ -63,7 +63,7 @@ Future<void> createCV() async {
 
     final appStore =
         await getExternalStorageDirectory().whenComplete(() => print('LLLL'));
-    
+
     final docpath = appStore!.path;
     print(docpath);
     File fileCv = File('$docpath/cv.pdf');

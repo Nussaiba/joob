@@ -73,7 +73,7 @@ class ChatContact extends StatelessWidget {
                               child: Text(
                                 "user name",
                                 style: TextStyle(
-                                  color: AppColor.white,
+                                  
                                   fontWeight: FontWeight.normal,
                                   fontSize: 20,
 

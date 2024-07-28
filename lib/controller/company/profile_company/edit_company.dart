@@ -1,13 +1,18 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:jobs/core/class/statusrequest.dart';
 import 'package:jobs/core/constants/routes.dart';
 import 'package:jobs/core/functions/dialiog.dart';
 import 'package:jobs/core/functions/handlingdata.dart';
 import 'package:jobs/core/services/services.dart';
 import 'package:jobs/data/datasource/remote/company/profile_company_data.dart';
+import 'package:jobs/data/datasource/remote/general/choose_image.dart';
+import 'package:jobs/data/datasource/remote/general/convert_image_to_file.dart';
+import 'package:jobs/data/model/company.dart';
+
+import '../../../data/model/country.dart';
 
 abstract class UpdateProfileCompanyController extends GetxController {
   updateProfile();
@@ -15,77 +20,142 @@ abstract class UpdateProfileCompanyController extends GetxController {
 }
 
 class UpdateProfileCompanyControllerImp extends UpdateProfileCompanyController {
-  GlobalKey<FormState> formstate = GlobalKey<FormState>();
-
+  late CompanyModel companyModel;
   late TextEditingController? namecompany;
-  late TextEditingController? location;
+  String? location;
+  String? imagepathSave;
   File? image;
   late TextEditingController? contactInfo;
   late TextEditingController? about;
   MyServices myServices = Get.find();
-  String? nameCompanySave;
-  String? locationSave;
-  String? aboutSave;
-  String? contactInfoSave;
-  String? imagepathSave;
   StatusRequest statusRequest = StatusRequest.none;
   CompanyProfileData profileData = CompanyProfileData(Get.find());
-  final picker = ImagePicker();
+  FileData fileData = FileData(Get.find());
+  ImageAndFileData imageData = ImageAndFileData(Get.find());
+
   @override
-  Future getImage() async {
-    final pickedfile = await picker.pickImage(source: ImageSource.gallery);
-    if (pickedfile != null) {
-      image = File(pickedfile.path);
-      print(image);
-      print(image!.path);
-      print(image!.path.split("/").last);
-      update();
-    } else {
-      print("no Image");
-    }
+  getImage() async {
+    image = await imageData.getImageData();
+    imagepathSave = null;
+    update();
+  }
+
+  String? selectedDomain;
+
+  final List<String> domain = [
+    "Information Technology and Communications",
+    "Health and Medicine",
+    "Education and Training",
+    "Banking and Financial Services",
+    "Engineering and Construction",
+    "Tourism and Hospitality",
+    "Media and Publishing",
+    "Retail and E-commerce",
+    "Energy and Environment",
+    "Arts and Entertainment",
+    "Real Estate and Property Development",
+    "Manufacturing Industries",
+    "Consulting Services",
+    "Research and Development",
+    "Social Services and Humanitarian Aid",
+    "Legal and Law",
+    "Safety and Security",
+    "Agriculture and Sustainable Farming",
+    "Science and Technology",
+    "Social and Human Sciences",
+    "Research and Development",
+    "Real Estate and Property Management",
+    "Food and Beverage Industries",
+    "Medical Services and Healthcare",
+    "Design and Creative",
+    "Logistics and Supply Chain",
+    "Contracts and Procurement",
+    "Operations and Quality Management",
+    "Environment and Sustainability",
+    "Market Research and Marketing",
+    "Sports and Fitness",
+    "Social Work and Human Development",
+    "Social and Human Sciences",
+    "Space and Astronomy",
+    "Security and Defense",
+    "Fine Arts and Art Exhibitions",
+    "Charity Work and Relief",
+    "Politics and Government",
+    "Smart Contracts and Decentralized Technology",
+    "Gaming and Game Development"
+  ];
+
+  void Function(String?)? setSelectedDomain(type) {
+    selectedDomain = type;
+    update();
+    return null;
+  }
+
+  //Location
+  List<Country> countries = <Country>[].obs;
+  String? selectedCountry;
+  String? selectedCity;
+  List<City> cities = <City>[].obs;
+  void Function(String?)? setSelectedCountry(type) {
+    selectedCountry = type;
+
+    cities = countries.firstWhere((element) => element.county == type).cities;
+    selectedCity = null;
+    update();
+    return null;
+  }
+
+  void Function(String?)? setSelectedCiTy(type) {
+    selectedCity = type;
+    update();
+    return null;
+  }
+
+  void loadJsonData() async {
+    final String jsonString = await DefaultAssetBundle.of(Get.context!)
+        .loadString('assets/models/countries.json');
+    final jsonData = jsonDecode(jsonString) as Map<String, dynamic>;
+    final data = jsonData['data'] as List<dynamic>;
+    update();
+    countries = data.map((item) {
+      final county = item['country'] as String;
+      final cityNames = item['cities'] as List<dynamic>;
+      final citiesList = cityNames.map((city) => City(name: city)).toList();
+      return Country(county: county, cities: citiesList);
+    }).toList();
+    update();
   }
 
   @override
   updateProfile() async {
+    print(image == null && imagepathSave != null);
     //if (formstate.currentState!.validate()) {
     statusRequest = StatusRequest.loading;
     update();
     print("=111111111  Controller");
     var response = await profileData.updatePostdata(
-      namecompany == null ? nameCompanySave! : namecompany!.text,
-      location == null ? locationSave! : location!.text,
-      image == null ? getImageSaved()! : image!,
-      about == null ? aboutSave! : about!.text,
-      contactInfo == null ? contactInfoSave! : contactInfo!.text,
-    );
+        namecompany!.text,
+        "$selectedCountry,$selectedCity",
+       ( image == null && imagepathSave != null)== true
+? await fileData.downloadImage(imagepathSave!)
+            : image != null
+                ? image!
+                : null,
+        about!.text,
+        contactInfo!.text,
+        selectedDomain!);
     print("================$response  Controller");
     statusRequest = handlingData(response);
     print(statusRequest);
     print(response);
     if (StatusRequest.success == statusRequest) {
       if (response['status'] == 201) {
-        myServices.box.write(
-          "name",
-          namecompany == null ? nameCompanySave! : namecompany!.text,
-        );
-        myServices.box.write(
-          "location",
-          location == null ? locationSave! : location!.text,
-        );
-        myServices.box.write(
-          "imagepath",
-          image == null ? getImageSaved()!.path : image!.path,
-        );
-        myServices.box.write(
-          "about",
-          about == null ? aboutSave! : about!.text,
-        );
-        myServices.box.write(
-          "contactinfo",
-          contactInfo == null ? contactInfoSave! : contactInfo!.text,
-        );
-        getDialog("yes", "yesss");
-        Get.offNamed(AppRoute.profilePage);
+        getSnakBar("24".tr,  "${response["message"]}" , 3);
+        myServices.box.write("image", response["data"]['more_info']['logo']);
+
+        print(response["data"]['more_info']['logo']);
+        print(myServices.box.read("image"));
+        Get.offAllNamed(AppRoute.mainScreensCompany);
       }
     }
     update();
@@ -93,35 +163,25 @@ class UpdateProfileCompanyControllerImp extends UpdateProfileCompanyController {
     //  } else {}
   }
 
-  File? getImageSaved() {
-    if (imagepathSave != null) {
-      return File(imagepathSave!);
-    }
-    return null;
-  }
-
-  initialData() {
-    nameCompanySave = myServices.box.read("name");
-    locationSave = myServices.box.read("location");
-    imagepathSave = myServices.box.read("imagepath");
-    contactInfoSave = myServices.box.read("contactinfo");
-    aboutSave = myServices.box.read("about");
-  }
-
   @override
   void onInit() {
-    initialData();
-    namecompany = TextEditingController();
-    location = TextEditingController();
-    contactInfo = TextEditingController();
-    about = TextEditingController();
+    companyModel = Get.arguments['companyModel'];
+    loadJsonData();
+    imagepathSave = companyModel.logo;
+    namecompany = TextEditingController(text: companyModel.company_name);
+    contactInfo = TextEditingController(text: companyModel.contact_info);
+    about = TextEditingController(text: companyModel.about);
+    selectedDomain = companyModel.domain;
+    location = companyModel.location;
+    List<String> locationParts = location!.split(',');
+    selectedCountry = locationParts[0];
+    selectedCity = locationParts[1];
     super.onInit();
   }
 
   @override
   void dispose() {
     namecompany!.dispose();
-    location!.dispose();
     contactInfo!.dispose();
     about!.dispose();
     super.dispose();
@@ -129,7 +189,9 @@ class UpdateProfileCompanyControllerImp extends UpdateProfileCompanyController {
 
   @override
   void onClose() {
-    image!.delete();
+    if (image != null) {
+      image!.delete();
+    }
     super.onClose();
   }
 }

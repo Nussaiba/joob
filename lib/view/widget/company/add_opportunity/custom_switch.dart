@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jobs/core/constants/color.dart';
+import 'package:get/get.dart';
 
 class CustomSwitch extends StatelessWidget {
   final bool value;
@@ -8,13 +9,13 @@ class CustomSwitch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  SwitchListTile(
-          title:const Text('Vacant'),
-         // subtitle: Text(),
-          value: value,
-          onChanged: onChanged,
-          activeColor: AppColor.praimaryColor,
-          activeTrackColor: AppColor.pink,
-        );
+    return SwitchListTile(
+      title: Text("184".tr),
+      // subtitle: Text(),
+      value: value,
+      onChanged: onChanged,
+      activeColor: AppColor.praimaryColor,
+      activeTrackColor: AppColor.pink,
+    );
   }
 }

@@ -4,7 +4,8 @@ import 'package:jobs/core/constants/color.dart';
 class CustomButtomAuth extends StatelessWidget {
   final String  text;
   final void Function()? onPressed;
-  const CustomButtomAuth({super.key, required this.text, this.onPressed});
+  final Color color ;
+  const CustomButtomAuth({super.key, required this.text, this.onPressed, required this.color});
 
   @override
   Widget build(BuildContext context) {
@@ -12,10 +13,10 @@ class CustomButtomAuth extends StatelessWidget {
       margin: const EdgeInsets.only(top: 10),
       child: MaterialButton(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        padding: const EdgeInsets.symmetric(vertical: 13),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 24),
         onPressed: onPressed,
-        color: AppColor.praimaryColor,
-        textColor: Colors.white,
+        color:color,
+        textColor: AppColor.White(),
         child: Text(text),
       ),
     );

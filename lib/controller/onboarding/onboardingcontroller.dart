@@ -15,6 +15,7 @@ class OnBoardingControllerImp extends OnBoardingController {
   int currentPage = 0;
   MyServices myServices = Get.find();
   var isPress = false;
+ late String lang;
   @override
   void toggle(bool press) {
     isPress = press;
@@ -43,6 +44,8 @@ class OnBoardingControllerImp extends OnBoardingController {
   @override
   void onInit() {
     pageController = PageController();
+    lang = myServices.box.read("lang");
+    print("$lang  lang");
     super.onInit();
   }
 }

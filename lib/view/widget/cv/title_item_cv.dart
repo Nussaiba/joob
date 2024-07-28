@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jobs/core/constants/color.dart';
+import 'package:get/get.dart';
 
 class titleItemCv extends StatelessWidget {
   titleItemCv(
@@ -21,7 +22,7 @@ class titleItemCv extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(bottom: 10),
             child: Text(nameitem,
-                style: const TextStyle(
+                style:  TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                     color: AppColor.praimaryColor)),
@@ -37,7 +38,7 @@ class titleItemCv extends StatelessWidget {
                       width: 45,
                       child: Icon(icon, size: 28, color: AppColor.white))),
               ElevatedButton(
-                  onPressed: onPressed, child: Text("Add $nameitem")),
+                  onPressed: onPressed, child: Text(" ${"185".tr} $nameitem")),
             ],
           ),
         ],

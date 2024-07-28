@@ -7,12 +7,12 @@ class SaveData {
 
   getAllSavedData() async {
     var response = await crud.getData(AppLink.getSavedOpportunity);
-   return response.fold ((l)=> 1 , (r)=> r);
+   return response.fold ((l)=> l , (r)=> r);
   }
 
 
    addToSavedOrRemoveOppData(int id) async {
     var response = await crud.getData("${AppLink.saveOpportunity}/$id");
-   return response.fold ((l)=> 1 , (r)=> r);
+   return response.fold ((l)=> l , (r)=> r);
   }
 }

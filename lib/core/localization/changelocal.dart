@@ -1,11 +1,12 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jobs/core/constants/routes.dart';
+import 'package:jobs/core/constants/themes.dart';
 import 'package:jobs/core/services/services.dart';
 
 class LocalController extends GetxController {
   Locale? language;
   MyServices myServices = Get.find();
-
   changeLanguage(String languageCode) {
     Locale locale = Locale(languageCode);
     myServices.box.write("lang", languageCode);
@@ -22,6 +23,44 @@ class LocalController extends GetxController {
     } else {
       language = Locale(Get.deviceLocale!.languageCode);
     }
+    myServices.box.write("lang", language.toString());
+
+    var theme = myServices.box.read("theme");
+    if (theme == true) {
+      apptheme = Themes.customDarkTheme;
+
+      Get.changeTheme(apptheme!);
+    } else {
+      apptheme = Themes.customLightTheme;
+
+      Get.changeTheme(apptheme!);
+    }
+    print(
+        "==========Dark===Mode========${myServices.box.read("theme")}===========================");
     super.onInit();
+  }
+
+  ThemeData? apptheme;
+  changeTheme(value) async {
+    myServices.box.write("theme", value);
+    if (value == true) {
+      print("true");
+
+      update();
+      apptheme = Themes.customDarkTheme;
+
+      update();
+    }
+    if (value == false) {
+      print("false");
+
+      apptheme = Themes.customLightTheme;
+      update();
+    }
+
+    print(apptheme.toString());
+    Get.changeTheme(apptheme!);
+    Get.offAllNamed(AppRoute.mainScreens);
+    print("finish");
   }
 }

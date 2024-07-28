@@ -3,9 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:jobs/core/constants/routes.dart';
-import 'package:jobs/data/model/chat_model.dart';
 import 'package:jobs/data/model/user_chat_model.dart';
-import 'package:jobs/view/screen/chat/search_chat.dart';
 import 'package:jobs/view/screen/chat/chats.dart';
 
 import '../../view/screen/chat/chatcreen.dart';

@@ -8,7 +8,7 @@ List<OnBoardingModel> onBoardingList = [
       body:
        "2".tr,
       //image: AppImageAsset.onBoardingImgOne,
-      image: AppImageAsset.search),
+      image: AppImageAsset.searchOnboarding),
   OnBoardingModel(
       title:"3".tr,
       body:
@@ -20,5 +20,5 @@ List<OnBoardingModel> onBoardingList = [
       body:
           "Discover job vacancies in your area\n Guide you to the nearest opportunities\n to your location . ",
       // image: AppImageAsset.onBoardingImgThree,
-      image: AppImageAsset.map),
+      image: AppImageAsset.map2),
 ];

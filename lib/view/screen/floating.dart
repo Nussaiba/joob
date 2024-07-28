@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
+import 'package:jobs/core/constants/color.dart';
 import 'package:jobs/core/constants/routes.dart';
 
 class MyHomePagea extends StatelessWidget {
@@ -23,6 +24,9 @@ class MyHomePagea extends StatelessWidget {
           child: Visibility(
             visible: controller.isVisible.value,
             child: FloatingActionButton(
+               backgroundColor: AppColor.PraimaryColor(),
+                focusColor: AppColor.White(),
+                foregroundColor: AppColor.White(),
               onPressed: () {
                 Get.toNamed(AppRoute.onBoarding);
               },

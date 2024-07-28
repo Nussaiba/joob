@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:jobs/core/constants/color.dart';
 
-class OpportunityButton extends StatelessWidget {
+class CustomButton extends StatelessWidget {
   final void Function()? onPressed;
   final String title;
-  const OpportunityButton({super.key, required this.onPressed, required this.title});
+  const CustomButton(
+      {super.key, required this.onPressed, required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -12,16 +14,16 @@ class OpportunityButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          
-          backgroundColor: Colors.deepPurple,
+          backgroundColor: AppColor.praimaryColor,
           padding: const EdgeInsets.symmetric(horizontal: 45, vertical: 10),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),
         ),
-        child:  Text(
+        child: Text(
           title,
-          style: const TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold),
+          style: const TextStyle(
+              fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold),
         ),
       ),
     );

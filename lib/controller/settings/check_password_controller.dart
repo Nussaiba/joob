@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:jobs/core/class/statusrequest.dart';
 import 'package:jobs/core/functions/handlingdata.dart';
 import 'package:jobs/data/datasource/remote/settings/check_password.dart';
+import 'package:jobs/core/constants/routes.dart';
+import 'package:jobs/core/functions/dialiog.dart';
 
 abstract class CheckPasswordController extends GetxController {
   showPassWord();
@@ -13,7 +15,7 @@ class CheckPasswordControllerImp extends CheckPasswordController {
   checkPasswordData checkpasswordData = checkPasswordData(Get.find());
   GlobalKey<FormState> formstate = GlobalKey<FormState>();
 
-  late StatusRequest statusRequest;
+  StatusRequest statusRequest = StatusRequest.none;
   late TextEditingController password;
 
   bool isShowPassword = true;
@@ -33,12 +35,19 @@ class CheckPasswordControllerImp extends CheckPasswordController {
       statusRequest = handlingData(response);
       if (StatusRequest.success == statusRequest) {
         if (response['status'] == 200) {
-          print("yessssssssssssssssssssssssss200sss");
+          print("yesssssss200sss");
+        getSnakBar("24".tr,  "${response["message"]}" , 3);
+          Get.offAndToNamed(AppRoute.changePassword);
         } else {
-          statusRequest = StatusRequest.failure;
+          if (response['status'] == 401) {
+            print("401");
+                   getSnakBar("24".tr,  "${response["message"]}" , 3);
+
+            statusRequest = StatusRequest.failure;
+          }
         }
+        update();
       }
-      update();
     }
   }
 

@@ -1,6 +1,6 @@
 class AppLink {
-  static const String server = "http://192.168.185.152:8000/api";
-  static const String serverimage = "http://192.168.185.152:8000";
+  static const String serverimage = "http://192.168.252.152:8000";
+  static const String server = "$serverimage/api";
 
   //*********************
   static const String test = "$server/ ";
@@ -16,24 +16,22 @@ class AppLink {
   static const String resetPassword = "$server/rePassword";
   // *******************settings***********************
   // Change Password ****************
-  static const String changepassword = "$server/resetPasword";
+  static const String changepassword = "$server/resetPassword";
   static const String checkPassword = "$server/checkPassword";
   //logout
   static const String logout = "$server/logout";
   //delete Account
   static const String deleteaccount = "$server/delete";
 
-  //Seeker Profile
+  // Seeker Profile
   static const String createprofile = "$server/seeker/create";
   static const String updateprofile = "$server/seeker/update";
-  //seeker post
+  // seeker post
   static const String createPost = "$server/post/create";
   static const String editPost = "$server/post/edit";
   static const String deletePost = "$server/post/delete";
-  //static const String viewPost = "$server/post/view";
-
   
-  //apply
+  // apply
   static const String apply = "$server/apply";
   static const String updateApply = "$server/apply/update";
   static const String getMyAppliesSeeker = "$server/apply/getMyApplies";
@@ -42,31 +40,55 @@ class AppLink {
   static const String deleteApply = "$server/apply/delete";
   static const String updateStatusApply = "$server/apply/updateStatus";
 
-
-
-  //save opportunity
+  // save opportunity
   static const String saveOpportunity = "$server/save";
   static const String getSavedOpportunity = "$server/getSave";
-  //CV
+  // CV
   static const String createCV = "$server/seeker/createCV";
-  //Company Profile
+  // Company Profile
   static const String createcompanyprofile = "$server/company/create";
   static const String updatecompanyprofile = "$server/company/update";
-  
+
   //post an opportunity
   static const String addOpportunity =
-      "$server/opportunity/addOpportunity";
+      "$server/company/opportunity/addOpportunity";
   static const String updateOpportunity =
-      "$server/company/updateOpportunity{id}";
+      "$server/company/opportunity/updateOpportunity";
+  static const String deleteOpportunity = "$server/company/opportunity/delete";
 
-  //*************Seeker &  Company***************//
+  // *************Seeker &  Company***************//
   static const String allOpportunities = "$server/allOpportunities";
   static const String viewPost = "$server/allPosts";
 
+ // report
+  static const String reportUser = "$server/report/reportUser";
+  static const String reportOpportunity = "$server/report/reportOpportunity";
+  static const String reportPost = "$server/report/reportPost";
 
-//report
-  static const String report = "$server/report/reportUser";
-  static const String getReports = "$server/report/getReports";
+  // notification
+  static const String teststore = "$server/testStore";
+  static const String display = "$server/notification/display";
+  static const String deletenotification = "$server/notification/delete";
+  static const String getcontent = "$server/notification/getContent";
+  static const String makeRead =  "$server/notification/makeRead";
 
-  
+  //follow
+  static const String follow = "$server/follow";
+  static const String followings = "$server/followings";
+  static const String followers = "$server/followers";
+
+  // get user
+  static const String getUser = "$server/user";
+
+ //search
+  static const String searchPath = '$server/search';
+
+
+ // proposed_Companies
+    static const String proposedCompanies = '$server/proposed_Companies';
+ // proposed_Jobs
+    static const String proposedJobs = '$server/proposed_Jobs';
+
 }
+
+

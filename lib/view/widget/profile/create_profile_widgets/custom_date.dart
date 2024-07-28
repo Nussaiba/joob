@@ -17,7 +17,7 @@ class CustomDate extends StatelessWidget {
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(50),
-              color: Colors.deepPurple.shade50,
+              color: AppColor.Pink(),
               //border: Border.all(color: AppColor.grey, width: 1)
             ),
             height: 48,
@@ -27,19 +27,16 @@ class CustomDate extends StatelessWidget {
                 const Spacer(
                   flex: 1,
                 ),
-                const Icon(
+                 Icon(
                   Icons.date_range,
-                color: Colors.deepPurple),
+                color: AppColor.IconColor()),
               
                 const Spacer(
                   flex: 1,
                 ),
                 Text(
                   text,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyText1!
-                      .copyWith(color: AppColor.grey),
+             style: TextStyle(color: AppColor.TextColor(), fontWeight: FontWeight.w600),
                 ),
                 const Spacer(flex: 10),
                 const Spacer(

@@ -33,7 +33,6 @@ class TextFieldChatSend extends StatelessWidget {
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(100),
                       borderSide: const BorderSide(
-                        color: AppColor.grey,
                       ),
                     ),
                     focusColor: AppColor.praimaryColor,

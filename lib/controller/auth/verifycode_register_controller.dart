@@ -2,26 +2,27 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jobs/core/class/statusrequest.dart';
+import 'package:jobs/core/constants/color.dart';
 import 'package:jobs/core/constants/routes.dart';
+import 'package:jobs/core/functions/dialiog.dart';
 import 'package:jobs/core/functions/handlingdata.dart';
+import 'package:jobs/core/services/services.dart';
 import 'package:jobs/data/datasource/remote/auth/verifycodesignup.dart';
-import 'package:jobs/view/screen/auth/forgetpassword/verfiycode.dart';
 
 abstract class VerifyCodeRegisterController extends GetxController {
-  goToSuccessSignUp(String  verifycode);
+  goToSuccessSignUp(String verifycode);
 }
 
 VerifyCodeRegisterData verifyCodeRegisterData =
     VerifyCodeRegisterData(Get.find());
+
 class VerifyCodeRegisterControllerImp extends VerifyCodeRegisterController {
   String? email;
-
+  MyServices myServices = Get.find();
 
   StatusRequest statusRequest = StatusRequest.none;
   @override
-  goToSuccessSignUp(String  verifycode)async {
-
-
+  goToSuccessSignUp(String verifycode) async {
     statusRequest = StatusRequest.loading;
     update();
     print("=111111111111111111  Controller");
@@ -33,17 +34,33 @@ class VerifyCodeRegisterControllerImp extends VerifyCodeRegisterController {
 
     if (StatusRequest.success == statusRequest) {
       if (response['status'] == 200) {
-    Get.offNamed(AppRoute.successSignUp);
+        myServices.box.write("token", "${response["data"]["token"]}");
+        getSnakBar("24".tr, "${response["message"]}", 3);
+
+        Get.offNamed(AppRoute.successSignUp);
       } else if (response['status'] == 422) {
-        Get.defaultDialog(title: "Warning", middleText: "verification code is expire . ", 
-         custom: MaterialButton(onPressed: (){} , child: Text("Re Send"),) );
-        statusRequest = StatusRequest.failure;
+        print("244");
+        getDialog("203".tr, "${response["message"]}");
+
+        // Get.defaultDialog(
+        //     title: "203".tr,
+        //     titleStyle:  TextStyle(
+        //           color: AppColor.TextColor(),
+        //         ),
+        //     middleText: response['message'],
+        //     custom: MaterialButton(
+        //       onPressed: () {},
+        //       child: Text(
+        //         "212".tr,
+        //         style: TextStyle(
+        //           color: AppColor.TextColor(),
+        //         ),
+        //       ),
+        //     ));
       }
-      
     }
     update();
   }
-
 
   Timer? timer;
   int remainingTime = 4;
@@ -65,9 +82,7 @@ class VerifyCodeRegisterControllerImp extends VerifyCodeRegisterController {
     if (remainingTime == 0) {
       remainingTime = 4;
       startTimer();
-       verifyCodeRegisterData.reSendCodeData(email!);
-
-
+      verifyCodeRegisterData.reSendCodeData(email!);
     }
   }
 
@@ -77,22 +92,16 @@ class VerifyCodeRegisterControllerImp extends VerifyCodeRegisterController {
     super.onClose();
   }
 
-
-
-@override
+  @override
   void onInit() {
     super.onInit();
-        email = Get.arguments['email'];
+    email = Get.arguments['email'];
 
     startTimer();
   }
 
   @override
   void dispose() {
-   // email?.dispose();
     super.dispose();
-
-
-
   }
 }

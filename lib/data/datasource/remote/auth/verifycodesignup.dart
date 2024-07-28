@@ -19,6 +19,6 @@ class VerifyCodeRegisterData {
     "email" :  email ,
     });
     print("daataaaaaaaaaaaaaaa $response");
-    return response.fold((l) => 1, (r) => r);
+    return response.fold((l) => l, (r) => r);
   }
 }
