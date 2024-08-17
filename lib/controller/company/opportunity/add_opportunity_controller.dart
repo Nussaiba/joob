@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:jobs/controller/company_seeker/get_all_opportunity_posts_home.dart';
 import 'package:jobs/core/class/statusrequest.dart';
 import 'package:jobs/core/constants/routes.dart';
-import 'package:jobs/core/functions/dialiog.dart';
+import 'package:jobs/core/functions/dialiog_snack.dart';
 import 'package:jobs/core/functions/handlingdata.dart';
 import 'package:jobs/core/services/services.dart';
 import 'package:jobs/data/datasource/remote/company/create_opportunity.dart';
@@ -138,7 +138,6 @@ class AddNewOpportunityControllerImp extends AddNewOpportunityController {
 
     if (StatusRequest.success == statusRequest) {
       if (response["status"] == 201) {
-        //var update1 =
         Get.lazyPut<GetPostsAndOpportunityControllerImp>;
         update();
         getSnakBar("24".tr,  "${response["message"]}", 3);
@@ -192,8 +191,6 @@ class AddNewOpportunityControllerImp extends AddNewOpportunityController {
     location = TextEditingController();
     jophours = TextEditingController();
     salary = TextEditingController();
-    //qualifications = TextEditingController();
-    //  skills = TextEditingController();
     textEditingControllerskill = TextEditingController();
     textEditingControllerqualifications = TextEditingController();
     title.addListener(() {

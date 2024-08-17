@@ -71,7 +71,7 @@ class CustomSendReportMePage extends StatelessWidget {
                   controller.resetPage();
                   Get.back();
                 },
-                color: AppColor.Grey(),
+                color: AppColor.Grey().withOpacity(0.8),
               ),
             ),
           ),

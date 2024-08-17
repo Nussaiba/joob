@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:jobs/controller/company_seeker/get_all_opportunity_posts_home.dart';
 import 'package:jobs/core/class/statusrequest.dart';
 import 'package:jobs/core/constants/routes.dart';
-import 'package:jobs/core/functions/dialiog.dart';
+import 'package:jobs/core/functions/dialiog_snack.dart';
 import 'package:jobs/core/functions/handlingdata.dart';
 import 'package:jobs/core/services/services.dart';
 import 'package:jobs/data/datasource/remote/company/create_opportunity.dart';
@@ -30,7 +30,7 @@ class EditNewOpportunityControllerImp extends EditNewOpportunityController {
   late TextEditingController salary;
   late TextEditingController textEditingControllerskill;
   late TextEditingController textEditingControllerqualifications;
-  File? file;
+ 
   List<String> skills = [];
   List<String> qualifications = [];
   String? selectedJobType;
@@ -43,7 +43,7 @@ class EditNewOpportunityControllerImp extends EditNewOpportunityController {
   MyServices myServices = Get.find();
   ImageAndFileData imageData = ImageAndFileData(Get.find());
   FileData fileData = FileData(Get.find());
-
+ File? file;
   String? filePath;
   final List<String> jobTypes = [
     'full_time',
@@ -132,7 +132,7 @@ class EditNewOpportunityControllerImp extends EditNewOpportunityController {
         title.text,
         body.text,
         file == null && filePath != null
-            ? await fileData.downloadImage(filePath!)
+            ? await fileData.downloadImage(filePath!, 'img.jpg')
             : file != null
                 ? file!
                 : null,
@@ -210,7 +210,7 @@ class EditNewOpportunityControllerImp extends EditNewOpportunityController {
     textEditingControllerqualifications = TextEditingController();
     selectedJobType = opportuntiyModel.jopType!;
     selectedWorkPlaceType = opportuntiyModel.workPlaceType!;
-    filePath = opportuntiyModel.image;
+   filePath = opportuntiyModel.images;
     print(
         "fffffffffffffffffffffffffff$filePath $file fffffffffffffffffffffffffffff");
     super.onInit();

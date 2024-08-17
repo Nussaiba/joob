@@ -29,7 +29,7 @@ class ProposedCompanyModel {
         location: json['location']!,
         about: json['about']!,
         domain: json['domain']!,
-        contact_info: json['contact_info']!,
+        contact_info: json['contact_info']['email'],
        
       );
 

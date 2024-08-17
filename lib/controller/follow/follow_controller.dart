@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:jobs/controller/company_seeker/get_user_controller.dart';
 import 'package:jobs/core/class/statusrequest.dart';
-import 'package:jobs/core/functions/dialiog.dart';
+import 'package:jobs/core/functions/dialiog_snack.dart';
 import 'package:jobs/core/functions/follow_dialog.dart';
 import 'package:jobs/core/functions/handlingdata.dart';
 import 'package:jobs/core/services/services.dart';
@@ -53,7 +53,7 @@ class FollowControllerImp extends FollowController {
         update();
       } else {
         statusRequest = StatusRequest.failure;
-        Get.snackbar('Error', 'Failed to fetch Followers');
+        getSnakBar("203".tr, "${response["message"]}", 3);
       }
     }
     update();
@@ -82,7 +82,7 @@ class FollowControllerImp extends FollowController {
         update();
       } else {
         statusRequest = StatusRequest.failure;
-        Get.snackbar('Error', 'Failed to fetch Followings');
+        getSnakBar("203".tr, "${response["message"]}", 3);
       }
     }
     update();
@@ -109,7 +109,7 @@ class FollowControllerImp extends FollowController {
         } else {
           myFollowings.remove(id);
         }
-        Get.snackbar('Error', '${response['message']}');
+        getSnakBar("203".tr, "${response["message"]}", 3);
         update();
       } else {
         var update1 = Get.find<FollowControllerImp>();
@@ -147,7 +147,7 @@ class FollowControllerImp extends FollowController {
         update();
       } else {
         statusRequest = StatusRequest.failure;
-        Get.snackbar('Error', 'Failed to fetch saved opportunities');
+        getSnakBar("203".tr, "${response["message"]}", 3);
       }
     }
   }

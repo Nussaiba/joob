@@ -73,9 +73,16 @@ class ReportSearchUserPage extends StatelessWidget {
                 SizedBox(height: 15,),
                 TextField(
                   controller: controller.who,
+                  style: TextStyle(
+                      color:AppColor.TextColor(),
+                    ),
                   decoration: InputDecoration(
                     prefixIcon: Icon(Icons.search),
                     labelText: "111".tr,
+                    labelStyle: TextStyle(
+                      color:AppColor.TextColor(),
+                    ),
+                  
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
                       borderSide: BorderSide(color: AppColor.TextColor()),
@@ -147,7 +154,7 @@ class ReportSearchUserPage extends StatelessWidget {
 
                       Get.back();
                     },
-                    color: AppColor.Grey(),
+                color: AppColor.Grey().withOpacity(0.8),
                   ),
                 ),
               ],

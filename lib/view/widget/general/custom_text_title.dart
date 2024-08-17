@@ -14,6 +14,13 @@ class CustomTextTitle extends StatelessWidget {
         fontSize: 24,
         color: AppColor.TextColor(),
         fontWeight: FontWeight.bold,
+        letterSpacing: 1.3,
+        shadows: [
+          Shadow(
+            blurRadius: 4.0,
+            color: Colors.black.withOpacity(0.5),
+          ),
+        ],
       ),
     );
   }

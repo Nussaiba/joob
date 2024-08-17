@@ -16,9 +16,9 @@ class TitleText extends StatelessWidget {
       title,
       style: TextStyle(
         fontWeight: FontWeight.bold,
-        fontSize: 18,
+        fontSize: 16,
         color: AppColor.White(),
-        letterSpacing: 1.2,
+        letterSpacing: 1,
         shadows: [
           Shadow(
             blurRadius: 5.0,

@@ -20,9 +20,9 @@ class EditProfilePageCompany extends StatelessWidget {
     Get.put(UpdateProfileCompanyControllerImp());
 
     return Scaffold(
-      backgroundColor: AppColor.white,
+      backgroundColor: AppColor.Backgroundcolor(),
       appBar: AppBar(
-        backgroundColor: AppColor.praimaryColor,
+        backgroundColor: AppColor.PraimaryColor(),
         elevation: 0.0,
         title: Text(
           "83".tr,
@@ -38,7 +38,7 @@ class EditProfilePageCompany extends StatelessWidget {
           widget: Padding(
             padding: const EdgeInsets.all(8.0),
             child: ListView(children: [
-              FadeAnimation(CustomTextBody(text: "69".tr), 0.3),
+              FadeAnimation(CustomTextBody(text: "84".tr), 0.3),
               const SizedBox(
                 height: 10,
               ),
@@ -115,8 +115,9 @@ class EditProfilePageCompany extends StatelessWidget {
                     label: "76".tr,
                     hint: "77".tr,
                     items: controller.domain,
-                    icon: Icons.info_outline,
+                    icon: Icons.work_outline,
                     onChanged: controller.setSelectedDomain,
+                    selectedItem: controller.selectedDomain,
                   ),
                   2),
               FadeAnimation(
@@ -127,14 +128,42 @@ class EditProfilePageCompany extends StatelessWidget {
                     mycontroller: controller.about,
                   ),
                   2.5),
-              FadeAnimation(
-                  CustomTextFieldInfo(
-                    icon: Icons.contact_phone,
-                    label: "80".tr,
-                    hint: "81".tr,
-                    mycontroller: controller.contactInfo,
-                  ),
-                  3),
+                      FadeAnimation(
+                          CustomTextFieldInfo(
+                            icon: Icons.email,
+                            label: "13".tr,
+                            hint: "12".tr,
+                            mycontroller: controller.contactInfoEmail,
+                            keyboardType: TextInputType.emailAddress,
+                          ),
+                          3),
+                      FadeAnimation(
+                          CustomTextFieldInfo(
+                            icon: Icons.phone,
+                            label: "244".tr,
+                            hint: "245".tr,
+                            mycontroller: controller.contactInfoPhone,
+                            keyboardType: TextInputType.phone,
+                          ),
+                          3.1),
+                      FadeAnimation(
+                          CustomTextFieldInfo(
+                            icon: Icons.code,
+                            label: "246".tr,
+                            hint: "247".tr,
+                            mycontroller: controller.contactInfoGitHub,
+                            keyboardType: TextInputType.emailAddress,
+                          ),
+                          3.2),
+                      FadeAnimation(
+                          CustomTextFieldInfo(
+                            icon: Icons.web,
+                            label: "248".tr,
+                            hint: "249".tr,
+                            mycontroller: controller.contactInfoWebSite,
+                            keyboardType: TextInputType.emailAddress,
+                          ),
+                          3.3),
               const SizedBox(height: 30),
               CustomButtomAuth(
                   color: AppColor.praimaryColor,

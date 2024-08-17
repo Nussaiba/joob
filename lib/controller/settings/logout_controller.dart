@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 
 import '../../core/class/statusrequest.dart';
 import '../../core/constants/routes.dart';
-import '../../core/functions/dialiog.dart';
+import '../../core/functions/dialiog_snack.dart';
 import '../../core/functions/handlingdata.dart';
 import '../../core/services/services.dart';
 import '../../data/datasource/remote/settings/logoutdata.dart';

@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:jobs/core/constants/color.dart';
 import 'package:get/get.dart';
+import 'package:jobs/core/constants/color.dart';
+import 'package:jobs/view/widget/general/custom_button.dart';
 
 class titleItemCv extends StatelessWidget {
   titleItemCv(
       {super.key,
-      required this.nameitem,
+      required this.itemName,
       required this.onPressed,
       required this.icon});
-  final String nameitem;
+  final String itemName;
   final void Function()? onPressed;
   final IconData icon;
   @override
@@ -20,12 +21,12 @@ class titleItemCv extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Padding(
-            padding: const EdgeInsets.only(bottom: 10),
-            child: Text(nameitem,
-                style:  TextStyle(
-                    fontSize: 18,
+            padding: const EdgeInsets.fromLTRB( 8,2,8,8 ),
+            child: Text(itemName,
+                style: TextStyle(
+                    fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    color: AppColor.praimaryColor)),
+                    color: AppColor.TextColor())),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -33,12 +34,24 @@ class titleItemCv extends StatelessWidget {
               ClipRRect(
                   borderRadius: BorderRadius.circular(25),
                   child: Container(
-                      color: AppColor.grey,
+                      color: AppColor.Grey2(),
                       height: 45,
                       width: 45,
-                      child: Icon(icon, size: 28, color: AppColor.white))),
+                      child: Icon(icon, size: 24, color: AppColor.PraimaryColor()))),
+             
+               
               ElevatedButton(
-                  onPressed: onPressed, child: Text(" ${"185".tr} $nameitem")),
+                  style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColor.White(),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(25),
+                          ),
+                        ),
+                  onPressed: onPressed,
+                  child: Text(
+                    " ${"185".tr} $itemName",
+                    style: TextStyle(color: AppColor.TextColor()),
+                  )),
             ],
           ),
         ],

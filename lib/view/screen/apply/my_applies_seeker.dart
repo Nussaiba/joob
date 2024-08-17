@@ -13,18 +13,16 @@ class AppliesSeeker extends StatelessWidget {
     Get.put(GetApplySeekerControllerImp());
     final deletController = Get.put(UpdateApplyControllerImp());
     return Scaffold(
-            backgroundColor: AppColor.Backgroundcolor(),
-
+      backgroundColor: AppColor.Backgroundcolor(),
       appBar: AppBar(
         backgroundColor: AppColor.praimaryColor,
         title: Text(
           "196".tr,
-           
-         style: TextStyle(color: AppColor.White()),
-            ),
-            iconTheme: IconThemeData(
-              color: AppColor.White(),
-            ),
+          style: TextStyle(color: AppColor.White()),
+        ),
+        iconTheme: IconThemeData(
+          color: AppColor.White(),
+        ),
       ),
       body: GetBuilder<GetApplySeekerControllerImp>(
         builder: (controller) => HandlingDataView(
@@ -37,6 +35,9 @@ class AppliesSeeker extends StatelessWidget {
                     applySeekerModel: myApply,
                     onTapIcon: () {
                       deletController.deleteApply(myApply.id!);
+                    },
+                    onTapEdit: () {
+                      controller.goToUpdateApply(myApply.id!);
                     },
                   );
                 })),

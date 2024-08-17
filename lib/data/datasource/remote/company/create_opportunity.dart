@@ -30,8 +30,10 @@ class OpportunityData {
           "skills_req": skills,
           "salary": salary,
           "vacant": vacant,
+           "images": file,
+           "files" : file
         },
-        'file',
+        'images',
         file);
     print("daataaaaaaaaaaaaaaa $response");
     return response.fold((l) => l, (r) => r);
@@ -65,8 +67,10 @@ class OpportunityData {
           "skills_req": skills,
           "salary": salary,
           "vacant": vacant,
+            "images": file,
+           "files" : file
         },
-        'file',
+        'images',
         file);
     print("daataaaaaaaaaaaaaaa $response");
     return response.fold((l) => l, (r) => r);

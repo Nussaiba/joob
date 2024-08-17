@@ -14,16 +14,16 @@ class VerfiyCode extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.put(VerifyCodeControllerImp());
     return Scaffold(
+      backgroundColor: AppColor.Backgroundcolor(),
       appBar: AppBar(
-        backgroundColor: AppColor.praimaryColor,
-        elevation: 0.0,
         title: Text(
           "34".tr,
-          style: Theme.of(context)
-              .textTheme
-              .headline1!
-              .copyWith(color: AppColor.grey),
+          style: TextStyle(color: AppColor.white),
         ),
+        iconTheme: IconThemeData(
+          color: AppColor.white,
+        ),
+        backgroundColor: AppColor.PraimaryColor(),
       ),
       body: GetBuilder<VerifyCodeControllerImp>(
           builder: (controller) => HandlingDataRequest(
@@ -42,10 +42,15 @@ class VerfiyCode extends StatelessWidget {
                     const SizedBox(
                       height: 30,
                     ),
+                    // Center(child: Image.asset(AppImageAsset.otp)),
+                    const SizedBox(
+                      height: 10,
+                    ),
                     OtpTextField(
                       borderRadius: BorderRadius.circular(20),
-                      cursorColor: AppColor.grey,
-                      focusedBorderColor: AppColor.praimaryColor,
+                      cursorColor: AppColor.Grey(),
+                      enabledBorderColor: AppColor.Grey(),
+                      focusedBorderColor: AppColor.PraimaryColor(),
                       fieldWidth: 42.0,
                       numberOfFields: 6,
                       borderColor: AppColor.praimaryColor,

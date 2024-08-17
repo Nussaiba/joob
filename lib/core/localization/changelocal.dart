@@ -1,7 +1,9 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jobs/core/constants/routes.dart';
 import 'package:jobs/core/constants/themes.dart';
+import 'package:jobs/core/functions/fcm.dart';
 import 'package:jobs/core/services/services.dart';
 
 class LocalController extends GetxController {
@@ -15,6 +17,8 @@ class LocalController extends GetxController {
 
   @override
   void onInit() {
+    fcm();
+    requestPermissionNotification();
     String? boxLanguage = myServices.box.read("lang");
     if (boxLanguage == "ar") {
       language = const Locale("ar");
@@ -36,7 +40,7 @@ class LocalController extends GetxController {
       Get.changeTheme(apptheme!);
     }
     print(
-        "==========Dark===Mode========${myServices.box.read("theme")}===========================");
+        "==========Dark===Mode========${myServices.box.read("theme")}========================");
     super.onInit();
   }
 
@@ -60,7 +64,9 @@ class LocalController extends GetxController {
 
     print(apptheme.toString());
     Get.changeTheme(apptheme!);
-    Get.offAllNamed(AppRoute.mainScreens);
+    MyServices().box.read("account") == 'company'
+        ? Get.offAllNamed(AppRoute.mainScreensCompany)
+        : Get.offAllNamed(AppRoute.mainScreens);
     print("finish");
   }
 }

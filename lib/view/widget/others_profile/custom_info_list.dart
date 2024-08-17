@@ -17,8 +17,7 @@ class buildInfoSection2 extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(10.0),
       child: ExpansionTile(
-        // subtitle:Text(title),
-        //trailing:Icon(icon),
+     
         title: ListTile(
           leading: Icon(icon),
           title: Text(title),

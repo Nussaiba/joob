@@ -13,7 +13,7 @@ class CustomButtomAuth extends StatelessWidget {
       margin: const EdgeInsets.only(top: 10),
       child: MaterialButton(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 24),
+        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
         onPressed: onPressed,
         color:color,
         textColor: AppColor.White(),

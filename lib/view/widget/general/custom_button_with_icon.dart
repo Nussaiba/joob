@@ -10,7 +10,7 @@ class CustomButtonWithIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton.icon(
       onPressed: onPressed,
-      icon: Icon(icon),
+      icon: Icon(icon, color: AppColor.PraimaryColor(),),
       label: Text(
         title,
         style: TextStyle(

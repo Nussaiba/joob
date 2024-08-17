@@ -3,20 +3,20 @@ import 'package:get/get.dart';
 import 'package:jobs/controller/apply/apply_controller.dart';
 import 'package:jobs/core/class/handlingdataview.dart';
 import 'package:jobs/core/constants/color.dart';
-import 'package:jobs/core/constants/imageassest.dart';
+import 'package:jobs/core/constants/image_assest.dart';
 import 'package:jobs/view/widget/auth/custombuttomauth.dart';
 import 'package:jobs/view/widget/general/custom_text_body.dart';
 import 'package:jobs/view/widget/general/custom_text_title.dart';
 import 'package:jobs/view/widget/auth/textsignup.dart';
 import 'package:jobs/view/widget/general/custom_button_with_icon.dart';
-import 'package:jobs/view/widget/general/fade_animation.dart';
-import 'package:lottie/lottie.dart';
+
 
 class ApplyCV extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.put(ApplyControllerImp());
     return Scaffold(
+      backgroundColor: AppColor.Backgroundcolor(),
       appBar: AppBar(
         title: Text(
           "188".tr,
@@ -41,26 +41,27 @@ class ApplyCV extends StatelessWidget {
                       CustomTextTitle(
                         text: "189".tr,
                       ),
-                      Center(
-                        child: Lottie.asset(AppImageAsset.cv,
-                            width: 250, height: 250),
-                      ),
                       const SizedBox(
-                        height: 5,
+                        height: 10,
                       ),
-                      FadeAnimation(CustomTextBody(text: "190".tr), 0.5),
+                      CustomTextBody(text: "190".tr),
                       const SizedBox(
                         height: 25,
                       ),
-                      FadeAnimation(
-                          CustomButtonWithIcon(
-                            onPressed: () {
-                              controller.pickFile();
-                            },
-                            icon: Icons.upload_file,
-                            title: "191".tr,
-                          ),
-                          0.8),
+                      Center(
+                        child: Image.asset(AppImageAsset.cv3,
+                            width: 200, height: 200),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      CustomButtonWithIcon(
+                        onPressed: () {
+                          controller.pickFile();
+                        },
+                        icon: Icons.upload_file,
+                        title: "191".tr,
+                      ),
                       const SizedBox(
                         height: 25,
                       ),
@@ -81,26 +82,15 @@ class ApplyCV extends StatelessWidget {
                                     vertical: 8, horizontal: 15),
                               ),
                             )
-                          : Padding(
-                              padding: EdgeInsets.all(16),
-                              child: Center(
-                                  child: Text(
-                                "192".tr,
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              )),
-                            ),
+                          : Center(
+                              child: Text(
+                            "192".tr,
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          )),
                       SizedBox(
-                        height: 10,
+                        height: 15,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(24.0),
-                        child: Divider(),
-                      ),
-                      CustomTextSignUpOrSignIn(
-                          textone: "193".tr, texttwo: "194".tr, onTap: () {}),
-                      SizedBox(
-                        height: 30,
-                      ),
+                     
                       CustomButtomAuth(
                           color: controller.selectedFilePath != null
                               ? AppColor.praimaryColor
@@ -111,6 +101,20 @@ class ApplyCV extends StatelessWidget {
                                 ? controller.applyCV()
                                 : null;
                           }),
+                           SizedBox(
+                        height: 25,
+                      ),
+                     
+                      CustomTextSignUpOrSignIn(
+                          textone: "193".tr,
+                          texttwo: "194".tr,
+                          onTap: () {
+                            controller.goToCreateCV();
+                          }),
+                      SizedBox(
+                        height: 30,
+                      ),
+                     
                     ],
                   ),
                 ),

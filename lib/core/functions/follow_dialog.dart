@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jobs/data/model/follow_model.dart';
-import 'package:jobs/view/widget/general/custom_button.dart';
 import 'package:jobs/view/widget/search/search_item.dart';
 import '../constants/color.dart';
 

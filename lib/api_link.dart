@@ -1,15 +1,14 @@
 class AppLink {
-  static const String serverimage = "http://192.168.252.152:8000";
+  static const String serverimage = "http://192.168.139.152:8000";
   static const String server = "$serverimage/api";
-
-  //*********************
-  static const String test = "$server/ ";
 
   //auth Link ***********************
   static const String signup = "$server/register";
   static const String verifycoderegister = "$server/verifyAccount";
   static const String login = "$server/login";
   static const String reSendCode = "$server/sendCode";
+  static const String device_token = '$server/device_token';
+
   // Forget Password ****************
   static const String checkemail = "$server/forgotPassword";
   static const String verifycodeforgetpassword = "$server/checkCode";
@@ -30,7 +29,9 @@ class AppLink {
   static const String createPost = "$server/post/create";
   static const String editPost = "$server/post/edit";
   static const String deletePost = "$server/post/delete";
-  
+  static const String deleteImage = "$server/post/deleteImage";
+  static const String deleteFile = "$server/post/deleteFile";
+
   // apply
   static const String apply = "$server/apply";
   static const String updateApply = "$server/apply/update";
@@ -59,8 +60,9 @@ class AppLink {
   // *************Seeker &  Company***************//
   static const String allOpportunities = "$server/allOpportunities";
   static const String viewPost = "$server/allPosts";
+  static const String getNews = "$server/admin/news/getNews";
 
- // report
+  // report
   static const String reportUser = "$server/report/reportUser";
   static const String reportOpportunity = "$server/report/reportOpportunity";
   static const String reportPost = "$server/report/reportPost";
@@ -70,7 +72,7 @@ class AppLink {
   static const String display = "$server/notification/display";
   static const String deletenotification = "$server/notification/delete";
   static const String getcontent = "$server/notification/getContent";
-  static const String makeRead =  "$server/notification/makeRead";
+  static const String makeRead = "$server/notification/makeRead";
 
   //follow
   static const String follow = "$server/follow";
@@ -80,15 +82,11 @@ class AppLink {
   // get user
   static const String getUser = "$server/user";
 
- //search
+  //search
   static const String searchPath = '$server/search';
 
-
- // proposed_Companies
-    static const String proposedCompanies = '$server/proposed_Companies';
- // proposed_Jobs
-    static const String proposedJobs = '$server/proposed_Jobs';
-
+  // proposed_Companies
+  static const String proposedCompanies = '$server/proposed_Companies';
+  // proposed_Jobs
+  static const String proposedJobs = '$server/proposed_Jobs';
 }
-
-

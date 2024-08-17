@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jobs/core/class/statusrequest.dart';
 import 'package:jobs/core/constants/routes.dart';
-import 'package:jobs/core/functions/dialiog.dart';
+import 'package:jobs/core/functions/dialiog_snack.dart';
 import 'package:jobs/core/functions/handlingdata.dart';
 import 'package:jobs/core/services/services.dart';
 import 'package:jobs/data/datasource/remote/company/profile_company_data.dart';
@@ -25,7 +25,10 @@ class UpdateProfileCompanyControllerImp extends UpdateProfileCompanyController {
   String? location;
   String? imagepathSave;
   File? image;
-  late TextEditingController? contactInfo;
+  late TextEditingController contactInfoEmail;
+  late TextEditingController contactInfoPhone;
+  late TextEditingController contactInfoGitHub;
+  late TextEditingController contactInfoWebSite;
   late TextEditingController? about;
   MyServices myServices = Get.find();
   StatusRequest statusRequest = StatusRequest.none;
@@ -136,13 +139,16 @@ class UpdateProfileCompanyControllerImp extends UpdateProfileCompanyController {
     var response = await profileData.updatePostdata(
         namecompany!.text,
         "$selectedCountry,$selectedCity",
-       ( image == null && imagepathSave != null)== true
-? await fileData.downloadImage(imagepathSave!)
+        (image == null && imagepathSave != null) == true
+            ? await fileData.downloadImage(imagepathSave!, 'img.jpg')
             : image != null
                 ? image!
                 : null,
         about!.text,
-        contactInfo!.text,
+        contactInfoEmail.text,
+        contactInfoPhone.text,
+        contactInfoGitHub.text,
+        contactInfoWebSite.text,
         selectedDomain!);
     print("================$response  Controller");
     statusRequest = handlingData(response);
@@ -150,7 +156,7 @@ class UpdateProfileCompanyControllerImp extends UpdateProfileCompanyController {
     print(response);
     if (StatusRequest.success == statusRequest) {
       if (response['status'] == 201) {
-        getSnakBar("24".tr,  "${response["message"]}" , 3);
+        getSnakBar("24".tr, "${response["message"]}", 3);
         myServices.box.write("image", response["data"]['more_info']['logo']);
 
         print(response["data"]['more_info']['logo']);
@@ -167,11 +173,19 @@ class UpdateProfileCompanyControllerImp extends UpdateProfileCompanyController {
   void onInit() {
     companyModel = Get.arguments['companyModel'];
     loadJsonData();
+    selectedDomain = companyModel.domain;
     imagepathSave = companyModel.logo;
     namecompany = TextEditingController(text: companyModel.company_name);
-    contactInfo = TextEditingController(text: companyModel.contact_info);
+    contactInfoEmail =
+        TextEditingController(text: companyModel.contactInfoEmail);
+    contactInfoPhone =
+        TextEditingController(text: companyModel.contactInfoPhone);
+    contactInfoGitHub =
+        TextEditingController(text: companyModel.contactInfoGitHub);
+    contactInfoWebSite =
+        TextEditingController(text: companyModel.contactInfoeWebsite);
+
     about = TextEditingController(text: companyModel.about);
-    selectedDomain = companyModel.domain;
     location = companyModel.location;
     List<String> locationParts = location!.split(',');
     selectedCountry = locationParts[0];
@@ -182,7 +196,10 @@ class UpdateProfileCompanyControllerImp extends UpdateProfileCompanyController {
   @override
   void dispose() {
     namecompany!.dispose();
-    contactInfo!.dispose();
+    contactInfoEmail.dispose();
+    contactInfoPhone.dispose();
+    contactInfoGitHub.dispose();
+    contactInfoWebSite.dispose();
     about!.dispose();
     super.dispose();
   }

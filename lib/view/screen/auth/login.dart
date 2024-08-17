@@ -8,7 +8,6 @@ import 'package:jobs/core/functions/validinput.dart';
 import 'package:jobs/view/widget/general/fade_animation.dart';
 import 'package:jobs/view/widget/general/custom_text_body.dart';
 import 'package:jobs/view/widget/auth/customtextformauth.dart';
-import 'package:jobs/view/widget/general/custom_text_title.dart';
 import 'package:jobs/view/widget/auth/logoauth.dart';
 import 'package:jobs/view/widget/auth/textsignup.dart';
 import '../../widget/auth/custombuttomauth.dart';
@@ -19,21 +18,10 @@ class Login extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.put(LoginControllerImp());
     return Scaffold(
-        // appBar: AppBar(
-        //   backgroundColor: Colors.transparent,
-        //   elevation: 0.0,
-        //   title: Text(
-        //     "9".tr,
-        //     style: Theme.of(context)
-        //         .textTheme
-        //         .headline1!
-        //         .copyWith(color: AppColor.grey),
-        //   ),
-        // ),
         body: Stack(
       children: [
         Container(
-          color: AppColor.praimaryColor,
+          color: AppColor.PraimaryColor(),
           height: Get.height,
           width: Get.width,
           child: Padding(
@@ -47,7 +35,7 @@ class Login extends StatelessWidget {
                   style: Theme.of(context)
                       .textTheme
                       .headline1!
-                      .copyWith(color: AppColor.white),
+                      .copyWith(color: AppColor.White()),
                 ),
                 const SizedBox(
                   height: 8,
@@ -101,11 +89,11 @@ class Login extends StatelessWidget {
                           FadeAnimation(
                               CustomTextFormAuth(
                                 valid: (val) {
-                                  return validInput(val!, 5, 50, "email");
+                                  return null;
                                 },
                                 mycontroller: controller.email,
-                                hinttext: "12".tr,
-                                labeltext: "13".tr,
+                                hinttext: "243".tr,
+                                labeltext: "242".tr,
                                 iconData: Icons.email_outlined,
                               ),
                               1),
@@ -134,6 +122,7 @@ class Login extends StatelessWidget {
                                 child: Text(
                                   "16".tr,
                                   textAlign: TextAlign.end,
+                                  style: TextStyle(color: AppColor.Grey()),
                                 ),
                               ),
                               2),

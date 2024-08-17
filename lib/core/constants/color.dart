@@ -5,35 +5,21 @@ import 'package:jobs/core/services/services.dart';
 class AppColor {
   MyServices myServices = Get.find();
 
-  static Color praimaryColor = Color(0xff5B0888);
+  static Color praimaryColor = Color.fromARGB(255, 76, 22, 119);
   static Color PraimaryColor() {
     MyServices().box.read("theme") == true
         ? praimaryColor = Color(0xff939da6)
-        : praimaryColor = Color(0xff5B0888);
+        : praimaryColor =  Color.fromARGB(255, 76, 22, 119);
     return praimaryColor;
   }
 
-  static Color praimaryColor2 = Color(0xff5B0888);
-  static Color PraimaryColor2() {
-    MyServices().box.read("theme") == true
-        ? praimaryColor2 = Color.fromARGB(255, 156, 156, 156)
-        : praimaryColor2 = Color(0xff713ABE);
-    return praimaryColor2;
-  }
+ 
 
-  static Color praimaryColor3 = Color(0xff9D76C1);
-  static Color PraimaryColor3() {
-    MyServices().box.read("theme") == true
-        ? praimaryColor3 = Color.fromARGB(255, 201, 200, 200)
-        : praimaryColor3 = Color(0xff9D76C1);
-    return praimaryColor3;
-  }
-
-  static Color backgroundcolor = Color(0xff1f1f1f);
+  static Color backgroundcolor = Colors.grey[200]!;
   static Color Backgroundcolor() {
     MyServices().box.read("theme") == true
         ? backgroundcolor = Color(0xff1f1f1f)
-        : backgroundcolor = Colors.grey[300]!;
+        : backgroundcolor = Colors.grey[200]!;
     return backgroundcolor;
   }
 
@@ -45,27 +31,27 @@ class AppColor {
     return textColor;
   }
 
-  static Color iconColor = Color(0xff5B0888);
+  static Color iconColor =  Color.fromARGB(255, 76, 22, 119);
   static Color IconColor() {
     MyServices().box.read("theme") == true
         ? iconColor = Colors.white70
-        : iconColor = Color(0xff5B0888);
+        : iconColor = Color.fromARGB(255, 76, 22, 119);
     return iconColor;
   }
 
-  static Color grey = Color.fromARGB(255, 114, 113, 113);
+  static Color grey = Color.fromARGB(255, 122, 124, 126);
   static Color Grey() {
     MyServices().box.read("theme") == true
         ? grey = Colors.white70
-        : grey = Color.fromARGB(255, 114, 113, 113);
+        : grey = Color.fromARGB(255, 122, 124, 126);
     return grey;
   }
 
-  static Color grey2 = Color.fromARGB(106, 116, 115, 115);
+  static Color grey2 = Colors.grey[100]!;
   static Color Grey2() {
     MyServices().box.read("theme") == true
-        ? grey2 = Color.fromARGB(226, 114, 113, 113)
-        : grey2 = Color.fromARGB(106, 116, 115, 115);
+        ? grey2 = Color(0xff1f1f1f)
+        : grey2 = Colors.grey[100]!;
     return grey2;
   }
 
@@ -81,15 +67,28 @@ class AppColor {
   static Color White() {
     MyServices().box.read("theme") == true
         ? white = Color.fromARGB(255, 41, 41, 44)
-        : white = Color.fromARGB(232, 254, 249, 255);
+        : white = Color.fromARGB(232, 255, 255, 255);
     return white;
   }
 
-  static  Color pink = praimaryColor.withOpacity(0.2);
-   static Color Pink() {
+  static Color pink = Color(0xffe7d5ef);
+  static Color Pink() {
     MyServices().box.read("theme") == true
         ? pink = Color(0xff939da6).withOpacity(0.2)
-        : pink = praimaryColor.withOpacity(0.2);
+        : pink = Color(0xffe7d5ef);
     return pink;
   }
+  
+  static Color pink2 =Color(0xffcea9dd);
+  static Color Pink2() {
+    MyServices().box.read("theme") == true
+        ? pink2 = Color(0xff939da6).withOpacity(0.2)
+        : pink2 =Color(0xffcea9dd);
+    return pink2;
+  }
+
+  static Color pink1 = Color(0xffe7d5ef);
+  //static Color pink2 = Color(0xffcea9dd);
+  static Color pink3 = Color(0xffb87dcd);
+  static Color pink4 = Color(0xff5e2b71);
 }

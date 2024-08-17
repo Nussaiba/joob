@@ -4,6 +4,7 @@ import 'package:jobs/core/middleware/mymiddleware.dart';
 import 'package:jobs/view/screen/apply/all_applies_company.dart';
 import 'package:jobs/view/screen/apply/apply_cv.dart';
 import 'package:jobs/view/screen/apply/my_applies_seeker.dart';
+import 'package:jobs/view/screen/apply/update_apply_cv.dart';
 import 'package:jobs/view/screen/auth/splash.dart';
 import 'package:jobs/view/screen/company&seeker/all_opportunities.dart';
 import 'package:jobs/view/screen/company&seeker/all_posts.dart';
@@ -19,6 +20,7 @@ import 'package:jobs/view/screen/company/profile_company/create_company.dart';
 import 'package:jobs/view/screen/company/profile_company/edit_company.dart';
 import 'package:jobs/view/screen/others_profiles/companies_profile.dart';
 import 'package:jobs/view/screen/others_profiles/seekers_profile.dart';
+import 'package:jobs/view/screen/seeker/cv/create_cv.dart';
 import 'package:jobs/view/screen/seeker/main_screens/main_screen.dart';
 import 'package:jobs/view/screen/seeker/post/create_post.dart';
 import 'package:jobs/view/screen/seeker/post/edit_post.dart';
@@ -29,7 +31,6 @@ import 'package:jobs/view/screen/settings_pages/account_settings.dart';
 import 'package:jobs/view/screen/settings_pages/change_password.dart';
 import 'package:jobs/view/screen/settings_pages/check_password.dart';
 import 'package:jobs/view/screen/settings_pages/deletAccount.dart';
-
 import 'view/screen/auth/forgetpassword/forgetpassword.dart';
 import 'view/screen/auth/forgetpassword/resetpassword.dart';
 import 'view/screen/auth/forgetpassword/success_resetpassword.dart';
@@ -73,6 +74,7 @@ List<GetPage<dynamic>>? routes = [
   GetPage(name: AppRoute.editpostpage, page: () => EditPostPage()),
  
    GetPage(name: AppRoute.proposedPage, page: () => ProposedPage()),
+   GetPage(name: AppRoute.createCV, page: () => CreateCV()),
 
 
 
@@ -115,7 +117,7 @@ List<GetPage<dynamic>>? routes = [
   GetPage(name: AppRoute.appliesSeeker, page: () => AppliesSeeker()),
   GetPage(name: AppRoute.allAppliesCompany, page: () => AllAppliesCompany()),
   GetPage(name: AppRoute.applyCV, page: () => ApplyCV()),
-  //GetPage(name: AppRoute.applyForm, page: () => ApplyForm()),
+  GetPage(name: AppRoute.updateApplyCV, page: () => UpdateApplyCV()),
 
   GetPage(name: AppRoute.notifications, page: () => NotificationPage()),
 

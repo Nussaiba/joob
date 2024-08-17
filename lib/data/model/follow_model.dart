@@ -15,7 +15,7 @@ class FollowModel {
         id: json['id']!,
         roles_name: json['roles_name']!,
         name: json['name']!,
-        image: json['image'],
+        image: json['image'] != null ? json['image']: null,
       );
 
   Map<String, dynamic> toJson() => {};

@@ -5,8 +5,8 @@ import 'package:jobs/core/constants/color.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:jobs/view/screen/company&seeker/save_page.dart';
 import 'package:jobs/view/screen/company/main_screens/home_company.dart';
-import 'package:jobs/view/screen/floating.dart';
 import 'package:jobs/view/screen/company&seeker/notifications.dart';
+import 'package:jobs/view/screen/floating.dart';
 
 class MainScreensCompany extends GetView<MainScreenCompanyControllerImp> {
   const MainScreensCompany({super.key});
@@ -18,36 +18,41 @@ class MainScreensCompany extends GetView<MainScreenCompanyControllerImp> {
         extendBody: true,
         bottomNavigationBar: Obx(
           () => CurvedNavigationBar(
-            height: 58,
+            height: 55,
             key: controller.bottomNavigationBar,
-            color: AppColor.praimaryColor,
+            color: AppColor.Grey2(),
             index: controller.page.value,
             animationDuration: const Duration(milliseconds: 300),
             backgroundColor: Colors.transparent,
+            buttonBackgroundColor: AppColor.PraimaryColor().withOpacity(0.2),
             onTap: (index) {
               controller.onItemClick(index);
             },
             items: [
-              Icon(Icons.home_rounded,
-                  size: 30,
-                  color: controller.currentindex.value == 0
-                      ? AppColor.white
-                      : AppColor.grey),
-              Icon(Icons.chat_rounded,
-                  size: 30,
-                  color: controller.currentindex.value == 1
-                      ? AppColor.white
-                      : AppColor.grey),
-              Icon(Icons.notifications,
-                  size: 30,
-                  color: controller.currentindex.value == 2
-                      ? AppColor.white
-                      : AppColor.grey),
-              Icon(Icons.bookmark_border,
-                  size: 30,
-                  color: controller.currentindex.value == 3
-                      ? AppColor.white
-                      : AppColor.grey),
+              Icon(
+                  controller.currentindex.value == 0
+                      ? Icons.home_rounded
+                      : Icons.home_outlined,
+                  size: 28,
+                  color: AppColor.PraimaryColor()),
+              Icon(
+                  controller.currentindex.value == 1
+                      ? Icons.chat
+                      : Icons.chat_outlined,
+                  size: 28,
+                  color: AppColor.PraimaryColor()),
+              Icon(
+                  controller.currentindex.value == 2
+                      ? Icons.notifications
+                      : Icons.notifications_none_outlined,
+                  size: 28,
+                  color: AppColor.PraimaryColor()),
+              Icon(
+                  controller.currentindex.value == 3
+                      ? Icons.bookmark
+                      : Icons.bookmark_outline_rounded,
+                  size: 28,
+                  color: AppColor.PraimaryColor()),
             ],
           ),
         ),

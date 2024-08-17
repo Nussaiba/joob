@@ -4,7 +4,7 @@ import 'package:jobs/controller/company_seeker/get_all_opportunity_posts_home.da
 import 'package:jobs/controller/saved_jobs/saved_opportunity_controller.dart';
 import 'package:jobs/core/class/handlingdataview.dart';
 import 'package:jobs/core/constants/color.dart';
-import 'package:jobs/view/widget/custom_card_opportunity.dart';
+import 'package:jobs/view/widget/company&seeker/home_widgets/custom_card_opportunity.dart';
 
 class AllOpportunitiesPage extends StatelessWidget {
   AllOpportunitiesPage({super.key});

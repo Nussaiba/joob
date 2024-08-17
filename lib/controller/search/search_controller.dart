@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jobs/core/class/statusrequest.dart';
+import 'package:jobs/core/functions/dialiog_snack.dart';
 import 'package:jobs/core/functions/handlingdata.dart';
 import 'package:jobs/data/datasource/remote/search/search_data.dart';
 
@@ -30,13 +31,15 @@ class SearchControllerImp extends SearchController {
         print(response);
         data.clear();
         data.addAll(response['data']);
-
-        data.isEmpty
-            ? statusRequest = StatusRequest.failure
-            : statusRequest = StatusRequest.none;
       } else {
-        statusRequest = StatusRequest.failure;
-        Get.snackbar("Error", response["message"]);
+        if (response["status"] == 404) {
+          statusRequest = StatusRequest.failure;
+
+        getSnakBar("203".tr, "${response["message"]}", 3);
+        } else {
+          statusRequest = StatusRequest.failure;
+        getSnakBar("203".tr, "${response["message"]}", 3);
+        }
       }
     }
     update();
@@ -44,9 +47,7 @@ class SearchControllerImp extends SearchController {
 
   @override
   void onInit() {
-    // searchUserData = Get.put(SearchUserData());
     searchControllerText = TextEditingController();
-    //  followData = Get.find<FollowData>();
     super.onInit();
   }
 

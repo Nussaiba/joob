@@ -1,24 +1,27 @@
 import 'dart:io';
-import 'package:open_file/open_file.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
+import 'package:jobs/api_link.dart';
 import 'package:jobs/core/class/statusrequest.dart';
 import 'package:jobs/core/constants/routes.dart';
 import 'package:jobs/core/functions/handlingdata.dart';
 import 'package:jobs/core/services/services.dart';
 import 'package:jobs/data/datasource/remote/home/home.dart';
-import 'package:jobs/data/model/post_model.dart';
 import 'package:jobs/data/model/opportunity_model.dart';
+import 'package:jobs/data/model/post_model.dart';
+import 'package:jobs/view/widget/post/post_detail.dart';
+import 'package:open_file/open_file.dart';
 
-abstract class GetPostsAndOpportunityController extends GetxController {
+abstract class GetPostsAndOpportunityController extends GetxController
+    with GetSingleTickerProviderStateMixin {
   getOpportunitesData();
   getPostsData();
   goToPageOpportunityDetails(OpportunityModel opportuntiyModel);
   scrollListener();
   goToPageAllOpportunities();
   goToPageAllPosts();
-  
 }
 
 class GetPostsAndOpportunityControllerImp
@@ -27,24 +30,38 @@ class GetPostsAndOpportunityControllerImp
   HomeData homeData = HomeData(Get.find());
 
   late StatusRequest statusRequestPosts = StatusRequest.none;
-    late StatusRequest statusRequestOpportunity = StatusRequest.none;
+  late StatusRequest statusRequestOpportunity = StatusRequest.none;
 
   MyServices myServices = Get.find();
   var isFabVisible = true.obs;
-
   List dataopportuntiy = [];
   List<OpportunityModel> opportuntiesList = [];
   List dataposts = [];
   List<PostModel> postsList = [];
-  var isExpanded = false.obs;
+
   late String idUserPostOwner;
   late String account;
+
+  var isLoading = {}.obs;
+  var isExpanded = {}.obs;
+  late TabController tabController;
+
+  Future download(String url, String fileName) async {
+    String pdfurl = '${AppLink.serverimage}/$url';
+    print(pdfurl);
+    isLoading[pdfurl] = true;
+    update();
+    File file = await homeData.getFile(url, fileName);
+    await Future.delayed(Duration(seconds: 2));
+    isLoading[pdfurl] = false;
+    update();
+    await OpenFile.open(file.path);
+  }
 
   int reason_id = 0;
   String another_reason = '';
   void editPost() {}
   void deletePost() {}
-  //late String lang;
   @override
   getOpportunitesData() async {
     dataopportuntiy.clear();
@@ -68,13 +85,13 @@ class GetPostsAndOpportunityControllerImp
         }
         update();
       } else {
-       // statusRequest = StatusRequest.failure;
+        // statusRequest = StatusRequest.failure;
       }
     }
   }
 
-  void toggleExpanded() {
-    isExpanded.value = !isExpanded.value;
+  toggleExpanded(int id) async {
+    isExpanded['$id'] = !isExpanded['$id'];
     update();
   }
 
@@ -88,21 +105,29 @@ class GetPostsAndOpportunityControllerImp
     statusRequestPosts = handlingData(response);
     if (StatusRequest.success == statusRequestPosts) {
       if (response['status'] == 200) {
-        print("${dataposts.length}lllllllmmmmmmmmmmlllll");
+        print("${dataposts.length}lllllllllll");
         dataposts.addAll(response['data']);
         dataposts.isEmpty
             ? statusRequestPosts = StatusRequest.failure
             : statusRequestPosts = StatusRequest.none;
-        print("lll ${dataposts.length}");
+        print("llllllc ${dataposts.length}");
         for (int i = 0; i < dataposts.length; i++) {
           postsList.add(
             PostModel.fromJson(dataposts[i]),
           );
         }
+
+        for (int i = 0; i < postsList.length; i++) {
+          isExpanded['${postsList[i].id}'] = false;
+          for (int j = 0; j < postsList[i].files.length; j++) {
+            isLoading[postsList[i].files.isNotEmpty
+                ? '${AppLink.serverimage}/${postsList[i].files[j].url}'
+                : ''] = false;
+          }
+        }
+
         update();
-      } else {
-       // statusRequest = StatusRequest.failure;
-      }
+      } else {}
     }
     update();
   }
@@ -123,7 +148,6 @@ class GetPostsAndOpportunityControllerImp
     Get.toNamed(AppRoute.allPostPage);
   }
 
- 
   goToPageAddOpportunity() {
     Get.toNamed(AppRoute.addOpportunity);
   }
@@ -132,18 +156,10 @@ class GetPostsAndOpportunityControllerImp
     Get.toNamed(AppRoute.postpage);
   }
 
-
-
-
-  Future download(String url, String fileName) async {
-    //isLoading[pdfurl] = true;
+  int currentImage = 0;
+  onPageImageChanged(int indexpage) {
+    currentImage = indexpage;
     update();
-    File file = await homeData.getFile(url, fileName);
-    await Future.delayed(Duration(seconds: 2));
-    //isLoading[pdfurl] = false;
-    update();
-     
-    await OpenFile.open(file.path);
   }
 
   @override
@@ -160,23 +176,33 @@ class GetPostsAndOpportunityControllerImp
   }
 
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
 
     getOpportunitesData();
-    getPostsData();
+    await getPostsData();
     account = myServices.box.read("account");
     idUserPostOwner = myServices.box.read("id");
-    print(
-        "$idUserPostOwner idUserPostOwnerlllllllllllllllllllllllllllllllllllllllllll");
+    print("$idUserPostOwner idUserPostOwnerlllllllllllllllllllll");
     scrollController = ScrollController();
+    tabController = TabController(length: 3, vsync: this);
+
     scrollController.addListener(scrollListener);
   }
 
+  void showPostDialog(PostModel postmodel) {
+    currentImage = 0;
+    Get.dialog(PostDetailsDialog(
+      content: postmodel.body!,
+      filesUrl: postmodel.files,
+      imageUrl: postmodel.images,
+      title: "",
+    ));
+  }
+
   @override
-  void onClose() {
-    // scrollController.removeListener(scrollListener);
-    //  scrollController.dispose();
-    super.onClose();
+  void dispose() {
+    tabController.dispose();
+    super.dispose();
   }
 }

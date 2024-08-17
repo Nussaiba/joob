@@ -25,25 +25,31 @@ class ApplyCompanyCard extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 2.0, vertical: 3),
       child: Card(
         elevation: 5,
-        color: AppColor.white,
+        color: AppColor.White(),
         child: Column(
           children: [
             ListTile(
-              title: Text(' ${application.opportunity_name} '),
-              subtitle: Text(
+              title:Text(
                 " ${application.seeker_name}",
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
+                  color:AppColor.TextColor()
                 ),
-              ),
+              ), 
+              subtitle: Text(' ${application.opportunity_name} ',
+               style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color:AppColor.Grey()
+                ),),
               trailing: Column(
                 children: [
                   Text(
                     " ${application.created_at!.substring(0, 11)}",
                     style: TextStyle(
                       fontSize: 14,
-                      color: Colors.grey[600],
+                      color:AppColor.Grey(),
                     ),
                   ),
                   Text(
@@ -112,15 +118,7 @@ class ApplyCompanyCard extends StatelessWidget {
                         horizontal: 16.0, vertical: 8),
                     child: Container(
                       decoration: BoxDecoration(
-                        // color: _getStatusColor("${application.status!}")
-                        //.withOpacity(0.2),
-                        // boxShadow: [
-                        //   BoxShadow(
-                        //     color: Colors.grey.withOpacity(0.2),
-                        //     spreadRadius: 1,
-                        //     blurRadius: 1,
-                        //   ),
-                        // ],
+                      
                         borderRadius: const BorderRadius.vertical(
                             top: Radius.circular(10),
                             bottom: Radius.circular(10)),

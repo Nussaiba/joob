@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -15,7 +16,13 @@ class MyServices extends GetxService {
         messagingSenderId: "136062004556", //paste your messagingSenderId here
         projectId: "jobsapp-ea72c", //paste your project id here
       ),
-    );
+     );
+    //  FirebaseMessaging.instance.getToken().then((value) {
+    //   String? device_token = value;
+    //         print("device_token");
+
+    //   print(device_token);
+    // });
     return this;
   }
 }

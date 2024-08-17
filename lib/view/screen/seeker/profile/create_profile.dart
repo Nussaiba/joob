@@ -14,7 +14,6 @@ import 'package:jobs/view/widget/general/custom_text_body.dart';
 import 'package:jobs/view/widget/general/custom_text_field.dart';
 import 'package:jobs/view/widget/general/fade_animation.dart';
 import 'package:jobs/view/widget/profile/create_profile_widgets/custom_date.dart';
-import 'package:jobs/view/widget/profile/create_profile_widgets/text_user.dart';
 
 class CreateProfilePage extends StatelessWidget {
   const CreateProfilePage({super.key});
@@ -24,7 +23,7 @@ class CreateProfilePage extends StatelessWidget {
     Get.put(CreateProfileControllerImp());
 
     return Scaffold(
-      // backgroundColor: AppColor.white,
+      backgroundColor: AppColor.Backgroundcolor(),
       appBar: AppBar(
         backgroundColor: AppColor.praimaryColor,
         elevation: 0.0,
@@ -120,7 +119,7 @@ class CreateProfilePage extends StatelessWidget {
                           label: "129".tr,
                           hint: "130".tr,
                           items: controller.specializations,
-                          icon: Icons.info_outline,
+                          icon: Icons.work_outline,
                           onChanged: controller.setSelectedSpecialization,
                         ),
                         2.6),
@@ -169,7 +168,7 @@ class CreateProfilePage extends StatelessWidget {
                           children: [
                             CustomTextFieldInfo(
                               icon: Icons.emoji_objects,
-                              label: "133".tr,
+                              label: "59".tr,
                               hint: "134".tr,
                               mycontroller:
                                   controller.textEditingControllerskill,
@@ -200,6 +199,42 @@ class CreateProfilePage extends StatelessWidget {
                           ],
                         ),
                         3.3),
+                      FadeAnimation(
+                          CustomTextFieldInfo(
+                            icon: Icons.email,
+                            label: "13".tr,
+                            hint: "12".tr,
+                            mycontroller: controller.contactInfoEmail,
+                            keyboardType: TextInputType.emailAddress,
+                          ),
+                          3.4),
+                      FadeAnimation(
+                          CustomTextFieldInfo(
+                            icon: Icons.phone,
+                            label: "244".tr,
+                            hint: "245".tr,
+                            mycontroller: controller.contactInfoPhone,
+                            keyboardType: TextInputType.phone,
+                          ),
+                          3.5),
+                      FadeAnimation(
+                          CustomTextFieldInfo(
+                            icon: Icons.code,
+                            label: "246".tr,
+                            hint: "247".tr,
+                            mycontroller: controller.contactInfoGitHub,
+                            keyboardType: TextInputType.emailAddress,
+                          ),
+                          3.6),
+                      FadeAnimation(
+                          CustomTextFieldInfo(
+                            icon: Icons.web,
+                            label: "248".tr,
+                            hint: "249".tr,
+                            mycontroller: controller.contactInfoWebSite,
+                            keyboardType: TextInputType.emailAddress,
+                          ),
+                          3.7),
                     FadeAnimation(
                         CustomTextFieldInfo(
                           icon: Icons.perm_device_information,
@@ -207,7 +242,7 @@ class CreateProfilePage extends StatelessWidget {
                           hint: "136".tr,
                           mycontroller: controller.about,
                         ),
-                        3.6),
+                        3.8),
                     FadeAnimation(
                         CustomDropDownButton(
                           label: "137".tr,
@@ -217,7 +252,7 @@ class CreateProfilePage extends StatelessWidget {
                           icon: Icons.work,
                           onChanged: controller.setSelectedGender,
                         ),
-                        3),
+                        3.9),
                     const SizedBox(
                       height: 20,
                     ),
@@ -228,7 +263,7 @@ class CreateProfilePage extends StatelessWidget {
                             onPressed: () {
                               controller.createProfile();
                             }),
-                        3.6),
+                        4),
                     const SizedBox(
                       height: 30,
                     ),

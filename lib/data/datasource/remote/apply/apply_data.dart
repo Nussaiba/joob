@@ -34,68 +34,16 @@ class AppliesData {
     return response.fold((l) => l, (r) => r);
   }
 
-  applyForm(
-      int id,
-      String full_name,
-      String birth_day,
-      String location,
-      String about,
-      List<String> skills,
-      List<String> certificates,
-      List<String> languages,
-      List<String> projects,
-      List<String> experiences,
-      List<String> contacts) async {
-    var response = await crud.postData("${AppLink.apply}/$id", {
-      "full_name": full_name,
-      "birth_day": birth_day,
-      "location": location,
-      "about": about,
-      "skills": skills,
-      "certificates": certificates,
-      "languages": languages,
-      "projects": projects,
-      "experiences": experiences,
-      "contacts": contacts
-    });
-    print("daataaaaaaaaaaaaaaa $response");
-    return response.fold((l) => l, (r) => r);
-  }
-
+  
   updateApplyCV(int id, File cv) async {
     var response =
-        await crud.postFileAndData("${AppLink.updateApply}/$id", {}, 'cv', cv);
+        await crud.postFileAndData("${AppLink.updateApply}/$id", {
+
+        }, 'cv', cv);
     print("daataaaaaaaaaaaaaaa $response");
     return response.fold((l) => l, (r) => r);
   }
 
-  updateApplyForm(
-      int id,
-      String? full_name,
-      String? birth_day,
-      String? location,
-      String? about,
-      List<String>? skills,
-      List<String>? certificates,
-      List<String>? languages,
-      List<String>? projects,
-      List<String>? experiences,
-      List<String>? contacts) async {
-    var response = await crud.postData("${AppLink.updateApply}/$id", {
-      "full_name": full_name,
-      "birth_day": birth_day,
-      "location": location,
-      "about": about,
-      "skills": skills,
-      "certificates": certificates,
-      "languages": languages,
-      "projects": projects,
-      "experiences": experiences,
-      "contacts": contacts
-    });
-    print("daataaaaaaaaaaaaaaa $response");
-    return response.fold((l) => l, (r) => r);
-  }
 
   deleteApply(int id) async {
     var response = await crud.deleteData("${AppLink.deleteApply}/$id");

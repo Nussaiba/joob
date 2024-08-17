@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:jobs/controller/apply/get_apply_seeker_controller.dart';
 import 'package:jobs/core/class/statusrequest.dart';
 import 'package:jobs/core/constants/routes.dart';
-import 'package:jobs/core/functions/dialiog.dart';
+import 'package:jobs/core/functions/dialiog_snack.dart';
 import 'package:jobs/core/functions/handlingdata.dart';
 import 'package:jobs/core/services/services.dart';
 import 'package:jobs/data/datasource/remote/apply/apply_data.dart';
@@ -43,7 +43,7 @@ class ApplyControllerImp extends GetxController {
       if (response["status"] == 201) {
         Get.lazyPut<GetApplySeekerControllerImp>;
         update();
-        getSnakBar("24".tr,  "${response["message"]}" , 3);
+        getSnakBar("24".tr, "${response["message"]}", 3);
         Get.offNamed(AppRoute.appliesSeeker);
       } else {
         if (response["status"] == 400) {
@@ -55,25 +55,17 @@ class ApplyControllerImp extends GetxController {
   }
 
   
-  updateApplyCV(int id) async {
-      statusRequest = StatusRequest.loading;
-      update();
-      print("111111111111111111  Controller");
-      var response = await appliesData.updateApplyCV(id, cv!);
-      statusRequest = handlingData(response);
-      if (StatusRequest.success == statusRequest) {
-        if (response["status"] == 201) {
-          Get.lazyPut<GetApplySeekerControllerImp>;
-          update();
-          getSnakBar("24".tr,  "${response["message"]}", 3);
-        } else {
-          getDialog("203".tr,  "${response["message"]}");
-      }
-    }
+
+  goToCreateCV() {
+    Get.offAndToNamed(
+      AppRoute.createCV,
+    );
   }
+
   @override
   void onInit() {
     super.onInit();
+
     id = Get.arguments['id_opportunity'];
   }
 }

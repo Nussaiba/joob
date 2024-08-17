@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jobs/core/constants/color.dart';
-import 'package:jobs/core/constants/imageassest.dart';
+import 'package:jobs/core/constants/image_assest.dart';
 
 class UserChat extends StatelessWidget {
   const UserChat({super.key});

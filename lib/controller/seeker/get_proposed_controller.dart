@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:jobs/core/class/statusrequest.dart';
+import 'package:jobs/core/functions/dialiog_snack.dart';
 import 'package:jobs/core/functions/handlingdata.dart';
 import 'package:jobs/core/services/services.dart';
 import 'package:jobs/data/datasource/remote/seeker/proposed_Jobs_data.dart';
@@ -48,7 +49,7 @@ class GetProposedControllerImp extends GetProposedController {
         }
       } else {
         statusRequestProposedCompanies = StatusRequest.failure;
-        Get.snackbar('Error', 'Failed to fetch Proposed Companies');
+        getSnakBar("203".tr, "${response["message"]}", 3);
       }
     }
     update();
@@ -77,7 +78,7 @@ class GetProposedControllerImp extends GetProposedController {
           update();
       } else {
         statusRequestproposedJobs = StatusRequest.failure;
-        Get.snackbar('Error', 'Failed to fetch Proposed Jobs');
+        getSnakBar("203".tr, "${response["message"]}", 3);
       }
     }
     update();

@@ -4,7 +4,7 @@ import 'package:jobs/core/class/statusrequest.dart';
 import 'package:jobs/core/functions/handlingdata.dart';
 import 'package:jobs/data/datasource/remote/settings/check_password.dart';
 import 'package:jobs/core/constants/routes.dart';
-import 'package:jobs/core/functions/dialiog.dart';
+import 'package:jobs/core/functions/dialiog_snack.dart';
 
 abstract class CheckPasswordController extends GetxController {
   showPassWord();
@@ -41,7 +41,7 @@ class CheckPasswordControllerImp extends CheckPasswordController {
         } else {
           if (response['status'] == 401) {
             print("401");
-                   getSnakBar("24".tr,  "${response["message"]}" , 3);
+                   getDialog("203".tr,  "${response["message"]}" );
 
             statusRequest = StatusRequest.failure;
           }

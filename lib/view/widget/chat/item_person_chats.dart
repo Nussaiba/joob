@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:jobs/core/constants/imageassest.dart';
+import 'package:jobs/core/constants/image_assest.dart';
 
 
 class ItemPersonChats extends StatelessWidget {

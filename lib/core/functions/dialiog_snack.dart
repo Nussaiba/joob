@@ -6,15 +6,15 @@ getDialog(String title, String message) async {
   return await Get.defaultDialog(
     title: title,
     middleText: message,
-    middleTextStyle:  TextStyle(color: AppColor.White()),
-    titleStyle:  TextStyle(color: AppColor.White()),
-    backgroundColor: AppColor.praimaryColor,
+    middleTextStyle: TextStyle(color: AppColor.TextColor()),
+    titleStyle: TextStyle(color: AppColor.TextColor()),
+    backgroundColor: AppColor.Backgroundcolor(),
   );
 }
 
 getSnakBar(String title, String message, int seconds) async {
   return Get.snackbar(title, message,
-      colorText: AppColor.white,
-      backgroundColor: AppColor.grey.withOpacity(0.6),
+      colorText: AppColor.TextColor(),
+      backgroundColor: AppColor.Backgroundcolor().withOpacity(0.7),
       duration: Duration(seconds: seconds));
 }

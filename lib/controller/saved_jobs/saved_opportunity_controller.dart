@@ -1,9 +1,10 @@
 import 'package:get/get.dart';
 import 'package:jobs/core/class/statusrequest.dart';
 import 'package:jobs/core/constants/routes.dart';
+import 'package:jobs/core/functions/dialiog_snack.dart';
 import 'package:jobs/core/functions/handlingdata.dart';
 import 'package:jobs/core/services/services.dart';
-import 'package:jobs/data/datasource/remote/seeker/saved_opportunity.dart';
+import 'package:jobs/data/datasource/remote/general/saved_opportunity.dart';
 import 'package:jobs/data/model/opportunity_model.dart';
 
 class SavedController extends GetxController {
@@ -46,7 +47,7 @@ class SavedController extends GetxController {
         update();
       } else {
         statusRequest = StatusRequest.failure;
-        Get.snackbar('Error', 'Failed to fetch saved opportunities');
+        getSnakBar("203".tr, "${response["message"]}", 3);
       }
     }
   }
@@ -73,22 +74,19 @@ class SavedController extends GetxController {
       if (response['status'] != 200) {
         if (isCurrentlySaved) {
           savedJob.add(id);
-          //update();
+         
         } else {
           savedJob.remove(id);
-          // update();
+        
         }
-        Get.snackbar('Error', 'Failed to saved opportunities');
+        getSnakBar("203".tr, "${response["message"]}", 3);
         update();
       } else {
         var update1 = Get.find<SavedController>();
         update1.getSavedOpportunityData();
         update();
-        // account == 'company'
-        //     ? {Get.find<MainScreenCompanyControllerImp>().onItemClick(3)}
-        //     : Get.find<MainScreenControllerImp>().onItemClick(3);
-
-      await Get.snackbar('Yes', response['message']);
+        
+        getSnakBar("24".tr, "${response["message"]}", 3);
       }
     }
   }

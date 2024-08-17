@@ -17,7 +17,7 @@ class CustomNotificationCard extends StatelessWidget {
           
           color: notification.readAt != null
               ? AppColor.White()
-              : AppColor.praimaryColor3.withOpacity(0.3),
+              : AppColor.Pink().withOpacity(0.3),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15.0),
           ),

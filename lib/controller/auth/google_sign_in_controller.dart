@@ -5,7 +5,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:jobs/core/constants/routes.dart';
 import 'package:jobs/data/model/user_chat_model.dart';
 import 'package:jobs/view/screen/chat/chats.dart';
-
 import '../../view/screen/chat/chatcreen.dart';
 
 class AuthWithGoogle extends GetxController {
@@ -30,9 +29,12 @@ class AuthWithGoogle extends GetxController {
             idToken: authgoogle.idToken, accessToken: authgoogle.accessToken);
         print(credential);
         await FirebaseAuth.instance
-            .signInWithCredential(credential)
-            .then((value) => userCredential = value);
+        .signInWithCredential(credential)
+        .then((value) => userCredential = value);
 
+        // await FirebaseAuth.instance
+        //     .signInWithCustomToken("eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJmaXJlYmFzZS1hZG1pbnNkay1qeHc4MEBqb2JzYXBwLWVhNzJjLmlhbS5nc2VydmljZWFjY291bnQuY29tIiwic3ViIjoiZmlyZWJhc2UtYWRtaW5zZGstanh3ODBAam9ic2FwcC1lYTcyYy5pYW0uZ3NlcnZpY2VhY2NvdW50LmNvbSIsImF1ZCI6Imh0dHBzOi8vaWRlbnRpdHl0b29sa2l0Lmdvb2dsZWFwaXMuY29tL2dvb2dsZS5pZGVudGl0eS5pZGVudGl0eXRvb2xraXQudjEuSWRlbnRpdHlUb29sa2l0IiwiaWF0IjoxNzIzODI3OTQxLCJleHAiOjE3MjM4MzE1NDEsInVpZCI6IjE1In0.Cw2LZOllSVU0sjQV2defA7Et2O1ObD38-XBshsx6LeL71M-gi9wbvd0CRDO8ulKhsHGLtqiytwK1OG5ASMWanp7obMPIfU62mtjU4VCqWcCGMpW0iwlZL4bznig-ZgAvpiHX7WxjduAYeVXvFtF9sVevy_QsRJx0JtjYlyM4WxU8qIzV4_lpn_ipG-K0bFBMSl1XnlFTdYcCHZXViFtetdeBr0__tkNOQWuif0mkQIcxxNEDlCwfw795Nm37hLDt1UznBMGb58DhYhait3YLLC5GMRfmeGJjZTnjB2X6fiHYrodPgLZ_phTbyyYoywpU57BAysLNhV3sYtkfxkyT3w")
+        //     .then((value) => userCredential = value);
         CollectionReference users = await firebaseFirestore.collection("users");
         print(users);
 
@@ -51,7 +53,6 @@ class AuthWithGoogle extends GetxController {
             "lastSignInTime": userCredential!.user!.metadata.lastSignInTime!
                 .toIso8601String(),
             "updateTime": DateTime.now().toIso8601String(),
-           
           });
 
           await users.doc(googleSignInAccount!.email).collection("chats");
@@ -248,7 +249,7 @@ class AuthWithGoogle extends GetxController {
           .update({"isRead": true});
     });
 
-print("$chat_id nmnnnnnnnnnnnnnnn");
+    print("$chat_id nmnnnnnnnnnnnnnnn");
     await users
         .doc(googleSignInAccount!.email)
         .collection("chats")

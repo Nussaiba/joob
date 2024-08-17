@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:jobs/core/class/statusrequest.dart';
 import 'package:jobs/core/constants/color.dart';
 import 'package:jobs/core/constants/routes.dart';
-import 'package:jobs/core/functions/dialiog.dart';
+import 'package:jobs/core/functions/dialiog_snack.dart';
 import 'package:jobs/core/functions/handlingdata.dart';
 import 'package:jobs/core/services/services.dart';
 import 'package:jobs/data/datasource/remote/general/choose_image.dart';
@@ -25,6 +25,10 @@ class CreateProfileControllerImp extends CreateProfileController {
   String? email;
   late TextEditingController firstname;
   late TextEditingController lastname;
+  late TextEditingController contactInfoEmail;
+  late TextEditingController contactInfoPhone;
+  late TextEditingController contactInfoGitHub;
+  late TextEditingController contactInfoWebSite;
   List<String> skills = [];
   List<String> certificates = [];
   late TextEditingController about;
@@ -196,6 +200,10 @@ class CreateProfileControllerImp extends CreateProfileController {
         skills,
         certificates,
         selectedSpecialization!,
+         contactInfoEmail.text,
+        contactInfoPhone.text,
+        contactInfoGitHub.text,
+        contactInfoWebSite.text,
         about.text,
         selectedGender!);
     print("================$response  Controller");
@@ -204,14 +212,7 @@ class CreateProfileControllerImp extends CreateProfileController {
     print(response);
     if (StatusRequest.success == statusRequest) {
       if (response['status'] == 201) {
-        // myServices.box.write("firstname", firstname.text);
-        // myServices.box.write("lastname", lastname.text);
-        // myServices.box.write("birthday", birthday1.toString());
-        // // myServices.box.write("location", location);
-        // myServices.box.write("imagepath", image!.path);
-        // myServices.box.write("skills", skills);
-        // myServices.box.write("certificates", certificates);
-        // myServices.box.write("about", about.text);
+      
         myServices.box.write("step", "3");
 
         Get.offNamed(
@@ -271,12 +272,17 @@ class CreateProfileControllerImp extends CreateProfileController {
   @override
   void onInit() {
     initialData();
+        loadJsonData();
+
     firstname = TextEditingController();
     lastname = TextEditingController();
+     contactInfoEmail = TextEditingController();
+    contactInfoPhone = TextEditingController();
+    contactInfoGitHub = TextEditingController();
+    contactInfoWebSite = TextEditingController();
     textEditingControllerskill = TextEditingController();
     textEditingControllerCertificates = TextEditingController();
     about = TextEditingController();
-    loadJsonData();
     super.onInit();
   }
 
@@ -287,7 +293,10 @@ class CreateProfileControllerImp extends CreateProfileController {
 
     textEditingControllerCertificates.dispose();
     textEditingControllerskill.dispose();
-
+ contactInfoEmail.dispose();
+    contactInfoPhone.dispose();
+    contactInfoGitHub.dispose();
+    contactInfoWebSite.dispose();
     about.dispose();
     super.dispose();
   }

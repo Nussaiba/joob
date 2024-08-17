@@ -3,14 +3,12 @@ import 'package:get/get.dart';
 import 'package:jobs/api_link.dart';
 import 'package:jobs/controller/company_seeker/account_settings_controller.dart';
 import 'package:jobs/core/constants/color.dart';
-import 'package:jobs/core/constants/imageassest.dart';
 import 'package:jobs/core/constants/routes.dart';
+import 'package:jobs/view/widget/company&seeker/setting_page/setting_item..dart';
 
 class AccountSettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    //  const String profileImageUrl = AppImageAsset.onBoardingImgFour;
-
     final controller = Get.put(AccountSettingsController());
     return Scaffold(
       backgroundColor: AppColor.Backgroundcolor(),
@@ -19,7 +17,7 @@ class AccountSettingsScreen extends StatelessWidget {
           "160".tr,
           style: TextStyle(color: AppColor.white),
         ),
-        backgroundColor: AppColor.praimaryColor,
+        backgroundColor: AppColor.PraimaryColor(),
         iconTheme: IconThemeData(
           color: AppColor.white,
         ),
@@ -99,30 +97,5 @@ class AccountSettingsScreen extends StatelessWidget {
         ],
       ),
     );
-  }
-}
-
-class SettingsItem extends StatelessWidget {
-  const SettingsItem({
-    super.key,
-    this.onTap,
-    required this.text,
-    required this.icon,
-  });
-  final Function()? onTap;
-  final String text;
-  final IconData icon;
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-        leading: Icon(
-          icon,
-          color: AppColor.IconColor(),
-        ),
-        title: Text(
-          text,
-          style: TextStyle(color: AppColor.IconColor()),
-        ),
-        onTap: onTap);
   }
 }

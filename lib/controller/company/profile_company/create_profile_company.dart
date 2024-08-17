@@ -3,9 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jobs/core/class/statusrequest.dart';
-import 'package:jobs/core/constants/color.dart';
 import 'package:jobs/core/constants/routes.dart';
-import 'package:jobs/core/functions/dialiog.dart';
+import 'package:jobs/core/functions/dialiog_snack.dart';
 import 'package:jobs/core/functions/handlingdata.dart';
 import 'package:jobs/core/services/services.dart';
 import 'package:jobs/data/datasource/remote/company/profile_company_data.dart';
@@ -22,7 +21,11 @@ class CreateProfileCompanyControllerImp extends CreateProfileCompanyController {
 
   File? image;
   late TextEditingController companyname;
-  late TextEditingController contactInfo;
+  late TextEditingController contactInfoEmail;
+  late TextEditingController contactInfoPhone;
+  late TextEditingController contactInfoGitHub;
+  late TextEditingController contactInfoWebSite;
+
   late TextEditingController about;
   String? companyName;
   String? email;
@@ -100,7 +103,10 @@ class CreateProfileCompanyControllerImp extends CreateProfileCompanyController {
         "$selectedCountry,$selectedCity",
         image,
         about.text,
-        contactInfo.text,
+        contactInfoEmail.text,
+        contactInfoPhone.text,
+        contactInfoGitHub.text,
+        contactInfoWebSite.text,
         selectedDomain!);
     print("================$response  Controller");
     statusRequest = handlingData(response);
@@ -120,11 +126,6 @@ class CreateProfileCompanyControllerImp extends CreateProfileCompanyController {
     update();
 
     //  } else {}
-  }
-
-  initialData() {
-    // email = myServices.box.read("email");
-    // companyName = myServices.box.read("companyname");
   }
 
   List<Country> countries = <Country>[].obs;
@@ -171,10 +172,13 @@ class CreateProfileCompanyControllerImp extends CreateProfileCompanyController {
 
   @override
   void onInit() {
-    initialData();
     loadJsonData();
     companyname = TextEditingController();
-    contactInfo = TextEditingController();
+    contactInfoEmail = TextEditingController();
+    contactInfoPhone = TextEditingController();
+    contactInfoGitHub = TextEditingController();
+    contactInfoWebSite = TextEditingController();
+
     about = TextEditingController();
     super.onInit();
   }
@@ -182,8 +186,10 @@ class CreateProfileCompanyControllerImp extends CreateProfileCompanyController {
   @override
   void dispose() {
     companyname.dispose();
-    contactInfo.dispose();
-    // location.dispose();
+    contactInfoEmail.dispose();
+    contactInfoPhone.dispose();
+    contactInfoGitHub.dispose();
+    contactInfoWebSite.dispose();
     about.dispose();
     super.dispose();
   }

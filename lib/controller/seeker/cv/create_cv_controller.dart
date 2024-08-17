@@ -1,5 +1,10 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:jobs/core/constants/color.dart';
+import 'package:jobs/core/constants/image_assest.dart';
+import 'package:jobs/core/functions/dialiog_snack.dart';
+import 'package:jobs/view/widget/general/custom_button_with_icon.dart';
+import 'package:lottie/lottie.dart';
 import 'package:open_file/open_file.dart';
 import 'package:get/get.dart';
 import 'package:jobs/core/class/crud.dart';
@@ -13,17 +18,18 @@ class CreateCvController extends GetxController {
   StatusRequest statusRequest = StatusRequest.none;
   CvData cvData = CvData(Get.put(Crud()));
   MyServices myServices = Get.find();
-  String? firstName;
-  String? lastName;
-  String? Birthday;
-  String? Location;
-  String? imagepath;
+
+  late TextEditingController full_name;
+  late TextEditingController birth_day;
+  late TextEditingController location;
+  late TextEditingController about;
+
   late List<TextEditingController> language;
-  late List<TextEditingController> skills;
-  late List<TextEditingController> certificates;
-  late List<TextEditingController> projects;
-  late List<TextEditingController> experiences;
-  late List<TextEditingController> contacts;
+  late List<TextEditingController> skill;
+  late List<TextEditingController> certificate;
+  late List<TextEditingController> project;
+  late List<TextEditingController> experience;
+  late List<TextEditingController> contact;
   late List<TextEditingController> profile;
   var focuseslanguages = <FocusNode>[].obs;
   var focusesskills = <FocusNode>[].obs;
@@ -37,6 +43,7 @@ class CreateCvController extends GetxController {
     var flanguage = FocusNode();
     focuseslanguages.add(flanguage);
     list.add(TextEditingController());
+
     update();
     Future.delayed(const Duration(milliseconds: 100), () {
       flanguage.requestFocus();
@@ -98,7 +105,16 @@ class CreateCvController extends GetxController {
     update();
     print("=111111111111111111  Controller");
     var response = await cvData.postCvData(
-        skills, certificates, language, projects, experiences, contacts);
+        full_name.text,
+        birth_day.text,
+        location.text,
+        about.text,
+        skill,
+        certificate,
+        language,
+        project,
+        experience,
+        contact);
     print("================$response  Controller");
     statusRequest = handlingData(response);
     print(statusRequest);
@@ -115,48 +131,87 @@ class CreateCvController extends GetxController {
       print(fileCv);
       await fileCv.writeAsBytes(buffer.asUint8List());
       print(fileCv);
-      await OpenFile.open(fileCv.path).whenComplete(() => print("CV"));
+      open(fileCv);
+      // await OpenFile.open(fileCv.path).whenComplete(() => print("CV"));
       update();
+    } else {
+      getDialog("203".tr, "218".tr);
     }
   }
 
-  initialData() {
-    firstName = myServices.box.read("firstname");
-    lastName = myServices.box.read("lastname");
-    Birthday = myServices.box.read("birthday");
-    Location = myServices.box.read("location");
-    imagepath = myServices.box.read("imagepath");
+  open(File file) {
+    Get.defaultDialog(
+        backgroundColor: AppColor.Backgroundcolor(),
+        title: "217".tr,
+        titleStyle: TextStyle(
+          fontSize: 24.0,
+          fontWeight: FontWeight.bold,
+          color: AppColor.TextColor(),
+          letterSpacing: 1.5,
+          shadows: [
+            Shadow(
+              blurRadius: 4.0,
+              color: Colors.black.withOpacity(0.5),
+            ),
+          ],
+        ),
+        content: Column(
+          children: [
+            Center(
+              child: Lottie.asset(AppImageAsset.cv, width: 250, height: 250),
+            ),
+            CustomButtonWithIcon(
+              onPressed: () async {
+                await OpenFile.open(file.path).whenComplete(() => print("CV"));
+
+                update();
+                Get.back();
+              },
+              icon: Icons.attach_file,
+              title: "119".tr,
+            ),
+          ],
+        ));
   }
 
   @override
   void onInit() {
-    initialData();
+    full_name = TextEditingController();
+    birth_day = TextEditingController();
+    location = TextEditingController();
+    about = TextEditingController();
+
     language = <TextEditingController>[].obs;
-    skills = <TextEditingController>[].obs;
-    certificates = <TextEditingController>[].obs;
-    projects = <TextEditingController>[].obs;
-    experiences = <TextEditingController>[].obs;
-    contacts = <TextEditingController>[].obs;
+    skill = <TextEditingController>[].obs;
+    certificate = <TextEditingController>[].obs;
+    project = <TextEditingController>[].obs;
+    experience = <TextEditingController>[].obs;
+    contact = <TextEditingController>[].obs;
     profile = <TextEditingController>[].obs;
 
     super.onInit();
   }
 
   @override
-  void onClose() {
+  void dispose() {
+    full_name.dispose();
+    birth_day.dispose();
+    location.dispose();
+    about.dispose();
+
     for (var element in focuseslanguages) {
       element.dispose();
     }
     for (var element in language) {
       element.dispose();
     }
-    projects.forEach((element) {
+    project.forEach((element) {
       element.dispose();
     });
-    skills.forEach((element) {
+    skill.forEach((element) {
       element.dispose();
     });
 
-    super.onClose();
+    super.dispose();
   }
 }

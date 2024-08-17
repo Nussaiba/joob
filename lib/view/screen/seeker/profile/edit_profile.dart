@@ -6,9 +6,9 @@ import 'package:jobs/core/class/handlingdataview.dart';
 import 'package:jobs/core/constants/color.dart';
 import 'package:jobs/core/functions/validinput.dart';
 import 'package:jobs/view/widget/auth/custombuttomauth.dart';
-import 'package:jobs/view/widget/auth/customtextformauth.dart';
 import 'package:jobs/view/widget/company/add_opportunity/custom_warp.dart';
 import 'package:jobs/view/widget/general/custom_drop_search.dart';
+import 'package:jobs/view/widget/general/custom_text_body.dart';
 import 'package:jobs/view/widget/general/custom_text_field.dart';
 import 'package:jobs/view/widget/general/fade_animation.dart';
 import 'package:jobs/view/widget/profile/create_profile_widgets/custom_date.dart';
@@ -40,6 +40,13 @@ class EditProfilePage extends StatelessWidget {
           widget: Padding(
             padding: const EdgeInsets.all(8.0),
             child: ListView(children: [
+              const SizedBox(
+                height: 5,
+              ),
+              FadeAnimation(CustomTextBody(text: "233".tr), 0.2),
+              const SizedBox(
+                height: 15,
+              ),
               FadeAnimation(
                   (controller.imagepath != null && controller.image == null)
                       ? Center(
@@ -70,40 +77,9 @@ class EditProfilePage extends StatelessWidget {
                           image: controller.image,
                         ),
                   0.6),
-              // InkWell(
-              //   onTap: () async {
-              //     await controller.getImage();
-              //   },
-              //   child: Padding(
-              //     padding: const EdgeInsets.symmetric(horizontal: 140),
-              //     child: Container(
-              //         height: 70,
-              //         width: 70,
-              //         decoration: BoxDecoration(
-              //             borderRadius: BorderRadius.circular(50),
-              //             border: Border.all(
-              //                 color: AppColor.praimaryColor3, width: 2)),
-              //         child: (controller.image != null)
-              //             ? Image.file(
-              //                 controller.image!,
-              //               )
-              //             : (controller.image == null &&
-              //                     controller.imagepath != null)
-              //                 ? Image.network(
-              //                     "${AppLink.serverimage}/${controller.imagepath}",
-              //                   )
-              //                 : Container()),
-              //   ),
-              //),
               const SizedBox(
                 height: 15,
               ),
-              Divider(
-                  height: 16,
-                  thickness: 1,
-                  indent: 12,
-                  endIndent: 12,
-                  color: AppColor.black),
               const SizedBox(height: 10),
               FadeAnimation(
                   CustomTextFieldInfo(
@@ -166,7 +142,7 @@ class EditProfilePage extends StatelessWidget {
                     label: "129".tr,
                     hint: "130".tr,
                     items: controller.specializations,
-                    icon: Icons.info_outline,
+                    icon: Icons.work_outline,
                     onChanged: controller.setSelectedSpecialization,
                   ),
                   2.6),
@@ -212,7 +188,7 @@ class EditProfilePage extends StatelessWidget {
                     children: [
                       CustomTextFieldInfo(
                         icon: Icons.emoji_objects,
-                        label: "133".tr,
+                        label: "59".tr,
                         hint: "134".tr,
                         mycontroller: controller.textEditingControllerskill,
                         iconsuffix: Icons.add,
@@ -242,7 +218,42 @@ class EditProfilePage extends StatelessWidget {
                     ],
                   ),
                   3.3),
-
+              FadeAnimation(
+                  CustomTextFieldInfo(
+                    icon: Icons.email,
+                    label: "13".tr,
+                    hint: "12".tr,
+                    mycontroller: controller.contactInfoEmail,
+                    keyboardType: TextInputType.emailAddress,
+                  ),
+                  3.4),
+              FadeAnimation(
+                  CustomTextFieldInfo(
+                    icon: Icons.phone,
+                    label: "244".tr,
+                    hint: "245".tr,
+                    mycontroller: controller.contactInfoPhone,
+                    keyboardType: TextInputType.phone,
+                  ),
+                  3.5),
+              FadeAnimation(
+                  CustomTextFieldInfo(
+                    icon: Icons.code,
+                    label: "246".tr,
+                    hint: "247".tr,
+                    mycontroller: controller.contactInfoGitHub,
+                    keyboardType: TextInputType.emailAddress,
+                  ),
+                  3.6),
+              FadeAnimation(
+                  CustomTextFieldInfo(
+                    icon: Icons.web,
+                    label: "248".tr,
+                    hint: "249".tr,
+                    mycontroller: controller.contactInfoWebSite,
+                    keyboardType: TextInputType.emailAddress,
+                  ),
+                  3.7),
               FadeAnimation(
                   CustomTextFieldInfo(
                     icon: Icons.perm_device_information,
@@ -253,7 +264,7 @@ class EditProfilePage extends StatelessWidget {
                       return validInput(val!, 5, 80, "username");
                     },
                   ),
-                  3.5),
+                  3.8),
               FadeAnimation(
                   CustomDropDownButton(
                     label: "137".tr,
@@ -263,7 +274,7 @@ class EditProfilePage extends StatelessWidget {
                     icon: Icons.person,
                     onChanged: controller.setSelectedGender,
                   ),
-                  3.7),
+                  3.9),
               const SizedBox(
                 height: 20,
               ),

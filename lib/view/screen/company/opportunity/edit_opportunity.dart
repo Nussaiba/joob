@@ -8,7 +8,6 @@ import 'package:jobs/core/functions/validinput.dart';
 import 'package:jobs/view/widget/general/custom_text_body.dart';
 import 'package:jobs/view/widget/general/custom_dropdown_button.dart';
 import 'package:jobs/view/widget/company/add_opportunity/custom_switch.dart';
-import 'package:jobs/view/widget/general/custom_text_body.dart';
 import 'package:jobs/view/widget/general/custom_text_field.dart';
 import 'package:jobs/view/widget/general/Custom_choose_image.dart';
 import 'package:jobs/view/widget/general/custom_button.dart';
@@ -22,10 +21,16 @@ class EditJobOpportunityScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.put(EditNewOpportunityControllerImp());
     return Scaffold(
+      backgroundColor: AppColor.Backgroundcolor(),
       appBar: AppBar(
         title: Text(
           "66".tr,
+          style: TextStyle(color: AppColor.white),
         ),
+        iconTheme: IconThemeData(
+          color: AppColor.white,
+        ),
+        backgroundColor: AppColor.PraimaryColor(),
       ),
       body: Container(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -46,7 +51,7 @@ class EditJobOpportunityScreen extends StatelessWidget {
                                 decoration: BoxDecoration(
                                     border: Border.all(
                                         width: 1,
-                                        color: AppColor.praimaryColor),
+                                        color: AppColor.PraimaryColor()),
                                     color: Colors.deepPurple.shade50,
                                     borderRadius: BorderRadius.circular(50)),
                                 child: InkWell(
@@ -61,18 +66,14 @@ class EditJobOpportunityScreen extends StatelessWidget {
                                       )),
                                 )),
                           )
-                        // : controller.file != null
-                        //    ?
+                      
                         : CustomChooseImage(
                             onTap: () {
                               controller.getImage();
                             },
                             image: controller.file,
                           )
-                    // : Container(
-                    //     decoration: BoxDecoration(
-                    //     borderRadius: BorderRadius.circular(10),
-                    //   )),
+                   
                     ,
                     0.6),
                 FadeAnimation(

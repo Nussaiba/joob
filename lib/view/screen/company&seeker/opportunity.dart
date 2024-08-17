@@ -3,7 +3,9 @@ import 'package:get/get.dart';
 import 'package:jobs/api_link.dart';
 import 'package:jobs/controller/company_seeker/opportunity_details_controller.dart';
 import 'package:jobs/core/constants/color.dart';
-import 'package:jobs/core/constants/imageassest.dart';
+import 'package:jobs/core/constants/image_assest.dart';
+import 'package:jobs/view/widget/company&seeker/opportunity/detail_column.dart';
+import 'package:jobs/view/widget/company&seeker/opportunity/item.dart';
 import 'package:jobs/view/widget/company/add_opportunity/info_bottomsheet.dart';
 import 'package:jobs/view/widget/company/add_opportunity/simple_list.dart';
 import 'package:jobs/view/widget/general/custom_button.dart';
@@ -46,6 +48,9 @@ class OpportunityPage extends StatelessWidget {
                       Container(
                         height: 160,
                         decoration: BoxDecoration(
+                          // image: DecorationImage(
+                          //     image: AssetImage(AppImageAsset.background3),
+                          //     fit: BoxFit.cover),
                           color: AppColor.praimaryColor,
                           boxShadow: [
                             BoxShadow(
@@ -72,10 +77,9 @@ class OpportunityPage extends StatelessWidget {
                                     controller.back();
                                   },
                                 ),
-
                                 PopupMenuButton<String>(
-                                  color: AppColor.white,
-                                  iconColor: AppColor.white,
+                                  color: AppColor.White(),
+                                  iconColor: AppColor.White(),
                                   onSelected: (value) {
                                     switch (value) {
                                       case 'edit':
@@ -99,82 +103,79 @@ class OpportunityPage extends StatelessWidget {
                                         ? <PopupMenuEntry<String>>[
                                             PopupMenuItem(
                                               value: 'edit',
-                                              child: Text("66".tr),
+                                              child: Text("66".tr,
+                                                  style: TextStyle(
+                                                      color: AppColor
+                                                          .TextColor())),
                                             ),
                                             PopupMenuItem(
                                               value: 'delete',
-                                              child: Text("172".tr),
-                                            ),
+                                              child: Text("172".tr,
+                                                  style: TextStyle(
+                                                      color: AppColor
+                                                          .TextColor())),
+                                            )
                                           ]
                                         : <PopupMenuEntry<String>>[
                                             PopupMenuItem(
                                               value: 'report',
-                                              child: Text("100".tr),
+                                              child: Text("100".tr,
+                                                  style: TextStyle(
+                                                      color: AppColor
+                                                          .TextColor())),
                                             ),
                                           ];
                                   },
                                 ),
-                                // PopUpMenu(
-                                //   isOwner: controller.idUserOpportunityOwner ==
-                                //       controller.opportuntiyModel.user_id!,
-                                //   onPressedEdit: () {
-                                //     controller.goToEditPage(
-                                //         controller.opportuntiyModel);
-                                //   },
-                                //   onPressedDelete: () {
-                                //     controller.deleteOpportunity(
-                                //         controller.opportuntiyModel.id!);
-                                //   },
-                                //   onPressedReport: () {
-                                //     controller.report(
-                                //         controller.opportuntiyModel.id!);
-                                //   },
-                                // ),
                               ],
                             ),
                           )),
                       Positioned(
-                        top: 82.0,
+                        top: 78.0,
                         right: Get.width / 3.1,
                         left: Get.width / 3.1,
                         child: Container(
-                          height: 130,
-                          width: 130,
+                          height: 120,
+                          width: 120,
                           decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              color: AppColor.praimaryColor3,
+                              color: AppColor.Pink(),
                               border:
                                   Border.all(color: Colors.white, width: 5.0)),
-                          child: Hero(
-                            tag: controller.opportuntiyModel.id!,
-                            child: ClipRRect(
-                                borderRadius: BorderRadius.circular(100.0),
-                                child: controller.opportuntiyModel.image != null
-                                    ? Image.network(
-                                        "${AppLink.serverimage}/${controller.opportuntiyModel.image}",
-                                        fit: BoxFit.cover,
-                                      )
-                                    : Image.asset(
-                                        AppImageAsset.onBoardingImgOne,
-                                        fit: BoxFit.fill,
-                                      )),
-                          ),
+                          child: ClipRRect(
+                              borderRadius: BorderRadius.circular(200.0),
+                              child: controller.opportuntiyModel.images != null
+                                  ? Image.network(
+                                      "${AppLink.serverimage}/${controller.opportuntiyModel.images}",
+                                      fit: BoxFit.cover,
+                                    )
+                                  : Image.asset(
+                                      AppImageAsset.onBoardingImgOne,
+                                      fit: BoxFit.cover,
+                                    )),
                         ),
                       ),
                     ],
                   ),
                   const SizedBox(
-                    height: 25,
+                    height: 30,
                   ),
                   Container(
                     padding: const EdgeInsets.all(20),
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
+                        SizedBox(
+                          height: 10,
+                        ),
                         Text(controller.opportuntiyModel.title!,
+                        textAlign: TextAlign.center,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 24,
-                              color: AppColor.praimaryColor,
+                              
+                              color: AppColor.PraimaryColor(),
                               letterSpacing: 1.2,
                               shadows: [
                                 Shadow(
@@ -184,15 +185,12 @@ class OpportunityPage extends StatelessWidget {
                                 ),
                               ],
                             )),
-                        Hero(
-                          tag: controller.opportuntiyModel.location!,
-                          child: Text(
-                              '${"148".tr}  ${controller.opportuntiyModel.location!}',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
-                                  color: AppColor.TextColor())),
-                        ),
+                        Text(
+                            '${"148".tr}  ${controller.opportuntiyModel.location!}',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                color: AppColor.TextColor())),
                         const SizedBox(
                           height: 2,
                         ),
@@ -241,86 +239,5 @@ class OpportunityPage extends StatelessWidget {
                 ],
               ),
             ));
-  }
-}
-
-class DetailColumn extends StatelessWidget {
-  final String name;
-  final String description;
-  const DetailColumn({
-    super.key,
-    required this.name,
-    required this.description,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 22),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 4.0, bottom: 1),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 4),
-              child: Text(name,
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      color: AppColor.TextColor())),
-            ),
-          ),
-          Text(description,
-              style: TextStyle(
-                  color: AppColor.TextColor(), fontSize: 16, height: 1.5)),
-        ],
-      ),
-    );
-  }
-}
-
-class ItemDetailColumn extends StatelessWidget {
-  final IconData icon;
-  final String info;
-  final String info2;
-  const ItemDetailColumn({
-    super.key,
-    required this.icon,
-    required this.info,
-    required this.info2,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15.0),
-      child: Column(
-        children: [
-          Container(
-            width: 50,
-            height: 50,
-            decoration: BoxDecoration(
-              color: AppColor.PraimaryColor(),
-              borderRadius: BorderRadius.circular(40),
-            ),
-            child: Icon(icon, color: AppColor.White()),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          Text(info,
-              style:
-                  TextStyle(fontSize: 12, height: 1, color: AppColor.Grey())),
-          Text(
-            info2,
-            style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 14,
-                color: AppColor.TextColor()),
-          )
-        ],
-      ),
-    );
   }
 }

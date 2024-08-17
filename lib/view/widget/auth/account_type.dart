@@ -8,7 +8,7 @@ class AccountType extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Icon(icon, color: AppColor.praimaryColor3),
+      leading: Icon(icon, color: AppColor.IconColor()),
       title: Text(text),
     );
   }

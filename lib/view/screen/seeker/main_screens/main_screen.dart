@@ -19,41 +19,47 @@ class MainScreens extends GetView<MainScreenControllerImp> {
         extendBody: true,
         bottomNavigationBar: Obx(
           () => CurvedNavigationBar(
-            height: 60,
+            height: 55,
             key: controller.bottomNavigationBar,
-            color: AppColor.PraimaryColor(),
+            color: AppColor.Grey2(),
             index: controller.page.value,
             animationDuration: const Duration(milliseconds: 300),
             backgroundColor: Colors.transparent,
+            buttonBackgroundColor: AppColor.PraimaryColor().withOpacity(0.2),
             onTap: (index) {
               controller.onItemClick(index);
             },
             items: [
-              Icon(Icons.home_rounded,
+              Icon(
+                  controller.currentindex.value == 0
+                      ? Icons.home_rounded
+                      : Icons.home_outlined,
                   size: 25,
-                  color: controller.currentindex.value == 0
-                      ? AppColor.white
-                      : AppColor.grey),
-              Icon(Icons.add_business,
+                  color: AppColor.PraimaryColor()),
+              Icon(
+                  controller.currentindex.value == 1
+                      ? Icons.add_business
+                      : Icons.add_business_outlined,
                   size: 25,
-                  color: controller.currentindex.value == 1
-                      ? AppColor.white
-                      : AppColor.grey),
-              Icon(Icons.notifications,
+                  color: AppColor.PraimaryColor()),
+              Icon(
+                  controller.currentindex.value == 2
+                      ? Icons.notifications
+                      : Icons.notifications_none_outlined,
                   size: 25,
-                  color: controller.currentindex.value == 2
-                      ? AppColor.white
-                      : AppColor.grey),
-              Icon(Icons.bookmark_border,
+                  color: AppColor.PraimaryColor()),
+              Icon(
+                  controller.currentindex.value == 3
+                      ? Icons.bookmark
+                      : Icons.bookmark_outline_rounded,
                   size: 25,
-                  color: controller.currentindex.value == 3
-                      ? AppColor.white
-                      : AppColor.grey),
-              Icon(Icons.chat_rounded,
+                  color: AppColor.PraimaryColor()),
+              Icon(
+                  controller.currentindex.value == 4
+                      ? Icons.chat
+                      : Icons.chat_outlined,
                   size: 25,
-                  color: controller.currentindex.value == 4
-                      ? AppColor.white
-                      : AppColor.grey),
+                  color: AppColor.PraimaryColor()),
             ],
           ),
         ),
@@ -66,6 +72,7 @@ class MainScreens extends GetView<MainScreenControllerImp> {
             NotificationPage(),
             JobSavedScreen(),
             MyHomePagea(),
+            //ChatsApp(),
           ],
         ));
   }

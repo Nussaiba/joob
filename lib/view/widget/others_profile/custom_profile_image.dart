@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jobs/api_link.dart';
 import 'package:jobs/core/constants/color.dart';
-import 'package:jobs/core/constants/imageassest.dart';
+import 'package:jobs/core/constants/image_assest.dart';
 
 class customImage extends StatelessWidget {
   const customImage({
@@ -16,7 +16,7 @@ class customImage extends StatelessWidget {
       width: 110,
       decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: AppColor.praimaryColor3,
+          color: AppColor.PraimaryColor(),
           border: Border.all(color:AppColor.Backgroundcolor(), width: 4.0)),
       child: ClipRRect(
           borderRadius: BorderRadius.circular(150.0),

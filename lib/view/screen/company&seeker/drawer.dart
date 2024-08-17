@@ -71,7 +71,7 @@ class CustomDrawer extends StatelessWidget {
                                 child: Padding(
                                   padding: const EdgeInsets.only(bottom: 4.0),
                                   child:
-                                      // Icon(Icons.account_circle, size: 55),
+                                   
 
                                       CircleAvatar(
                                     backgroundImage: controller.image != null
@@ -105,11 +105,15 @@ class CustomDrawer extends StatelessWidget {
                       ),
                       DrawerItem(
                         open: controller.isDrawerOpen.value,
-                        icon: Icons.wb_sunny_outlined,
-                        itemName: "86".tr,
+                        icon: controller.dark == true?
+                        Icons.wb_sunny_outlined:
+                        Icons.dark_mode ,
+                        itemName:
+                        controller.dark == true?
+                        "227".tr:
+                       "86".tr,
                         onTap: () {
                           controller.toggleDarkMode();
-                          //controller.setDarkMode();
                         },
                       ),
                       DrawerItem(

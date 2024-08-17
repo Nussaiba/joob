@@ -1,10 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jobs/api_link.dart';
 import 'package:jobs/controller/seeker/post/edie_post.dart';
+import 'package:jobs/core/class/handlingdataview.dart';
 import 'package:jobs/core/constants/color.dart';
-import 'package:jobs/view/widget/post/chosen_image_card.dart';
 import 'package:jobs/view/widget/post/chosen_pdf_card.dart';
-import 'package:jobs/view/widget/post/show_image_card.dart';
 import 'package:jobs/view/widget/post/show_pdf_card.dart';
 
 class EditPostPage extends StatelessWidget {
@@ -15,6 +17,7 @@ class EditPostPage extends StatelessWidget {
     Get.put(EditPostControllerImp());
     return GetBuilder<EditPostControllerImp>(
         builder: (controller) => Scaffold(
+              backgroundColor: AppColor.Backgroundcolor(),
               appBar: AppBar(
                 title: Text(
                   "121".tr,
@@ -31,72 +34,144 @@ class EditPostPage extends StatelessWidget {
                   ),
                 ],
               ),
-              body: SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TextField(
-                          controller: controller.bodyPost,
-                          decoration: InputDecoration(
-                            hintText: "118".tr,
-                            border: InputBorder.none,
-                            contentPadding: EdgeInsets.symmetric(
-                                horizontal: 8.0, vertical: 8.0),
+              body: HandlingDataView(
+                statusRequest: controller.statusRequest,
+                widget: SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TextField(
+                            controller: controller.bodyPost,
+                            decoration: InputDecoration(
+                              hintText: "118".tr,
+                              border: InputBorder.none,
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 8.0, vertical: 8.0),
+                            ),
+                            keyboardType: TextInputType.multiline,
+                            maxLines: null,
                           ),
-                          keyboardType: TextInputType.multiline,
-                          maxLines: null,
                         ),
-                      ),
-                      const SizedBox(height: 20),
-                      controller.path != null &&
-                              controller.selectedFile == null &&
-                              controller.contentType == 'image'
-                          ? ShowImageCard(
-                              imageName: controller.path!,
-                              onPressedDelete: () => {controller.deleteFile()},
-                            )
-                          : controller.path != null &&
-                                  controller.selectedFile == null &&
-                                  controller.contentType == 'file'
-                              ? ShowPdfCard(
+                        const SizedBox(height: 20),
+                        ListView.builder(
+                          physics: NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                            itemCount: controller.oldFilespaths.length +
+                                controller.newFiles!.length,
+                            itemBuilder: (context, index) {
+                              if (index < controller.oldFilespaths.length) {
+                                return ShowPdfCard(
                                   onTapDownload: () async {
                                     await controller.download(
-                                        '${controller.path}',
-                                        '${controller.path!.split("/").last}.pdf');
+                                        '${controller.oldFilespaths[index].url}',
+                                        '${controller.oldFilespaths[index].url!.split("/").last}');
                                   },
-                                  pdfName: controller.path!.split('/').last,
+                                  pdfName: controller
+                                      .oldFilespaths[index].url!
+                                      .split('/')
+                                      .last,
+                                  onPressedDelete: () => {
+                                    controller.removeOldFile(index,
+                                        controller.oldFilespaths[index].id!)
+                                  },
+                                );
+                              } else {
+                                return ChosenPdfCard(
+                                  pdfName: controller
+                                      .newFiles![index -
+                                          controller.oldFilespaths.length]
+                                      .path
+                                      .split('/')
+                                      .last,
+                                  onTapOpen: () =>
+                                      controller.openSelectedFile(
+                                        controller.selectedFiles[index -
+                                          controller.oldFilespaths.length]),
                                   onPressedDelete: () =>
-                                      {controller.deleteFile()},
-                                )
-                              : controller.selectedFile != null &&
-                                      controller.contentType == 'file'
-                                  ? ChosenPdfCard(
-                                      pdfName: controller.selectedFile!.path
-                                          .split('/')
-                                          .last,
-                                      onTapOpen: () =>
-                                          controller.openSelectedFile(),
-                                      onPressedDelete: () =>
-                                          {controller.deleteFile()},
-                                    )
-                                  :
-                                  //controller.path == null&&
-                                  controller.selectedFile != null &&
-                                          controller.contentType == 'image'
-                                      ? ChosenImageCard(
-                                          image: controller.selectedFile!,
-                                          onPressedDelete: () =>
-                                              {controller.deleteFile()})
-                                      : Container(
-                                          decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ))
-                    ],
+                                      {controller.removeNewFile(index -
+                                    controller.oldFilespaths.length)},
+                                );
+                              }
+                            }),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        GridView.builder(
+                             physics: NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 3,
+                            childAspectRatio: 1.1,
+                          ),
+                          itemCount: controller.oldimagespaths.length +
+                              controller.newImages!.length,
+                          itemBuilder: (context, index) {
+                            if (index < controller.oldimagespaths.length) {
+                              return GestureDetector(
+                                onTap: () {
+                                  controller.removeOldImage(index,
+                                      controller.oldimagespaths[index].id!);
+                                },
+                                child: Stack(
+                                  children: [
+                                    Container(
+                                      height: 100,
+                                      width: 100,
+                                      child: Image.network(
+                                        "${AppLink.serverimage}/${controller.oldimagespaths[index].url}",
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    Positioned(
+                                      right: 0,
+                                      child: Icon(
+                                        Icons.delete,
+                                        color: Colors.red,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            } else {
+                              return GestureDetector(
+                                onTap: () {
+                                  controller.removeNewImage(index -
+                                      controller.oldimagespaths.length);
+                                },
+                                child: Stack(
+                                  children: [
+                                    Container(
+                                      height: 100,
+                                      width: 100,
+                                      child: Image.file(
+                                        File(controller
+                                            .newImages![index -
+                                                controller
+                                                    .oldimagespaths.length]
+                                            .path),
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    Positioned(
+                                      right: 0,
+                                      child: Icon(
+                                        Icons.delete,
+                                        color: Colors.red,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            }
+                          },
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

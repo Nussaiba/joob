@@ -3,10 +3,9 @@ import 'package:get/get.dart';
 import 'package:jobs/view/widget/general/custom_button_with_icon.dart';
 
 class ApplicationWays extends StatelessWidget {
-  ApplicationWays({Key? key, this.onPressedCV, this.onPressedForm})
+  ApplicationWays({Key? key, this.onPressedCV, })
       : super(key: key);
   final void Function()? onPressedCV;
-  final void Function()? onPressedForm;
 
   @override
   Widget build(BuildContext context) {
@@ -20,11 +19,7 @@ class ApplicationWays extends StatelessWidget {
             title: "176".tr,
           ),
           SizedBox(height: 20),
-          CustomButtonWithIcon(
-            onPressed: onPressedCV,
-            icon: Icons.text_fields,
-            title: "177".tr,
-          ),
+        
         ],
       ),
     );

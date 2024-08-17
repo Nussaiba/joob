@@ -1,10 +1,9 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jobs/controller/seeker/post/create_post_controller.dart';
+import 'package:jobs/core/class/handlingdataview.dart';
 import 'package:jobs/core/constants/color.dart';
-import 'package:jobs/view/widget/post/chosen_image_card.dart';
 import 'package:jobs/view/widget/post/chosen_pdf_card.dart';
 
 class PostPage extends StatelessWidget {
@@ -15,12 +14,13 @@ class PostPage extends StatelessWidget {
     Get.put(CreatePostControllerImp());
     return GetBuilder<CreatePostControllerImp>(
         builder: (controller) => Scaffold(
+              backgroundColor: AppColor.Backgroundcolor(),
               appBar: AppBar(
                 title: Text(
                   "117".tr,
                   style: TextStyle(color: AppColor.white),
                 ),
-                backgroundColor: AppColor.praimaryColor,
+                backgroundColor: AppColor.PraimaryColor(),
                 iconTheme: IconThemeData(color: AppColor.white),
                 actions: [
                   IconButton(
@@ -31,52 +31,102 @@ class PostPage extends StatelessWidget {
                   ),
                 ],
               ),
-              body: SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TextField(
-                          controller: controller.bodyPost,
-                          decoration: InputDecoration(
-                            hintText: "118".tr,
-                            border: InputBorder.none,
-                            contentPadding: EdgeInsets.symmetric(
-                                horizontal: 8.0, vertical: 8.0),
+              body: HandlingDataView(
+                statusRequest: controller.statusRequest,
+                widget: SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TextField(
+                            controller: controller.bodyPost,
+                            decoration: InputDecoration(
+                              hintText: "118".tr,
+                              border: InputBorder.none,
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 8.0, vertical: 8.0),
+                            ),
+                            keyboardType: TextInputType.multiline,
+                            maxLines: null,
                           ),
-                          keyboardType: TextInputType.multiline,
-                          maxLines: null,
                         ),
-                      ),
-                      const SizedBox(height: 20),
-                      controller.selectedFile != null &&
-                              controller.contentType == 'image'
-                          ? ChosenImageCard(
-                              image: controller.selectedFile!,
-                              onPressedDelete: () => {controller.deleteFile()})
-                          : controller.selectedFile != null &&
-                                  controller.contentType == 'file'
-                              ? ChosenPdfCard(
-                                  pdfName: '${controller.selectedFile!.path}',
-                                  onTapOpen: () =>
-                                      controller.openSelectedFile(),
-                                  onPressedDelete: () =>
-                                      {controller.deleteFile()},
-                                )
-                              : Container(
-                                  decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                )),
-                      const SizedBox(height: 20),
-                    ],
+                        const SizedBox(height: 20),
+                        controller.selectedFiles.isNotEmpty
+                            ? ListView.builder(
+                                physics: NeverScrollableScrollPhysics(),
+                                                      shrinkWrap: true,
+                                itemCount: controller.selectedFiles.length,
+                                itemBuilder: (context, index) {
+                                  return ChosenPdfCard(
+                                    pdfName:
+                                        '${controller.selectedFiles[index].name}',
+                                    onTapOpen: () =>
+                                        controller.openSelectedFile(controller.selectedFiles[index]),
+                                    onPressedDelete: () =>
+                                        {controller.removeFiles(index)},
+                                  );
+                                })
+                            : Container(
+                                decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                              )),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        controller.selectedImages.isNotEmpty
+                            ? GridView.builder(
+                                physics: NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 3,
+                                childAspectRatio: 1.1,
+                              ),
+                              itemCount: controller.selectedImages.length,
+                              itemBuilder: (context, index) {
+                                final image =
+                                    controller.selectedImages[index];
+                            
+                                return GestureDetector(
+                                  onTap: () {
+                                    controller.removeImage(index);
+                                  },
+                                  child: Stack(
+                                    children: [
+                                      Container(
+                                        height: 100,
+                                        width: 100,
+                                        child: Image.file(
+                                          File(image.path),
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                      Positioned(
+                                        right: 0,
+                                        child: Icon(
+                                          Icons.delete,
+                                          color: Colors.red,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
+                            )
+                            : Container(
+                                decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                              )),
+                      ],
+                    ),
                   ),
                 ),
               ),
               floatingActionButton: FloatingActionButton(
-                  backgroundColor: AppColor.PraimaryColor(),
+                backgroundColor: AppColor.PraimaryColor(),
                 focusColor: AppColor.White(),
                 foregroundColor: AppColor.White(),
                 onPressed: () {

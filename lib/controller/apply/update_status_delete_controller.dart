@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:jobs/controller/apply/get_apply_company_controller.dart';
 import 'package:jobs/controller/apply/get_apply_seeker_controller.dart';
 import 'package:jobs/core/class/statusrequest.dart';
-import 'package:jobs/core/functions/dialiog.dart';
+import 'package:jobs/core/functions/dialiog_snack.dart';
 import 'package:jobs/core/functions/handlingdata.dart';
 import 'package:jobs/core/services/services.dart';
 import 'package:jobs/data/datasource/remote/apply/apply_data.dart';

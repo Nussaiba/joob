@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:jobs/controller/report/report_controller.dart';
 import 'package:jobs/view/widget/report/another_reason_page.dart';
 import 'package:jobs/view/widget/report/send_report_page.dart';
-
 import '../../../widget/report/reason_page_post&opportunity.dart';
 
 class ReportSheetPost extends StatelessWidget {
@@ -43,7 +42,7 @@ class AnotherReasonPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomAnotherReasonPage(
       controller: controller,
-      // id: id,
+      
       onPressedReportAnotherReason: () {
         controller.reportPost(id);
       },
@@ -60,10 +59,9 @@ class SendPeportPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomSendReportPage(
       controller: controller,
-      //  id: id,
       onPressedSendPerprt: () {
         controller.reportPost(id);
-        // controller.resetPage();
+        
       },
     );
   }

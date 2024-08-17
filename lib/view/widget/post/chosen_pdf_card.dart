@@ -27,15 +27,9 @@ class ChosenPdfCard extends StatelessWidget {
           ),
         ),
         subtitle: Text("119".tr),
-        trailing: Padding(
-          padding: const EdgeInsets.all(2.0),
-          child: CircleAvatar(
-            backgroundColor: AppColor.grey.withOpacity(0.6),
-            child: IconButton(
-                icon: const Icon(Icons.delete, color: Colors.white),
-                onPressed: onPressedDelete),
-          ),
-        ),
+        trailing: IconButton(
+            icon:  Icon(Icons.delete, color:AppColor.Black()),
+            onPressed: onPressedDelete),
         onTap: onTapOpen,
         contentPadding: EdgeInsets.symmetric(vertical: 2, horizontal: 8),
       ),

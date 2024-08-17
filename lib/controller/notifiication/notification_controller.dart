@@ -3,7 +3,7 @@ import 'package:jobs/controller/company/main_screens_company/main_screen_company
 import 'package:jobs/controller/seeker/mainscreen/main_scrren_controller.dart';
 import 'package:jobs/core/class/statusrequest.dart';
 import 'package:jobs/core/constants/routes.dart';
-import 'package:jobs/core/functions/dialiog.dart';
+import 'package:jobs/core/functions/dialiog_snack.dart';
 import 'package:jobs/core/functions/handlingdata.dart';
 import 'package:jobs/core/services/services.dart';
 import 'package:jobs/data/datasource/remote/notificationdata.dart';
@@ -49,7 +49,7 @@ class NotificationControllerImp extends NotificationController {
         update();
       } else {
         statusRequest = StatusRequest.failure;
-        Get.snackbar('Error', 'Failed to Notification');
+        getSnakBar("203".tr, "${response["message"]}", 3);
       }
     }
   }
@@ -92,10 +92,7 @@ class NotificationControllerImp extends NotificationController {
     update();
   }
 
-  getOpportunityDetails(
-
-      ///int objId, String title
-      String id) async {
+  getOpportunityDetails(String id) async {
     statusRequest = StatusRequest.loading;
     update();
     var response = await notificationData.fetchOpportunityDetails(id);
@@ -105,10 +102,8 @@ class NotificationControllerImp extends NotificationController {
       if (response['status'] == 200) {
         if (response['data'] != null) {
           print(response['data']['type']);
-          print(account);
-          if (response['data']['type'] == 'application') {
-            print("go  application");
 
+          if (response['data']['type'] == 'application') {
             account == 'company'
                 ? Get.toNamed(AppRoute.allAppliesCompany)
                 : Get.toNamed(AppRoute.appliesSeeker);
@@ -122,10 +117,7 @@ class NotificationControllerImp extends NotificationController {
             });
           }
           if (response['data']['type'] == "post") {
-            print("go");
-            account == 'company'
-                ? Get.toNamed(AppRoute.mainScreensCompany)
-                : Get.toNamed(AppRoute.mainScreens);
+        
 
             account == 'company'
                 ? {Get.find<MainScreenCompanyControllerImp>().onItemClick(0)}
@@ -136,8 +128,6 @@ class NotificationControllerImp extends NotificationController {
         }
       }
       if (response['status'] == 404) {
-        print('message');
-
         print(response['message']);
         getSnakBar("203".tr, response['message'], 3);
       }

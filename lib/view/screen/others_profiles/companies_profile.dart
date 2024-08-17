@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jobs/controller/company_seeker/get_all_opportunity_posts_home.dart';
 import 'package:jobs/controller/follow/follow_controller.dart';
 import 'package:jobs/controller/profile/company_profile_controller.dart';
 import 'package:jobs/controller/saved_jobs/saved_opportunity_controller.dart';
 import 'package:jobs/core/class/handlingdataview.dart';
 import 'package:jobs/core/constants/color.dart';
-import 'package:jobs/view/screen/others_profiles/seekers_profile.dart';
 import 'package:jobs/view/widget/company&seeker/home_widgets/job_card_home.dart';
 import 'package:jobs/view/widget/others_profile/custom_info.dart';
+import 'package:jobs/view/widget/others_profile/custom_info_list.dart';
 import 'package:jobs/view/widget/others_profile/custom_profile_image.dart';
 import 'package:jobs/view/widget/others_profile/custom_show_follow_button.dart';
 import 'package:jobs/view/widget/others_profile/custom_title.dart';
 import 'package:jobs/view/widget/others_profile/icon_back.dart';
+import 'package:jobs/view/widget/others_profile/image_background.dart';
+import 'package:jobs/view/widget/others_profile/no_data.dart';
 import 'package:jobs/view/widget/others_profile/profile_bottom_navigation_bar.dart';
 
 class ProfileCompanies extends StatelessWidget {
@@ -19,6 +22,9 @@ class ProfileCompanies extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(CompanyProfileControllerImp());
+    final opportunityController =
+        Get.put(GetPostsAndOpportunityControllerImp());
+
     Get.put(FollowControllerImp(idUser: controller.companyModel.id!));
     return GetBuilder<FollowControllerImp>(
         builder: (followController) => Scaffold(
@@ -50,17 +56,9 @@ class ProfileCompanies extends StatelessWidget {
                                 controller.Back();
                               },
                             ),
-                            // PopUpMenu(
-                            //   isOwner: controller.idUserOwner ==
-                            //       controller.companyModel.id!,
-                            //   onPressedReport: () {
-                            //     controller
-                            //         .reportUser(controller.companyModel.id!);
-                            //   },
-                            // ),
                             PopupMenuButton<String>(
-                              color: AppColor.white,
-                              iconColor: AppColor.white,
+                              color: AppColor.White(),
+                              iconColor: AppColor.White(),
                               onSelected: (value) {
                                 switch (value) {
                                   case 'edit':
@@ -108,8 +106,8 @@ class ProfileCompanies extends StatelessWidget {
                   ),
                   Positioned(
                     top: 65.0,
-                    right: Get.width / 3,
-                    left: Get.width / 3,
+                    right: Get.width / 10,
+                    left: Get.width / 10,
                     child: Column(
                       children: [
                         TitleText(title: controller.companyModel.company_name!),
@@ -153,10 +151,55 @@ class ProfileCompanies extends StatelessWidget {
                         info: controller.companyModel.location!,
                         icon: Icons.location_on_outlined,
                       ),
-                      buildInfo(
-                        info: controller.companyModel.contact_info!,
-                        icon: Icons.contact_phone,
-                      ),
+                      Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            buildInfo(
+                              info: "80".tr,
+                              icon: Icons.contact_phone,
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 16.0),
+                              child: Column(
+                                children: [
+                                  controller.companyModel.contactInfoEmail !=
+                                          null
+                                      ? buildInfo(
+                                          info:
+                                              " ${controller.companyModel.contactInfoEmail!}",
+                                          icon: Icons.email,
+                                        )
+                                      : Container(),
+                                  controller.companyModel.contactInfoPhone !=
+                                          null
+                                      ? buildInfo(
+                                          info:
+                                              " ${controller.companyModel.contactInfoPhone}",
+                                          icon: Icons.phone,
+                                        )
+                                      : Container(),
+                                  controller.companyModel.contactInfoGitHub !=
+                                          null
+                                      ? buildInfo(
+                                          info:
+                                              " ${controller.companyModel.contactInfoGitHub}",
+                                          icon: Icons.code,
+                                        )
+                                      : Container(),
+                                  controller.companyModel.contactInfoeWebsite !=
+                                          null
+                                      ? buildInfo(
+                                          info:
+                                              " ${controller.companyModel.contactInfoeWebsite}",
+                                          icon: Icons.language,
+                                        )
+                                      : Container(),
+                                ],
+                              ),
+                            )
+                          ]),
                       buildInfo(
                         info: controller.companyModel.about!,
                         icon: Icons.info_outline,
@@ -179,6 +222,12 @@ class ProfileCompanies extends StatelessWidget {
                                       final isSaved = jobController.isSaved(
                                           controller.opportunities[index].id!);
                                       return JobCardHome(
+                                        onPressed: () {
+                                          opportunityController
+                                              .goToPageOpportunityDetails(
+                                                  controller
+                                                      .opportunities[index]);
+                                        },
                                         opportuntiyModel:
                                             controller.opportunities[index],
                                         icon: isSaved
@@ -212,34 +261,5 @@ class ProfileCompanies extends StatelessWidget {
                 ),
               ]),
             ));
-  }
-}
-
-class NoDataWidget extends StatelessWidget {
-  const NoDataWidget({
-    super.key,
-    required this.text1,
-    required this.text2,
-  });
-  final String text1;
-  final String text2;
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-        child: Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          text1,
-          style: TextStyle(color: AppColor.grey, fontSize: 20),
-        ),
-        Text(
-          text2,
-          style: TextStyle(color: AppColor.grey, fontSize: 20),
-        ),
-      ],
-    ));
   }
 }

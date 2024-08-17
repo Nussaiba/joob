@@ -45,6 +45,7 @@ class AppRoute {
   static const String homeCompany = "/homeseekercompany";
   static const String addOpportunity = "/addopportunity";
   static const String editOpportunity = "/editopportunity";
+  static const String createCV = "/createcv";
 
 
 
@@ -61,7 +62,8 @@ class AppRoute {
   static const String allAppliesCompany = "/allappliescompany";
   static const String appliesSeeker = "/appliesseeker";
   static const String applyCV = "/applycv";
-  static const String applyForm = "/applyform";
+
+  static const String updateApplyCV = "/updateapplycv";
 
 
   static const String notifications = "/notifications";

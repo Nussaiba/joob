@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:jobs/data/model/post_model.dart';
+
 class OpportunityModel {
   // OpportuntiyModel opportunitFromJson(String str) =>
   //     OpportuntiyModel.fromJson(json.decode(str));
@@ -19,7 +21,8 @@ class OpportunityModel {
   List? skills;
   String? salary;
   String? vacant;
-  String? image;
+   ImageModel? file;
+  String? images;
   String? createdat;
   String? updatedat;
   OpportunityModel(
@@ -38,7 +41,8 @@ class OpportunityModel {
       this.skills,
       this.salary,
       this.vacant,
-      this.image,
+      this.images,
+    this.file,
       this.createdat,
       this.updatedat});
   factory OpportunityModel.fromJson(Map<String, dynamic> json) =>
@@ -62,8 +66,11 @@ class OpportunityModel {
               : json['skills_req']!,
           salary: json['salary']!.toString(),
           vacant: json['vacant']!.toString(),
-          image: json['file'],
-          createdat: json['created_at'],
+       images:
+         List<ImageModel>.from(json["images"].map((x) => ImageModel.fromJson(x))).isNotEmpty?json["images"][0]['url']:null ,
+             createdat: json['created_at_with_time'],
+        
+      //  file: ImageModel.fromJson(json["files"][0].map((x) => ImageModel.fromJson(x)))   ,
           updatedat: json['updated_at']);
 
   Map<String, dynamic> toJson() => {};

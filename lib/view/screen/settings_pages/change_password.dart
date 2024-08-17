@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:jobs/controller/settings/change_password_controller.dart';
 import 'package:jobs/core/class/handlingdataview.dart';
 import 'package:jobs/core/constants/color.dart';
-import 'package:jobs/core/functions/alert_exit.dart';
 import 'package:jobs/core/functions/validinput.dart';
 import 'package:jobs/view/widget/general/custom_text_body.dart';
 import 'package:jobs/view/widget/auth/customtextformauth.dart';
@@ -18,23 +17,20 @@ class ChangePassword extends StatelessWidget {
     Get.put(ChangePasswordControllerImp());
 
     return Scaffold(
+       backgroundColor: AppColor.Backgroundcolor(),
       appBar: AppBar(
-        backgroundColor: AppColor.praimaryColor,
-        elevation: 0.0,
-        title: Text(
-          "161".tr,
-          style: Theme.of(context)
-              .textTheme
-              .headline1!
-              .copyWith(color: AppColor.grey),
+        backgroundColor: AppColor.PraimaryColor(),
+        title: Text("161".tr,
+         style: TextStyle(color: AppColor.White()),
         ),
+      
+        iconTheme: IconThemeData(color: AppColor.White()),
       ),
+  
       body: GetBuilder<ChangePasswordControllerImp>(
         builder: (controller) => HandlingDataRequest(
           statusRequest: controller.statusRequest,
-          widget: WillPopScope(
-            onWillPop: alertExitApp,
-            child: Container(
+          widget: Container(
                 padding:
                     const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
                 child: Form(
@@ -104,7 +100,7 @@ class ChangePassword extends StatelessWidget {
                 )),
           ),
         ),
-      ),
+      
     );
   }
 }

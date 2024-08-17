@@ -7,39 +7,36 @@ class PopUpMenu extends StatelessWidget {
       required this.isOwner,
       this.onPressedEdit,
       this.onPressedDelete,
-      this.onPressedReport, this.onSelected});
+      this.onPressedReport,
+      this.onSelected});
   final bool isOwner;
   final void Function()? onPressedEdit;
   final void Function()? onPressedDelete;
   final void Function()? onPressedReport;
-final void Function(String)? onSelected;
+  final void Function(String)? onSelected;
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton<String>(
-      color: AppColor.white,
-      iconColor: AppColor.white,
+      color: AppColor.White(),
+      iconColor: AppColor.White(),
       onSelected: (value) {
         switch (value) {
           case 'edit':
             () {
-              print("jjjjjjjjjjjjjjjjjjjjjjj");
               onPressedEdit;
             };
-            // controller.goToEditPage(
-            //     controller.opportuntiyModel);
+            
             break;
           case 'delete':
             () {
               onPressedDelete;
             };
-            // controller.deleteOpportunity(
-            //     controller.opportuntiyModel.id!);
+          
             break;
           case 'report':
             () {
               onPressedReport;
             };
-            // controller.reportUser(controller.companyModel.id!);
             break;
         }
       },

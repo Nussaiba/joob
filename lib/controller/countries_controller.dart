@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:jobs/core/class/statusrequest.dart';
+import 'package:jobs/core/functions/dialiog_snack.dart';
 import 'package:jobs/core/functions/handlingdata.dart';
 import 'package:jobs/core/services/services.dart';
 import 'package:jobs/data/datasource/remote/contries.dart';
@@ -44,7 +45,7 @@ class CountryController extends GetxController {
         }
         update();
       } else {
-        Get.snackbar('Error', 'Failed to fetch countries');
+        getSnakBar("203".tr, "${response["message"]}", 3);
       }
     }
   }

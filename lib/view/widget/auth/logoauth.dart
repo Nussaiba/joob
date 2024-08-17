@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jobs/core/constants/imageassest.dart';
+import 'package:jobs/core/constants/image_assest.dart';
 
 class LogoAuth extends StatelessWidget {
   const LogoAuth({super.key});

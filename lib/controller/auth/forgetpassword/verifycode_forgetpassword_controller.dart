@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:get/get.dart';
 import 'package:jobs/core/class/statusrequest.dart';
 import 'package:jobs/core/constants/routes.dart';
-import 'package:jobs/core/functions/dialiog.dart';
+import 'package:jobs/core/functions/dialiog_snack.dart';
 import 'package:jobs/data/datasource/remote/auth/forgetpassword/checkemail.dart';
 import 'package:jobs/data/datasource/remote/auth/forgetpassword/verifycode.dart';
 import 'package:jobs/core/functions/handlingdata.dart';

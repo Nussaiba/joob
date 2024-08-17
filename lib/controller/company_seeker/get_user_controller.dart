@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:jobs/controller/company_seeker/drawer_controller.dart';
 import 'package:jobs/core/class/statusrequest.dart';
 import 'package:jobs/core/constants/routes.dart';
+import 'package:jobs/core/functions/dialiog_snack.dart';
 import 'package:jobs/core/functions/handlingdata.dart';
 import 'package:jobs/core/services/services.dart';
 import 'package:jobs/data/datasource/remote/get_user.dart';
@@ -34,6 +35,7 @@ class GetUserController extends GetxController {
             "${response['data']['profile']['type']}gggggggggggggggggggggggggggg");
         if (response['data']['profile']['type'] == 'company') {
           dataopportuntiesList.addAll(response['data']['opportunity']);
+
           for (int i = 0; i < dataopportuntiesList.length; i++) {
             opportuntiesList.add(
               OpportunityModel.fromJson(dataopportuntiesList[i]),
@@ -67,7 +69,7 @@ class GetUserController extends GetxController {
       }
     } else {
       statusRequest = StatusRequest.failure;
-      Get.snackbar('Error', 'Failed to fetch Profile Info');
+      getSnakBar("203".tr, "${response["message"]}", 3);
     }
 
     update();
@@ -99,8 +101,7 @@ class GetUserController extends GetxController {
             "companyModel": CompanyModel.fromJson(response['data']['profile']),
             "opportunities": opportuntiesList
           });
-                  Get.find<CustomDrawerController>().refresh();
-
+          Get.find<CustomDrawerController>().refresh();
         } else {
           if (response['data']['profile']['type'] == 'job_seeker') {
             print("jjjjjjjjjjjjjjjjjjjobSeeker");
@@ -116,7 +117,7 @@ class GetUserController extends GetxController {
               "seekerModel": SeekerModel.fromJson(response['data']['profile']),
               "posts": postsList
             });
-        Get.find<CustomDrawerController>().refresh();
+            Get.find<CustomDrawerController>().refresh();
 
             update();
             print("jjjjjjjjjjjjjjjjjjjobSeeker");
@@ -125,7 +126,7 @@ class GetUserController extends GetxController {
       }
     } else {
       statusRequest = StatusRequest.failure;
-      Get.snackbar('Error', 'Failed to fetch Profile Info');
+      getSnakBar("203".tr, "${response["message"]}", 3);
     }
 
     update();
@@ -154,7 +155,7 @@ class GetUserController extends GetxController {
       }
     } else {
       statusRequest = StatusRequest.failure;
-      Get.snackbar('Error', 'Failed to fetch Profile Info');
+      getSnakBar("203".tr, "${response["message"]}", 3);
     }
 
     update();

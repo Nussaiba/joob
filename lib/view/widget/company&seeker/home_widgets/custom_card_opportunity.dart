@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jobs/api_link.dart';
 import 'package:jobs/core/constants/color.dart';
-import 'package:jobs/core/constants/imageassest.dart';
+import 'package:jobs/core/constants/image_assest.dart';
 import 'package:jobs/data/model/opportunity_model.dart';
 import 'package:get/get.dart';
 

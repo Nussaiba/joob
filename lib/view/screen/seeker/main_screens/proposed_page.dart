@@ -123,14 +123,14 @@ class CompanyCard extends StatelessWidget {
             SizedBox(height: 5),
             Text(
               company.company_name!,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
             ),
             Text(
-              company.domain!,
+            company.domain!.length> 20 ? "${company.domain!.substring(0,18)}" :company.domain!,
               textAlign: TextAlign.center,
               selectionColor: AppColor.pink,
             ),
-            SizedBox(height: 5),
+            SizedBox(height: 2),
             ElevatedButton(
               onPressed: onPressed,
               child: Text("204".tr),

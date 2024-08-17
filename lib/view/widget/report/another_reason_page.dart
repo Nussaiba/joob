@@ -36,10 +36,9 @@ class CustomAnotherReasonPage extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                 CustomReportBack(onPressed: () {
+                CustomReportBack(onPressed: () {
                   controller.changePage(0);
                 }),
-               
                 CustomTextTitle(
                   text: "100".tr,
                 ),
@@ -69,14 +68,15 @@ class CustomAnotherReasonPage extends StatelessWidget {
                 labelText: "104".tr,
                 labelStyle: TextStyle(color: AppColor.TextColor()),
                 hintStyle: TextStyle(color: AppColor.TextColor()),
- border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide: BorderSide(color: AppColor.TextColor()),
-                    ),                 enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide: BorderSide(color: AppColor.TextColor()),
-                    ),
-                    iconColor: AppColor.IconColor(),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(15),
+                  borderSide: BorderSide(color: AppColor.TextColor()),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(15),
+                  borderSide: BorderSide(color: AppColor.TextColor()),
+                ),
+                iconColor: AppColor.IconColor(),
                 contentPadding:
                     const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
                 focusedBorder: OutlineInputBorder(
@@ -86,22 +86,21 @@ class CustomAnotherReasonPage extends StatelessWidget {
               ),
             ),
           ),
-           Padding(
-             padding: const EdgeInsets.all(16.0),
-             child: Center(
-                     child: CustomButtomAuth(
-                       text: "106".tr,
-                       onPressed: () async {
-                         await onPressedReportAnotherReason();
-                         controller.resetPage();
-                     
-                         Get.back();
-                       },
-                       color: AppColor.Grey(),
-                     ),
-                   ),
-           ),
-         
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Center(
+              child: CustomButtomAuth(
+                text: "106".tr,
+                onPressed: () async {
+                  await onPressedReportAnotherReason();
+                  controller.resetPage();
+
+                  Get.back();
+                },
+                color: AppColor.Grey().withOpacity(0.8),
+              ),
+            ),
+          ),
         ],
       ),
     );

@@ -6,7 +6,7 @@ import 'package:jobs/controller/company_seeker/get_user_controller.dart';
 import 'package:jobs/core/class/statusrequest.dart';
 import 'package:jobs/core/constants/color.dart';
 import 'package:jobs/core/constants/routes.dart';
-import 'package:jobs/core/functions/dialiog.dart';
+import 'package:jobs/core/functions/dialiog_snack.dart';
 import 'package:jobs/core/functions/handlingdata.dart';
 import 'package:jobs/core/services/services.dart';
 import 'package:jobs/data/datasource/remote/general/choose_image.dart';
@@ -25,6 +25,10 @@ class UpdateProfileControllerImp extends UpdateProfileController {
   late SeekerModel seekerModel;
   late TextEditingController? firstname;
   late TextEditingController? lastname;
+  late TextEditingController contactInfoEmail;
+  late TextEditingController contactInfoPhone;
+  late TextEditingController contactInfoGitHub;
+  late TextEditingController contactInfoWebSite;
   String? location;
   String? birthday;
   File? image;
@@ -240,13 +244,17 @@ class UpdateProfileControllerImp extends UpdateProfileController {
         birthday1 == null ? birthday! : birthday1.toString(),
         "$selectedCountry , $selectedCity",
         image == null && imagepath != null
-            ? await fileData.downloadImage(imagepath!)
+            ? await fileData.downloadImage(imagepath!,'img.jpg')
             : image != null
                 ? image!
                 : null,
         skills,
         certificates,
         selectedSpecialization!,
+            contactInfoEmail.text,
+        contactInfoPhone.text,
+        contactInfoGitHub.text,
+        contactInfoWebSite.text,
         about!.text,
         selectedGender!);
     print("================$response  Controller");
@@ -290,7 +298,14 @@ class UpdateProfileControllerImp extends UpdateProfileController {
     about = TextEditingController(text: seekerModel.about);
     selectedSpecialization = seekerModel.specialization;
     print(" $selectedSpecialization");
-
+  contactInfoEmail =
+        TextEditingController(text: seekerModel.contactInfoEmail);
+    contactInfoPhone =
+        TextEditingController(text: seekerModel.contactInfoPhone);
+    contactInfoGitHub =
+        TextEditingController(text: seekerModel.contactInfoGitHub);
+    contactInfoWebSite =
+        TextEditingController(text: seekerModel.contactInfoeWebsite);
     selectedGender = seekerModel.gender!;
     super.onInit();
   }
@@ -299,6 +314,10 @@ class UpdateProfileControllerImp extends UpdateProfileController {
   void dispose() {
     firstname!.dispose();
     lastname!.dispose();
+     contactInfoEmail.dispose();
+    contactInfoPhone.dispose();
+    contactInfoGitHub.dispose();
+    contactInfoWebSite.dispose();
     textEditingControllerskill!.dispose();
     textEditingControllercertificates!.dispose();
     about!.dispose();

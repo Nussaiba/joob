@@ -19,15 +19,9 @@ class SearchItem extends StatelessWidget {
   final String? image;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: Get.width,
-       decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(
-     Radius.circular(5),
-        ),
-              color: AppColor.White(),
-
-       ),
+    return Card(
+      color: AppColor.White(),
+      margin: EdgeInsets.all(1),
       child: ListTile(
         trailing: Icon(
           type == 'company' ? Icons.business : Icons.person,
@@ -38,6 +32,13 @@ class SearchItem extends StatelessWidget {
               ? NetworkImage("${AppLink.serverimage}/${image}")
               : null,
           radius: 28,
+          backgroundColor: AppColor.PraimaryColor(),
+          child: image == null
+              ? Icon(
+                  type == 'company' ? Icons.business : Icons.person,
+                  color: AppColor.White(),
+                )
+              : null,
         ),
         title: Text(user,
             style: TextStyle(

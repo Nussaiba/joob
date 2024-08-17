@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jobs/api_link.dart';
 import 'package:jobs/core/constants/color.dart';
-import 'package:jobs/core/constants/imageassest.dart';
+import 'package:jobs/core/constants/image_assest.dart';
 import '../../../data/model/apply_seeker_model.dart';
 
 class JobApplySeekerCard extends StatelessWidget {
   final ApplySeekerModel applySeekerModel;
   final Function()? onTapIcon;
-  JobApplySeekerCard({required this.applySeekerModel, required this.onTapIcon});
+    final Function()? onTapEdit;
+
+  JobApplySeekerCard({required this.applySeekerModel, required this.onTapIcon, this.onTapEdit});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +26,6 @@ class JobApplySeekerCard extends StatelessWidget {
             children: [
               Container(
                 child: Row(
-                  //crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
                       height: 46,
@@ -49,8 +50,8 @@ class JobApplySeekerCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       
                       children: [
-                        Text(
-                          applySeekerModel.opportunity_name!,
+                        Text( applySeekerModel.opportunity_name!.length>15?
+                          "${applySeekerModel.opportunity_name!.substring(0,14)}...":applySeekerModel.opportunity_name!,
                           style:  TextStyle(
                               fontSize: 18,
                               
@@ -67,22 +68,33 @@ class JobApplySeekerCard extends StatelessWidget {
                       ],
                     ),
                     Spacer(),
-                    InkWell(
-                        onTap: onTapIcon,
-                        child: applySeekerModel.status! == 'waiting'
-                            ? Icon(
+                    applySeekerModel.status! == 'waiting'
+                        ? Row(
+                          children: [
+                             IconButton(
+                              onPressed: onTapEdit,
+                              icon: Icon(
+                                Icons.edit,
+                                color: AppColor.grey,
+                                size: 26,)
+                              ),
+                            IconButton(
+                              onPressed: onTapIcon,
+                              icon: Icon(
                                 Icons.delete,
                                 color: AppColor.grey,
-                                size: 28,
-                              )
-                            : Container(
-                                child: Text(
-                                  "",
-                                  style: TextStyle(fontSize: 0),
-                                ),
-                              )),
+                                size: 26,)
+                              ),
+                              
+                          ],
+                        )
+                        : Container(
+                            child: Text(
+                              "",
+                              style: TextStyle(fontSize: 0),
+                            ),
+                          ),
 
-                    //  Container(color: Colors.blue, child: Text("ffff")),
                   ],
                 ),
               ),

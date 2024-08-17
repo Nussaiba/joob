@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jobs/api_link.dart';
+import 'package:jobs/controller/company_seeker/get_all_opportunity_posts_home.dart';
 import 'package:jobs/controller/follow/follow_controller.dart';
 import 'package:jobs/controller/profile/seeker_profile_controller.dart';
 import 'package:jobs/core/class/handlingdataview.dart';
 import 'package:jobs/core/constants/color.dart';
-import 'package:jobs/view/screen/others_profiles/companies_profile.dart';
 import 'package:jobs/view/widget/company&seeker/home_widgets/job_card_home.dart';
 import 'package:jobs/view/widget/company&seeker/home_widgets/post_widget.dart';
 import 'package:jobs/view/widget/others_profile/custom_info.dart';
@@ -13,6 +14,8 @@ import 'package:jobs/view/widget/others_profile/custom_profile_image.dart';
 import 'package:jobs/view/widget/others_profile/custom_show_follow_button.dart';
 import 'package:jobs/view/widget/others_profile/custom_title.dart';
 import 'package:jobs/view/widget/others_profile/icon_back.dart';
+import 'package:jobs/view/widget/others_profile/image_background.dart';
+import 'package:jobs/view/widget/others_profile/no_data.dart';
 import 'package:jobs/view/widget/others_profile/profile_bottom_navigation_bar.dart';
 
 import '../../../controller/seeker/post/create_post_controller.dart';
@@ -23,6 +26,7 @@ class SeekerProfiles extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(SeekerProfileControllerImp());
     final postController = Get.put(CreatePostControllerImp());
+    Get.put(GetPostsAndOpportunityControllerImp());
 
     Get.put(FollowControllerImp(idUser: controller.seekerModel.id!));
     return GetBuilder<SeekerProfileControllerImp>(
@@ -63,7 +67,6 @@ class SeekerProfiles extends StatelessWidget {
                                 onSelected: (value) {
                                   switch (value) {
                                     case 'edit':
-                                      print("jjjjjjjjjjjjjjjjjjjjjjj");
                                       controller
                                           .goToEditPage(controller.seekerModel);
                                       break;
@@ -82,17 +85,26 @@ class SeekerProfiles extends StatelessWidget {
                                       ? <PopupMenuEntry<String>>[
                                           PopupMenuItem(
                                             value: 'edit',
-                                            child: Text("151".tr),
+                                            child: Text("151".tr,
+                                                style: TextStyle(
+                                                    color:
+                                                        AppColor.TextColor())),
                                           ),
                                           PopupMenuItem(
                                             value: 'delete',
-                                            child: Text("152".tr),
+                                            child: Text("152".tr,
+                                                style: TextStyle(
+                                                    color:
+                                                        AppColor.TextColor())),
                                           ),
                                         ]
                                       : <PopupMenuEntry<String>>[
                                           PopupMenuItem(
                                             value: 'report',
-                                            child: Text("100".tr),
+                                            child: Text("100".tr,
+                                                style: TextStyle(
+                                                    color:
+                                                        AppColor.TextColor())),
                                           ),
                                         ];
                                 },
@@ -103,8 +115,8 @@ class SeekerProfiles extends StatelessWidget {
                       ),
                       Positioned(
                         top: 65.0,
-                        right: Get.width / 3.4,
-                        left: Get.width / 3.4,
+                        right: Get.width / 10,
+                        left: Get.width /10,
                         child: Column(
                           children: [
                             TitleText(
@@ -161,9 +173,59 @@ class SeekerProfiles extends StatelessWidget {
                             info: controller.seekerModel.birth_day!,
                             icon: Icons.calendar_today_outlined,
                           ),
+
+                           Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            buildInfo(
+                              info: "80".tr,
+                              icon: Icons.contact_phone,
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 16.0),
+                              child: Column(
+                                children: [
+                                  controller.seekerModel.contactInfoEmail !=
+                                          null
+                                      ? buildInfo(
+                                          info:
+                                              " ${controller.seekerModel.contactInfoEmail!}",
+                                          icon: Icons.email,
+                                        )
+                                      : Container(),
+                                  controller.seekerModel.contactInfoPhone !=
+                                          null
+                                      ? buildInfo(
+                                          info:
+                                              " ${controller.seekerModel.contactInfoPhone}",
+                                          icon: Icons.phone,
+                                        )
+                                      : Container(),
+                                  controller.seekerModel.contactInfoGitHub !=
+                                          null
+                                      ? buildInfo(
+                                          info:
+                                              " ${controller.seekerModel.contactInfoGitHub}",
+                                          icon: Icons.code,
+                                        )
+                                      : Container(),
+                                  controller.seekerModel.contactInfoeWebsite !=
+                                          null
+                                      ? buildInfo(
+                                          info:
+                                              " ${controller.seekerModel.contactInfoeWebsite}",
+                                          icon: Icons.language,
+                                        )
+                                      : Container(),
+                                ],
+                              ),
+                            )
+                          ]),
                           (controller.seekerModel.skills != null)
                               ? buildInfoSection(
-                                  title: "133".tr,
+                                  title: "59".tr,
                                   infoList: controller.seekerModel.skills!,
                                   icon: Icons.star,
                                 )
@@ -184,51 +246,76 @@ class SeekerProfiles extends StatelessWidget {
                             title: "46".tr,
                             viewall: false,
                           ),
-                          controller.posts.isNotEmpty
-                              ? ListView.builder(
-                                  shrinkWrap: true,
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  itemCount: controller.posts.length,
-                                  itemBuilder: (context, i) {
-                                    return CustomPostWidget(
-                                      onPressedDownload: () async {
-                                        //  await controller.download(
-                                        // '${controller.postsList[i].file}',
-                                        // 'apply_cv_${controller.postsList[i].id}.pdf');
-                                      },
-                                      isLoudingPdf: false,
-                                      postmodel: controller.posts[i],
-                                      onTapExpanded: () {},
-                                      isExpanded: false,
-                                      textviewmore: '',
-                                      text: controller.posts[i].body!,
-                                      onSelected: (value) {
-                                        switch (value) {
-                                          case 'edit':
-                                            print("jjjjjjjjjjjjjjjjjjjjjjj");
-                                            postController.goToEditPage(
-                                                controller.posts[i]);
-                                            break;
-                                          case 'delete':
-                                            postController.deletePost(
-                                                controller.posts[i].id!);
-                                            break;
-                                          case 'report':
-                                            controller.reportPost(
-                                                controller.posts[i].id!);
-                                            break;
-                                        }
-                                      },
-                                      isOwner: controller.posts[i].user_id ==
-                                          controller.idUserOwner,
-                                    );
-                                  },
-                                )
-                              : NoDataWidget(
-                                  text1: "${"207".tr}",
-                                  text2:
-                                      "${"206".tr} : ${controller.seekerModel.first_name}  ${controller.seekerModel.last_name} ",
-                                ),
+                          GetBuilder<GetPostsAndOpportunityControllerImp>(
+                            builder: (postscontroller) => controller
+                                    .posts.isNotEmpty
+                                ? ListView.builder(
+                                    shrinkWrap: true,
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    itemCount: controller.posts.length,
+                                    itemBuilder: (context, i) {
+                                      return CustomPostWidget(
+                                        onPressedDownload: () async {
+                                        
+
+                                          await postscontroller.download(
+                                              '${controller.posts[i].files[0].url}',
+                                              'file_${controller.posts[i].id}.pdf');
+                                        },
+                                        isLoudingPdf: postscontroller.isLoading[
+                                          controller.posts[i].files.isNotEmpty?
+                                            '${AppLink.serverimage}/${controller.posts[i].files[0].url}':' '],
+                                        postmodel: controller.posts[i],
+                                        onTapExpanded: () async {
+                                          await postscontroller.toggleExpanded(
+                                              controller.posts[i].id!);
+                                        },
+                                        isExpanded: postscontroller.isExpanded[
+                                            '${controller.posts[i].id!}'],
+                                        textviewmore: postscontroller
+                                                    .isExpanded[
+                                                '${controller.posts[i].id!}']
+                                            ? "235".tr
+                                            : "234".tr,
+                                        text: postscontroller.isExpanded[
+                                                '${controller.posts[i].id!}']
+                                            ? controller.posts[i].body!
+                                            : controller.posts[i].body!.length >
+                                                    20
+                                                ? controller.posts[i].body!
+                                                    .substring(0, 20)
+                                                : controller.posts[i].body!,
+                                        onSelected: (value) {
+                                          switch (value) {
+                                            case 'edit':
+                                              postController.goToEditPage(
+                                                  controller.posts[i]);
+                                              break;
+                                            case 'delete':
+                                              postController.deletePost(
+                                                  controller.posts[i].id!);
+                                              break;
+                                            case 'report':
+                                              controller.reportPost(
+                                                  controller.posts[i].id!);
+                                              break;
+                                          }
+                                        },
+                                        isOwner: controller.posts[i].user_id ==
+                                            controller.idUserOwner,
+                                       onTapImage: () {
+                              postscontroller
+                                  .showPostDialog(controller.posts[i]);
+                            });
+                                    },
+                                  )
+                                : NoDataWidget(
+                                    text1: "${"207".tr}",
+                                    text2:
+                                        "${"206".tr} : ${controller.seekerModel.first_name}  ${controller.seekerModel.last_name} ",
+                                  ),
+                          ),
                           buildInfo(
                             info:
                                 "${"156".tr + " " + controller.seekerModel.created_at!.substring(0, 10)}",
@@ -239,33 +326,5 @@ class SeekerProfiles extends StatelessWidget {
                     ),
                   ]),
                 )));
-  }
-}
-
-class BackGroundProfileImage extends StatelessWidget {
-  const BackGroundProfileImage({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 0),
-      child: Container(
-        height: 180,
-        decoration: BoxDecoration(
-          color: AppColor.praimaryColor,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.2),
-              spreadRadius: 5,
-              blurRadius: 5,
-            ),
-          ],
-          borderRadius:
-              const BorderRadius.vertical(bottom: Radius.circular(30)),
-        ),
-      ),
-    );
   }
 }

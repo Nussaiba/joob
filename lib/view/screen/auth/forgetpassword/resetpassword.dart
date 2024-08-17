@@ -15,15 +15,16 @@ class ResetPassword extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.put(ResetPasswordControllerImp());
     return Scaffold(
+        backgroundColor: AppColor.Backgroundcolor(),
         appBar: AppBar(
-          backgroundColor: AppColor.praimaryColor,
           title: Text(
             "37".tr,
-            style: Theme.of(context)
-                .textTheme
-                .headline1!
-                .copyWith(color: AppColor.grey),
+            style: TextStyle(color: AppColor.white),
           ),
+          iconTheme: IconThemeData(
+            color: AppColor.white,
+          ),
+          backgroundColor: AppColor.PraimaryColor(),
         ),
         body: GetBuilder<ResetPasswordControllerImp>(
             builder: (controller) => HandlingDataRequest(

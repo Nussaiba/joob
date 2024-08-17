@@ -33,7 +33,7 @@ class DrawerItem extends StatelessWidget {
             title: open
                 ? Text(
                     itemName,
-                    style: TextStyle(fontSize: 16, color: AppColor.TextColor()),
+                    style: TextStyle(fontSize: 15, color: AppColor.TextColor(),   fontFamily: "Gafata",),
                   )
                 : null),
       ),

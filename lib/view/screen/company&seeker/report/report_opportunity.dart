@@ -42,8 +42,8 @@ class AnotherReasonPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomAnotherReasonPage(
       controller: controller,
-      onPressedReportAnotherReason: ()  {
-         controller.reportOpportunity(id);
+      onPressedReportAnotherReason: () {
+        controller.reportOpportunity(id);
       },
       textEditingController: controller.another_reason_opportunity,
     );
@@ -58,12 +58,8 @@ class SendPeportPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomSendReportPage(
       controller: controller,
-      //  id: id,
-      onPressedSendPerprt: ()  {
-                print("before send");
-
-         controller.reportOpportunity(id);
-        print("send");
+      onPressedSendPerprt: () {
+        controller.reportOpportunity(id);
       },
     );
   }

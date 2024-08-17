@@ -6,21 +6,34 @@ class CvData {
   Crud crud;
   CvData(this.crud);
 
-  postCvData( List skills , List certificates , List lunguages ,List projects , List experiences ,List contacts  ) async {
-    var response = await crud.create(AppLink.createCV,  json.encode({
-      "full_name": "ABC Phonics",
-      "birth_day": "1/1/2000",
-      "location": "Syria",
-      "about": "Full Stack Developer",
-      "skills": skills,
-      "certificates":certificates,
-      "languages": lunguages,
-      "projects":projects,
-      "experiences": experiences,
-      "contacts": contacts,
-      "profile": ["facebook: blabalbafas", "X: hi", "github: @myGithub"]
-    })
-    );
+  postCvData(
+    String? full_name,
+    String? birth_day,
+    String? location,
+    String? about,
+    List? skills,
+    List? certificates,
+    List? lunguages,
+    List? projects,
+    List? experiences,
+    List? contacts,
+  ) async {
+    var response = await crud.create(
+        AppLink.createCV,
+        json.encode({
+          "full_name": full_name,
+          "birth_day": birth_day,
+          "location": location,
+          "about": about,
+          "skills": skills!.map((controller) => controller.text).toList(),
+          "certificates":
+              certificates!.map((controller) => controller.text).toList(),
+          "languages": lunguages!.map((controller) => controller.text).toList(),
+          "projects": projects!.map((controller) => controller.text).toList(),
+          "experiences":
+              experiences!.map((controller) => controller.text).toList(),
+          "contacts": contacts!.map((controller) => controller.text).toList(),
+        }));
     print("daataaaaaaaaaaaaaaa $response");
     return response.fold((l) => l, (r) => r);
   }

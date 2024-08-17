@@ -8,6 +8,7 @@
 
         <activity
             android:name=".MainActivity"
+            android:extractNativeLibs="true"
             android:exported="true"
             android:launchMode="singleTop"
             android:theme="@style/LaunchTheme"

@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:jobs/api_link.dart';
 import 'package:jobs/core/class/statusrequest.dart';
+import 'package:jobs/core/functions/dialiog_snack.dart';
 import 'package:jobs/core/functions/handlingdata.dart';
 import 'package:jobs/core/services/services.dart';
 import 'package:jobs/data/datasource/remote/apply/apply_data.dart';
@@ -61,7 +62,7 @@ class GetApplyCompanyControllerImp extends GetApplyCompanyController {
         update();
       } else {
         statusRequest = StatusRequest.failure;
-        Get.snackbar('Error', 'Failed to fetch  all applies');
+        getSnakBar("203".tr, "${response["message"]}", 3);
       }
     }
   }

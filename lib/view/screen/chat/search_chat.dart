@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jobs/controller/auth/google_sign_in_controller.dart';
 import 'package:jobs/controller/auth/search_fire_controller.dart';
-import 'package:jobs/core/constants/imageassest.dart';
+import 'package:jobs/core/constants/image_assest.dart';
 import '../../../core/constants/color.dart';
 
 class SearchChatAp extends GetView<SearchFireControllerImp> {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jobs/controller/auth/splash_controller.dart';
-import 'package:jobs/core/constants/imageassest.dart';
+import 'package:jobs/core/constants/image_assest.dart';
 import 'package:jobs/view/widget/auth/logoauth.dart';
 import 'package:lottie/lottie.dart';
 

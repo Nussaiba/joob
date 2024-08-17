@@ -1,5 +1,3 @@
-
-
 class CompanyModel {
   int? id;
   String? user_name;
@@ -10,24 +8,28 @@ class CompanyModel {
   String? logo;
   String? location;
   String? about;
-    String? domain;
+  String? domain;
 
-  String? contact_info;
- 
-  CompanyModel({
-    this.id,
-    this.user_name,
-    this.email,
-    this.created_at,
-    this.type,
-    this.company_name,
-    this.logo,
-    this.location,
-    this.about,
-    this.contact_info,
-    this.domain
-   
-  });
+  String? contactInfoEmail;
+  String? contactInfoPhone;
+  String? contactInfoGitHub;
+  String? contactInfoeWebsite;
+  CompanyModel(
+      {this.id,
+      this.user_name,
+      this.email,
+      this.created_at,
+      this.type,
+      this.company_name,
+      this.logo,
+      this.location,
+      this.about,
+      this.contactInfoEmail,
+            this.contactInfoPhone,
+      this.contactInfoGitHub,
+      this.contactInfoeWebsite,
+
+      this.domain});
   factory CompanyModel.fromJson(Map<String, dynamic> json) => CompanyModel(
         id: json['id']!,
         user_name: json['user_name']!,
@@ -38,11 +40,11 @@ class CompanyModel {
         logo: json['more_info']['logo'],
         location: json['more_info']['location']!,
         about: json['more_info']['about']!,
-                        domain: json['more_info']['domain']!,
-
-        contact_info: json['more_info']['contact_info']!,
-
-     
+        domain: json['more_info']['domain']!,
+        contactInfoEmail: json['more_info']['contact_info']['email'],
+        contactInfoPhone: json['more_info']['contact_info']['phone'],
+        contactInfoGitHub: json['more_info']['contact_info']['gitHub'],
+        contactInfoeWebsite: json['more_info']['contact_info']['website'],
       );
 
   Map<String, dynamic> toJson() => {};

@@ -8,19 +8,17 @@ import 'package:jobs/core/services/services.dart';
 import 'dart:io';
 import 'package:path/path.dart';
 
-//String? token =   myServices.box.read("token");
-
 class Crud {
   MyServices myServices = Get.find();
   Map<String, String> headers = {
     "Accept": "application/json",
     "Accept-Language": MyServices().box.read("lang") != null
         ? MyServices().box.read("lang")
-        :  Locale(Get.deviceLocale!.languageCode),
+        : Locale(Get.deviceLocale!.languageCode).toString(),
   };
   Token() {
     String? token = myServices.box.read("token");
-    print("$token qqqqqqqqqqqqqqq");
+    print("$token qqqqqqqqqqq");
     print(MyServices().box.read("lang"));
 
     print(
@@ -48,6 +46,8 @@ class Crud {
           response.statusCode == 201 ||
           response.statusCode == 401 ||
           response.statusCode == 404 ||
+                    response.statusCode == 403 ||
+
           response.statusCode == 400 ||
           response.statusCode == 422 ||
           response.statusCode == 500) {
@@ -92,7 +92,7 @@ class Crud {
   Future<Either<StatusRequest, Map>> postFileAndData(
       String linkUrl, Map data, String? filename, File? file) async {
     Token();
-    print("object");
+
     var request = http.MultipartRequest(
       'Post',
       Uri.parse(
@@ -135,10 +135,64 @@ class Crud {
     }
   }
 
+  Future<Either<StatusRequest, Map>> postMutipleImagesAndData(String linkurl,
+      Map data, String name, images, String? fileName, files) async {
+    Token();
+    var request = http.MultipartRequest(
+      'POST',
+      Uri.parse(
+        linkurl,
+      ),
+    );
+
+    request.headers.addAll(headers);
+    for (int i = 0; i < files.length; i++) {
+
+     request.files.add(
+        http.MultipartFile(
+          '$fileName[$i]',
+          http.ByteStream(files[i].openRead()),
+          await files[i].length(),
+          filename: basename(files[i].path),
+        ),
+      );
+    }
+
+    for (int i = 0; i < images.length; i++) {
+      request.files.add(
+        http.MultipartFile(
+          '$name[$i]',
+          http.ByteStream(images[i].openRead()),
+          await images[i].length(),
+          filename: basename(images[i].path),
+        ),
+      );
+    }
+
+    data.forEach((key, value) {
+      if (value is List<String>) {
+        request.fields[key] = jsonEncode(value);
+      } else {
+        request.fields[key] = value.toString();
+      }
+    });
+
+    var myRequest = await request.send();
+    var response = await http.Response.fromStream(myRequest);
+
+    if (myRequest.statusCode == 200 ||
+        myRequest.statusCode == 201 ||
+        myRequest.statusCode == 422) {
+      return Right(jsonDecode(response.body));
+    } else {
+      print(response.body);
+      return const Left(StatusRequest.serverfailure);
+    }
+  }
+
   Future<Either<StatusRequest, dynamic>> create(String linkurl, data) async {
     try {
       //if (await checkInternet()) {
-      print("sssssssssss");
       Token();
       headers['Content-Type'] = 'application/json';
       headers['Accept'] = 'application/pdf';

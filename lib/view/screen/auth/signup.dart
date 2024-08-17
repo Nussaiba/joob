@@ -22,17 +22,7 @@ class SignUp extends StatelessWidget {
     Get.put(AuthWithGoogle());
 
     return Scaffold(
-      // appBar: AppBar(
-      //   backgroundColor: AppColor.praimaryColor,
-      //   elevation: 0.0,
-      //   title: Text(
-      //     "18".tr,
-      //     style: Theme.of(context)
-      //         .textTheme
-      //         .headline1!
-      //         .copyWith(color: AppColor.grey),
-      //   ),
-      // ),
+     
       body: GetBuilder<SignUpControllerImp>(
         builder: (controller) => HandlingDataRequest(
           statusRequest: controller.statusRequest,
@@ -44,12 +34,13 @@ class SignUp extends StatelessWidget {
                 child: Form(
                   key: controller.formstate,
                   child: ListView(children: [
-                    const LogoAuth(),
-                    FadeAnimation(
+                      FadeAnimation(
                         CustomTextTitle(
-                          text: "10".tr,
+                          text: "18".tr,
                         ),
-                        0.2),
+                        0.1),
+                    FadeAnimation( const LogoAuth(), 0.2),
+                  
                     const SizedBox(
                       height: 10,
                     ),

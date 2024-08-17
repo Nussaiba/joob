@@ -1,8 +1,7 @@
 import 'package:get/get.dart';
 import 'package:jobs/core/class/statusrequest.dart';
-
 import '../../core/constants/routes.dart';
-import '../../core/functions/dialiog.dart';
+import '../../core/functions/dialiog_snack.dart';
 import '../../core/functions/handlingdata.dart';
 import '../../core/services/services.dart';
 import '../../data/datasource/remote/settings/deletaccount.dart';
@@ -22,12 +21,9 @@ class DeleteAccountControllerImp extends DeleteAccountController {
     update();
     var response = await deleteAccountData.deleteAccount();
     statusRequest = handlingData(response);
-    print("Delete account status: $statusRequest");
-
     if (StatusRequest.success == statusRequest) {
       if (response["status"] == 200) {
         Get.offAllNamed(AppRoute.login);
-        // Get.off(Login());
         getSnakBar("24".tr, "${response["message"]}", 3);
       } else {
         getDialog("203".tr, "${response["message"]}");

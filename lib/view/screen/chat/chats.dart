@@ -4,11 +4,11 @@ import 'package:get/get.dart';
 import 'package:jobs/controller/auth/google_sign_in_controller.dart';
 import 'package:jobs/controller/chats/chats_controller.dart';
 import 'package:jobs/core/constants/color.dart';
-import 'package:jobs/core/constants/imageassest.dart';
+import 'package:jobs/core/constants/image_assest.dart';
 import '../../widget/chat/app_bar_chats_page.dart';
 
 class ChatsApp extends GetView<ChatsController> {
-  final auth = Get.find<AuthWithGoogle>();
+  final auth = Get.put(AuthWithGoogle());
    // final auth = Get.put(AuthWithGoogle());
 
   ChatsApp({super.key});
@@ -70,11 +70,11 @@ class ChatsApp extends GetView<ChatsController> {
                                       0
                                   ? const SizedBox()
                                   : Chip(
-                                      backgroundColor: AppColor.praimaryColor3,
+                                      backgroundColor: AppColor.PraimaryColor(),
                                       clipBehavior: Clip.none,
                                       label: Text(
                                         "${ListDocsChats[index]["total_unread"]}",
-                                        style: TextStyle(color: AppColor.white),
+                                        style: TextStyle(color: AppColor.White()),
                                       ),
                                     ),
                             );

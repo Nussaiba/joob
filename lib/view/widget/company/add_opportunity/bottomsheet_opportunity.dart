@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jobs/core/constants/color.dart';
 import 'package:jobs/view/widget/general/custom_text_title.dart';
 import 'package:jobs/view/widget/company/add_opportunity/info_bottomsheet.dart';
 import 'package:jobs/view/widget/company/add_opportunity/simple_list.dart';
@@ -48,8 +49,8 @@ class BottomSheetOpportunity extends StatelessWidget {
           padding: const EdgeInsets.symmetric(
             horizontal: 20,
           ),
-          decoration: const BoxDecoration(
-            color: Colors.white,
+          decoration: BoxDecoration(
+            color: AppColor.White(),
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(30),
               topRight: Radius.circular(30),
@@ -78,34 +79,34 @@ class BottomSheetOpportunity extends StatelessWidget {
                     '  ${body.length > 20 ? '${body.substring(0, 20)}...' : body}',
                     style: const TextStyle(fontSize: 16, height: 1),
                   ),
-                  trailing: ClipRRect(
-                      borderRadius: BorderRadius.circular(100.0),
-                      child: image != null
-                          ? Image.file(
-                              image!,
-                              //  width: 100,
-                              //    height: 120,
-                              //fit: BoxFit.cover,
-                            )
-                          : null),
+                  trailing: Container(
+                    child: ClipRRect(
+                        borderRadius: BorderRadius.circular(120.0),
+                        child: image != null
+                            ? Image.file(
+                                height: 70,
+                                width: 70,
+                                image!,
+                                fit: BoxFit.cover,
+                              )
+                            : null),
+                  ),
                 ),
                 const SizedBox(
                   height: 10,
                 ),
-                const Divider(height: 24),
+                Divider(
+                  height: 24,
+                  color: AppColor.grey,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     InfoRow(
-                      title: location,
-                      icon: Icons.location_on,
+                      title: salary,
+                      icon: Icons.attach_money_rounded,
                     ),
-                    InfoRow(
-                      title: GetStringUtils(
-                              jobType.toString().replaceAll('_', ' '))
-                          .capitalizeFirst!,
-                      icon: Icons.work,
-                    ),
+                    InfoRow(title: vacant, icon: Icons.event_seat),
                   ],
                 ),
                 Row(
@@ -123,17 +124,12 @@ class BottomSheetOpportunity extends StatelessWidget {
                     ),
                   ],
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    InfoRow(
-                      title: salary,
-                      icon: Icons.attach_money_rounded,
-                    ),
-                    InfoRow(title: vacant, icon: Icons.event_seat),
-                  ],
+                InfoRow(
+                  title: GetStringUtils(jobType.toString().replaceAll('_', ' '))
+                      .capitalizeFirst!,
+                  icon: Icons.work,
                 ),
-                InfoRow(title: "133".tr, icon: Icons.lightbulb_outline),
+                InfoRow(title: "59".tr, icon: Icons.lightbulb_outline),
                 CustomSimpleList(
                   list: skills,
                 ),

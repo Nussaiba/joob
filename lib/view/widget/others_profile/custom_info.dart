@@ -9,7 +9,7 @@ class buildInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 44,
+     // height: 44,
       child: ListTile(
         leading: Icon(
           icon,

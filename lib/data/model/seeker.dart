@@ -16,6 +16,11 @@ class SeekerModel {
   List? certificates;
   String? about;
   String? specialization;
+  
+  String? contactInfoEmail;
+  String? contactInfoPhone;
+  String? contactInfoGitHub;
+  String? contactInfoeWebsite;
   SeekerModel(
       {this.id,
       this.user_name,
@@ -31,6 +36,11 @@ class SeekerModel {
       this.skills,
       this.certificates,
       this.about,
+        this.contactInfoEmail,
+            this.contactInfoPhone,
+      this.contactInfoGitHub,
+      this.contactInfoeWebsite,
+
       this.specialization});
   factory SeekerModel.fromJson(Map<String, dynamic> json) => SeekerModel(
       id: json['id']!,
@@ -44,6 +54,10 @@ class SeekerModel {
       birth_day: json['more_info']['birth_day'],
       location: json['more_info']['location'],
       image: json['more_info']['image'],
+       contactInfoEmail: json['more_info']['contact_info']['email'],
+        contactInfoPhone: json['more_info']['contact_info']['phone'],
+        contactInfoGitHub: json['more_info']['contact_info']['gitHub'],
+        contactInfoeWebsite: json['more_info']['contact_info']['website'],
       skills: (json['more_info']['skills'] is String)
           ? jsonDecode(json['more_info']['skills'])
           : json['more_info']['skills'],

@@ -11,19 +11,30 @@ class HomeData {
 
   getAllOppData() async {
     var response = await crud.getData(AppLink.allOpportunities);
-   return response.fold ((l)=> l , (r)=> r);
-  }
-  getAllPostsData() async {
-    var response = await crud.getData(AppLink.viewPost);
-   return response.fold ((l)=> l , (r)=> r);
+    return response.fold((l) => l, (r) => r);
   }
 
-   Future<File> getFile(String url, String fileName) async {
+  getAllPostsData() async {
+    var response = await crud.getData(AppLink.viewPost);
+    return response.fold((l) => l, (r) => r);
+  }
+
+  getNews() async {
+    var response = await crud.getData(AppLink.getNews);
+    return response.fold((l) => l, (r) => r);
+  }
+
+  Future<File> getFile(String url, String fileName) async {
     String pdfurl = '${AppLink.serverimage}/$url';
-      final response = await http.get(Uri.parse(pdfurl));
+    final response = await http.get(Uri.parse(pdfurl));
+        print("response");
+
+    print(response);
     final dir = await getExternalStorageDirectory();
     final file = File('${dir!.path}/$fileName');
     await file.writeAsBytes(response.bodyBytes);
+        print(file);
+
     return file;
   }
 }

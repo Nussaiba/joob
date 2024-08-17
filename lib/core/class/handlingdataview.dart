@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:jobs/core/class/statusrequest.dart';
-import 'package:jobs/core/constants/imageassest.dart';
+import 'package:jobs/core/constants/image_assest.dart';
 import 'package:lottie/lottie.dart';
 
 class HandlingDataView extends StatelessWidget {

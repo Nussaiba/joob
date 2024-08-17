@@ -10,12 +10,15 @@ class CustomSwitch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SwitchListTile(
-      title: Text("184".tr),
-      // subtitle: Text(),
+      title: Text("184".tr, style: TextStyle(
+        color: AppColor.TextColor()
+      ),),
       value: value,
       onChanged: onChanged,
-      activeColor: AppColor.praimaryColor,
-      activeTrackColor: AppColor.pink,
+      activeColor: AppColor.PraimaryColor(),
+      activeTrackColor: AppColor.Pink(),
+      inactiveTrackColor:  AppColor.Grey2(),
+      inactiveThumbColor:  AppColor.Grey(),
     );
   }
 }

@@ -48,7 +48,9 @@ class SearchScreen extends StatelessWidget {
                         type: user['type'],
                         user: user['user_name'],
                         email: user['email'],
-                       image:user['type'] =='company' ? user['more_info']['logo']:user['more_info']['image'],
+                       image:user['type'] =='company' ? user['more_info']['logo']:
+                       
+                       user['more_info']['image'],
                         onTap: () {
                           profileController.getUser(user['id']!);
                         },

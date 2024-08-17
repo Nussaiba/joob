@@ -4,7 +4,7 @@ import 'package:jobs/controller/company_seeker/get_all_opportunity_posts_home.da
 import 'package:jobs/controller/report/report_controller.dart';
 import 'package:jobs/core/class/statusrequest.dart';
 import 'package:jobs/core/constants/color.dart';
-import 'package:jobs/core/functions/dialiog.dart';
+import 'package:jobs/core/functions/dialiog_snack.dart';
 import 'package:jobs/core/functions/handlingdata.dart';
 import 'package:jobs/core/services/services.dart';
 import 'package:jobs/data/datasource/remote/company/create_opportunity.dart';
@@ -32,7 +32,7 @@ class OpportunityDetailsControllerImp extends OpportunityDetailsController {
   OpportunityData opportunityData = OpportunityData(Get.find());
   StatusRequest statusRequest = StatusRequest.none;
   late String account;
-  
+
   @override
   bool? isOwner(int id) {
     idUserOpportunityOwner == id ? true : false;
@@ -62,9 +62,9 @@ class OpportunityDetailsControllerImp extends OpportunityDetailsController {
         Get.find<GetPostsAndOpportunityControllerImp>().getOpportunitesData();
         update();
         Get.offAllNamed(AppRoute.mainScreensCompany);
-        getSnakBar("24".tr,  "${response["message"]}" , 3);
+        getSnakBar("24".tr, "${response["message"]}", 3);
       } else {
-  getDialog("203".tr, "${response["message"]}");        
+        getDialog("203".tr, "${response["message"]}");
       }
     }
     update();
@@ -78,6 +78,7 @@ class OpportunityDetailsControllerImp extends OpportunityDetailsController {
   @override
   chooseApplyWay(int id) {
     Get.defaultDialog(
+      backgroundColor: AppColor.Backgroundcolor(),
         title: "211".tr,
         titleStyle: TextStyle(color: AppColor.TextColor()),
         content: ApplicationWays(
@@ -85,10 +86,7 @@ class OpportunityDetailsControllerImp extends OpportunityDetailsController {
             Get.offAndToNamed(AppRoute.applyCV,
                 arguments: {"id_opportunity": id});
           },
-          onPressedForm: () {
-            Get.offAndToNamed(AppRoute.applyForm,
-                arguments: {"id_opportunity": id});
-          },
+         
         ));
   }
 

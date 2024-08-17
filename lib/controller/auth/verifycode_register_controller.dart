@@ -1,10 +1,8 @@
 import 'dart:async';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jobs/core/class/statusrequest.dart';
-import 'package:jobs/core/constants/color.dart';
 import 'package:jobs/core/constants/routes.dart';
-import 'package:jobs/core/functions/dialiog.dart';
+import 'package:jobs/core/functions/dialiog_snack.dart';
 import 'package:jobs/core/functions/handlingdata.dart';
 import 'package:jobs/core/services/services.dart';
 import 'package:jobs/data/datasource/remote/auth/verifycodesignup.dart';
@@ -36,27 +34,12 @@ class VerifyCodeRegisterControllerImp extends VerifyCodeRegisterController {
       if (response['status'] == 200) {
         myServices.box.write("token", "${response["data"]["token"]}");
         getSnakBar("24".tr, "${response["message"]}", 3);
+          myServices.box.write("step", "2");
 
         Get.offNamed(AppRoute.successSignUp);
       } else if (response['status'] == 422) {
         print("244");
         getDialog("203".tr, "${response["message"]}");
-
-        // Get.defaultDialog(
-        //     title: "203".tr,
-        //     titleStyle:  TextStyle(
-        //           color: AppColor.TextColor(),
-        //         ),
-        //     middleText: response['message'],
-        //     custom: MaterialButton(
-        //       onPressed: () {},
-        //       child: Text(
-        //         "212".tr,
-        //         style: TextStyle(
-        //           color: AppColor.TextColor(),
-        //         ),
-        //       ),
-        //     ));
       }
     }
     update();

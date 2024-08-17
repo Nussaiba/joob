@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jobs/controller/company/opportunity/add_opportunity_controller.dart';
 import 'package:jobs/core/class/handlingdataview.dart';
+import 'package:jobs/core/constants/color.dart';
 import 'package:jobs/core/functions/validinput.dart';
 import 'package:jobs/view/widget/general/custom_text_body.dart';
 import 'package:jobs/view/widget/general/custom_dropdown_button.dart';
@@ -19,11 +20,19 @@ class AddJobOpportunityScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.put(AddNewOpportunityControllerImp());
     return Scaffold(
+           backgroundColor: AppColor.Backgroundcolor(),
       appBar: AppBar(
         title: Text(
           "47".tr,
+          style: TextStyle(color: AppColor.white),
         ),
+        iconTheme: IconThemeData(
+          color: AppColor.white,
+        ),
+        backgroundColor: AppColor.PraimaryColor(),
       ),
+
+      
       body: Container(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           child: GetBuilder<AddNewOpportunityControllerImp>(
@@ -194,7 +203,6 @@ class AddJobOpportunityScreen extends StatelessWidget {
                   FadeAnimation(
                       CustomButton(
                           title: "65".tr,
-                          //onPressed: controller.addOpportunity(),
                           onPressed: () {
                             controller.showJobPreviewBottomSheet(context);
                           }),

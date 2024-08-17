@@ -20,19 +20,29 @@ class CustomWarp extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
       child: Wrap(
         spacing: 8.0,
-        
+
         children: List<Widget>.generate(
           list.length,
           (index) {
             final l = list[index];
             return InputChip(
-            
-              label: Text(l, style: TextStyle(color:AppColor.Grey2(), fontSize: 14),),
+              color: MaterialStateProperty.resolveWith<Color>((states) {
+                if (states.contains(MaterialState.disabled)) {
+                  return Colors.grey; // لون الحالة disabled
+                }
+                return AppColor.White(); // لون افتراضي
+              }),
+              label: Text(
+                l,
+                style: TextStyle(color: AppColor.TextColor()),
+              ),
               onSelected: (_) => onSelected(index),
-              onDeleted: 
-              ()=> 
-              onDelete(index),
-              deleteIcon: Icon(Icons.cancel, size: 18,color: AppColor.Grey(),),
+              onDeleted: () => onDelete(index),
+              deleteIcon: Icon(
+                Icons.cancel,
+                size: 18,
+                color: AppColor.Grey(),
+              ),
               selected: selectedIndex == index,
               selectedColor: Colors.pink.shade100,
               showCheckmark: false,

@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:jobs/core/class/statusrequest.dart';
 import 'package:jobs/core/constants/color.dart';
 import 'package:jobs/core/constants/routes.dart';
-import 'package:jobs/core/functions/dialiog.dart';
+import 'package:jobs/core/functions/dialiog_snack.dart';
 import 'package:jobs/core/functions/handlingdata.dart';
 import 'package:jobs/core/services/services.dart';
 import 'package:jobs/data/datasource/remote/auth/signupdata.dart';
@@ -56,7 +56,7 @@ class SignUpControllerImp extends SinUpController {
       if (StatusRequest.success == statusRequest) {
         if (response['status'] == 200) {
           myServices.box.write("account", accountType.value);
-          myServices.box.write("step", "2");
+          // myServices.box.write("step", "2");
           Get.offNamed(AppRoute.verifyCodeRegister,
               arguments: {"email": email.text});
           getSnakBar("24".tr, "Verification Code sent to\n ${email.text} ", 3);
@@ -150,7 +150,9 @@ class SignUpControllerImp extends SinUpController {
                 ButtonSignUp(
                   onPressed: () {
                     print(accountType == '');
-                    accountType != '' ? SignUp() : Get.snackbar("203".tr, "202".tr);
+                    accountType != '' ? SignUp() : 
+                            getSnakBar("203".tr, "202".tr, 3);
+
                     Get.back();
                   },
                 )

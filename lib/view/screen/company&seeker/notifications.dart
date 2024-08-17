@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:jobs/controller/notifiication/notification_controller.dart';
 import 'package:jobs/core/class/handlingdataview.dart';
 import 'package:jobs/core/constants/color.dart';
-import 'package:jobs/view/widget/noification/notification_card.dart';
+import 'package:jobs/view/widget/notification/notification_card.dart';
 
 class NotificationPage extends StatelessWidget {
   @override
@@ -14,10 +14,10 @@ class NotificationPage extends StatelessWidget {
       return Scaffold(
           backgroundColor: AppColor.Backgroundcolor(),
           appBar: AppBar(
-           backgroundColor: AppColor.PraimaryColor(),
+            backgroundColor: AppColor.PraimaryColor(),
             title: Text(
               "93".tr,
-         style: TextStyle(color: AppColor.White()),
+              style: TextStyle(color: AppColor.White()),
             ),
             iconTheme: IconThemeData(
               color: AppColor.White(),
@@ -40,6 +40,7 @@ class NotificationPage extends StatelessWidget {
                 return CustomNotificationCard(
                   notification: notification,
                   onTap: () async {
+                    print("${notification.id}");
                     await controller.getOpportunityDetails(notification.id);
                   },
                 );
@@ -49,9 +50,9 @@ class NotificationPage extends StatelessWidget {
           floatingActionButton: Padding(
             padding: const EdgeInsets.only(bottom: 58),
             child: FloatingActionButton(
-                backgroundColor: AppColor.PraimaryColor(),
-                focusColor: AppColor.White(),
-                foregroundColor: AppColor.White(),
+              backgroundColor: AppColor.PraimaryColor(),
+              focusColor: AppColor.White(),
+              foregroundColor: AppColor.White(),
               tooltip: "95".tr,
               onPressed: () async {
                 await controller.deleteAllNotifications();

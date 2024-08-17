@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:jobs/controller/report/report_controller.dart';
 import 'package:jobs/core/constants/color.dart';
 import 'package:jobs/view/widget/auth/custombuttomauth.dart';
-import 'package:jobs/view/widget/general/custom_button.dart';
 import 'package:jobs/view/widget/general/custom_text_body.dart';
 import 'package:jobs/view/widget/report/custom_back.dart';
 
@@ -74,7 +73,7 @@ class CustomSendReportPage extends StatelessWidget {
               
                   Get.back();
                 },
-                color: AppColor.Grey(),
+                color: AppColor.Grey().withOpacity(0.8),
               ),
             ),
           ),

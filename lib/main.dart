@@ -24,9 +24,10 @@ class MyApp extends StatelessWidget {
       locale: controller.language,
       debugShowCheckedModeBanner: false,
       theme: controller.apptheme ,
-      initialRoute: '/splash',
+   //  home:NewsViewk(),
+    initialRoute: '/splash',
       initialBinding: InitialBindings(),
-      getPages: routes,
+     getPages: routes,
     );
   }
 }

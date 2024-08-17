@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:jobs/controller/saved_jobs/saved_opportunity_controller.dart';
 import 'package:jobs/core/class/handlingdataview.dart';
 import 'package:jobs/core/constants/color.dart';
-import 'package:jobs/view/widget/custom_card_opportunity.dart';
+import 'package:jobs/view/widget/company&seeker/home_widgets/custom_card_opportunity.dart';
 
 class JobSavedScreen extends StatelessWidget {
   @override

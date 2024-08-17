@@ -24,6 +24,7 @@ class CustomTextFormAuth extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(bottom: 20),
       child: TextFormField(
+        style: TextStyle(color: AppColor.TextColor(), fontSize: 14, fontWeight: FontWeight.w700),
         validator: valid,
         controller: mycontroller,
         obscureText: obscureText == null || obscureText == false ? false : true,
@@ -40,20 +41,28 @@ class CustomTextFormAuth extends StatelessWidget {
               margin: const EdgeInsets.symmetric(horizontal: 9),
               child: Text(
                 labeltext,
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText1!
-                    .copyWith(color: AppColor.black),
+                style: TextStyle(
+                  color:AppColor.TextColor()
+                ),
               ),
             ),
             suffixIcon: InkWell(
               onTap: onTapIcon,
-              child: Icon(iconData, color: AppColor.praimaryColor),
+              child: Icon(iconData, color: AppColor.IconColor()),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(30),
-              borderSide: const BorderSide(
+              borderSide:  BorderSide(
+                color: AppColor.Grey()
               ),
+              
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(30),
+              borderSide:  BorderSide(
+                color: AppColor.PraimaryColor()
+              ),
+              
             ),
             border:
                 OutlineInputBorder(borderRadius: BorderRadius.circular(30))),

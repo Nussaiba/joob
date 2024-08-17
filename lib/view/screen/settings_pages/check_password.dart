@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:jobs/controller/settings/check_password_controller.dart';
 import 'package:jobs/core/class/handlingdataview.dart';
 import 'package:jobs/core/constants/color.dart';
-import 'package:jobs/core/constants/imageassest.dart';
+import 'package:jobs/core/constants/image_assest.dart';
 import 'package:jobs/core/functions/validinput.dart';
 import 'package:jobs/view/widget/general/custom_text_body.dart';
 import 'package:jobs/view/widget/auth/customtextformauth.dart';
@@ -19,17 +19,16 @@ class CheckPassword extends StatelessWidget {
     Get.put(CheckPasswordControllerImp());
 
     return Scaffold(
+     backgroundColor: AppColor.Backgroundcolor(),
       appBar: AppBar(
-        backgroundColor: AppColor.praimaryColor,
-        elevation: 0.0,
+        backgroundColor: AppColor.PraimaryColor(),
         title: Text(
           "165".tr,
-          style: Theme.of(context)
-              .textTheme
-              .headline1!
-              .copyWith(color: AppColor.grey),
+          style: TextStyle(color: AppColor.White()),
         ),
+        iconTheme: IconThemeData(color: AppColor.White()),
       ),
+    
       body: GetBuilder<CheckPasswordControllerImp>(
         builder: (controller) => HandlingDataRequest(
           statusRequest: controller.statusRequest,
@@ -52,7 +51,7 @@ class CheckPassword extends StatelessWidget {
                       ),
                   FadeAnimation(CustomTextBody(text: "166".tr), 0.4),
                   const SizedBox(
-                    height: 15,
+                    height: 25,
                   ),
                   FadeAnimation(
                       CustomTextFormAuth(
